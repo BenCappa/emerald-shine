@@ -11,28 +11,28 @@ DesertUnderpass_OnTransition:
 DesertUnderpass_EventScript_Fossil::
 	lock
 	faceplayer
-	goto_if_set FLAG_CHOSE_ROOT_FOSSIL, DesertUnderpass_EventScript_GiveClawFossil
-	goto_if_set FLAG_CHOSE_CLAW_FOSSIL, DesertUnderpass_EventScript_GiveRootFossil
+	goto_if_set FLAG_CHOSE_SKULL_FOSSIL, DesertUnderpass_EventScript_GiveSailFossil
+	goto_if_set FLAG_CHOSE_SAIL_FOSSIL, DesertUnderpass_EventScript_GiveSkullFossil
 	release
 	end
 
-DesertUnderpass_EventScript_GiveClawFossil::
-	giveitem ITEM_CLAW_FOSSIL
+DesertUnderpass_EventScript_GiveSailFossil::
+	giveitem ITEM_SAIL_FOSSIL
 	removeobject LOCALID_FOSSIL
 	release
 	end
 
-DesertUnderpass_EventScript_GiveRootFossil::
-	giveitem ITEM_ROOT_FOSSIL
+DesertUnderpass_EventScript_GiveSkullFossil::
+	giveitem ITEM_SKULL_FOSSIL
 	removeobject LOCALID_FOSSIL
 	release
 	end
 
 @ Unused
-DesertUnderpass_Text_FoundRootFossil::
-	.string "{PLAYER} found the ROOT FOSSIL.$"
+DesertUnderpass_Text_FoundSkullFossil::
+	.string "{PLAYER} found the Skull FOSSIL.$"
 
 @ Unused
-DesertUnderpass_Text_FoundClawFossil::
-	.string "{PLAYER} found the CLAW FOSSIL.$"
+DesertUnderpass_Text_FoundSailFossil::
+	.string "{PLAYER} found the Sail FOSSIL.$"
 

@@ -132,13 +132,13 @@ Route111_EventScript_MirageTowerDisappear::
 	waitstate
 	setvar VAR_MIRAGE_TOWER_STATE, 2
 	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
-	goto_if_set FLAG_CHOSE_CLAW_FOSSIL, Route111_EventScript_RootFossilDisappeared
-	msgbox Route111_Text_ClawFossilDisappeared, MSGBOX_DEFAULT
+	goto_if_set FLAG_CHOSE_SAIL_FOSSIL, Route111_EventScript_SkullFossilDisappeared
+	msgbox Route111_Text_SailFossilDisappeared, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route111_EventScript_RootFossilDisappeared::
-	msgbox Route111_Text_RootFossilDisappeared, MSGBOX_DEFAULT
+Route111_EventScript_SkullFossilDisappeared::
+	msgbox Route111_Text_SkullFossilDisappeared, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -706,12 +706,12 @@ Route111_Text_MirageTowerHasntBeenSeenSince:
 	.string "Perhaps it really was\n"
 	.string "the MIRAGE TOWER…$"
 
-Route111_Text_ClawFossilDisappeared:
-	.string "The CLAW FOSSIL disappeared into\n"
+Route111_Text_SailFossilDisappeared:
+	.string "The Sail FOSSIL disappeared into\n"
 	.string "the sand…$"
 
-Route111_Text_RootFossilDisappeared:
-	.string "The ROOT FOSSIL disappeared into\n"
+Route111_Text_SkullFossilDisappeared:
+	.string "The Skull FOSSIL disappeared into\n"
 	.string "the sand…$"
 
 Route111_Text_MauvilleUncleToldMeToTakeRockSmash:
