@@ -244,9 +244,9 @@ LilycoveCity_EventScript_May::
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DeclineMayBattle
 	msgbox LilycoveCity_Text_MayWontBeBeaten, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
-	case 0, LilycoveCity_EventScript_BattleMayTreecko
-	case 1, LilycoveCity_EventScript_BattleMayTorchic
-	case 2, LilycoveCity_EventScript_BattleMayMudkip
+	case 0, LilycoveCity_EventScript_BattleMayBulbasaur
+	case 1, LilycoveCity_EventScript_BattleMayFennekin
+	case 2, LilycoveCity_EventScript_BattleMayPiplup
 	end
 
 LilycoveCity_EventScript_MayAskToBattleAgain::
@@ -272,9 +272,9 @@ LilycoveCity_EventScript_Brendan::
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DeclineBrendanBattle
 	msgbox LilycoveCity_Text_BrendanWontBeBeaten, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
-	case 0, LilycoveCity_EventScript_BattleBrendanTreecko
-	case 1, LilycoveCity_EventScript_BattleBrendanTorchic
-	case 2, LilycoveCity_EventScript_BattleBrendanMudkip
+	case 0, LilycoveCity_EventScript_BattleBrendanBulbasaur
+	case 1, LilycoveCity_EventScript_BattleBrendanFennekin
+	case 2, LilycoveCity_EventScript_BattleBrendanPiplup
 	end
 
 LilycoveCity_EventScript_BrendanAskToBattleAgain::
@@ -293,33 +293,33 @@ LilycoveCity_EventScript_DeclineBrendanBattle::
 	release
 	end
 
-LilycoveCity_EventScript_BattleMayTreecko::
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_TREECKO, LilycoveCity_Text_MayDefeat
+LilycoveCity_EventScript_BattleMayBulbasaur::
+	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_BULBASAUR, LilycoveCity_Text_MayDefeat
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
-LilycoveCity_EventScript_BattleMayTorchic::
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_TORCHIC, LilycoveCity_Text_MayDefeat
+LilycoveCity_EventScript_BattleMayFennekin::
+	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_FENNEKIN, LilycoveCity_Text_MayDefeat
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
-LilycoveCity_EventScript_BattleMayMudkip::
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_MUDKIP, LilycoveCity_Text_MayDefeat
+LilycoveCity_EventScript_BattleMayPiplup::
+	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_PIPLUP, LilycoveCity_Text_MayDefeat
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
-LilycoveCity_EventScript_BattleBrendanTreecko::
-	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_TREECKO, LilycoveCity_Text_BrendanDefeat
+LilycoveCity_EventScript_BattleBrendanBulbasaur::
+	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_BULBASAUR, LilycoveCity_Text_BrendanDefeat
 	goto LilycoveCity_EventScript_DefeatedBrendan
 	end
 
-LilycoveCity_EventScript_BattleBrendanTorchic::
-	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_TORCHIC, LilycoveCity_Text_BrendanDefeat
+LilycoveCity_EventScript_BattleBrendanFennekin::
+	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_FENNEKIN, LilycoveCity_Text_BrendanDefeat
 	goto LilycoveCity_EventScript_DefeatedBrendan
 	end
 
-LilycoveCity_EventScript_BattleBrendanMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_MUDKIP, LilycoveCity_Text_BrendanDefeat
+LilycoveCity_EventScript_BattleBrendanPiplup::
+	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_PIPLUP, LilycoveCity_Text_BrendanDefeat
 	goto LilycoveCity_EventScript_DefeatedBrendan
 	end
 

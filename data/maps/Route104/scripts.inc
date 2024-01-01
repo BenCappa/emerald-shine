@@ -146,9 +146,9 @@ Route104_EventScript_MayAskToBattle::
 Route104_EventScript_BattleMay::
 	msgbox Route104_Text_MayIntro, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
-	case 0, Route104_EventScript_BattleMayTreecko
-	case 1, Route104_EventScript_BattleMayTorchic
-	case 2, Route104_EventScript_BattleMayMudkip
+	case 0, Route104_EventScript_BattleMayBulbasaur
+	case 1, Route104_EventScript_BattleMayFennekin
+	case 2, Route104_EventScript_BattleMayPiplup
 	end
 
 Route104_EventScript_MayDefeated::
@@ -162,20 +162,20 @@ Route104_EventScript_RestoreMusic::
 	fadedefaultbgm
 	return
 
-Route104_EventScript_BattleMayTreecko::
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayDefeat
+Route104_EventScript_BattleMayBulbasaur::
+	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_BULBASAUR, Route104_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
-Route104_EventScript_BattleMayTorchic::
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayDefeat
+Route104_EventScript_BattleMayFennekin::
+	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_FENNEKIN, Route104_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
-Route104_EventScript_BattleMayMudkip::
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayDefeat
+Route104_EventScript_BattleMayPiplup::
+	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_PIPLUP, Route104_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
@@ -218,9 +218,9 @@ Route104_EventScript_BrendanAskToBattle::
 Route104_EventScript_BattleBrendan::
 	msgbox Route104_Text_BrendanIntro, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
-	case 0, Route104_EventScript_BattleBrendanTreecko
-	case 1, Route104_EventScript_BattleBrendanTorchic
-	case 2, Route104_EventScript_BattleBrendanMudkip
+	case 0, Route104_EventScript_BattleBrendanBulbasaur
+	case 1, Route104_EventScript_BattleBrendanFennekin
+	case 2, Route104_EventScript_BattleBrendanPiplup
 	end
 
 Route104_EventScript_BrendanDefeated::
@@ -229,20 +229,20 @@ Route104_EventScript_BrendanDefeated::
 	releaseall
 	end
 
-Route104_EventScript_BattleBrendanTreecko::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanDefeat
+Route104_EventScript_BattleBrendanBulbasaur::
+	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_BULBASAUR, Route104_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
-Route104_EventScript_BattleBrendanTorchic::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanDefeat
+Route104_EventScript_BattleBrendanFennekin::
+	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_FENNEKIN, Route104_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
-Route104_EventScript_BattleBrendanMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanDefeat
+Route104_EventScript_BattleBrendanPiplup::
+	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_PIPLUP, Route104_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
