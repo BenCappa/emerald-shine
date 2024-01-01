@@ -5180,7 +5180,6 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpeed     = 95,                                                            \
         .baseSpAttack  = 60,                                                            \
         .baseSpDefense = 70,                                                            \
-        .types = { TYPE_NORMAL, TYPE_GRASS },                                           \
         .catchRate = 75,                                                                \
         .expYield = 166,                                                                \
         .evYield_Attack = 2,                                                            \
@@ -5213,6 +5212,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     [SPECIES_SAWSBUCK_SPRING] =
     {
         SAWSBUCK_MISC_INFO,
+        .types = { TYPE_FAIRY, TYPE_GRASS },
         .description = COMPOUND_STRING(
             "Some people call Sawsbuck the harbingers\n"
             "of spring because the plants growing on\n"
@@ -5227,6 +5227,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     [SPECIES_SAWSBUCK_SUMMER] =
     {
         SAWSBUCK_MISC_INFO,
+        .types = { TYPE_NORMAL, TYPE_GRASS },
         .description = COMPOUND_STRING(
             "The thicker and larger the\n"
             "branches and leaves on its antlers, the\n"
@@ -5241,6 +5242,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     [SPECIES_SAWSBUCK_AUTUMN] =
     {
         SAWSBUCK_MISC_INFO,
+        .types = { TYPE_FIRE, TYPE_GRASS },
         .description = COMPOUND_STRING(
             "Sawsbuck in their Autumn Form are\n"
             "known for having very short\n"
@@ -5255,6 +5257,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     [SPECIES_SAWSBUCK_WINTER] =
     {
         SAWSBUCK_MISC_INFO,
+        .types = { TYPE_ICE, TYPE_GRASS },
         .description = COMPOUND_STRING(
             "Though there are many enthusiasts\n"
             "for Sawsbuck as a species, this\n"
@@ -5635,7 +5638,8 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .catchRate = 75,
         .expYield = 165,
         .evYield_HP = 2,
-        .genderRatio = PERCENT_FEMALE(50),
+        .itemCommon = ITEM_HEART_SCALE,
+        .genderRatio = MON_FEMALE,
         .eggCycles = 40,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_FAST,
@@ -6481,7 +6485,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpeed     = 67,
         .baseSpAttack  = 40,
         .baseSpDefense = 50,
-        .types = { TYPE_DRAGON, TYPE_DRAGON },
+        .types = { TYPE_DRAGON, TYPE_FIGHTING },
         .catchRate = 60,
         .expYield = 144,
         .evYield_Attack = 2,
@@ -6529,7 +6533,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpeed     = 97,
         .baseSpAttack  = 60,
         .baseSpDefense = 70,
-        .types = { TYPE_DRAGON, TYPE_DRAGON },
+        .types = { TYPE_DRAGON, TYPE_FIGHTING },
         .catchRate = 45,
         .expYield = 243,
         .evYield_Attack = 3,
