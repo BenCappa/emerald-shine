@@ -1392,18 +1392,18 @@ void CalculateMonStats(struct Pokemon *mon)
 {
     s32 oldMaxHP = GetMonData(mon, MON_DATA_MAX_HP, NULL);
     s32 currentHP = GetMonData(mon, MON_DATA_HP, NULL);
-    s32 hpIV = GetMonData(mon, MON_DATA_HP_IV, NULL);
-    s32 hpEV = GetMonData(mon, MON_DATA_HP_EV, NULL);
-    s32 attackIV = GetMonData(mon, MON_DATA_ATK_IV, NULL);
-    s32 attackEV = GetMonData(mon, MON_DATA_ATK_EV, NULL);
-    s32 defenseIV = GetMonData(mon, MON_DATA_DEF_IV, NULL);
-    s32 defenseEV = GetMonData(mon, MON_DATA_DEF_EV, NULL);
-    s32 speedIV = GetMonData(mon, MON_DATA_SPEED_IV, NULL);
-    s32 speedEV = GetMonData(mon, MON_DATA_SPEED_EV, NULL);
-    s32 spAttackIV = GetMonData(mon, MON_DATA_SPATK_IV, NULL);
-    s32 spAttackEV = GetMonData(mon, MON_DATA_SPATK_EV, NULL);
-    s32 spDefenseIV = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
-    s32 spDefenseEV = GetMonData(mon, MON_DATA_SPDEF_EV, NULL);
+//    s32 hpIV = GetMonData(mon, MON_DATA_HP_IV, NULL);
+//    s32 hpEV = GetMonData(mon, MON_DATA_HP_EV, NULL);
+//    s32 attackIV = GetMonData(mon, MON_DATA_ATK_IV, NULL);
+//    s32 attackEV = GetMonData(mon, MON_DATA_ATK_EV, NULL);
+//    s32 defenseIV = GetMonData(mon, MON_DATA_DEF_IV, NULL);
+//    s32 defenseEV = GetMonData(mon, MON_DATA_DEF_EV, NULL);
+//    s32 speedIV = GetMonData(mon, MON_DATA_SPEED_IV, NULL);
+//    s32 speedEV = GetMonData(mon, MON_DATA_SPEED_EV, NULL);
+//    s32 spAttackIV = GetMonData(mon, MON_DATA_SPATK_IV, NULL);
+//    s32 spAttackEV = GetMonData(mon, MON_DATA_SPATK_EV, NULL);
+//    s32 spDefenseIV = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
+//    s32 spDefenseEV = GetMonData(mon, MON_DATA_SPDEF_EV, NULL);
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
     s32 level = GetLevelFromMonExp(mon);
@@ -1427,11 +1427,11 @@ void CalculateMonStats(struct Pokemon *mon)
 
     SetMonData(mon, MON_DATA_MAX_HP, &newMaxHP);
 
-    CALC_STAT(baseAttack, attackIV, attackEV, STAT_ATK, MON_DATA_ATK)
-    CALC_STAT(baseDefense, defenseIV, defenseEV, STAT_DEF, MON_DATA_DEF)
-    CALC_STAT(baseSpeed, speedIV, speedEV, STAT_SPEED, MON_DATA_SPEED)
-    CALC_STAT(baseSpAttack, spAttackIV, spAttackEV, STAT_SPATK, MON_DATA_SPATK)
-    CALC_STAT(baseSpDefense, spDefenseIV, spDefenseEV, STAT_SPDEF, MON_DATA_SPDEF)
+    CALC_STAT(baseAttack, STAT_ATK, MON_DATA_ATK)
+    CALC_STAT(baseDefense, STAT_DEF, MON_DATA_DEF)
+    CALC_STAT(baseSpeed, STAT_SPEED, MON_DATA_SPEED)
+    CALC_STAT(baseSpAttack, STAT_SPATK, MON_DATA_SPATK)
+    CALC_STAT(baseSpDefense, STAT_SPDEF, MON_DATA_SPDEF)
 
     if (species == SPECIES_SHEDINJA)
     {
