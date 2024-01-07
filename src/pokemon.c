@@ -5266,9 +5266,15 @@ void SetWildMonHeldItem(void)
                     if (rnd < chanceNoItem)
                         continue;
                     if (rnd < chanceNotRare)
-                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemCommon);
+                        if (gSpeciesInfo[species].itemCommon != ITEM_NONE)
+                            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemCommon);
+                        else
+                            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[SPECIES_NONE].itemCommon);
                     else
-                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemRare);
+                        if (gSpeciesInfo[species].itemRare != ITEM_NONE)
+                            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemRare);
+                        else
+                            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[SPECIES_NONE].itemRare);
                 }
             }
         }

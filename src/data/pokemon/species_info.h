@@ -228,6 +228,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
     {
+        .itemCommon = ITEM_EXP_CANDY_XS,
+        .itemRare = ITEM_EXP_CANDY_S,
         .speciesName = _("??????????"),
         .cryId = CRY_NONE,
         .natDexNum = NATIONAL_DEX_NONE,
