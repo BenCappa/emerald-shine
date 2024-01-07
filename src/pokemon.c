@@ -957,17 +957,14 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
 }
 
 // This is only used to create Wally's Ralts.
-void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
+void CreateShinyMaleMon(struct Pokemon *mon, u16 species, u8 level)
 {
     u32 personality;
     u32 otId;
-
-    do
-    {
-        otId = Random32();
-        personality = Random32();
-    }
-    while (GetGenderFromSpeciesAndPersonality(species, personality) != MON_MALE);
+    
+    otId = 00000000000000000000000000000001;
+    personality = 00000000000000000000000000000001;
+    
     CreateMon(mon, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PRESET, otId);
 }
 
@@ -1774,10 +1771,16 @@ u8 GetBoxMonGender(struct BoxPokemon *boxMon)
         return gSpeciesInfo[species].genderRatio;
     }
 
-    if (gSpeciesInfo[species].genderRatio > (personality & 0xFF))
-        return MON_FEMALE;
+    if (species == SPECIES_RALTS)
+        if (gSpeciesInfo[species].genderRatio < (personality & 0xFF))
+            return MON_FEMALE;
+        else
+            return MON_MALE;
     else
-        return MON_MALE;
+        if (gSpeciesInfo[species].genderRatio > (personality & 0xFF))
+            return MON_FEMALE;
+        else
+            return MON_MALE;
 }
 
 u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
@@ -1789,7 +1792,7 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
     case MON_GENDERLESS:
         return gSpeciesInfo[species].genderRatio;
     }
-
+    
     if (gSpeciesInfo[species].genderRatio > (personality & 0xFF))
         return MON_FEMALE;
     else
