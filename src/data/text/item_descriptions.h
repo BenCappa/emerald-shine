@@ -542,27 +542,27 @@ static const u8 sRareCandyDesc[] = _(
 
 static const u8 sExpCandyXSDesc[] = _(
     "Gives a very small\n"
-    "amount of Exp. to\n"
+    "amount of Exp to\n"
     "a single Pokémon.");
 
 static const u8 sExpCandySDesc[] = _(
     "Gives a small\n"
-    "amount of Exp. to\n"
+    "amount of Exp to\n"
     "a single Pokémon.");
 
 static const u8 sExpCandyMDesc[] = _(
     "Gives a moderate\n"
-    "amount of Exp. to\n"
+    "amount of Exp to\n"
     "a single Pokémon.");
 
 static const u8 sExpCandyLDesc[] = _(
     "Gives a large\n"
-    "amount of Exp. to\n"
+    "amount of Exp to\n"
     "a single Pokémon.");
 
 static const u8 sExpCandyXLDesc[] = _(
     "Gives a very large\n"
-    "amount of Exp. to\n"
+    "amount of Exp to\n"
     "a single Pokémon.");
 
 static const u8 sDynamaxCandyDesc[] = _(
@@ -2408,11 +2408,11 @@ static const u8 sWhiteHerbDesc[] = _(
 static const u8 sExpShareDesc[] = _(
 #if I_EXP_SHARE_ITEM >= GEN_6
     "This device gives\n"
-    "exp. to other\n"
+    "Exp to other\n"
     "party members.");
 #else
     "A hold item that\n"
-    "gets Exp. points\n"
+    "gets Exp points\n"
     "from battles.");
 #endif
 
@@ -2465,7 +2465,7 @@ static const u8 sFocusBandDesc[] = _(
 
 static const u8 sLuckyEggDesc[] = _(
     "A hold item that\n"
-    "boosts Exp. points\n"
+    "boosts Exp points\n"
     "earned in battle.");
 
 static const u8 sScopeLensDesc[] = _(
@@ -3489,7 +3489,7 @@ static const u8 sCatchingCharmDesc[] = _(
 
 static const u8 sExpCharmDesc[] = _(
     "A charm that raises\n"
-    "the amount of Exp.\n"
+    "the amount of Exp\n"
     "earned in battle.");
 
 // Form-changing Key Items

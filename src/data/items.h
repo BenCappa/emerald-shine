@@ -1224,7 +1224,7 @@ const struct Item gItems[] =
 
     [ITEM_EXP_CANDY_XS] =
     {
-        .name = _("Exp.Candy XS"),
+        .name = _("Exp Candy XS"),
         .price = 20,
         .holdEffectParam = EXP_100,
         .description = sExpCandyXSDesc,
@@ -1236,7 +1236,7 @@ const struct Item gItems[] =
 
     [ITEM_EXP_CANDY_S] =
     {
-        .name = _("Exp.Candy S"),
+        .name = _("Exp Candy S"),
         .price = 240,
         .holdEffectParam = EXP_800,
         .description = sExpCandySDesc,
@@ -1248,7 +1248,7 @@ const struct Item gItems[] =
 
     [ITEM_EXP_CANDY_M] =
     {
-        .name = _("Exp.Candy M"),
+        .name = _("Exp Candy M"),
         .price = 1000,
         .holdEffectParam = EXP_3000,
         .description = sExpCandyMDesc,
@@ -1260,7 +1260,7 @@ const struct Item gItems[] =
 
     [ITEM_EXP_CANDY_L] =
     {
-        .name = _("Exp.Candy L"),
+        .name = _("Exp Candy L"),
         .price = 3000,
         .holdEffectParam = EXP_10000,
         .description = sExpCandyLDesc,
@@ -1272,7 +1272,7 @@ const struct Item gItems[] =
 
     [ITEM_EXP_CANDY_XL] =
     {
-        .name = _("Exp.Candy XL"),
+        .name = _("Exp Candy XL"),
         .price = 10000,
         .holdEffectParam = EXP_30000,
         .description = sExpCandyXLDesc,
@@ -5637,7 +5637,7 @@ const struct Item gItems[] =
 
     [ITEM_EXP_SHARE] =
     {
-        .name = _("Exp. Share"),
+        .name = _("Exp Share"),
         .price = 3000,
         .holdEffect = HOLD_EFFECT_EXP_SHARE,
         .description = sExpShareDesc,
@@ -8476,7 +8476,7 @@ const struct Item gItems[] =
 
     [ITEM_EXP_CHARM] =
     {
-        .name = _("Exp. Charm"),
+        .name = _("Exp Charm"),
         .price = 0,
         .importance = 1,
         .description = sExpCharmDesc,
