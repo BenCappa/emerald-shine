@@ -1,18 +1,23 @@
 gText_Birch_Welcome::
 	.string "Sorry to keep you waiting!\p"
-	.string "Welcome to the world of Pokémon!\p"
-	.string "I'm Professor Mike.\n"
+	.string "Let me introduce myself,\n"
+	.string "I'm Professor Mike.\p"
 	.string "But you can call me Gump.\p"
+	.string "Pleasure to meet you!\p"
+	.string "Welcome to the world of Pokémon!\p"
+	.string "As I understand it, you're\n"
+	.string "something of a Pokémon fan.\p"
+	.string "Tell ya what, here's someone\n"
+	.string "I think you should meet.\p"
 	.string "$"
 
 gText_Birch_Pokemon::
-	.string "This is my partner: Rotom.{PAUSE 96}\p"
-	.string "\n"
+	.string "This is my partner: Rotom.\p"
 	.string "$"
 
 gText_Birch_MainSpeech::
 	.string "You may not know this but Rotom\n"
-	.string "aren't normally found in Hoenn.\p"
+	.string "aren't normally from this region.\p"
 	.string "You see, someone has quite drastically\n"
 	.string "changed the world you're entering.\p"
 	.string "All sorts of new Pokémon have began\n"
@@ -27,8 +32,9 @@ gText_Birch_MainSpeech::
 	.string "$"
 
 gText_Birch_AndYouAre::
-	.string "This is you, right?\n"
-	.string "Yeah, your name is {PLAYER}!\p"
+	.string "To be clear, this IS you…\n"
+	.string "right?\p"
+	.string "{PLAYER}?\p"
 	.string "$"
 
 gText_Birch_BoyOrGirl::
@@ -40,23 +46,35 @@ gText_Birch_WhatsYourName::
 	.string "What's your name?$"
 
 gText_Birch_SoItsPlayer::
-	.string "So it's {PLAYER}{KUN}?$"
+	.string "Yeah, you're definitely {PLAYER}!\p"
+	.string "You match the description I\n"
+	.string "have here to a tee.\p"
+	.string "Long brown hair…\p"
+	.string "Beautiful smile…\p"
+	.string "Awkawrd pose…\p"
+	.string "To a tee!\p"
+	.string "$"
 
 gText_Birch_YourePlayer::
-	.string "Well {PLAYER}, you've got some work\n"
-	.string "cut out for ya.\p"
-	.string "It'll take you exploring this new\n"
-	.string "world to see if my theory's correct.\p"
-	.string "Whoever made this world has put\n"
-	.string "their heart into every change.\p"
+	.string "Anyways, as I was saying…\p"
+	.string "{PLAYER}, I've got a favor to ask.\p"
+	.string "Can you please explore this new world\n"
+	.string "and find out if my theory's correct.\p"
+	.string "Whoever did all this obviously put\n"
+	.string "their heart into it and I'd hate to\l"
+	.string "see all that hard work go to waste.\p"
+	.string "Can you do that for me?\p"
+	.string "Great!\p"
+	.string "I promise, you won't regret it.\p"
 	.string "$"
 
 gText_Birch_AreYouReady::
-	.string "So leave no stone unturned.\p"
-	.string "Leave no challenge unanswered.\p"
-	.string "Are you ready?\p"
+	.string "Alrighty then, you ready?\p"
 	.string "Then go forth and begin your\n"
 	.string "adventure!\p"
-	.string "When you get there, find my son.\n"
+	.string "Leave no stone unturned.\p"
+	.string "Leave no challenge unanswered.\p"
+	.string "And when you get there, find my son.\p"
 	.string "He'll help get you started.\p"
+	.string "See you soon!\p"
 	.string "$"
