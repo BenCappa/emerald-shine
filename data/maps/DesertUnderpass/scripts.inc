@@ -18,7 +18,6 @@ DesertUnderpass_EventScript_Fossil::
 
 DesertUnderpass_EventScript_GiveSailFossil::
 	giveitem ITEM_SAIL_FOSSIL
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	removeobject LOCALID_FOSSIL
 	release
 	end
