@@ -10,6 +10,7 @@ MirageTower_4F_EventScript_SkullFossil::
 	msgbox MirageTower_4F_Text_TakeSkullFossil, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MirageTower_4F_EventScript_LeaveSkullFossil
 	giveitem ITEM_SKULL_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_SKULL_FOSSIL
 	setflag FLAG_HIDE_MIRAGE_TOWER_SAIL_FOSSIL
@@ -30,6 +31,7 @@ MirageTower_4F_EventScript_SailFossil::
 	msgbox MirageTower_4F_Text_TakeSailFossil, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MirageTower_4F_EventScript_LeaveSailFossil
 	giveitem ITEM_SAIL_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_SAIL_FOSSIL
 	setflag FLAG_HIDE_MIRAGE_TOWER_SKULL_FOSSIL
