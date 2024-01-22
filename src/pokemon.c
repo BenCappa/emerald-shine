@@ -5224,6 +5224,7 @@ void SetWildMonHeldItem(void)
     {
         u16 rnd;
         u16 species;
+        u16 typeNum = Random() % 2;
         u16 count = (WILD_DOUBLE_BATTLE) ? 2 : 1;
         u16 i;
         bool32 itemHeldBoost = CanFirstMonBoostHeldItemRarity();
@@ -5267,18 +5268,150 @@ void SetWildMonHeldItem(void)
                 }
                 else
                 {
+                    u16 normal = { ITEM_CHILAN_BERRY, ITEM_SILK_SCARF };
+                    u16 fighting = { ITEM_CHOPLE_BERRY, ITEM_BLACK_BELT };
+                    u16 flying = { ITEM_COBA_BERRY, ITEM_SHARP_BEAK };
+                    u16 poison = { ITEM_KEBIA_BERRY, ITEM_POISON_BARB };
+                    u16 ground = { ITEM_SHUCA_BERRY, ITEM_SOFT_SAND };
+                    u16 rock = { ITEM_CHARTI_BERRY, ITEM_HARD_STONE };
+                    u16 bug = { ITEM_TANGA_BERRY, ITEM_SILVER_POWDER };
+                    u16 ghost = { ITEM_KASIB_BERRY, ITEM_SPELL_TAG };
+                    u16 steel = { ITEM_BABIRI_BERRY, ITEM_METAL_COAT };
+                    u16 fire = { ITEM_OCCA_BERRY, ITEM_CHARCOAL };
+                    u16 water = { ITEM_PASSHO_BERRY, ITEM_MYSTIC_WATER };
+                    u16 grass = { ITEM_RINDO_BERRY, ITEM_MIRACLE_SEED };
+                    u16 electric = { ITEM_WACAN_BERRY, ITEM_MAGNET };
+                    u16 psychic = { ITEM_PAYAPA_BERRY, ITEM_TWISTED_SPOON };
+                    u16 ice = { ITEM_YACHE_BERRY, ITEM_NEVER_MELT_ICE };
+                    u16 dragon = { ITEM_HABAN_BERRY, ITEM_DRAGON_FANG };
+                    u16 dark = { ITEM_COLBUR_BERRY, ITEM_BLACK_GLASSES };
+                    u16 fairy = { ITEM_ROSELI_BERRY, ITEM_FAIRY_FEATHER };
+
                     if (rnd < chanceNoItem)
                         continue;
                     if (rnd < chanceNotRare)
                         if (gSpeciesInfo[species].itemCommon != ITEM_NONE)
                             SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemCommon);
                         else
-                            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[SPECIES_NONE].itemCommon);
+                            switch (gSpeciesInfo[species].types[typeNum])
+                            {
+                            case TYPE_NORMAL:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &normal[0]);
+                                break;
+                            case TYPE_FIGHTING:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &fighting[0]);
+                                break;
+                            case TYPE_FLYING:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &flying[0]);
+                                break;
+                            case TYPE_POISON:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &poison[0]);
+                                break;
+                            case TYPE_GROUND:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &ground[0]);
+                                break;
+                            case TYPE_ROCK:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &rock[0]);
+                                break;
+                            case TYPE_BUG:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &bug[0]);
+                                break;
+                            case TYPE_GHOST:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &ghost[0]);
+                                break;
+                            case TYPE_STEEL:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &steel[0]);
+                                break;
+                            case TYPE_FIRE:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &fire[0]);
+                                break;
+                            case TYPE_WATER:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &water[0]);
+                                break;
+                            case TYPE_GRASS:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &grass[0]);
+                                break;
+                            case TYPE_ELECTRIC:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &electric[0]);
+                                break;
+                            case TYPE_PSYCHIC:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &psychic[0]);
+                                break;
+                            case TYPE_ICE:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &ice[0]);
+                                break;
+                            case TYPE_DRAGON:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &dragon[0]);
+                                break;
+                            case TYPE_DARK:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &dark[0]);
+                                break;
+                            case TYPE_FAIRY:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &fairy[0]);
+                                break;
+                            }
+                            
                     else
                         if (gSpeciesInfo[species].itemRare != ITEM_NONE)
                             SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemRare);
                         else
-                            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[SPECIES_NONE].itemRare);
+                            switch (gSpeciesInfo[species].types[typeNum])
+                            {
+                            case TYPE_NORMAL:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &normal[1]);
+                                break;
+                            case TYPE_FIGHTING:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &fighting[1]);
+                                break;
+                            case TYPE_FLYING:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &flying[1]);
+                                break;
+                            case TYPE_POISON:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &poison[1]);
+                                break;
+                            case TYPE_GROUND:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &ground[1]);
+                                break;
+                            case TYPE_ROCK:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &rock[1]);
+                                break;
+                            case TYPE_BUG:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &bug[1]);
+                                break;
+                            case TYPE_GHOST:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &ghost[1]);
+                                break;
+                            case TYPE_STEEL:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &steel[1]);
+                                break;
+                            case TYPE_FIRE:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &fire[1]);
+                                break;
+                            case TYPE_WATER:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &water[1]);
+                                break;
+                            case TYPE_GRASS:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &grass[1]);
+                                break;
+                            case TYPE_ELECTRIC:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &electric[1]);
+                                break;
+                            case TYPE_PSYCHIC:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &psychic[1]);
+                                break;
+                            case TYPE_ICE:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &ice[1]);
+                                break;
+                            case TYPE_DRAGON:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &dragon[1]);
+                                break;
+                            case TYPE_DARK:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &dark[1]);
+                                break;
+                            case TYPE_FAIRY:
+                                SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &fairy[1]);
+                                break;
+                            }
                 }
             }
         }

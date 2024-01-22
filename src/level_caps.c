@@ -22,30 +22,23 @@ u32 GetCurrentLevelCap(void)
 
     u32 i;
 
-    if (B_LEVEL_CAP_TYPE == LEVEL_CAP_FLAG_LIST)
+    for (i = 0; i < ARRAY_COUNT(sLevelCapFlagMap); i++)
     {
-        for (i = 0; i < ARRAY_COUNT(sLevelCapFlagMap); i++)
-        {
-            if (!FlagGet(sLevelCapFlagMap[i][0]))
-                return sLevelCapFlagMap[i][1];
-        }
+        if (!FlagGet(sLevelCapFlagMap[i][0]))
+            return sLevelCapFlagMap[i][1];
     }
-    else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
-    {
-        return VarGet(B_LEVEL_CAP_VARIABLE);
-    }
-
+    
     return MAX_LEVEL;
 }
 
-u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
+u32 GetLevelCapExpValue(u32 species, u32 level, u32 expCurrent, u32 expValue)
 {
-    static const u32 sExpScalingDown[5] = { 4, 8, 16, 32, 64 };
+    /*static const u32 sExpScalingDown[5] = { 4, 8, 16, 32, 64 };
     static const u32 sExpScalingUp[5]   = { 16, 8, 4, 2, 1 };
 
-    u32 levelDifference;
+    u32 levelDifference;*/
     u32 currentLevelCap = GetCurrentLevelCap();
-
+    /*
     if (B_EXP_CAP_TYPE == EXP_CAP_NONE)
         return expValue;
 
@@ -64,6 +57,20 @@ u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
             return expValue / sExpScalingDown[ARRAY_COUNT(sExpScalingDown) - 1];
         else
             return expValue / sExpScalingDown[levelDifference];
+    }
+    else
+        return 0;
+    */
+    if (level < currentLevelCap)
+    {
+        if ((expCurrent + expValue) > gExperienceTables[gSpeciesInfo[species].growthRate][currentLevelCap])
+        {
+            expValue = gExperienceTables[gSpeciesInfo[species].growthRate][currentLevelCap] - expCurrent;
+            if (expValue < 0)
+                expValue = 0;
+        }
+        
+        return expValue;
     }
     else
         return 0;
