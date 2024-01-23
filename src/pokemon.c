@@ -5268,24 +5268,24 @@ void SetWildMonHeldItem(void)
                 }
                 else
                 {
-                    u16 normal = { ITEM_CHILAN_BERRY, ITEM_SILK_SCARF };
-                    u16 fighting = { ITEM_CHOPLE_BERRY, ITEM_BLACK_BELT };
-                    u16 flying = { ITEM_COBA_BERRY, ITEM_SHARP_BEAK };
-                    u16 poison = { ITEM_KEBIA_BERRY, ITEM_POISON_BARB };
-                    u16 ground = { ITEM_SHUCA_BERRY, ITEM_SOFT_SAND };
-                    u16 rock = { ITEM_CHARTI_BERRY, ITEM_HARD_STONE };
-                    u16 bug = { ITEM_TANGA_BERRY, ITEM_SILVER_POWDER };
-                    u16 ghost = { ITEM_KASIB_BERRY, ITEM_SPELL_TAG };
-                    u16 steel = { ITEM_BABIRI_BERRY, ITEM_METAL_COAT };
-                    u16 fire = { ITEM_OCCA_BERRY, ITEM_CHARCOAL };
-                    u16 water = { ITEM_PASSHO_BERRY, ITEM_MYSTIC_WATER };
-                    u16 grass = { ITEM_RINDO_BERRY, ITEM_MIRACLE_SEED };
-                    u16 electric = { ITEM_WACAN_BERRY, ITEM_MAGNET };
-                    u16 psychic = { ITEM_PAYAPA_BERRY, ITEM_TWISTED_SPOON };
-                    u16 ice = { ITEM_YACHE_BERRY, ITEM_NEVER_MELT_ICE };
-                    u16 dragon = { ITEM_HABAN_BERRY, ITEM_DRAGON_FANG };
-                    u16 dark = { ITEM_COLBUR_BERRY, ITEM_BLACK_GLASSES };
-                    u16 fairy = { ITEM_ROSELI_BERRY, ITEM_FAIRY_FEATHER };
+                    u16 normal[] = { ITEM_CHILAN_BERRY, ITEM_SILK_SCARF };
+                    u16 fighting[] = { ITEM_CHOPLE_BERRY, ITEM_BLACK_BELT };
+                    u16 flying[] = { ITEM_COBA_BERRY, ITEM_SHARP_BEAK };
+                    u16 poison[] = { ITEM_KEBIA_BERRY, ITEM_POISON_BARB };
+                    u16 ground[] = { ITEM_SHUCA_BERRY, ITEM_SOFT_SAND };
+                    u16 rock[] = { ITEM_CHARTI_BERRY, ITEM_HARD_STONE };
+                    u16 bug[] = { ITEM_TANGA_BERRY, ITEM_SILVER_POWDER };
+                    u16 ghost[] = { ITEM_KASIB_BERRY, ITEM_SPELL_TAG };
+                    u16 steel[] = { ITEM_BABIRI_BERRY, ITEM_METAL_COAT };
+                    u16 fire[] = { ITEM_OCCA_BERRY, ITEM_CHARCOAL };
+                    u16 water[] = { ITEM_PASSHO_BERRY, ITEM_MYSTIC_WATER };
+                    u16 grass[] = { ITEM_RINDO_BERRY, ITEM_MIRACLE_SEED };
+                    u16 electric[] = { ITEM_WACAN_BERRY, ITEM_MAGNET };
+                    u16 psychic[] = { ITEM_PAYAPA_BERRY, ITEM_TWISTED_SPOON };
+                    u16 ice[] = { ITEM_YACHE_BERRY, ITEM_NEVER_MELT_ICE };
+                    u16 dragon[] = { ITEM_HABAN_BERRY, ITEM_DRAGON_FANG };
+                    u16 dark[] = { ITEM_COLBUR_BERRY, ITEM_BLACK_GLASSES };
+                    u16 fairy[] = { ITEM_ROSELI_BERRY, ITEM_FAIRY_FEATHER };
 
                     if (rnd < chanceNoItem)
                         continue;
