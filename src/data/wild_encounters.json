@@ -155,7 +155,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 3,
@@ -339,7 +339,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 3,
@@ -523,7 +523,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 3,
@@ -707,7 +707,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 3,
@@ -1555,7 +1555,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 5,
@@ -1739,7 +1739,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 12,
@@ -2081,7 +2081,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 5,
@@ -3039,7 +3039,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 18,
@@ -3579,7 +3579,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 5,
@@ -4140,7 +4140,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 20,
@@ -8891,7 +8891,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 20,
@@ -9455,7 +9455,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 3,
@@ -9746,7 +9746,7 @@
             ]
           },
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 25,
@@ -11896,7 +11896,7 @@
           "map": "MAP_RUSTBORO_CITY",
           "base_label": "gRustboroCity0",
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 5,
@@ -11930,7 +11930,7 @@
           "map": "MAP_LITTLEROOT_TOWN",
           "base_label": "gLittlerootTown0",
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 3,
@@ -11964,7 +11964,7 @@
           "map": "MAP_OLDALE_TOWN",
           "base_label": "gOldaleTown0",
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 3,
@@ -11998,7 +11998,7 @@
           "map": "MAP_LAVARIDGE_TOWN",
           "base_label": "gLavaridgeTown0",
           "headbutt_mons": {
-            "encounter_rate": 0,
+            "encounter_rate": 100,
             "mons": [
               {
                 "min_level": 18,

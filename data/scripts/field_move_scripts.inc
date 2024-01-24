@@ -308,6 +308,7 @@ EventScript_HeadbuttTree:
 	goto_if_eq EventScript_EndHeadbutt
 	waitstate
 EventScript_EndHeadbutt:
+	msgbox Text_FailSweetScent, MSGBOX_SIGN
 	releaseall
 	end
 
