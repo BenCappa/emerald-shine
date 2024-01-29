@@ -4,75 +4,63 @@
 #include "level_caps.h"
 #include "pokemon.h"
 
+u8 GetCurrentBadgeCount(void)
+{
+    u16 i, j, badgeCount = 0;
+    for (i = FLAG_BADGE01_GET; i < FLAG_BADGE01_GET + NUM_BADGES; i++)
+    {
+        if(FlagGet(i))
+            badgeCount++;
+    }
+    for (j = FLAG_DEFEATED_ELITE_4_DRAKE; j < FLAG_DEFEATED_ELITE_4_DRAKE + 4; j++)
+    {
+        if(FlagGet(j))
+            badgeCount++;
+    }
+    return badgeCount;
+}
+
+enum LevelCap {
+    LEVEL_CAP_NO_BADGES,
+    LEVEL_CAP_BADGE_1,
+    LEVEL_CAP_BADGE_2,
+    LEVEL_CAP_BADGE_3,
+    LEVEL_CAP_BADGE_4,
+    LEVEL_CAP_BADGE_5,
+    LEVEL_CAP_BADGE_6,
+    LEVEL_CAP_BADGE_7,
+    LEVEL_CAP_BADGE_8,
+    LEVEL_CAP_SYDNEY,
+    LEVEL_CAP_PHOEBE,
+    LEVEL_CAP_GLACIA,
+    LEVEL_CAP_DRAKE
+};
+
+static const u8 sLevelCapTable[] =
+{
+    [LEVEL_CAP_NO_BADGES]   = 15,
+    [LEVEL_CAP_BADGE_1]     = 19,
+    [LEVEL_CAP_BADGE_2]     = 24,
+    [LEVEL_CAP_BADGE_3]     = 29,
+    [LEVEL_CAP_BADGE_4]     = 31,
+    [LEVEL_CAP_BADGE_5]     = 33,
+    [LEVEL_CAP_BADGE_6]     = 42,
+    [LEVEL_CAP_BADGE_7]     = 46,
+    [LEVEL_CAP_BADGE_8]     = 49,
+    [LEVEL_CAP_SYDNEY]      = 51,
+    [LEVEL_CAP_PHOEBE]      = 53,
+    [LEVEL_CAP_GLACIA]      = 55,
+    [LEVEL_CAP_DRAKE]       = 58,
+};
 
 u32 GetCurrentLevelCap(void)
 {
-    static const u32 sLevelCapFlagMap[][2] =
-    {
-        {FLAG_BADGE01_GET, 15},
-        {FLAG_BADGE02_GET, 19},
-        {FLAG_BADGE03_GET, 24},
-        {FLAG_BADGE04_GET, 29},
-        {FLAG_BADGE05_GET, 31},
-        {FLAG_BADGE06_GET, 33},
-        {FLAG_BADGE07_GET, 42},
-        {FLAG_BADGE08_GET, 46},
-        {FLAG_IS_CHAMPION, 58},
-    };
+    u8 badgeCount = GetCurrentBadgeCount();
 
-    u32 i;
-
-    for (i = 0; i < ARRAY_COUNT(sLevelCapFlagMap); i++)
-    {
-        if (!FlagGet(sLevelCapFlagMap[i][0]))
-            return sLevelCapFlagMap[i][1];
-    }
+    if (FlagGet(FLAG_IS_CHAMPION))
+        return MAX_LEVEL;
+    else
+        return sLevelCapTable[badgeCount];
     
     return MAX_LEVEL;
-}
-
-u32 GetLevelCapExpValue(u32 species, u32 level, u32 expCurrent, u32 expValue)
-{
-    /*static const u32 sExpScalingDown[5] = { 4, 8, 16, 32, 64 };
-    static const u32 sExpScalingUp[5]   = { 16, 8, 4, 2, 1 };
-
-    u32 levelDifference;*/
-    u32 currentLevelCap = GetCurrentLevelCap();
-    /*
-    if (B_EXP_CAP_TYPE == EXP_CAP_NONE)
-        return expValue;
-
-    if (B_LEVEL_CAP_EXP_UP && level < currentLevelCap)
-    {
-        levelDifference = currentLevelCap - level;
-        if (levelDifference > ARRAY_COUNT(sExpScalingDown))
-            return expValue + (expValue / sExpScalingUp[ARRAY_COUNT(sExpScalingDown) - 1]);
-        else
-            return expValue + (expValue / sExpScalingUp[levelDifference]);
-    }
-    else if (B_EXP_CAP_TYPE == EXP_CAP_SOFT && level >= currentLevelCap)
-    {
-        levelDifference = level - currentLevelCap;
-        if (levelDifference > ARRAY_COUNT(sExpScalingDown))
-            return expValue / sExpScalingDown[ARRAY_COUNT(sExpScalingDown) - 1];
-        else
-            return expValue / sExpScalingDown[levelDifference];
-    }
-    else
-        return 0;
-    */
-    if (level < currentLevelCap)
-    {
-        if ((expCurrent + expValue) > gExperienceTables[gSpeciesInfo[species].growthRate][currentLevelCap])
-        {
-            expValue = gExperienceTables[gSpeciesInfo[species].growthRate][currentLevelCap] - expCurrent;
-            if (expValue < 0)
-                expValue = 0;
-        }
-        
-        return expValue;
-    }
-    else
-        return 0;
-
 }

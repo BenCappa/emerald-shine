@@ -4182,7 +4182,7 @@ static void Cmd_getexp(void)
                 gBattleMoveDamage = 0; // used for exp
             }
             else if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && *expMonId >= 3)
-                  || GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+                  || GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) == GetCurrentLevelCap())
             {
                 gBattleScripting.getexpState = 5;
                 gBattleMoveDamage = 0; // used for exp
@@ -4206,14 +4206,14 @@ static void Cmd_getexp(void)
                 if (IsValidForBattle(&gPlayerParty[*expMonId]))
                 {
                     if (wasSentOut)
-                        gBattleMoveDamage = GetLevelCapExpValue(GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES), gPlayerParty[*expMonId].level, GetMonData(&gPlayerParty[*expMonId], MON_DATA_EXP), gBattleStruct->expValue);
+                        gBattleMoveDamage = gBattleStruct->expValue;
                     else
                         gBattleMoveDamage = 0;
 
                     if ((holdEffect == HOLD_EFFECT_EXP_SHARE || IsGen6ExpShareEnabled())
                         && (B_SPLIT_EXP < GEN_6 || gBattleMoveDamage == 0)) // only give exp share bonus in later gens if the mon wasn't sent out
                     {
-                        gBattleMoveDamage += GetLevelCapExpValue(GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES), gPlayerParty[*expMonId].level, GetMonData(&gPlayerParty[*expMonId], MON_DATA_EXP), gBattleStruct->expShareExpValue);
+                        gBattleMoveDamage += gBattleStruct->expShareExpValue;
                     }
 
                     ApplyExperienceMultipliers(&gBattleMoveDamage, *expMonId, gBattlerFainted);
@@ -4249,6 +4249,19 @@ static void Cmd_getexp(void)
                         gBattleStruct->expGetterBattlerId = 0;
                     }
 
+                    u32 expGetterExp = GetMonData(&gPlayerParty[*expMonId], MON_DATA_EXP);
+                    u32 expCap = gExperienceTables[gSpeciesInfo[GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES)].growthRate][GetCurrentLevelCap()];
+
+                    if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) >= GetCurrentLevelCap())
+                        gBattleMoveDamage = 0;
+                    
+                    if ((expGetterExp + gBattleMoveDamage) > expCap)
+                    {
+                        gBattleMoveDamage = expCap - expGetterExp;
+                        if (gBattleMoveDamage < 0)
+                            gBattleMoveDamage = 0;
+                    }
+
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, *expMonId);
                     // buffer 'gained' or 'gained a boosted'
                     PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
@@ -4275,7 +4288,7 @@ static void Cmd_getexp(void)
         if (gBattleControllerExecFlags == 0)
         {
             gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0;
-            if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_HP) && GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) != MAX_LEVEL)
+            if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_HP) > 0 && GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) < GetCurrentLevelCap())
             {
                 gBattleResources->beforeLvlUp->stats[STAT_HP]    = GetMonData(&gPlayerParty[*expMonId], MON_DATA_MAX_HP);
                 gBattleResources->beforeLvlUp->stats[STAT_ATK]   = GetMonData(&gPlayerParty[*expMonId], MON_DATA_ATK);
