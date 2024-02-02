@@ -1115,8 +1115,8 @@
 	.4byte \products
 	.endm
 
-	@ Identical to pokemartdecoration, but with slight changes to the clerk dialogue. See uses of MART_TYPE_DECOR2.
-	.macro pokemartdecoration2 products:req
+	@ Identical to pokemart, but with slight changes to the items offered.
+	.macro pokemartbattle products:req
 	.byte 0x88
 	.4byte \products
 	.endm

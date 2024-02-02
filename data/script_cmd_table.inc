@@ -136,7 +136,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_bufferstring                      @ 0x85
 	.4byte ScrCmd_pokemart                          @ 0x86
 	.4byte ScrCmd_pokemartdecoration                @ 0x87
-	.4byte ScrCmd_pokemartdecoration2               @ 0x88
+	.4byte ScrCmd_pokemartbattle                    @ 0x88
 	.4byte ScrCmd_playslotmachine                   @ 0x89
 	.4byte ScrCmd_setberrytree                      @ 0x8a
 	.4byte ScrCmd_choosecontestmon                  @ 0x8b

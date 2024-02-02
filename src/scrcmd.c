@@ -1906,7 +1906,9 @@ bool8 ScrCmd_pokemart(struct ScriptContext *ctx)
 {
     const void *ptr = (void *)ScriptReadWord(ctx);
 
-    CreatePokemartMenu(ptr);
+    u8 martType = 0;
+
+    CreatePokemartMenu(ptr, martType);
     ScriptContext_Stop();
     return TRUE;
 }
@@ -1915,17 +1917,21 @@ bool8 ScrCmd_pokemartdecoration(struct ScriptContext *ctx)
 {
     const void *ptr = (void *)ScriptReadWord(ctx);
 
-    CreateDecorationShop1Menu(ptr);
+    u8 martType = 0;
+
+    CreateDecorationShopMenu(ptr, martType);
     ScriptContext_Stop();
     return TRUE;
 }
 
-// Changes clerk dialogue slightly from above. See MART_TYPE_DECOR2
-bool8 ScrCmd_pokemartdecoration2(struct ScriptContext *ctx)
+// Changed from decoration2
+bool8 ScrCmd_pokemartbattle(struct ScriptContext *ctx)
 {
     const void *ptr = (void *)ScriptReadWord(ctx);
 
-    CreateDecorationShop2Menu(ptr);
+    u8 martType = 1;
+
+    CreatePokemartMenu(ptr, martType);
     ScriptContext_Stop();
     return TRUE;
 }

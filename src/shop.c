@@ -4,6 +4,7 @@
 #include "decompress.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -67,7 +68,6 @@ enum {
 enum {
     MART_TYPE_NORMAL,
     MART_TYPE_DECOR,
-    MART_TYPE_DECOR2,
 };
 
 // shop view window NPC info enum
@@ -154,6 +154,340 @@ static void Task_HandleShopMenuBuy(u8 taskId);
 static void Task_HandleShopMenuSell(u8 taskId);
 static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list);
 static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y);
+
+static const u16 sShopInventory_ZeroBadges[] =
+{
+    ITEM_POTION,
+    ITEM_ANTIDOTE,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_AWAKENING,
+    ITEM_PARALYZE_HEAL,
+    ITEM_REVIVE,
+    ITEM_NONE
+};
+
+static const u16 sBattleShopInventory_ZeroBadges[] =
+{
+    ITEM_POKE_BALL,
+    ITEM_EVERSTONE,
+    ITEM_SOOTHE_BELL,
+    ITEM_SMOKE_BALL,
+    ITEM_POKE_DOLL,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory_OneBadge[] =
+{
+    ITEM_POTION,
+    ITEM_SUPER_POTION,
+    ITEM_ANTIDOTE,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_AWAKENING,
+    ITEM_PARALYZE_HEAL,
+    ITEM_REVIVE,
+    ITEM_REPEL,
+    ITEM_NONE
+};
+
+static const u16 sBattleShopInventory_OneBadge[] =
+{
+    ITEM_POKE_BALL,
+    ITEM_GREAT_BALL,
+    ITEM_HEAL_BALL,
+    ITEM_EVERSTONE,
+    ITEM_SOOTHE_BELL,
+    ITEM_SMOKE_BALL,
+    ITEM_POKE_DOLL,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory_TwoBadges[] =
+{
+    ITEM_POTION,
+    ITEM_SUPER_POTION,
+    ITEM_ANTIDOTE,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_AWAKENING,
+    ITEM_PARALYZE_HEAL,
+    ITEM_REVIVE,
+    ITEM_REPEL,
+    ITEM_LURE,
+    ITEM_NONE
+};
+
+static const u16 sBattleShopInventory_TwoBadges[] =
+{
+    ITEM_POKE_BALL,
+    ITEM_GREAT_BALL,
+    ITEM_HEAL_BALL,
+    ITEM_NET_BALL,
+    ITEM_EVERSTONE,
+    ITEM_SOOTHE_BELL,
+    ITEM_SMOKE_BALL,
+    ITEM_POKE_DOLL,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory_ThreeBadges[] =
+{
+    ITEM_POTION,
+    ITEM_SUPER_POTION,
+    ITEM_ANTIDOTE,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_AWAKENING,
+    ITEM_PARALYZE_HEAL,
+    ITEM_REVIVE,
+    ITEM_REPEL,
+    ITEM_SUPER_REPEL,
+    ITEM_LURE,
+    ITEM_NONE
+};
+
+static const u16 sBattleShopInventory_ThreeBadges[] =
+{
+    ITEM_POKE_BALL,
+    ITEM_GREAT_BALL,
+    ITEM_HEAL_BALL,
+    ITEM_REPEAT_BALL,
+    ITEM_NET_BALL,
+    ITEM_NEST_BALL,
+    ITEM_EVERSTONE,
+    ITEM_SOOTHE_BELL,
+    ITEM_SMOKE_BALL,
+    ITEM_POKE_DOLL,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory_FourBadges[] =
+{
+    ITEM_POTION,
+    ITEM_SUPER_POTION,
+    ITEM_HYPER_POTION,
+    ITEM_ANTIDOTE,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_AWAKENING,
+    ITEM_PARALYZE_HEAL,
+    ITEM_REVIVE,
+    ITEM_REPEL,
+    ITEM_SUPER_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
+    ITEM_NONE
+};
+
+static const u16 sBattleShopInventory_FourBadges[] =
+{
+    ITEM_POKE_BALL,
+    ITEM_GREAT_BALL,
+    ITEM_HEAL_BALL,
+    ITEM_REPEAT_BALL,
+    ITEM_LUXURY_BALL,
+    ITEM_NET_BALL,
+    ITEM_NEST_BALL,
+    ITEM_EVERSTONE,
+    ITEM_SMOKE_BALL,
+    ITEM_SOOTHE_BELL,
+    ITEM_POKE_DOLL,
+    ITEM_ADRENALINE_ORB,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory_FiveBadges[] =
+{
+    ITEM_POTION,
+    ITEM_SUPER_POTION,
+    ITEM_HYPER_POTION,
+    ITEM_ANTIDOTE,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_AWAKENING,
+    ITEM_PARALYZE_HEAL,
+    ITEM_REVIVE,
+    ITEM_REPEL,
+    ITEM_SUPER_REPEL,
+    ITEM_MAX_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
+    ITEM_NONE
+};
+
+static const u16 sBattleShopInventory_FiveBadges[] =
+{
+    ITEM_POKE_BALL,
+    ITEM_GREAT_BALL,
+    ITEM_ULTRA_BALL,
+    ITEM_HEAL_BALL,
+    ITEM_REPEAT_BALL,
+    ITEM_LUXURY_BALL,
+    ITEM_NET_BALL,
+    ITEM_NEST_BALL,
+    ITEM_DIVE_BALL,
+    ITEM_EVERSTONE,
+    ITEM_SOOTHE_BELL,
+    ITEM_SMOKE_BALL,
+    ITEM_POKE_DOLL,
+    ITEM_ADRENALINE_ORB,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory_SixBadges[] =
+{
+    ITEM_POTION,
+    ITEM_SUPER_POTION,
+    ITEM_HYPER_POTION,
+    ITEM_ANTIDOTE,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_AWAKENING,
+    ITEM_PARALYZE_HEAL,
+    ITEM_REVIVE,
+    ITEM_REPEL,
+    ITEM_SUPER_REPEL,
+    ITEM_MAX_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
+    ITEM_MAX_LURE,
+    ITEM_NONE
+};
+
+static const u16 sBattleShopInventory_SixBadges[] =
+{
+    ITEM_POKE_BALL,
+    ITEM_GREAT_BALL,
+    ITEM_ULTRA_BALL,
+    ITEM_HEAL_BALL,
+    ITEM_REPEAT_BALL,
+    ITEM_LUXURY_BALL,
+    ITEM_QUICK_BALL,
+    ITEM_NET_BALL,
+    ITEM_NEST_BALL,
+    ITEM_DIVE_BALL,
+    ITEM_EVERSTONE,
+    ITEM_SOOTHE_BELL,
+    ITEM_SMOKE_BALL,
+    ITEM_POKE_DOLL,
+    ITEM_ADRENALINE_ORB,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory_SevenBadges[] =
+{
+    ITEM_POTION,
+    ITEM_SUPER_POTION,
+    ITEM_HYPER_POTION,
+    ITEM_MAX_POTION,
+    ITEM_ANTIDOTE,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_AWAKENING,
+    ITEM_PARALYZE_HEAL,
+    ITEM_FULL_HEAL,
+    ITEM_REVIVE,
+    ITEM_REPEL,
+    ITEM_SUPER_REPEL,
+    ITEM_MAX_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
+    ITEM_MAX_LURE,
+    ITEM_NONE
+};
+
+static const u16 sBattleShopInventory_SevenBadges[] =
+{
+    ITEM_POKE_BALL,
+    ITEM_GREAT_BALL,
+    ITEM_ULTRA_BALL,
+    ITEM_HEAL_BALL,
+    ITEM_REPEAT_BALL,
+    ITEM_LUXURY_BALL,
+    ITEM_QUICK_BALL,
+    ITEM_NET_BALL,
+    ITEM_NEST_BALL,
+    ITEM_DIVE_BALL,
+    ITEM_DUSK_BALL,
+    ITEM_EVERSTONE,
+    ITEM_SOOTHE_BELL,
+    ITEM_SMOKE_BALL,
+    ITEM_POKE_DOLL,
+    ITEM_ADRENALINE_ORB,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory_EightBadges[] =
+{
+    ITEM_POTION,
+    ITEM_SUPER_POTION,
+    ITEM_HYPER_POTION,
+    ITEM_MAX_POTION,
+    ITEM_FULL_RESTORE,
+    ITEM_ANTIDOTE,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_AWAKENING,
+    ITEM_PARALYZE_HEAL,
+    ITEM_FULL_HEAL,
+    ITEM_REVIVE,
+    ITEM_REPEL,
+    ITEM_SUPER_REPEL,
+    ITEM_MAX_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
+    ITEM_MAX_LURE,
+    ITEM_NONE
+};
+
+static const u16 sBattleShopInventory_EightBadges[] =
+{
+    ITEM_POKE_BALL,
+    ITEM_GREAT_BALL,
+    ITEM_ULTRA_BALL,
+    ITEM_HEAL_BALL,
+    ITEM_REPEAT_BALL,
+    ITEM_LUXURY_BALL,
+    ITEM_QUICK_BALL,
+    ITEM_TIMER_BALL,
+    ITEM_NET_BALL,
+    ITEM_NEST_BALL,
+    ITEM_DIVE_BALL,
+    ITEM_DUSK_BALL,
+    ITEM_EVERSTONE,
+    ITEM_SOOTHE_BELL,
+    ITEM_SMOKE_BALL,
+    ITEM_POKE_DOLL,
+    ITEM_ADRENALINE_ORB,
+    ITEM_NONE
+};
+
+static const u16 *const sShopInventories[] = 
+{
+    sShopInventory_ZeroBadges, 
+    sShopInventory_OneBadge,
+    sShopInventory_TwoBadges,
+    sShopInventory_ThreeBadges,
+    sShopInventory_FourBadges,
+    sShopInventory_FiveBadges,
+    sShopInventory_SixBadges,
+    sShopInventory_SevenBadges,
+    sShopInventory_EightBadges
+};
+
+static const u16 *const sBattleShopInventories[] = 
+{
+    sBattleShopInventory_ZeroBadges, 
+    sBattleShopInventory_OneBadge,
+    sBattleShopInventory_TwoBadges,
+    sBattleShopInventory_ThreeBadges,
+    sBattleShopInventory_FourBadges,
+    sBattleShopInventory_FiveBadges,
+    sBattleShopInventory_SixBadges,
+    sBattleShopInventory_SevenBadges,
+    sBattleShopInventory_EightBadges
+};
 
 static const struct YesNoFuncTable sShopPurchaseYesNoFuncs =
 {
@@ -374,14 +708,34 @@ static void SetShopMenuCallback(void (* callback)(void))
     sMartInfo.callback = callback;
 }
 
-static void SetShopItemsForSale(const u16 *items)
+static u8 GetNumberOfBadges(void)
+{
+    u16 badgeFlag;
+    u8 count = 0;
+    
+    for (badgeFlag = FLAG_BADGE01_GET; badgeFlag < FLAG_BADGE01_GET + NUM_BADGES; badgeFlag++)
+    {
+        if (FlagGet(badgeFlag))
+            count++;
+    }
+    
+    return count;
+}
+
+static void SetShopItemsForSale(const u16 *items, u8 martType)
 {
     u16 i = 0;
+    u8 badgeCount = GetNumberOfBadges();
 
-    sMartInfo.itemList = items;
+    if (items == NULL)
+        if (martType == 0)
+            sMartInfo.itemList = sShopInventories[badgeCount];
+        else
+            sMartInfo.itemList = sBattleShopInventories[badgeCount];
+    else
+        sMartInfo.itemList = items;
+
     sMartInfo.itemCount = 0;
-
-    // Read items until ITEM_NONE / DECOR_NONE is reached
     while (sMartInfo.itemList[i])
     {
         sMartInfo.itemCount++;
@@ -467,12 +821,7 @@ static void MapPostLoadHook_ReturnToShopMenu(void)
 static void Task_ReturnToShopMenu(u8 taskId)
 {
     if (IsWeatherNotFadingIn() == TRUE)
-    {
-        if (sMartInfo.martType == MART_TYPE_DECOR2)
-            DisplayItemMessageOnField(taskId, gText_CanIHelpWithAnythingElse, ShowShopMenuAfterExitingBuyOrSellMenu);
-        else
-            DisplayItemMessageOnField(taskId, gText_AnythingElseICanHelp, ShowShopMenuAfterExitingBuyOrSellMenu);
-    }
+        DisplayItemMessageOnField(taskId, gText_CanIHelpWithAnythingElse, ShowShopMenuAfterExitingBuyOrSellMenu);
 }
 
 static void ShowShopMenuAfterExitingBuyOrSellMenu(u8 taskId)
@@ -1026,10 +1375,7 @@ static void Task_BuyMenu(u8 taskId)
                     StringCopy(gStringVar1, gDecorations[itemId].name);
                     ConvertIntToDecimalStringN(gStringVar2, sShopData->totalCost, STR_CONV_MODE_LEFT_ALIGN, 6);
 
-                    if (sMartInfo.martType == MART_TYPE_DECOR)
-                        StringExpandPlaceholders(gStringVar4, gText_Var1IsItThatllBeVar2);
-                    else // MART_TYPE_DECOR2
-                        StringExpandPlaceholders(gStringVar4, gText_YouWantedVar1ThatllBeVar2);
+                    StringExpandPlaceholders(gStringVar4, gText_YouWantedVar1ThatllBeVar2);
 
                     BuyMenuDisplayMessage(taskId, gStringVar4, BuyMenuConfirmPurchase);
                 }
@@ -1128,10 +1474,7 @@ static void BuyMenuTryMakePurchase(u8 taskId)
     {
         if (DecorationAdd(tItemId))
         {
-            if (sMartInfo.martType == MART_TYPE_DECOR)
-                BuyMenuDisplayMessage(taskId, gText_ThankYouIllSendItHome, BuyMenuSubtractMoney);
-            else // MART_TYPE_DECOR2
-                BuyMenuDisplayMessage(taskId, gText_ThanksIllSendItHome, BuyMenuSubtractMoney);
+            BuyMenuDisplayMessage(taskId, gText_ThanksIllSendItHome, BuyMenuSubtractMoney);
         }
         else
         {
@@ -1162,8 +1505,15 @@ static void Task_ReturnToItemListAfterItemPurchase(u8 taskId)
         PlaySE(SE_SELECT);
 
         // Purchasing 10+ Poke Balls gets the player a Premier Ball
-        if (tItemId == ITEM_POKE_BALL && tItemCount >= 10 && AddBagItem(ITEM_PREMIER_BALL, 1) == TRUE)
-            BuyMenuDisplayMessage(taskId, gText_ThrowInPremierBall, BuyMenuReturnToItemList);
+        if ((ItemId_GetPocket(tItemId) == POCKET_POKE_BALLS) && tItemCount > 9 && AddBagItem(ITEM_PREMIER_BALL, tItemCount / 10) == TRUE)
+            if (tItemCount > 19)
+            {
+                BuyMenuDisplayMessage(taskId, gText_ThrowInPremierBalls, BuyMenuReturnToItemList);
+            }
+            else
+            {
+                BuyMenuDisplayMessage(taskId, gText_ThrowInPremierBall, BuyMenuReturnToItemList);
+            }
         else
             BuyMenuReturnToItemList(taskId);
     }
@@ -1259,24 +1609,17 @@ static void RecordItemPurchase(u8 taskId)
 #undef tCallbackHi
 #undef tCallbackLo
 
-void CreatePokemartMenu(const u16 *itemsForSale)
+void CreatePokemartMenu(const u16 *itemsForSale, u8 martType)
 {
     CreateShopMenu(MART_TYPE_NORMAL);
-    SetShopItemsForSale(itemsForSale);
+    SetShopItemsForSale(itemsForSale, martType);
     ClearItemPurchases();
     SetShopMenuCallback(ScriptContext_Enable);
 }
 
-void CreateDecorationShop1Menu(const u16 *itemsForSale)
+void CreateDecorationShopMenu(const u16 *itemsForSale, u8 martType)
 {
     CreateShopMenu(MART_TYPE_DECOR);
-    SetShopItemsForSale(itemsForSale);
-    SetShopMenuCallback(ScriptContext_Enable);
-}
-
-void CreateDecorationShop2Menu(const u16 *itemsForSale)
-{
-    CreateShopMenu(MART_TYPE_DECOR2);
-    SetShopItemsForSale(itemsForSale);
+    SetShopItemsForSale(itemsForSale, martType);
     SetShopMenuCallback(ScriptContext_Enable);
 }

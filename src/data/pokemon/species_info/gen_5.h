@@ -3000,8 +3000,8 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         PALETTES(BasculinWhiteStriped),
         ICON(BasculinWhiteStriped, 0),
         LEARNSETS(BasculinWhiteStriped),
-        .evolutions = EVOLUTION({EVO_NONE, 0, SPECIES_BASCULEGION_MALE},
-                                {EVO_NONE, 0, SPECIES_BASCULEGION_FEMALE}),
+        .evolutions = EVOLUTION({EVO_LEVEL_MALE, 34, SPECIES_BASCULEGION_MALE},
+                                {EVO_LEVEL_FEMALE, 34, SPECIES_BASCULEGION_FEMALE}),
     },
 
 #define BASCULEGION_MISC_INFO                                                               \

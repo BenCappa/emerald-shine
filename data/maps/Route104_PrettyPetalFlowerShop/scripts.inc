@@ -46,7 +46,7 @@ Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries::
 Route104_PrettyPetalFlowerShop_EventScript_SellDecorations::
 	message gText_PlayerWhatCanIDoForYou
 	waitmessage
-	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Pokemart_Plants
+	pokemartdecoration Route104_PrettyPetalFlowerShop_Pokemart_Plants
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
