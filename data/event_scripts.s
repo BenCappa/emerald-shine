@@ -846,8 +846,9 @@ gText_PokemonCenterSign::
 	.string "POKéMON CENTER$"
 
 gText_MomOrDadMightLikeThisProgram::
-	.string "{STR_VAR_1} might like this program.\n"
-	.string "… … … … … … … … … … … … … … … …\p"
+	.string "There is a movie on TV.\p"
+	.string "A spider-themed superhero is getting a\n"
+	.string "kiss while hanging upside down!\p"
 	.string "Better get going!$"
 
 gText_WhichFloorWouldYouLike::

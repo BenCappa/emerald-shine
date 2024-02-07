@@ -1,7 +1,7 @@
 @ Local IDs are the same for both players houses
-.set LOCALID_MOM, 1
+.set LOCALID_GRAM, 1
 .set LOCALID_DAD, 5
-.set LOCALID_MOM_2F, 14
+.set LOCALID_GRAM_2F, 14
 
 PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet::
 	setvar VAR_LITTLEROOT_INTRO_STATE, 5
@@ -75,7 +75,7 @@ PlayersHouse_2F_EventScript_WallClock::
 	end
 
 PlayersHouse_2F_EventScript_MomComesUpstairsMale::
-	setvar VAR_0x8008, LOCALID_MOM_2F
+	setvar VAR_0x8008, LOCALID_GRAM_2F
 	addobject VAR_0x8008
 	applymovement VAR_0x8008, PlayersHouse_2F_Movement_MomEntersMale
 	waitmovement 0
@@ -88,7 +88,7 @@ PlayersHouse_2F_EventScript_MomComesUpstairsMale::
 	return
 
 PlayersHouse_2F_EventScript_MomComesUpstairsFemale::
-	setvar VAR_0x8008, LOCALID_MOM_2F
+	setvar VAR_0x8008, LOCALID_GRAM_2F
 	addobject VAR_0x8008
 	applymovement VAR_0x8008, PlayersHouse_2F_Movement_MomEntersFemale
 	waitmovement 0
@@ -493,13 +493,13 @@ PlayersHouse_1F_EventScript_AirLatiBroadcast::
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale::
 	setvar VAR_0x8008, MALE
 	setvar VAR_0x8009, LOCALID_DAD
-	setvar VAR_0x800A, LOCALID_MOM
+	setvar VAR_0x800A, LOCALID_GRAM
 	return
 
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsFemale::
 	setvar VAR_0x8008, FEMALE
 	setvar VAR_0x8009, LOCALID_DAD
-	setvar VAR_0x800A, LOCALID_MOM
+	setvar VAR_0x800A, LOCALID_GRAM
 	return
 
 PlayersHouse_1F_EventScript_DadApproachPlayerMale::
@@ -678,3 +678,236 @@ PlayersHouse_1F_Movement_PlayerApproachTVForLatiFemale:
 EventScript_RunningShoesManual::
 	msgbox PlayersHouse_1F_Text_RunningShoesManual, MSGBOX_SIGN
 	end
+
+PlayersHouse_1F_EventScript_MomConversations::
+	lock
+	faceplayer
+	goto_if_unset FLAG_ADVENTURE_STARTED, PlayersHouse_1F_EventScript_BeginningDialogue
+	random 2
+	goto_if_eq VAR_RESULT, 0, PlayersHouse_1F_EventScript_BadgeDialogue
+	goto_if_eq VAR_RESULT, 1, PlayersHouse_1F_EventScript_RandomDialogue
+	return
+
+PlayersHouse_1F_EventScript_BeginningDialogue::
+	msgbox PlayersHouse_1F_Text_MomMissedYou, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_BadgeDialogue::
+	goto_if_set FLAG_IS_CHAMPION, PlayersHouse_1F_EventScript_MomChampion
+	goto_if_set FLAG_BADGE08_GET, PlayersHouse_1F_EventScript_MomRainBadge
+	goto_if_set FLAG_BADGE07_GET, PlayersHouse_1F_EventScript_MomMindBadge
+	goto_if_set FLAG_BADGE06_GET, PlayersHouse_1F_EventScript_MomFeatherBadge
+	goto_if_set FLAG_BADGE05_GET, PlayersHouse_1F_EventScript_MomKnuckleBadge
+	goto_if_set FLAG_BADGE04_GET, PlayersHouse_1F_EventScript_MomHeatBadge
+	goto_if_set FLAG_BADGE03_GET, PlayersHouse_1F_EventScript_MomDynamoBadge
+	goto_if_set FLAG_BADGE02_GET, PlayersHouse_1F_EventScript_MomStoneBadge
+	goto_if_set FLAG_BADGE01_GET, PlayersHouse_1F_EventScript_MomBalanceBadge
+	return
+
+PlayersHouse_1F_EventScript_RandomDialogue::
+	random 4
+	goto_if_eq VAR_RESULT, 0, PlayersHouse_1F_EventScript_MomFollowHeart
+	goto_if_eq VAR_RESULT, 1, PlayersHouse_1F_EventScript_MomBelieveInYou
+	goto_if_eq VAR_RESULT, 2, PlayersHouse_1F_EventScript_MomEnjoyJourney
+	goto_if_eq VAR_RESULT, 3, PlayersHouse_1F_EventScript_MomGrowSoFast
+	return
+
+PlayersHouse_1F_EventScript_MomBalanceBadge::
+	msgbox PlayersHouse_1F_Text_MomBalanceBadge, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomStoneBadge::
+	msgbox PlayersHouse_1F_Text_MomStoneBadge, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomDynamoBadge::
+	msgbox PlayersHouse_1F_Text_MomDynamoBadge, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomHeatBadge::
+	msgbox PlayersHouse_1F_Text_MomHeatBadge, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomKnuckleBadge::
+	msgbox PlayersHouse_1F_Text_MomKnuckleBadge, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomFeatherBadge::
+	msgbox PlayersHouse_1F_Text_MomFeatherBadge, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomMindBadge::
+	msgbox PlayersHouse_1F_Text_MomMindBadge, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomRainBadge::
+	msgbox PlayersHouse_1F_Text_MomRainBadge, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomChampion::
+	msgbox PlayersHouse_1F_Text_MomChampion, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomFollowHeart::
+	msgbox PlayersHouse_1F_Text_MomFollowHeart, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomBelieveInYou::
+	msgbox PlayersHouse_1F_Text_MomBelieveInYou, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomEnjoyJourney::
+	msgbox PlayersHouse_1F_Text_MomEnjoyJourney, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_MomGrowSoFast::
+	msgbox PlayersHouse_1F_Text_MomGrowSoFast, MSGBOX_DEFAULT
+	goto PlayersHouse_1F_EventScript_EndMomConversation
+	return
+
+PlayersHouse_1F_EventScript_EndMomConversation::
+	msgbox PlayersHouse_1F_Text_MomLoveYou, MSGBOX_DEFAULT
+	closemessage
+	face_right
+	release
+	end
+
+PlayersHouse_1F_Text_MomLoveYou:
+	.string "I love you!$"
+
+PlayersHouse_1F_Text_MomBalanceBadge:
+	.string "Congratulations on your first gym\n"
+	.string "badge, Asha!\p"
+	.string "Oreo's Pokémon sure were cute,\n"
+	.string "don't you think?\p"
+	.string "T is up next, and you know how he is\n"
+	.string "when it comes to Rock-type Pokémon.\p"
+	.string "I suggest you bring something to deal\n"
+	.string "with sandstorms and entry hazards.\p$"
+
+PlayersHouse_1F_Text_MomStoneBadge:
+	.string "Nice job beating Niles, Asha!\n"
+	.string "I'm sure he didn't go easy on you.\p"
+	.string "Up next is Wattson, the Electric-type\n"
+	.string "Gym Leader.\p"
+	.string "Watch out for his ace, Manetric.\n"
+	.string "It's incredibly strong.\p"
+	.string "Bring a Ground-type Pokémon since they\n"
+	.string "are immune to Electric type attacks.\p$"
+
+PlayersHouse_1F_Text_MomDynamoBadge:
+	.string "Look at your Dynamo Badge! So pretty!\p"
+	.string "You've gotta face May May next, and\n"
+	.string "she trains Fire-type Pokémon to match\l"
+	.string "her red-hot temper!\p"
+	.string "Be prepared for any Harsh Sunlight.\n"
+	.string "It weakens Water-type attacks but\l"
+	.string "strenghtens Fire-type attacks.\p$"
+
+PlayersHouse_1F_Text_MomHeatBadge:
+	.string "Great job getting the Heat Badge!\n"
+	.string "Did Iliyah bring the heat herself?\p"
+	.string "You know who's next: Micheal.\p"
+	.string "He trains his Fighting-type Pokémon to\n"
+	.string "hit hard and hit fast.\p"
+	.string "You'll need to hit harder with Psychic\l"
+	.string "or Flying-type attacks and hit faster"
+	.string "before they get to land too many hits.\p$"
+
+PlayersHouse_1F_Text_MomKnuckleBadge:
+	.string "Congratulations on defeating Micheal,\n"
+	.string "Asha!\p"
+	.string "I know I don't need to tell you this, but\n"
+	.string "he's lying if he says he let you win.\p"
+	.string "You should be facing Winona next.\p"
+	.string "Her team of Flying-type Pokémon are\n"
+	.string "super fast and she utilizes Tailwind to\l"
+	.string "make them even faster for a bit.\p"
+	.string "So unless your defense is rock solid,\n"
+	.string "you'll need to slow them down.\p$"
+
+PlayersHouse_1F_Text_MomFeatherBadge:
+	.string "Well done getting the Feather Badge,\n"
+	.string "Asha!\p"
+	.string "At the next gym, you're gonna be facing\n"
+	.string "two gym leaders at once!\p"
+	.string "They know how to use powerful moves\n"
+	.string "that seriously damage everyone on the\l"
+	.string "battlefield except their teammate.\p"
+	.string "I'd bring a Dark-type Pokémon that's\n"
+	.string "immune to their Psychic-type attacks.\p$"
+
+PlayersHouse_1F_Text_MomMindBadge:
+	.string "Very impressive defeating the twins,\n"
+	.string "Asha! I'm proud of you as always.\p"
+	.string "The only one in between you and your\n"
+	.string "last badge is Rheannon! How exciting!\p"
+	.string "Her strategy often uses Rain to boost\n"
+	.string "the power of her Water-type Pokémon,\l"
+	.string "so I'd say use that against her.\p"
+	.string "Either change the weather or embrace\n"
+	.string "it with a perfectly accurate Thunder.\p$"
+
+PlayersHouse_1F_Text_MomRainBadge:
+	.string "Asha, I'm so proud of you. You've\n"
+	.string "collected all the badges in Hoenn!\p"
+	.string "All that's left is the Elite 4…\p"
+	.string "Sidney specializes in Dark-types,\n"
+	.string "Juan specializes in Ghost-types,\l"
+	.string "Glacia specializes in Ice-types,\l"
+	.string "and Drake in Dragon-types.\p"
+	.string "Of course, there is also the Champion:\n"
+	.string "Wallace. He's a Water-type specialist.\p"
+	.string "I can't help you much more than that.\p"
+	.string "Trust yourself and use everything that\n"
+	.string "you've learned up to this point.\p$"
+
+PlayersHouse_1F_Text_MomChampion:
+	.string "My Asha, a champion…\p"
+	.string "Of course I already knew that. You've\n"
+	.string "been a champion your whole life.\p"
+	.string "I'm unbelievably proud of you. I can't\n"
+	.string "wait to see what you do next.\p$"
+
+PlayersHouse_1F_Text_MomMissedYou:
+	.string "I've missed you so much, Asha!\p"
+	.string "It's nice to be together again.\p"
+	.string "I'm a bit tired from the move though,\n"
+	.string "so why don't you finish getting settled\l"
+	.string "in and meeting our new neighbors?\p"
+	.string "I'll be here when you're done.\p$"
+
+PlayersHouse_1F_Text_MomFollowHeart:
+	.string "Remember, Asha…\n"
+	.string "always follow your heart.\p"
+	.string "If you do that, the rest will take\n"
+	.string "care of itself.\p$"
+
+PlayersHouse_1F_Text_MomBelieveInYou:
+	.string "I believe in you, Asha.\p"
+	.string "No matter what happens, know that\n"
+	.string "I'll be here for you.\p$"
+
+PlayersHouse_1F_Text_MomEnjoyJourney:
+	.string "Don't forget to take breaks and enjoy\n"
+	.string "the journey, Asha.\p"
+	.string "Before you know it, you'll have a gallery\n"
+	.string "of memories to reminisce.\p$"
+
+PlayersHouse_1F_Text_MomGrowSoFast:
+	.string "You're growing up so fast, Asha.\p"
+	.string "Just remember to stay true to yourself\n"
+	.string "and never give up on those dreams.\p$"

@@ -143,10 +143,10 @@ DewfordTown_Gym_EventScript_Brawly::
 
 DewfordTown_Gym_EventScript_BrawlyDefeated::
 	call DewfordTown_Gym_EventScript_AnimateFlashFullBrightness
-	message DewfordTown_Gym_Text_ReceivedKnuckleBadge
+	message DewfordTown_Gym_Text_ReceivedStoneBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis, MSGBOX_DEFAULT
+	msgbox DewfordTown_Gym_Text_StoneBadgeInfoTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_DEWFORD_GYM
 	setflag FLAG_BADGE02_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
@@ -395,12 +395,12 @@ DewfordTown_Gym_Text_BrawlyDefeat:
 	.string "Okay, you've got me.\n"
 	.string "Take this GYM BADGE!$"
 
-DewfordTown_Gym_Text_ReceivedKnuckleBadge:
-	.string "{PLAYER} received the KNUCKLE BADGE\n"
+DewfordTown_Gym_Text_ReceivedStoneBadge:
+	.string "{PLAYER} received the Stone Badge\n"
 	.string "from BRAWLY.$"
 
-DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
-	.string "The KNUCKLE BADGE makes all POKéMON\n"
+DewfordTown_Gym_Text_StoneBadgeInfoTakeThis:
+	.string "The Stone Badge makes all POKéMON\n"
 	.string "up to Level 30, even those you get in\l"
 	.string "trades, obey without question.\p"
 	.string "And, you'll be able to use the HM move\n"

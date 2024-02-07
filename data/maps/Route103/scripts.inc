@@ -53,6 +53,7 @@ Route103_EventScript_RivalBrendan::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
+	bufferleadmonspeciesname 0
 	msgbox Route103_Text_BrendanLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_StartBrendanBattleBulbasaur
@@ -194,7 +195,31 @@ Route103_EventScript_Boy::
 	end
 
 Route103_EventScript_Man::
-	msgbox Route103_Text_ShortcutToOldale, MSGBOX_NPC
+	lockall
+	msgbox Route103_Text_ShortcutToOldale, MSGBOX_DEFAULT
+	showmoneybox 0, 0
+	msgbox Route103_Text_GiveTip, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route103_EventScript_TipMan
+	hidemoneybox
+	msgbox Route103_Text_MaybeOneDay
+	releaseall
+	end
+
+Route103_EventScript_TipMan::
+	checkmoney 10
+	goto_if_eq VAR_RESULT, FALSE, Route103_EventScript_NotEnoughMoney
+	removemoney 10
+	updatemoneybox
+	faceplayer
+	msgbox Route103_Text_ThanksForTip
+	hidemoneybox
+	releaseall
+	end
+
+Route103_EventScript_NotEnoughMoney::
+	msgbox Route103_Text_NotEnoughMoney, MSGBOX_DEFAULT
+	hidemoneybox
+	releaseall
 	end
 
 Route103_EventScript_RouteSign::
@@ -289,13 +314,13 @@ Route103_EventScript_Isabelle::
 	end
 
 Route103_Text_MayRoute103Pokemon:
-	.string "MAY: Let's see… The POKéMON found\n"
+	.string "MAY: Let's see… The Pokémon found\n"
 	.string "on ROUTE 103 include…$"
 
 Route103_Text_MayLetsBattle:
 	.string "Oh, hi, {PLAYER}{KUN}!\p"
 	.string "…Oh, I see, my dad gave you\n"
-	.string "a POKéMON as a gift.\p"
+	.string "a Pokémon as a gift.\p"
 	.string "Since we're here, let's have a quick\n"
 	.string "battle!\p"
 	.string "I'll give you a taste of what being\n"
@@ -308,46 +333,66 @@ Route103_Text_MayDefeated:
 Route103_Text_MayTimeToHeadBack:
 	.string "MAY: I think I know why my dad has\n"
 	.string "an eye out for you now.\p"
-	.string "I mean, you just got that POKéMON,\n"
+	.string "I mean, you just got that Pokémon,\n"
 	.string "but it already likes you.\p"
 	.string "You might be able to befriend any\n"
-	.string "kind of POKéMON easily.\p"
+	.string "kind of Pokémon easily.\p"
 	.string "Well, it's time to head back to\n"
 	.string "the LAB.$"
 
 Route103_Text_BrendanRoute103Pokemon:
-	.string "BRENDAN: Okay, so it's this one and\n"
-	.string "that one that live on ROUTE 103…$"
+	.string "Ben: Okay, if I could just find her a…$"
 
 Route103_Text_BrendanLetsBattle:
 	.string "Hey, it's {PLAYER}!\p"
-	.string "…Oh, yeah, Dad gave you a POKéMON.\p"
-	.string "Since we're here, how about a little\n"
-	.string "battle?\p"
-	.string "I'll teach you what being a TRAINER's\n"
+	.string "…Oh, Dad already gave you a Pokémon.\p"
+	.string "It's not like he knew I was searching\n"
+	.string "for one to give you or anything.\p"
+	.string "Well, which one did he give you?\p"
+	.string "Seriously, his {STR_VAR_1}?!\p"
+	.string "How come he trusts you so quickly?\p"
+	.string "Ah, whatever. Hey, since we're here,\n"
+	.string "how about a little battle?\p"
+	.string "I'll teach you what being a Trainer's\n"
 	.string "about!$"
 
 Route103_Text_BrendanDefeated:
-	.string "Huh, {PLAYER}, you're not too shabby.$"
+	.string "Woah, {PLAYER}, you're pretty good!$"
 
 Route103_Text_BrendanTimeToHeadBack:
-	.string "BRENDAN: I think I get it.\n"
+	.string "Ben: I think I get it.\n"
 	.string "I think I know why my dad has his eye\l"
 	.string "out for you now.\p"
-	.string "Look, your POKéMON already likes you,\n"
+	.string "Look, your {STR_VAR_1} already likes you,\n"
 	.string "even though you just got it.\p"
 	.string "{PLAYER}, I get the feeling that you\n"
-	.string "could befriend any POKéMON with ease.\p"
-	.string "We should head back to the LAB.$"
+	.string "could befriend any Pokémon with ease.\p"
+	.string "We should head back to the Lab.$"
 
 Route103_Text_ShouldHaveBroughtPotion:
-	.string "My POKéMON is staggeringly tired…\n"
-	.string "I should have brought a POTION…$"
+	.string "My Pokémon is staggeringly tired…\n"
+	.string "I should have brought a Potion…$"
 
 Route103_Text_ShortcutToOldale:
 	.string "If you cross the sea from here,\n"
-	.string "it'll be a shortcut to OLDALE TOWN.\p"
-	.string "Fufufu, that's useful, isn't it?$"
+	.string "it'll be a shortcut to Oldale Town.\p"
+	.string "It's a useful tip if you know how\n"
+	.string "to swim. But if you don't…\p"
+	.string "You could always stand here and give\n"
+	.string "strangers free advice.$"
+
+Route103_Text_GiveTip:
+	.string "Would you like to tip the man ¥10?$"
+
+Route103_Text_MaybeOneDay:
+	.string "… … … … … … … … … … …\n"
+	.string "… … maybe one day… $"
+
+Route103_Text_ThanksForTip:
+	.string "Oh wow thanks!$"
+
+Route103_Text_NotEnoughMoney:
+	.string "You somehow don't even have ¥10…$"
 
 Route103_Text_RouteSign:
 	.string "ROUTE 103\n"

@@ -11,10 +11,10 @@ RustboroCity_Gym_EventScript_Roxanne::
 	end
 
 RustboroCity_Gym_EventScript_RoxanneDefeated::
-	message RustboroCity_Gym_Text_ReceivedStoneBadge
+	message RustboroCity_Gym_Text_ReceivedBalanceBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	msgbox RustboroCity_Gym_Text_StoneBadgeInfoTakeThis, MSGBOX_DEFAULT
+	msgbox RustboroCity_Gym_Text_BalanceBadgeInfoTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	setflag FLAG_BADGE01_GET
 	setvar VAR_RUSTBORO_CITY_STATE, 1
@@ -130,7 +130,7 @@ RustboroCity_Gym_Text_GymGuidePostVictory:
 	.string "My cheering must've worked!\p"
 	.string "Great!\n"
 	.string "Check your TRAINER CARD.\p"
-	.string "The STONE BADGE you got should be\n"
+	.string "The Balance Badge you got should be\n"
 	.string "properly recorded on it.\p"
 	.string "In other words…\p"
 	.string "You've climbed the first step on\n"
@@ -194,15 +194,15 @@ RustboroCity_Gym_Text_RoxanneDefeat:
 	.string "that TRAINERS are to be given this\l"
 	.string "if they defeat a GYM LEADER.\p"
 	.string "Please accept the official POKéMON\n"
-	.string "LEAGUE STONE BADGE.$"
+	.string "LEAGUE Balance Badge.$"
 
-RustboroCity_Gym_Text_ReceivedStoneBadge:
-	.string "{PLAYER} received the STONE BADGE\n"
+RustboroCity_Gym_Text_ReceivedBalanceBadge:
+	.string "{PLAYER} received the Balance Badge\n"
 	.string "from ROXANNE.$"
 
-RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
-	.string "The STONE BADGE heightens the ATTACK\n"
-	.string "power of your POKéMON.\p"
+RustboroCity_Gym_Text_BalanceBadgeInfoTakeThis:
+	.string "The Balance Badge heightens the\n"
+	.string "ATTACK power of your POKéMON.\p"
 	.string "It also enables them to use the HM move\n"
 	.string "CUT outside of battle.\p"
 	.string "Please take this with you, too.$"

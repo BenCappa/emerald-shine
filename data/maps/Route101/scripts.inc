@@ -266,35 +266,37 @@ Route101_Text_HelpMe:
 Route101_Text_PleaseHelp:
 	.string "Hello! You over there!\n"
 	.string "Please! Help!\p"
-	.string "In my BAG!\n"
-	.string "There's a POKé BALL!$"
+	.string "In my Bag!\n"
+	.string "There's a Poké Ball!$"
 
 Route101_Text_DontLeaveMe:
 	.string "Wh-Where are you going?!\n"
 	.string "Don't leave me like this!$"
 
 Route101_Text_YouSavedMe:
-	.string "PROF. BIRCH: Whew…\p"
-	.string "I was in the tall grass studying wild\n"
-	.string "POKéMON when I was jumped.\p"
-	.string "You saved me.\n"
-	.string "Thanks a lot!\p"
+	.string "Gump: Whew…\p"
+	.string "That was the most I've run in years!\p"
+	.string "I was doing fieldwork in the tall grass\n"
+	.string "when that funny-looking Zigzagoon\n"
+	.string "started biting the hell out of me!\p"
+	.string "Thanks for saving me!\p"
 	.string "Oh?\p"
 	.string "Hi, you're {PLAYER}{KUN}!\p"
 	.string "This is not the place to chat, so come\n"
-	.string "by my POKéMON LAB later, okay?$"
+	.string "by my Pokémon Lab later, okay?$"
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "If POKéMON get tired, take them to\n"
-	.string "a POKéMON CENTER.\p"
-	.string "There's a POKéMON CENTER in OLDALE\n"
-	.string "TOWN right close by.$"
+	.string "If Pokémon get tired, take them to\n"
+	.string "a Pokémon Center.\p"
+	.string "There's a Pokémon Center in Oldale\n"
+	.string "Town right close by.$"
 
 Route101_Text_WildPokemonInTallGrass:
-	.string "Wild POKéMON will jump out at you in\n"
-	.string "tall grass.\p"
-	.string "If you want to catch POKéMON, you have\n"
-	.string "to go into the tall grass and search.$"
+	.string "I heard wild Pokémon are more likely to\n"
+	.string "jump out if you're running.\p"
+	.string "I don't know if it's true but I'm not\n"
+	.string "taking any chances after what happened\l"
+	.string "to Prof. Mike!$"
 
 Route101_Text_RouteSign:
 	.string "ROUTE 101\n"

@@ -179,12 +179,12 @@ RustboroCity_PokemonSchool_EventScript_ScottSpokeAlready::
 	end
 
 RustboroCity_PokemonSchool_EventScript_ScottGreetHasBadge::
-	msgbox RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge, MSGBOX_DEFAULT
+	msgbox RustboroCity_PokemonSchool_Text_ScottMetAlreadyBalanceBadge, MSGBOX_DEFAULT
 	goto RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge
 	end
 
 RustboroCity_PokemonSchool_EventScript_ScottNoticeBadge::
-	msgbox RustboroCity_PokemonSchool_Text_ScottStoneBadge, MSGBOX_DEFAULT
+	msgbox RustboroCity_PokemonSchool_Text_ScottBalanceBadge, MSGBOX_DEFAULT
 	goto RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge
 	end
 
@@ -322,16 +322,16 @@ RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown:
 	.string "The talent levels of the students here\n"
 	.string "are unknown. The potential's there.$"
 
-RustboroCity_PokemonSchool_Text_ScottStoneBadge:
+RustboroCity_PokemonSchool_Text_ScottBalanceBadge:
 	.string "SCOTT: Oh, what's that?\p"
-	.string "It's a STONE BADGE, isn't it?\n"
+	.string "It's a Balance Badge, isn't it?\n"
 	.string "That's pretty impressive, I'd say.\p"
 	.string "But, you know, I would've loved to see\n"
 	.string "you in battle.\p"
 	.string "It's hard to tell what you're like as\n"
 	.string "a TRAINER from a LEAGUE BADGE.$"
 
-RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge:
+RustboroCity_PokemonSchool_Text_ScottMetAlreadyBalanceBadge:
 	.string "Hello? Didn't we meet before?\n"
 	.string "I think back in PETALBURG CITY.\p"
 	.string "Let me introduce myself.\n"
@@ -341,7 +341,7 @@ RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge:
 	.string "More specifically, I'm looking for\n"
 	.string "POKéMON battle experts.\p"
 	.string "Oh, what's that?\n"
-	.string "It's a STONE BADGE, isn't it?\p"
+	.string "It's a Balance Badge, isn't it?\p"
 	.string "That's pretty impressive, I'd say, for\n"
 	.string "a starting TRAINER like yourself.\p"
 	.string "But, you know, I would've loved to see\n"
