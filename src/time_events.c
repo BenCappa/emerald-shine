@@ -2,6 +2,7 @@
 #include "time_events.h"
 #include "event_data.h"
 #include "field_weather.h"
+#include "item.h"
 #include "pokemon.h"
 #include "random.h"
 #include "overworld.h"
@@ -41,12 +42,8 @@ void UpdateMirageRnd(u16 days)
 
 bool8 IsMirageIslandPresent(void)
 {
-    u16 rnd = GetMirageRnd() >> 16;
-    int i;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && (GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY) & 0xFFFF) == rnd)
-            return TRUE;
+    if (CheckBagHasItem(ITEM_GRACIDEA, 1) && IsBetweenHours(gLocalTime.hours, 5, 20))
+        return TRUE;
 
     return FALSE;
 }
