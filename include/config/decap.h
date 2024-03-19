@@ -11,7 +11,7 @@ Exceptions:
 - ASM strings that use `.fixstr`
 - If mirroring enabled, string addresses passed through MirrorPtr
 */
-#define DECAP_ENABLED FALSE
+#define DECAP_ENABLED TRUE
 // Enables signaling that a string's case should be preserved
 // by *mirroring* its address: i.e 08xxxxxx to 0Axxxxxx
 // Unless you are targeting a different platform than the GBA,
@@ -20,7 +20,7 @@ Exceptions:
 
 // If TRUE, *all* Pokemon nicknames and player names will be decapitalized.
 // Otherwise, their case will be preserved. Default FALSE
-#define DECAP_NICKNAMES     FALSE
+#define DECAP_NICKNAMES     TRUE
 
 #define DECAP_MAIN_MENU     TRUE // Main menu text.
 #define DECAP_OPTION_MENU   TRUE // Option menu text.

@@ -3100,7 +3100,7 @@ static const struct TrainerMon sParty_Roxanne1[] = {
     .ability = ABILITY_COMPETITIVE,
     .gender = TRAINER_MON_FEMALE,
     .moves = {MOVE_WISH, MOVE_DRAINING_KISS, MOVE_SING, MOVE_COPYCAT},
-    .nature = TRAINER_PARTY_NATURE(NATURE_CALM),
+    .nature = NATURE_CALM,
     .nickname = COMPOUND_STRING("Dolly")
     },
     {
@@ -3110,7 +3110,7 @@ static const struct TrainerMon sParty_Roxanne1[] = {
     .ability = ABILITY_MAGIC_GUARD,
     .gender = TRAINER_MON_FEMALE,
     .moves = {MOVE_DISARMING_VOICE, MOVE_ENDURE, MOVE_ENDEAVOR, MOVE_ENCORE},
-    .nature = TRAINER_PARTY_NATURE(NATURE_BOLD),
+    .nature = NATURE_BOLD,
     .nickname = COMPOUND_STRING("Starburst")
     },
     {
@@ -3121,7 +3121,7 @@ static const struct TrainerMon sParty_Roxanne1[] = {
     .friendship = 200,
     .gender = TRAINER_MON_MALE,
     .moves = {MOVE_RETURN, MOVE_BOUNCE, MOVE_AQUA_JET, MOVE_CHARM},
-    .nature = TRAINER_PARTY_NATURE(NATURE_ADAMANT),
+    .nature = NATURE_ADAMANT,
     .nickname = COMPOUND_STRING("Bubbles")
     },
     {
@@ -3130,7 +3130,7 @@ static const struct TrainerMon sParty_Roxanne1[] = {
     .ability = ABILITY_FRIEND_GUARD,
     .gender = TRAINER_MON_FEMALE,
     .moves = {MOVE_COVET, MOVE_THUNDER_WAVE, MOVE_HEAL_BELL, MOVE_DEFENSE_CURL},
-    .nature = TRAINER_PARTY_NATURE(NATURE_CALM),
+    .nature = NATURE_CALM,
     .nickname = COMPOUND_STRING("Joy")
     },
     {
@@ -3141,7 +3141,7 @@ static const struct TrainerMon sParty_Roxanne1[] = {
     .friendship = 200,
     .gender = TRAINER_MON_FEMALE,
     .moves = {MOVE_ANCIENT_POWER, MOVE_LIFE_DEW, MOVE_SWEET_KISS, MOVE_METRONOME},
-    .nature = TRAINER_PARTY_NATURE(NATURE_QUIET),
+    .nature = NATURE_QUIET,
     .nickname = COMPOUND_STRING("Misty")
     },
     {
@@ -3152,7 +3152,7 @@ static const struct TrainerMon sParty_Roxanne1[] = {
     .friendship = 200,
     .gender = TRAINER_MON_MALE,
     .moves = {MOVE_RETURN, MOVE_CURSE, MOVE_BELCH, MOVE_RECYCLE},
-    .nature = TRAINER_PARTY_NATURE(NATURE_SASSY),
+    .nature = NATURE_SASSY,
     .nickname = COMPOUND_STRING("Chomps")
     }
 };
@@ -3163,7 +3163,7 @@ static const struct TrainerMon sParty_Brawly1[] = {
     .lvl = 19,
     .heldItem = ITEM_BLACK_SLUDGE,
     .moves = {MOVE_STEALTH_ROCK, MOVE_VENOSHOCK, MOVE_ANCIENT_POWER, MOVE_HARDEN},
-    .nature = TRAINER_PARTY_NATURE(NATURE_TIMID),
+    .nature = NATURE_TIMID,
     .nickname = COMPOUND_STRING("Cal")
     },
     {
@@ -3172,7 +3172,7 @@ static const struct TrainerMon sParty_Brawly1[] = {
     .heldItem = ITEM_ROCKY_HELMET,
     .ability = ABILITY_STURDY,
     .moves = {MOVE_ROLLOUT, MOVE_ROCK_POLISH, MOVE_DEFENSE_CURL, MOVE_FIRE_PUNCH},
-    .nature = TRAINER_PARTY_NATURE(NATURE_IMPISH),
+    .nature = NATURE_IMPISH,
     .nickname = COMPOUND_STRING("Theo")
     },
     {
@@ -3181,7 +3181,7 @@ static const struct TrainerMon sParty_Brawly1[] = {
     .heldItem = ITEM_SMOOTH_ROCK,
     .gender = TRAINER_MON_FEMALE,
     .moves = {MOVE_SANDSTORM, MOVE_STOMPING_TANTRUM, MOVE_COUNTER, MOVE_IRON_DEFENSE},
-    .nature = TRAINER_PARTY_NATURE(NATURE_CAREFUL),
+    .nature = NATURE_CAREFUL,
     .nickname = COMPOUND_STRING("Sarah")
     },
     {
@@ -3191,7 +3191,7 @@ static const struct TrainerMon sParty_Brawly1[] = {
     .ability = ABILITY_STURDY,
     .gender = TRAINER_MON_MALE,
     .moves = {MOVE_DRAGON_DANCE, MOVE_SCALE_SHOT, MOVE_ROCK_BLAST, MOVE_STEALTH_ROCK},
-    .nature = TRAINER_PARTY_NATURE(NATURE_JOLLY),
+    .nature = NATURE_JOLLY,
     .nickname = COMPOUND_STRING("George")
     },
     {
@@ -3200,7 +3200,7 @@ static const struct TrainerMon sParty_Brawly1[] = {
     .heldItem = ITEM_EVIOLITE,
     .ability = ABILITY_FLAME_BODY,
     .moves = {MOVE_SPIKES, MOVE_RAPID_SPIN, MOVE_FLAME_CHARGE, MOVE_STEALTH_ROCK},
-    .nature = TRAINER_PARTY_NATURE(NATURE_IMPISH),
+    .nature = NATURE_IMPISH,
     .nickname = COMPOUND_STRING("Cole")
     },
     {
@@ -3209,7 +3209,7 @@ static const struct TrainerMon sParty_Brawly1[] = {
     .heldItem = ITEM_CHOICE_BAND,
     .ability = ABILITY_SHARPNESS,
     .moves = {MOVE_STONE_AXE, MOVE_FURY_CUTTER, MOVE_U_TURN, MOVE_AERIAL_ACE},
-    .nature = TRAINER_PARTY_NATURE(NATURE_ADAMANT),
+    .nature = NATURE_ADAMANT,
     .nickname = COMPOUND_STRING("Sid")
     }
 };
@@ -3221,14 +3221,14 @@ static const struct TrainerMon sParty_Wattson1[] = {
     .heldItem = ITEM_TERRAIN_EXTENDER,
     .ability = ABILITY_ELECTRIC_SURGE,
     .moves = {MOVE_RISING_VOLTAGE, MOVE_CHARGE, MOVE_SPIKES, MOVE_ELECTRIC_TERRAIN},
-    .nature = TRAINER_PARTY_NATURE(NATURE_SASSY),
+    .nature = NATURE_SASSY,
     },
     {
     .species = SPECIES_RAICHU_ALOLAN,
     .lvl = 24,
     .heldItem = ITEM_ALORAICHIUM_Z,
     .moves = {MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_ELECTRO_BALL, MOVE_NASTY_PLOT},
-    .nature = TRAINER_PARTY_NATURE(NATURE_MODEST),
+    .nature = NATURE_MODEST,
     },
     {
     .species = SPECIES_STUNFISK,
@@ -3236,7 +3236,7 @@ static const struct TrainerMon sParty_Wattson1[] = {
     .heldItem = ITEM_DAMP_ROCK,
     .ability = ABILITY_STATIC,
     .moves = {MOVE_SHOCK_WAVE, MOVE_WATER_PULSE, MOVE_STEALTH_ROCK, MOVE_RAIN_DANCE},
-    .nature = TRAINER_PARTY_NATURE(NATURE_CALM),
+    .nature = NATURE_CALM,
     },
     {
     .species = SPECIES_HELIOLISK,
@@ -3244,14 +3244,14 @@ static const struct TrainerMon sParty_Wattson1[] = {
     .heldItem = ITEM_ELECTRIC_SEED,
     .ability = ABILITY_DRY_SKIN,
     .moves = {MOVE_THUNDER, MOVE_PARABOLIC_CHARGE, MOVE_SWIFT, MOVE_SUBSTITUTE},
-    .nature = TRAINER_PARTY_NATURE(NATURE_TIMID),
+    .nature = NATURE_TIMID,
     },
     {
     .species = SPECIES_ROTOM,
     .lvl = 24,
     .heldItem = ITEM_LEFTOVERS,
     .moves = {MOVE_SHOCK_WAVE, MOVE_HEX, MOVE_THUNDER_WAVE, MOVE_NASTY_PLOT},
-    .nature = TRAINER_PARTY_NATURE(NATURE_TIMID)
+    .nature = NATURE_TIMID
     },
     {
     .species = SPECIES_MANECTRIC,
@@ -3259,7 +3259,6 @@ static const struct TrainerMon sParty_Wattson1[] = {
     .heldItem = ITEM_MANECTITE,
     .ability = ABILITY_LIGHTNING_ROD,
     .moves = {MOVE_RISING_VOLTAGE, MOVE_FIRE_FANG, MOVE_SNARL, MOVE_THUNDER_FANG},
-    .nature = TRAINER_PARTY_NATURE(),
     .nickname = COMPOUND_STRING("Bolt")
     }
 };
@@ -6301,14 +6300,14 @@ static const struct TrainerMon sParty_BrendanRoute103Piplup[] = {
     .species = SPECIES_YAMPER,
     .lvl = 4,
     .gender = TRAINER_MON_FEMALE,
-    .nature = TRAINER_PARTY_NATURE(NATURE_JOLLY),
+    .nature = NATURE_JOLLY,
     .nickname = COMPOUND_STRING("Bella")
     },
     {
     .species = SPECIES_BULBASAUR,
     .lvl = 5,
     .gender = TRAINER_MON_MALE,
-    .nature = TRAINER_PARTY_NATURE(NATURE_MODEST)
+    .nature = NATURE_MODEST
     }
 };
 
@@ -6369,14 +6368,14 @@ static const struct TrainerMon sParty_BrendanRoute103Bulbasaur[] = {
     .species = SPECIES_YAMPER,
     .lvl = 4,
     .gender = TRAINER_MON_FEMALE,
-    .nature = TRAINER_PARTY_NATURE(NATURE_JOLLY),
+    .nature = NATURE_JOLLY,
     .nickname = COMPOUND_STRING("Bella")
     },
     {
     .species = SPECIES_FENNEKIN,
     .lvl = 5,
     .gender = TRAINER_MON_FEMALE,
-    .nature = TRAINER_PARTY_NATURE(NATURE_TIMID)
+    .nature = NATURE_TIMID
     }
 };
 
@@ -6437,14 +6436,14 @@ static const struct TrainerMon sParty_BrendanRoute103Fennekin[] = {
     .species = SPECIES_YAMPER,
     .lvl = 4,
     .gender = TRAINER_MON_FEMALE,
-    .nature = TRAINER_PARTY_NATURE(NATURE_JOLLY),
+    .nature = NATURE_JOLLY,
     .nickname = COMPOUND_STRING("Bella")
     },
     {
     .species = SPECIES_PIPLUP,
     .lvl = 5,
     .gender = TRAINER_MON_MALE,
-    .nature = TRAINER_PARTY_NATURE(NATURE_MODEST)
+    .nature = NATURE_MODEST
     }
 };
 
@@ -8184,7 +8183,7 @@ static const struct TrainerMon sParty_WallyMauville[] = {
     .gender = TRAINER_MON_MALE,
     .isShiny = TRUE,
     .moves = {MOVE_CONFUSION, MOVE_DISARMING_VOICE, MOVE_LUCKY_CHANT, MOVE_MAGICAL_LEAF},
-    .nature = TRAINER_PARTY_NATURE(NATURE_BRAVE)
+    .nature = NATURE_BRAVE
     }
 };
 
