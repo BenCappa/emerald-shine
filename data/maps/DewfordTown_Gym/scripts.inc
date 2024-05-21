@@ -136,7 +136,7 @@ DewfordTown_Gym_EventScript_Brawly::
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
-	goto_if_unset FLAG_RECEIVED_TM_BULK_UP, DewfordTown_Gym_EventScript_GiveBulkUp2
+	goto_if_unset FLAG_RECEIVED_TM_ROCK_TOMB, DewfordTown_Gym_EventScript_GiveRockTomb2
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -153,7 +153,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 2
 	call Common_EventScript_SetGymTrainers
-	call DewfordTown_Gym_EventScript_GiveBulkUp
+	call DewfordTown_Gym_EventScript_GiveRockTomb
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -167,18 +167,18 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	release
 	end
 
-DewfordTown_Gym_EventScript_GiveBulkUp::
-	giveitem ITEM_TM_BULK_UP
+DewfordTown_Gym_EventScript_GiveRockTomb::
+	giveitem ITEM_TM_ROCK_TOMB
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_BagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_BULK_UP
+	msgbox DewfordTown_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_ROCK_TOMB
 	return
 
-DewfordTown_Gym_EventScript_GiveBulkUp2:
-	giveitem ITEM_TM_BULK_UP
+DewfordTown_Gym_EventScript_GiveRockTomb2:
+	giveitem ITEM_TM_ROCK_TOMB
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_BULK_UP
+	msgbox DewfordTown_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_ROCK_TOMB
 	release
 	end
 
@@ -285,21 +285,23 @@ DewfordTown_Gym_EventScript_GymStatue::
 DewfordTown_Gym_Text_GymGuideAdvice:
 	.string "Hey, how's it going, CHAMPION-\n"
 	.string "bound {PLAYER}?\p"
-	.string "DEWFORD's GYM LEADER BRAWLY commands\n"
-	.string "FIGHTING-type POKéMON.\p"
-	.string "Going against him with NORMAL-type\n"
-	.string "POKéMON is asking for trouble.\p"
-	.string "FIGHTING POKéMON will lay a serious\n"
-	.string "smack down on NORMAL POKéMON,\l"
-	.string "so be careful!\p"
-	.string "What's worse, the GYM is as dark as\n"
-	.string "the ocean floor.\p"
-	.string "But it will get brighter after defeating\n"
-	.string "the TRAINERS in your way.\p"
+	.string "DEWFORD's GYM LEADER Niles specializes\n"
+	.string "in ROCK-type POKéMON.\p"
+	.string "Fun fact: Almost all the Pokémon in\n"
+	.string "this gym were revived from fossils!\p"
+	.string "Now, you may have noticed the GYM is\n"
+	.string "currently as dark as Granite Cave.\p"
+	.string "Every time you defeat a Trainer in\n"
+	.string "here it will get a little brighter.\p"
+	.string "Oh, one more thing!\p"
+	.string "Be prepared for Niles to use a\n"
+	.string "Z-Move during your battle.\p"
+	.string "Gym Leaders are instructed to use more\n"
+	.string "gimmicks with the more badges you earn.\p"
 	.string "Hey, okay, go for it!$"
 
 DewfordTown_Gym_Text_GymGuidePostVictory:
-	.string "Whoah! It's turned too bright in here!\p"
+	.string "Whoah! It's gotten bright in here!\p"
 	.string "Your future is bright, too!$"
 
 DewfordTown_Gym_Text_TakaoIntro:
@@ -314,9 +316,9 @@ DewfordTown_Gym_Text_TakaoPostBattle:
 	.string "Your technique is commendable!$"
 
 DewfordTown_Gym_Text_JocelynIntro:
-	.string "There's no need for BRAWLY to be\n"
+	.string "There's no need for Niles to be\n"
 	.string "involved!\p"
-	.string "I'll crush you!$"
+	.string "I'll crush you here!$"
 
 DewfordTown_Gym_Text_JocelynDefeat:
 	.string "But… How?\n"
@@ -338,10 +340,8 @@ DewfordTown_Gym_Text_LauraDefeat:
 	.string "I lost!$"
 
 DewfordTown_Gym_Text_LauraPostBattle:
-	.string "I battle in the dark to make my heart\n"
-	.string "stronger.\p"
-	.string "But because it's so dark, I can never\n"
-	.string "see BRAWLY's face…$"
+	.string "I like to battle in the dark so\n"
+	.string "no one can see my face…$"
 
 DewfordTown_Gym_Text_LilithIntro:
 	.string "Ufufu…\n"
@@ -380,24 +380,24 @@ DewfordTown_Gym_Text_CristianPostBattle:
 	.string "Go after that BADGE!$"
 
 DewfordTown_Gym_Text_BrawlyIntro:
-	.string "I'm BRAWLY!\n"
-	.string "DEWFORD's GYM LEADER!\p"
-	.string "I've been churned in the rough waves\n"
-	.string "of these parts, and I've grown tough\l"
-	.string "in the pitch-black cave!\p"
-	.string "So you wanted to challenge me?\n"
-	.string "Let me see what you're made of!$"
+	.string "Hey Ashley.\p"
+	.string "I'm sure you're wondering:\n"
+	.string "Why make my Gym a pitch-black cave?\p"
+	.string "It's simple, I think it's funny when\n"
+	.string "people get lost and confused.\p"
+	.string "That and rocks and caves and stuff…"
+	.string "Anyways, you wanted to challenge me?\n"
+	.string "Let's get started!$"
 
 DewfordTown_Gym_Text_BrawlyDefeat:
-	.string "Whoah, wow! You made a much bigger\n"
-	.string "splash than I expected!\p"
-	.string "You swamped me!\p"
 	.string "Okay, you've got me.\n"
-	.string "Take this GYM BADGE!$"
+	.string "I'll admit it!\p"
+	.string "You did a lot better I expected.\p"
+	.string "Take this GYM BADGE.$"
 
 DewfordTown_Gym_Text_ReceivedStoneBadge:
 	.string "{PLAYER} received the Stone Badge\n"
-	.string "from BRAWLY.$"
+	.string "from Niles.$"
 
 DewfordTown_Gym_Text_StoneBadgeInfoTakeThis:
 	.string "The Stone Badge makes all POKéMON\n"
@@ -408,51 +408,47 @@ DewfordTown_Gym_Text_StoneBadgeInfoTakeThis:
 	.string "If you'd like, use this TECHNICAL\n"
 	.string "MACHINE, too.$"
 
-DewfordTown_Gym_Text_ExplainBulkUp:
-	.string "That TM08 contains BULK UP.\p"
-	.string "It's a move that raises both ATTACK\n"
-	.string "and DEFENSE stats.\p"
+DewfordTown_Gym_Text_ExplainRockTomb:
+	.string "That TM39 contains Rock Tomb.\p"
+	.string "It's a move that can lower an\n"
+	.string "opponents Speed stat.\p"
 	.string "… … … … … …$"
 
 DewfordTown_Gym_Text_RegisteredBrawly:
-	.string "Registered GYM LEADER BRAWLY\n"
+	.string "Registered GYM LEADER Niles\n"
 	.string "in the POKéNAV.$"
 
 DewfordTown_Gym_Text_BrawlyPostBattle:
-	.string "I can see your talent becoming a giant\n"
-	.string "wave to cause a storm of astonishment\l"
-	.string "among TRAINERS one day!$"
+	.string "Keep training so I can show you my\n"
+	.string "actually challenging teams.$"
 
 DewfordTown_Gym_Text_GymStatue:
 	.string "DEWFORD TOWN POKéMON GYM$"
 
 DewfordTown_Gym_Text_GymStatueCertified:
 	.string "DEWFORD TOWN POKéMON GYM\p"
-	.string "BRAWLY'S CERTIFIED TRAINERS:\n"
+	.string "Niles'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
 DewfordTown_Gym_Text_BrawlyPreRematch:
-	.string "BRAWLY: A wave may draw back, but it\n"
-	.string "always returns to the shore.\p"
-	.string "A giant wave of a talent like you…\n"
-	.string "I knew you would return!\p"
-	.string "Show me how much higher\n"
-	.string "you've gone!$"
+	.string "Niles: You want to battle?\n"
+	.string "I guess I can spare some time.\p"
+	.string "Time to face my rock-hard team!\p"
+	.string "… … … … … …\p"
+	.string "I didn't word that the best.\p"
+	.string "Don't be gross, can we just battle?$"
 
 DewfordTown_Gym_Text_BrawlyRematchDefeat:
-	.string "Wow!\n"
-	.string "Swamped again!$"
+	.string "You know, I'm more just\n"
+	.string "disappointed in myself.$"
 
 DewfordTown_Gym_Text_BrawlyPostRematch:
-	.string "BRAWLY: Battling is vast and it's deep.\n"
-	.string "You can't see the bottom.\l"
-	.string "It's just like the sea of HOENN!$"
+	.string "Niles: That was fun.\n"
+	.string "Keep training and lets battle again.$"
 
 DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons:
-	.string "BRAWLY: A wave may draw back, but it\n"
-	.string "always returns to the shore.\p"
-	.string "A giant wave of a talent like you…\n"
-	.string "I knew you would return!\p"
+	.string "Niles: You want to battle?\n"
+	.string "I guess I can spare some time.\p"
 	.string "Oh? You only have one POKéMON\n"
 	.string "that can battle.\p"
 	.string "I'm sorry, but I'd like you to come back\n"

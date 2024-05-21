@@ -163,7 +163,7 @@ RustboroCity_Gym_Text_TommyPostBattle:
 	.string "You'd better be on your guard!$"
 
 RustboroCity_Gym_Text_MarcIntro:
-	.string "We might be in the middle of town,\n"
+	.string "We might be new to our adventure,\n"
 	.string "but so what?\p"
 	.string "My Baby Pokémon need room to\n"
 	.string "rampage!$"
