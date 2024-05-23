@@ -89,18 +89,8 @@ RustboroCity_Gym_EventScript_GymStatue::
 	end
 
 RustboroCity_Gym_EventScript_RegisterRoxanne::
-	lockall
-	pokenavcall RustboroCity_Gym_Text_RoxanneRegisterCall
-	waitmessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox RustboroCity_Gym_Text_RegisteredRoxanne, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_ROXANNE_MATCH_CALL
 	clearflag FLAG_ENABLE_ROXANNE_FIRST_CALL
-	releaseall
 	end
 
 RustboroCity_Gym_Text_GymGuideAdvice:
@@ -232,27 +222,6 @@ RustboroCity_Gym_Text_GymStatueCertified:
 	.string "RUSTBORO CITY POKéMON GYM\p"
 	.string "ORIANA'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
-
-RustboroCity_Gym_Text_RoxanneRegisterCall:
-	.string "… … … … … …\n"
-	.string "… … … … … Beep!\p"
-	.string "Oreo: Oh, hello, {PLAYER}?\n"
-	.string "It's your youngest sister, Oreo.\p"
-	.string "I heard from Niles that you're\n"
-	.string "moving up through the ranks of\l"
-	.string "Trainers at an incredible clip.\p"
-	.string "Well, I'd rather not think that\n"
-	.string "I can't beat you.\p"
-	.string "I promise, I'm shaping up my Gym\n"
-	.string "so that you can challenge us again.\p"
-	.string "I hope you'll be looking forward to\n"
-	.string "that occasion as much as me!\p"
-	.string "… … … … … …\n"
-	.string "… … … … … Click!$"
-
-RustboroCity_Gym_Text_RegisteredRoxanne:
-	.string "Registered Gym Leader Oriana\n"
-	.string "in the PokéNav.$"
 
 RustboroCity_Gym_Text_RoxannePreRematch:
 	.string "Oreo: I'm so glad to see you again.\p"

@@ -187,7 +187,6 @@ Route110_EventScript_EdwinRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_EdwinRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_EDWIN_1
 	release
 	end
 
@@ -223,7 +222,6 @@ Route110_EventScript_BenjaminRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_BenjaminRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_BENJAMIN_1
 	release
 	end
 
@@ -249,7 +247,6 @@ Route110_EventScript_AbigailRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_AbigailRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ABIGAIL_1
 	release
 	end
 
@@ -270,7 +267,6 @@ Route110_EventScript_IsabelRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_IsabelRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ISABEL_1
 	release
 	end
 
@@ -623,12 +619,6 @@ Route110_EventScript_BirchScene::
 	msgbox Route110_Text_HeardYouInstallMatchCall, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox Route110_Text_RegisteredBirchInPokenav, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
-	setflag FLAG_ENABLE_PROF_BIRCH_MATCH_CALL
 	msgbox Route110_Text_KeepAnEyeOutForRival, MSGBOX_DEFAULT
 	closemessage
 	call_if_eq VAR_0x8008, 1, Route110_EventScript_BirchExit1
@@ -972,23 +962,12 @@ Route110_Text_ImagineSeeingYouHere:
 Route110_Text_HeardYouInstallMatchCall:
 	.string "Oh, I see!\n"
 	.string "You two are running separately.\l"
-	.string "Well, that's fine.\p"
-	.string "Oh, yes, I heard that your PokéNav\n"
-	.string "had the Match Call system installed.\p"
-	.string "Well, then, I should register you in\n"
-	.string "my PokéNav as well.\p"
-	.string "That way, even when we're apart,\n"
-	.string "I can rate your Pokédex anytime.\p"
-	.string "… … … … … …$"
-
-Route110_Text_RegisteredBirchInPokenav:
-	.string "Registered Gump\n"
-	.string "in the PokéNav.$"
+	.string "Well, that's fine.$"
 
 Route110_Text_KeepAnEyeOutForRival:
-	.string "Gump: {PLAYER}{KUN}…\p"
-	.string "Please help {RIVAL} stay out of trouble.\n"
-	.string "… … … … … …\p"
-	.string "Well, I had better get going.\n"
-	.string "See you again, {PLAYER}{KUN}!$"
+	.string "Can you please do me a favor though?\p"
+	.string "Just make sure he stays out of trouble.\n"
+	.string "Simply for my peace of mind?\p"
+	.string "It would help keep my anxiety down.\n"
+	.string "Thanks again, {PLAYER}{KUN}!$"
 

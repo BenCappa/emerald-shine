@@ -22,7 +22,6 @@ AbandonedShip_Rooms_1F_EventScript_RegisterThalia::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox AbandonedShip_Rooms_1F_Text_ThaliaRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_THALIA_1
 	release
 	end
 
@@ -51,7 +50,7 @@ AbandonedShip_Rooms_1F_Text_ThaliaPostBattle:
 
 AbandonedShip_Rooms_1F_Text_ThaliaRegister:
 	.string "You're such a tough TRAINER!\n"
-	.string "Let me register you as a memento!$"
+	.string "I'm curious how strong you really are.$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaRematchIntro:
 	.string "What on earth would compel you to\n"

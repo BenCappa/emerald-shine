@@ -484,7 +484,6 @@ MtChimney_EventScript_DefeatedShelby::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MtChimney_Text_ShelbyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_SHELBY_1
 	release
 	end
 
@@ -525,7 +524,6 @@ MtChimney_EventScript_SawyerDefeated::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MtChimney_Text_SawyerRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_SAWYER_1
 	release
 	end
 
@@ -830,8 +828,8 @@ MtChimney_Text_SawyerPostBattle:
 	.string "HOT SPRING with the locals!$"
 
 MtChimney_Text_SawyerRegister:
-	.string "I like little fireballs like you.\n"
-	.string "Let me register you in my POKéNAV.$"
+	.string "I like firebrands like you.\n"
+	.string "Keep that flame burning!$"
 
 MtChimney_Text_SawyerRematchIntro:
 	.string "I'm happily surrounded by hot people\n"

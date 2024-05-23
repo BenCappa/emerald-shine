@@ -363,7 +363,6 @@ Route119_EventScript_RegisterJackson::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route119_Text_JacksonRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JACKSON_1
 	release
 	end
 
@@ -384,7 +383,6 @@ Route119_EventScript_RegisterCatherine::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route119_Text_CatherineRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CATHERINE_1
 	release
 	end
 
@@ -471,12 +469,8 @@ Route119_EventScript_TrainerTipsDecoration::
 	end
 
 Route119_EventScript_ScottWonAtFortreeGymCall::
-	lockall
-	pokenavcall Route119_Text_ScottYouWonAtFortreeGym
-	waitmessage
 	clearflag FLAG_SCOTT_CALL_FORTREE_GYM
 	addvar VAR_SCOTT_STATE, 1
-	releaseall
 	end
 
 Route119_Text_MayIntro:
@@ -550,22 +544,6 @@ Route119_Text_ScottWayToGoBeSeeingYou:
 	.string "Are you off to Fortree Gym next?\p"
 	.string "I expect that you'll do well at the Gym.\n"
 	.string "Well, I'll be seeing you!$"
-
-
-Route119_Text_ScottYouWonAtFortreeGym:
-	.string "… … … … … …\n"
-	.string "… … … … … Beep!\p"
-	.string "Scott: Hiya, {PLAYER}{KUN}, it's me!\p"
-	.string "Just as I thought, you won at\n"
-	.string "the Fortree Gym.\p"
-	.string "Your strength…\n"
-	.string "Perhaps you really are the Trainer\l"
-	.string "that I've been searching for.\p"
-	.string "Remember, you have a fan in me.\n"
-	.string "I'll be cheering from the sidelines.\l"
-	.string "Keep up the great work!\p"
-	.string "… … … … … …\n"
-	.string "… … … … … Click!$"
 
 Route119_Text_StayAwayFromWeatherInstitute:
 	.string "We're standing lookout here.\p"

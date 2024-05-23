@@ -13,7 +13,6 @@ MeteorFalls_1F_2R_EventScript_RegisterNicolas::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MeteorFalls_1F_2R_Text_NicolasRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_NICOLAS_1
 	release
 	end
 
@@ -32,7 +31,6 @@ MeteorFalls_1F_2R_EventScript_John::
 
 MeteorFalls_1F_2R_EventScript_RegisterJohn::
 	msgbox MeteorFalls_1F_2R_Text_JohnRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JOHN_AND_JAY_1
 	release
 	end
 
@@ -51,7 +49,6 @@ MeteorFalls_1F_2R_EventScript_Jay::
 
 MeteorFalls_1F_2R_EventScript_RegisterJay::
 	msgbox MeteorFalls_1F_2R_Text_JohnRegister, MSGBOX_DEFAULT  @ John speaks for both during register
-	register_matchcall TRAINER_JOHN_AND_JAY_1
 	release
 	end
 
@@ -77,7 +74,7 @@ MeteorFalls_1F_2R_Text_NicolasPostBattle:
 
 MeteorFalls_1F_2R_Text_NicolasRegister:
 	.string "I want to know more about your power.\n"
-	.string "Let me register you in my POKéNAV.$"
+	.string "Perhaps I can attain it as well.$"
 
 MeteorFalls_1F_2R_Text_NicolasRematchIntro:
 	.string "Since we met, we have trained hard\n"

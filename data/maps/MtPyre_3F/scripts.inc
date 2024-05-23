@@ -23,7 +23,6 @@ MtPyre_3F_EventScript_RegisterGabrielle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MtPyre_3F_Text_GabrielleRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_GABRIELLE_1
 	release
 	end
 
@@ -77,8 +76,7 @@ MtPyre_3F_Text_GabriellePostBattle:
 
 MtPyre_3F_Text_GabrielleRegister:
 	.string "I would like to see your POKéMON\n"
-	.string "when they grow up some more…\p"
-	.string "Please, I need to see your POKéNAV.$"
+	.string "when they grow up some more…$"
 
 MtPyre_3F_Text_GabrielleRematchIntro:
 	.string "Oh, it's you…\p"
