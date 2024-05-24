@@ -464,9 +464,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Cut"),
         .description = COMPOUND_STRING(
-            "Cuts the foe with sharp\n"
-            "scythes, claws, etc."),
-        .effect = EFFECT_HIT,
+            "A slicing move that's super\n"
+            "effective on Grass-types."),
+        .effect = EFFECT_CUT,
         .power = 50,
         .type = TYPE_NORMAL,
         .accuracy = 95,
