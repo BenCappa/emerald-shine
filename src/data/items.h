@@ -2488,10 +2488,11 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Heart Scale"),
         .price = 100,
+        .holdEffect = HOLD_EFFECT_HEART_SCALE,
         .description = COMPOUND_STRING(
-            "A lovely scale.\n"
-            "It is coveted by\n"
-            "collectors."),
+            "Raises the Sp. Atk\n"
+            "of Alomomola and\n"
+            "Luvdisc when held."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
