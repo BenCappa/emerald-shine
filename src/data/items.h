@@ -633,28 +633,38 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Revive"),
         .price = (I_PRICE >= GEN_7) ? 2000 : 1500,
-        .description = COMPOUND_STRING(
+        /*.description = COMPOUND_STRING(
             "Revives a fainted\n"
             "Pokémon with half\n"
-            "its HP."),
+            "its HP."),*/
+        .description = sMaxReviveDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_REVIVE,
-        .effect = gItemEffect_Revive,
+        //.effect = gItemEffect_Revive,
+        .effect = gItemEffect_MaxRevive,
         .flingPower = 30,
     },
 
     [ITEM_MAX_REVIVE] =
     {
         .name = _("Max Revive"),
-        .price = 4000,
+        .price = 4000,/*
         .description = sMaxReviveDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_REVIVE,
-        .effect = gItemEffect_MaxRevive,
+        .effect = gItemEffect_MaxRevive,*/
+        .description = COMPOUND_STRING(
+            "Fully revives and\n"
+            "restores all\n"
+            "fainted Pokémon."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_SacredAsh,
+        .effect = gItemEffect_SacredAsh,
         .flingPower = 30,
     },
 
@@ -909,15 +919,20 @@ const struct Item gItemsInfo[] =
         .name = _("Ether"),
         .price = (I_PRICE >= GEN_2) ? 1200 : 1,
         .holdEffectParam = 10,
-        .description = COMPOUND_STRING(
+        /*.description = COMPOUND_STRING(
             "Restores the PP\n"
             "of a selected move\n"
-            "by 10."),
+            "by 10."),*/
+        .description = COMPOUND_STRING(
+            "Fully restores the\n"
+            "PP of a selected\n"
+            "move."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU_MOVES,
         .fieldUseFunc = ItemUseOutOfBattle_PPRecovery,
         .battleUsage = EFFECT_ITEM_RESTORE_PP,
-        .effect = gItemEffect_Ether,
+        //.effect = gItemEffect_Ether,
+        .effect = gItemEffect_MaxEther,
         .flingPower = 30,
     },
 
@@ -944,13 +959,17 @@ const struct Item gItemsInfo[] =
         .price = (I_PRICE >= GEN_2) ? 3000 : 1,
         .holdEffectParam = 10,
         .description = COMPOUND_STRING(
+            "Fully restores the\n"
+            "PP of all moves."),
+        /*.description = COMPOUND_STRING(
             "Restores the PP\n"
-            "of all moves by 10."),
+            "of all moves by 10."),*/
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_PPRecovery,
         .battleUsage = EFFECT_ITEM_RESTORE_PP,
-        .effect = gItemEffect_Elixir,
+        //.effect = gItemEffect_Elixir,
+        .effect = gItemEffect_MaxElixir,
         .flingPower = 30,
     },
 
