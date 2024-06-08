@@ -1029,10 +1029,19 @@ void MarkBattlerReceivedLinkData(u32 battler)
 const u8* CancelMultiTurnMoves(u32 battler)
 {
     const u8 *result = NULL;
-    gBattleMons[battler].status2 &= ~(STATUS2_MULTIPLETURNS);
-    gBattleMons[battler].status2 &= ~(STATUS2_LOCK_CONFUSE);
     gBattleMons[battler].status2 &= ~(STATUS2_UPROAR);
     gBattleMons[battler].status2 &= ~(STATUS2_BIDE);
+
+    if (B_RAMPAGE_CANCELLING < GEN_5)
+    {
+        gBattleMons[battler].status2 &= ~(STATUS2_MULTIPLETURNS);
+        gBattleMons[battler].status2 &= ~(STATUS2_LOCK_CONFUSE);
+    }
+    else if (!(gBattleMons[battler].status2 & STATUS2_LOCK_CONFUSE)
+     || ((gBattleMons[battler].status2 & STATUS2_LOCK_CONFUSE) > STATUS2_LOCK_CONFUSE_TURN(1)))
+    {
+        gBattleMons[battler].status2 &= ~(STATUS2_MULTIPLETURNS);
+    }
 
     // Clear battler's semi-invulnerable bits if they are not held by Sky Drop.
     if (!(gStatuses3[battler] & STATUS3_SKY_DROPPED))
@@ -3987,14 +3996,12 @@ static inline uq4_12_t GetSupremeOverlordModifier(u32 battler)
     return UQ_4_12(1.0) + (UQ_4_12(0.1) * gBattleStruct->supremeOverlordCounter[battler]);
 }
 
-static inline bool32 HadMoreThanHalfHpNowHasLess(u32 battler)
+static inline bool32 HadMoreThanHalfHpNowDoesnt(u32 battler)
 {
     u32 cutoff = gBattleMons[battler].maxHP / 2;
-    if (gBattleMons[battler].maxHP % 2 == 1)
-        cutoff++;
     // Had more than half of hp before, now has less
-     return (gBattleStruct->hpBefore[battler] >= cutoff
-             && gBattleMons[battler].hp < cutoff);
+     return (gBattleStruct->hpBefore[battler] > cutoff
+             && gBattleMons[battler].hp <= cutoff);
 }
 
 u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg)
@@ -5233,7 +5240,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
-             && HadMoreThanHalfHpNowHasLess(battler)
+             && HadMoreThanHalfHpNowDoesnt(battler)
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
              && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
              && CompareStat(battler, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN))
@@ -5251,7 +5258,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
             // Had more than half of hp before, now has less
-             && HadMoreThanHalfHpNowHasLess(battler)
+             && HadMoreThanHalfHpNowDoesnt(battler)
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
              && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
              && (CanBattlerSwitch(battler) || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
@@ -5306,9 +5313,9 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_PROTECTIVE_PADS
              && IsMoveMakingContact(move, gBattlerAttacker)
              && gBattleStruct->overwrittenAbilities[gBattlerAttacker] != GetBattlerAbility(gBattlerTarget)
-             && gBattleMons[gBattlerTarget].ability != ABILITY_MUMMY
-             && gBattleMons[gBattlerTarget].ability != ABILITY_LINGERING_AROMA
-             && !gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeSuppressed)
+             && gBattleMons[gBattlerAttacker].ability != ABILITY_MUMMY
+             && gBattleMons[gBattlerAttacker].ability != ABILITY_LINGERING_AROMA
+             && !gAbilitiesInfo[gBattleMons[gBattlerAttacker].ability].cantBeSuppressed)
             {
                 if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_ABILITY_SHIELD)
                 {
@@ -5691,7 +5698,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && TARGET_TURN_DAMAGED
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1) // Activates after all hits from a multi-hit move.
              && IsBattlerAlive(gBattlerTarget)
-             && HadMoreThanHalfHpNowHasLess(gBattlerTarget)
+             && HadMoreThanHalfHpNowDoesnt(gBattlerTarget)
              && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove)))
             {
                 gBattlerAttacker = gBattlerTarget;
