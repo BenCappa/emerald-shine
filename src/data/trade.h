@@ -986,71 +986,75 @@ static const struct InGameTrade sIngameTrades[] =
 {
     [INGAME_TRADE_SEEDOT] =
     {
-        .nickname = _("DOTS"),
-        .species = SPECIES_SEEDOT,
-        .ivs = {5, 4, 5, 4, 4, 4},
-        .abilityNum = 1,
+        .nickname = _("Spike"),
+        .species = SPECIES_PICHU_SPIKY_EARED,
+        .abilityNum = 2,
+        .isShiny = FALSE,
+        .moves = {MOVE_VOLT_TACKLE, MOVE_HEADBUTT, MOVE_HELPING_HAND, MOVE_PAIN_SPLIT},
+        .pp = {15, 15, 20, 20},
         .otId = 38726,
         .conditions = {30, 5, 5, 5, 5},
         .personality = 0x84,
-        .heldItem = ITEM_CHESTO_BERRY,
-        .mailNum = -1,
-        .otName = _("KOBE"),
-        .otGender = MALE,
+        .heldItem = ITEM_MIRROR_HERB,
+        .otName = _("Cece"),
+        .otGender = FEMALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_RALTS
+        .requestedSpecies = SPECIES_MINCCINO
     },
     [INGAME_TRADE_PLUSLE] =
     {
-        .nickname = _("PLUSES"),
-        .species = SPECIES_PLUSLE,
-        .ivs = {4, 4, 4, 5, 5, 4},
+        .nickname = _("Mia"),
+        .species = SPECIES_COMBEE,
         .abilityNum = 0,
+        .isShiny = FALSE,
+        .moves = {MOVE_FLOWER_TRICK, MOVE_SWEET_SCENT, MOVE_GUST, MOVE_BUG_BITE},
+        .pp = {10, 20, 35, 20},
         .otId = 73996,
-        .conditions = {5, 5, 30, 5, 5},
-        .personality = 0x6F,
-        .heldItem = ITEM_WOOD_MAIL,
-        .mailNum = 0,
-        .otName = _("ROMAN"),
+        .conditions = {5, 5, 5, 30, 5},
+        .personality = 0x1E,
+        .heldItem = ITEM_COVERT_CLOAK,
+        .otName = _("Joe"),
         .otGender = MALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_VOLBEAT
+        .requestedSpecies = SPECIES_MOTHIM
     },
     [INGAME_TRADE_HORSEA] =
     {
-        .nickname = _("SEASOR"),
-        .species = SPECIES_HORSEA,
-        .ivs = {5, 4, 4, 4, 5, 4},
-        .abilityNum = 0,
+        .nickname = _("Marvel"),
+        .species = SPECIES_DRATINI,
+        .abilityNum = 2,
+        .isShiny = TRUE,
+        .moves = {MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_DRAGON_DANCE, MOVE_DRAGON_RUSH},
+        .pp = {5, 20, 20, 10},
         .otId = 46285,
-        .conditions = {5, 5, 5, 5, 30},
+        .conditions = {5, 30, 5, 5, 5},
         .personality = 0x7F,
-        .heldItem = ITEM_WAVE_MAIL,
-        .mailNum = 1,
-        .otName = _("SKYLAR"),
+        .heldItem = ITEM_ABILITY_SHIELD,
+        .otName = _("Lance"),
         .otGender = MALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_BAGON
+        .requestedSpecies = SPECIES_KINGDRA
     },
     [INGAME_TRADE_MEOWTH] =
     {
-        .nickname = _("MEOWOW"),
+        .nickname = _("Meowzer"),
         .species = SPECIES_MEOWTH,
-        .ivs = {4, 5, 4, 5, 4, 4},
+        .isShiny = FALSE,
+        .moves = {MOVE_PAY_DAY, MOVE_TAIL_WHIP, MOVE_AERIAL_ACE, MOVE_LAST_RESORT},
+        .pp = {20, 30, 20, 5},
         .abilityNum = 0,
         .otId = 91481,
         .conditions = {5, 5, 5, 30, 5},
         .personality = 0x8B,
-        .heldItem = ITEM_RETRO_MAIL,
-        .mailNum = 2,
-        .otName = _("ISIS"),
+        .heldItem = ITEM_CHERISH_BALL,
+        .otName = _("Jessie"),
         .otGender = FEMALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_SKITTY
+        .requestedSpecies = SPECIES_MEOWTH_ALOLAN
     }
 };
 
-static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
+/*static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
 {
     {
         EC_WORD_BE,
@@ -1083,7 +1087,7 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_CUTE,
         EC_WORD_WAY
     }
-};
+};*/
 
 static const struct WindowTemplate sTradeSequenceWindowTemplates[] =
 {

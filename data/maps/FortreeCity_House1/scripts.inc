@@ -61,38 +61,37 @@ FortreeCity_House1_EventScript_Zigzagoon::
 	end
 
 FortreeCity_House1_Text_YouWillTradeWontYou:
-	.string "Wrooooaaar! I need it!\n"
-	.string "I have to get me a {STR_VAR_1}!\l"
-	.string "I'll do anything for it!\p"
-	.string "…Uh… Did you hear that?\n"
-	.string "My shout from the bottom of my heart?\p"
-	.string "Having heard that, you will trade\n"
-	.string "your {STR_VAR_1} for my {STR_VAR_2},\l"
-	.string "won't you?$"
+	.string "I'm accompanying my queen as we meet\n"
+	.string "with Her Majesty's granddaughter.\p"
+	.string "I bred many {STR_VAR_2} eggs in hopes\n"
+	.string "a female would hatch and, just my luck,\l"
+	.string "two females ended up hatching!\p"
+	.string "Having heard that, would you be willing\n"
+	.string "to trade my extra {STR_VAR_2} for,\l"
+	.string "let's say, a {STR_VAR_1}?$"
 
 FortreeCity_House1_Text_MonYouTakeCare:
-	.string "Oh, yeah, right on!\p"
-	.string "{STR_VAR_1}, welcome!\n"
-	.string "{STR_VAR_2}, you take care!$"
+	.string "My sincerest gratitude.\p"
+	.string "Welcome to the royal service, {STR_VAR_1}.\n"
+	.string "Treat {STR_VAR_2} like royalty!$"
 
 FortreeCity_House1_Text_ThisIsntAMon:
-	.string "Uh, no, I don't think so.\n"
+	.string "Oh, no, I don't think that's right.\n"
 	.string "That isn't a {STR_VAR_1}.$"
 
 FortreeCity_House1_Text_YouWontTradeMe:
-	.string "No? You won't trade me?\n"
-	.string "Even after I bared my heart to you?$"
+	.string "No? You won't trade for my Pokémon?\n"
+	.string "Even though it's technically royalty?$"
 
 FortreeCity_House1_Text_GoingToMakeVolbeatStrong:
-	.string "I'm going to make VOLBEAT super\n"
-	.string "strong from this moment on!\p"
-	.string "I hope you do the same with PLUSLE!$"
+	.string "I think Mothim suits an old man like me,\n"
+	.string "don't you agree?$"
 
 FortreeCity_House1_Text_TradingMemoriesWithOthers:
-	.string "Trading POKéMON with others…\p"
+	.string "Trading Pokémon with others…\p"
 	.string "It's as if you're trading your own\n"
 	.string "memories with other people.$"
 
 FortreeCity_House1_Text_Zigzagoon:
-	.string "ZIGZAGOON: Gumomoh?$"
+	.string "Zigzagoon: Gumomoh?$"
 

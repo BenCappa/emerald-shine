@@ -51,39 +51,39 @@ PacifidlogTown_House3_EventScript_Girl::
 	end
 
 PacifidlogTown_House3_Text_WillingToTradeIt:
-	.string "Check out this {STR_VAR_2}!\p"
-	.string "It's the {STR_VAR_2} that I caught\n"
-	.string "yesterday to celebrate my birthday!\p"
-	.string "Oh, I can see that you want it!\n"
-	.string "After all, it's priceless!\p"
-	.string "I'll tell you what. I might be willing\n"
-	.string "to trade it for a {STR_VAR_1}.$"
+	.string "I was told this {STR_VAR_2} is supposed\n"
+	.string "to evolve into a super strong Pokémon!\p"
+	.string "I've been training it for what feels\n"
+	.string "like forever but it hasn't evolved yet!\p"
+	.string "What a waste of time!\n"
+	.string "… … … … … … … … … Hey, do you want it?\p"
+	.string "I might be willing to trade it for a\n"
+	.string "super strong Dragon-type Pokémon\l"
+	.string "like… … … {STR_VAR_1}!$"
 
 PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou:
-	.string "Oh, so this is a {STR_VAR_1}?\p"
-	.string "It's sort of like a {STR_VAR_2},\n"
-	.string "and yet it's subtly different.\p"
-	.string "Thank you!$"
+	.string "Oh, so this is a {STR_VAR_1}? Awesome!\p"
+	.string "Now I get all the epic power without\n"
+	.string "all the boring training!\p"
+	.string "Hope that {STR_VAR_2} works out for ya!$"
 
 PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon:
-	.string "No, no, no! I won't accept any\n"
-	.string "less than a real {STR_VAR_1}!$"
+	.string "No, no, no! I won't accept any less\n"
+	.string "than a fully-evolved {STR_VAR_1}!$"
 
 PacifidlogTown_House3_Text_NotDesperateOrAnything:
-	.string "Oh, so you're not going to go through\n"
-	.string "with this?\p"
-	.string "That's cool. I'm not desperate to make\n"
-	.string "a trade or anything.$"
+	.string "Oh, come on! It's not that bad!\p"
+	.string "I even caught a girl-colored one by\n"
+	.string "mistake, so you'd totally love it!$"
 
 PacifidlogTown_House3_Text_ReallyWantedToGetBagon:
-	.string "I know I could go looking for one\n"
-	.string "on my own, but…\p"
-	.string "But I really wanted to get a BAGON\n"
-	.string "that another TRAINER caught…$"
+	.string "Seriously, what gives?\p"
+	.string "Your Kingdra is seriously strong,\n"
+	.string "but it won't listen to a word I say!\p"
+	.string "I can't believe I still have to train…$"
 
 PacifidlogTown_House3_Text_IsThatAPokedex:
-	.string "Is that a POKéDEX?\p"
-	.string "Did you get to meet a lot of different\n"
-	.string "POKéMON?\p"
-	.string "I wish I was like you.$"
-
+	.string "My little brother over there wants to\n"
+	.string "be a world-famous Dragon Tamer but\l"
+	.string "he keeps cutting corners to get there.\p"
+	.string "He's not ready for this Mega Stone.$"
