@@ -1916,10 +1916,10 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Repel"),
         .price = (I_PRICE >= GEN_7) ? 400 : 350,
-        .holdEffectParam = 100,
+        .holdEffectParam = 250,
         .description = COMPOUND_STRING(
             "Repels weak wild\n"
-            "Pokémon for 100\n"
+            "Pokémon for 250\n"
             "steps."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -1931,10 +1931,10 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Super Repel"),
         .price = (I_PRICE >= GEN_7) ? 700 : 500,
-        .holdEffectParam = 200,
+        .holdEffectParam = 250,
         .description = COMPOUND_STRING(
             "Repels weak wild\n"
-            "Pokémon for 200\n"
+            "Pokémon for 250\n"
             "steps."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -1961,11 +1961,11 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Lure"),
         .price = 400,
-        .holdEffectParam = 100,
+        .holdEffectParam = 250,
         .description = COMPOUND_STRING(
             "Makes Pokémon more\n"
             "likely to appear\n"
-            "for 100 steps."),
+            "for 250 steps."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Lure,
@@ -1977,11 +1977,11 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Super Lure"),
         .price = 700,
-        .holdEffectParam = 200,
+        .holdEffectParam = 250,
         .description = COMPOUND_STRING(
             "Makes Pokémon more\n"
             "likely to appear\n"
-            "for 200 steps."),
+            "for 250 steps."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Lure,
