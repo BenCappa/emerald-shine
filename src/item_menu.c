@@ -93,6 +93,9 @@ enum {
     ACTION_SHOW,
     ACTION_GIVE_FAVOR_LADY,
     ACTION_CONFIRM_QUIZ_LADY,
+    ACTION_BY_NAME,
+    ACTION_BY_TYPE,
+    ACTION_BY_AMOUNT,
     ACTION_DUMMY,
 };
 
@@ -151,6 +154,7 @@ static u8 AddItemMessageWindow(u8);
 static void RemoveItemMessageWindow(u8);
 static void ReturnToItemList(u8);
 static void PrintItemQuantity(u8, s16);
+
 static u8 BagMenu_AddWindow(u8);
 static u8 GetSwitchBagPocketDirection(void);
 static void SwitchBagPocket(u8, s16, bool16);
@@ -184,6 +188,8 @@ static void SellItem(u8);
 static void WaitAfterItemSell(u8);
 static void TryDepositItem(u8);
 static void Task_ChooseHowManyToDeposit(u8 taskId);
+
+// .rodata
 static void WaitDepositErrorMessage(u8);
 static void CB2_ApprenticeExitBagMenu(void);
 static void CB2_FavorLadyExitBagMenu(void);
@@ -215,6 +221,21 @@ static void CancelToss(u8);
 static void ConfirmSell(u8);
 static void CancelSell(u8);
 static void Task_FadeAndCloseBagMenuIfMulch(u8 taskId);
+
+//bag sort
+static void Task_LoadBagSortOptions(u8 taskId);
+static void ItemMenu_SortByName(u8 taskId);
+static void ItemMenu_SortByType(u8 taskId);
+static void ItemMenu_SortByAmount(u8 taskId);
+static void SortBagItems(u8 taskId);
+static void Task_SortFinish(u8 taskId);
+static void SortItemsInBag(u8 pocket, u8 type);
+static void MergeSort(struct ItemSlot* array, u32 low, u32 high, s8 (*comparator)(struct ItemSlot*, struct ItemSlot*));
+static void Merge(struct ItemSlot* array, u32 low, u32 mid, u32 high, s8 (*comparator)(struct ItemSlot*, struct ItemSlot*));
+static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
+static s8 CompareItemsByMost(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
+static s8 CompareItemsByType(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
+static s16 FindPositionInArray(u16 itemId);
 
 static const struct BgTemplate sBgTemplates_ItemMenu[] =
 {
@@ -269,6 +290,12 @@ static const struct ListMenuTemplate sItemListMenu =
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
+static const u8 sMenuText_ByName[] = _("Name");
+static const u8 sMenuText_ByType[] = _("Type");
+static const u8 sMenuText_ByAmount[] = _("Amount");
+static const u8 sMenuText_ByNumber[] = _("Number");
+static const u8 sText_NothingToSort[] = _("There's nothing to sort!");
+
 static const struct MenuAction sItemMenuActions[] = {
     [ACTION_USE]               = {gMenuText_Use,      {ItemMenu_UseOutOfBattle}},
     [ACTION_TOSS]              = {gMenuText_Toss,     {ItemMenu_Toss}},
@@ -284,6 +311,9 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_SHOW]              = {gMenuText_Show,     {ItemMenu_Show}},
     [ACTION_GIVE_FAVOR_LADY]   = {gMenuText_Give2,    {ItemMenu_GiveFavorLady}},
     [ACTION_CONFIRM_QUIZ_LADY] = {gMenuText_Confirm,  {ItemMenu_ConfirmQuizLady}},
+    [ACTION_BY_NAME]           = {sMenuText_ByName,   {ItemMenu_SortByName}},
+    [ACTION_BY_TYPE]           = {sMenuText_ByType,   {ItemMenu_SortByType}},
+    [ACTION_BY_AMOUNT]         = {sMenuText_ByAmount, {ItemMenu_SortByAmount}},
     [ACTION_DUMMY]             = {gText_EmptyString2, {NULL}}
 };
 
@@ -1268,6 +1298,30 @@ static void Task_BagMenu_HandleInput(u8 taskId)
                 }
                 return;
             }
+            else if (JOY_NEW(START_BUTTON))
+            {
+                if ((gBagMenu->numItemStacks[gBagPosition.pocket] - 1) <= 1 || gBagPosition.pocket == TMHM_POCKET) //can't sort with 0 or 1 item in bag or TMs
+                {
+                    static const u8 sText_NothingToSort[] = _("There's nothing to sort!");
+                    PlaySE(SE_FAILURE);
+                    DisplayItemMessage(taskId, 1, sText_NothingToSort, HandleErrorMessage);
+                    break;
+                }
+                
+                data[1] = GetItemListPosition(gBagPosition.pocket);
+                data[2] = BagGetQuantityByPocketPosition(gBagPosition.pocket + 1, data[1]);
+                if (gBagPosition.cursorPosition[gBagPosition.pocket] == gBagMenu->numItemStacks[gBagPosition.pocket] - 1)
+                    break;
+                else
+                    gSpecialVar_ItemId = BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1]);
+                
+                PlaySE(SE_SELECT);
+                BagDestroyPocketScrollArrowPair();
+                BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
+                ListMenuGetScrollAndRow(data[0], scrollPos, cursorPos);
+                gTasks[taskId].func = Task_LoadBagSortOptions;
+                return;
+            }
             break;
         }
 
@@ -1332,7 +1386,11 @@ static u8 GetSwitchBagPocketDirection(void)
 
 static void ChangeBagPocketId(u8 *bagPocketId, s8 deltaBagPocketId)
 {
-    if (deltaBagPocketId == MENU_CURSOR_DELTA_RIGHT && *bagPocketId == POCKETS_COUNT - 1)
+    u16 megaStoneCheck = gBagPockets[MEGASTONES_POCKET].itemSlots[0].itemId;
+
+    if ((deltaBagPocketId == MENU_CURSOR_DELTA_RIGHT && *bagPocketId == TREASURES_POCKET && megaStoneCheck == ITEM_NONE) || (deltaBagPocketId == MENU_CURSOR_DELTA_LEFT && *bagPocketId == TMHM_POCKET && megaStoneCheck == ITEM_NONE))
+        *bagPocketId += deltaBagPocketId*2;
+    else if (deltaBagPocketId == MENU_CURSOR_DELTA_RIGHT && *bagPocketId == POCKETS_COUNT - 1)
         *bagPocketId = 0;
     else if (deltaBagPocketId == MENU_CURSOR_DELTA_LEFT && *bagPocketId == 0)
         *bagPocketId = POCKETS_COUNT - 1;
@@ -2655,4 +2713,1242 @@ static void PrintTMHMMoveData(u16 itemId)
 
         CopyWindowToVram(WIN_TMHM_INFO, COPYWIN_GFX);
     }
+}
+
+// bag sorting
+enum BagSortOptions
+{
+    SORT_ALPHABETICALLY,
+    SORT_BY_TYPE,
+    SORT_BY_AMOUNT, //greatest->least
+};
+static const u8 sText_SortItemsHow[] = _("Sort items how?");
+static const u8 sText_Name[] = _("name");
+static const u8 sText_Type[] = _("type");
+static const u8 sText_Amount[] = _("amount");
+static const u8 sText_ItemsSorted[] = _("Items sorted by {STR_VAR_1}!");
+static const u8 *const sSortTypeStrings[] = 
+{
+    [SORT_ALPHABETICALLY] = sText_Name,
+    [SORT_BY_TYPE] = sText_Type,
+    [SORT_BY_AMOUNT] = sText_Amount,
+};
+
+static const u8 sBagMenuSortItems[] =
+{
+    ACTION_BY_NAME,
+    ACTION_BY_TYPE,
+    ACTION_BY_AMOUNT,
+    ACTION_CANCEL,
+};
+
+static const u8 sBagMenuSortKeyItems[] =
+{
+    ACTION_BY_NAME,
+    ACTION_CANCEL,
+};
+
+static const u8 sBagMenuSortPokeBallsBerries[] =
+{
+    ACTION_BY_NAME,
+    ACTION_BY_AMOUNT,
+    ACTION_DUMMY,
+    ACTION_CANCEL,
+};
+
+static const u16 sItemsByType[ITEMS_COUNT] =
+{
+/*ITEMS*/
+	// FIELD_USE   
+    ITEM_REPEL,
+    ITEM_SUPER_REPEL,
+    ITEM_MAX_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
+    ITEM_MAX_LURE,
+    ITEM_HONEY,
+    ITEM_ESCAPE_ROPE,
+
+	// EVOLUTION_STONE
+    ITEM_FIRE_STONE,
+    ITEM_WATER_STONE,
+    ITEM_THUNDER_STONE,
+    ITEM_LEAF_STONE,
+    ITEM_ICE_STONE,
+    ITEM_SUN_STONE,
+    ITEM_MOON_STONE,
+    ITEM_SHINY_STONE,
+    ITEM_DUSK_STONE,
+    ITEM_DAWN_STONE,
+    ITEM_OVAL_STONE,
+    ITEM_EVERSTONE,
+
+	// EVOLUTION_ITEM
+    ITEM_KINGS_ROCK,
+    ITEM_DRAGON_SCALE,
+    ITEM_RAZOR_CLAW,
+    ITEM_RAZOR_FANG,
+    ITEM_DEEP_SEA_TOOTH,
+    ITEM_DEEP_SEA_SCALE,
+    ITEM_UP_GRADE,
+    ITEM_DUBIOUS_DISC,
+    ITEM_PROTECTOR,
+    ITEM_ELECTIRIZER,
+    ITEM_MAGMARIZER,
+    ITEM_REAPER_CLOTH,
+    ITEM_BLACK_AUGURITE,
+    ITEM_PEAT_BLOCK,
+    ITEM_METAL_ALLOY,
+    ITEM_PRISM_SCALE,
+    ITEM_SACHET,
+    ITEM_WHIPPED_DREAM,
+    ITEM_AUSPICIOUS_ARMOR,
+    ITEM_MALICIOUS_ARMOR,
+    ITEM_GALARICA_CUFF,
+    ITEM_GALARICA_WREATH,
+    ITEM_SWEET_APPLE,
+    ITEM_TART_APPLE,
+    ITEM_SYRUPY_APPLE,
+    ITEM_STRAWBERRY_SWEET,
+    ITEM_LOVE_SWEET,
+    ITEM_BERRY_SWEET,
+    ITEM_CLOVER_SWEET,
+    ITEM_FLOWER_SWEET,
+    ITEM_STAR_SWEET,
+    ITEM_RIBBON_SWEET,
+    ITEM_CRACKED_POT,
+    ITEM_CHIPPED_POT,
+    ITEM_UNREMARKABLE_TEACUP,
+    ITEM_MASTERPIECE_TEACUP,
+    ITEM_LINKING_CORD,
+    ITEM_GIMMIGHOUL_COIN,
+    ITEM_LEADERS_CREST,
+
+	// MEMORY
+    ITEM_FIGHTING_MEMORY,
+    ITEM_FLYING_MEMORY,
+    ITEM_POISON_MEMORY,
+    ITEM_GROUND_MEMORY,
+    ITEM_ROCK_MEMORY,
+    ITEM_BUG_MEMORY,
+    ITEM_GHOST_MEMORY,
+    ITEM_STEEL_MEMORY,
+    ITEM_FIRE_MEMORY,
+    ITEM_WATER_MEMORY,
+    ITEM_GRASS_MEMORY,
+    ITEM_ELECTRIC_MEMORY,
+    ITEM_PSYCHIC_MEMORY,
+    ITEM_ICE_MEMORY,
+    ITEM_DRAGON_MEMORY,
+    ITEM_DARK_MEMORY,
+    ITEM_FAIRY_MEMORY,
+
+	// PLATE
+    ITEM_FIST_PLATE,
+    ITEM_SKY_PLATE,
+    ITEM_TOXIC_PLATE,
+    ITEM_EARTH_PLATE,
+    ITEM_STONE_PLATE,
+    ITEM_INSECT_PLATE,
+    ITEM_SPOOKY_PLATE,
+    ITEM_IRON_PLATE,
+    ITEM_FLAME_PLATE,
+    ITEM_SPLASH_PLATE,
+    ITEM_MEADOW_PLATE,
+    ITEM_ZAP_PLATE,
+    ITEM_MIND_PLATE,
+    ITEM_ICICLE_PLATE,
+    ITEM_DRACO_PLATE,
+    ITEM_DREAD_PLATE,
+    ITEM_PIXIE_PLATE,
+
+	// DRIVE
+    ITEM_BURN_DRIVE,
+    ITEM_DOUSE_DRIVE,
+    ITEM_SHOCK_DRIVE,
+    ITEM_CHILL_DRIVE,
+
+    // SPECIES_ENHANCING_ITEM
+    ITEM_LIGHT_BALL,
+    ITEM_STICK,
+    ITEM_THICK_CLUB,
+    ITEM_LUCKY_PUNCH,
+    ITEM_HEART_SCALE,
+    ITEM_METAL_POWDER,
+    ITEM_QUICK_POWDER,
+    ITEM_SOUL_DEW,
+    ITEM_ADAMANT_ORB,
+    ITEM_ADAMANT_CRYSTAL,
+    ITEM_LUSTROUS_ORB,
+    ITEM_LUSTROUS_GLOBE,
+    ITEM_GRISEOUS_ORB,
+    ITEM_GRISEOUS_CORE,
+    ITEM_RUSTED_SWORD,
+    ITEM_RUSTED_SHIELD,
+    ITEM_CORNERSTONE_MASK,
+    ITEM_WELLSPRING_MASK,
+    ITEM_HEARTHFLAME_MASK,
+    ITEM_BOOSTER_ENERGY,
+  
+    // TYPE_ENHANCING_ITEM
+    ITEM_SILK_SCARF,
+    ITEM_BLACK_BELT,
+    ITEM_SHARP_BEAK,
+    ITEM_POISON_BARB,
+    ITEM_SOFT_SAND,
+    ITEM_HARD_STONE,
+    ITEM_SILVER_POWDER,
+    ITEM_SPELL_TAG,
+    ITEM_METAL_COAT,
+    ITEM_CHARCOAL,
+    ITEM_MYSTIC_WATER,
+    ITEM_MIRACLE_SEED,
+    ITEM_MAGNET,
+    ITEM_TWISTED_SPOON,
+    ITEM_NEVER_MELT_ICE,
+    ITEM_DRAGON_FANG,
+    ITEM_BLACK_GLASSES,
+    ITEM_FAIRY_FEATHER,
+
+    // CONSUMABLE_HELD_ITEM
+    ITEM_FOCUS_SASH,
+    ITEM_AIR_BALLOON,
+    ITEM_ADRENALINE_ORB,
+    ITEM_EJECT_BUTTON,
+    ITEM_RED_CARD,
+    ITEM_EJECT_PACK,
+    ITEM_ROOM_SERVICE,
+    ITEM_THROAT_SPRAY,
+    ITEM_BERSERK_GENE,
+
+    // CHOICE_ITEM
+    ITEM_CHOICE_BAND,
+    ITEM_CHOICE_SPECS,
+    ITEM_CHOICE_SCARF,
+
+    // STATUS_ORB
+    ITEM_LIFE_ORB,
+    ITEM_FLAME_ORB,
+    ITEM_TOXIC_ORB,
+
+    // WEATHER_ROCK
+    ITEM_DAMP_ROCK,
+    ITEM_HEAT_ROCK,
+    ITEM_SMOOTH_ROCK,
+    ITEM_ICY_ROCK,
+    
+    // HERB
+    ITEM_WHITE_HERB,
+    ITEM_MENTAL_HERB,
+    ITEM_POWER_HERB,
+    ITEM_MIRROR_HERB,
+
+    // POLICY
+    ITEM_WEAKNESS_POLICY,
+    ITEM_BLUNDER_POLICY,
+
+    // LENS
+    ITEM_SCOPE_LENS,
+    ITEM_WIDE_LENS,
+    ITEM_ZOOM_LENS,
+
+	// POWER_ITEM
+    ITEM_MACHO_BRACE,
+    ITEM_POWER_WEIGHT,
+    ITEM_POWER_BRACER,
+    ITEM_POWER_BELT,
+    ITEM_POWER_LENS,
+    ITEM_POWER_BAND,
+    ITEM_POWER_ANKLET,
+
+	// INCENSE
+    ITEM_SEA_INCENSE,
+    ITEM_LAX_INCENSE,
+    ITEM_ODD_INCENSE,
+    ITEM_ROCK_INCENSE,
+    ITEM_FULL_INCENSE,
+    ITEM_WAVE_INCENSE,
+    ITEM_ROSE_INCENSE,
+    ITEM_LUCK_INCENSE,
+    ITEM_PURE_INCENSE,
+
+    // TYPE_ACTIVATED_STAT_BOOSTER
+    ITEM_ABSORB_BULB,
+    ITEM_CELL_BATTERY,
+    ITEM_LUMINOUS_MOSS,
+    ITEM_SNOWBALL,
+
+	// GEM
+    ITEM_NORMAL_GEM,
+    ITEM_FIGHTING_GEM,
+    ITEM_FLYING_GEM,
+    ITEM_POISON_GEM,
+    ITEM_GROUND_GEM,
+    ITEM_ROCK_GEM,
+    ITEM_BUG_GEM,
+    ITEM_GHOST_GEM,
+    ITEM_STEEL_GEM,
+    ITEM_FIRE_GEM,
+    ITEM_WATER_GEM,
+    ITEM_GRASS_GEM,
+    ITEM_ELECTRIC_GEM,
+    ITEM_PSYCHIC_GEM,
+    ITEM_ICE_GEM,
+    ITEM_DRAGON_GEM,
+    ITEM_DARK_GEM,
+    ITEM_FAIRY_GEM,
+
+    // TERRAIN_ITEM
+    ITEM_ELECTRIC_SEED,
+    ITEM_PSYCHIC_SEED,
+    ITEM_MISTY_SEED,
+    ITEM_GRASSY_SEED,
+    ITEM_TERRAIN_EXTENDER,
+
+	// HELD_ITEM
+    ITEM_BRIGHT_POWDER,
+    ITEM_QUICK_CLAW,
+    ITEM_FOCUS_BAND,
+    ITEM_BIG_ROOT,
+    ITEM_LEFTOVERS,
+    ITEM_BLACK_SLUDGE,
+    ITEM_SHELL_BELL,
+    ITEM_SHED_SHELL,
+    ITEM_DESTINY_KNOT,
+    ITEM_LIGHT_CLAY,
+    ITEM_EVIOLITE,
+    ITEM_METRONOME,
+    ITEM_LOADED_DICE,
+    ITEM_EXPERT_BELT,
+    ITEM_MUSCLE_BAND,
+    ITEM_WISE_GLASSES,
+    ITEM_FLOAT_STONE,
+    ITEM_GRIP_CLAW,
+    ITEM_BINDING_BAND,
+    ITEM_IRON_BALL,
+    ITEM_LAGGING_TAIL,
+    ITEM_RING_TARGET,
+    ITEM_STICKY_BARB,
+    ITEM_SAFETY_GOGGLES,
+    ITEM_UTILITY_UMBRELLA,
+    ITEM_ROCKY_HELMET,
+    ITEM_ASSAULT_VEST,
+    ITEM_PROTECTIVE_PADS,
+    ITEM_HEAVY_DUTY_BOOTS,
+    ITEM_ABILITY_SHIELD,
+    ITEM_CLEAR_AMULET,
+    ITEM_PUNCHING_GLOVE,
+    ITEM_COVERT_CLOAK,
+
+    // PASSIVE_HELD_ITEM
+    ITEM_EXP_SHARE,
+    ITEM_SOOTHE_BELL,
+    ITEM_AMULET_COIN,
+    ITEM_CLEANSE_TAG,
+    ITEM_SMOKE_BALL,
+    ITEM_LUCKY_EGG,
+
+    // CONTEST_SCARF
+    ITEM_RED_SCARF,
+    ITEM_BLUE_SCARF,
+    ITEM_PINK_SCARF,
+    ITEM_GREEN_SCARF,
+    ITEM_YELLOW_SCARF,
+
+    // APRICORN
+    ITEM_RED_APRICORN,
+    ITEM_BLUE_APRICORN,
+    ITEM_YELLOW_APRICORN,
+    ITEM_GREEN_APRICORN,
+    ITEM_PINK_APRICORN,
+    ITEM_WHITE_APRICORN,
+    ITEM_BLACK_APRICORN,
+
+	// Z_CRYSTAL
+    ITEM_NORMALIUM_Z,
+    ITEM_FIGHTINIUM_Z,
+    ITEM_FLYINIUM_Z,
+    ITEM_POISONIUM_Z,
+    ITEM_GROUNDIUM_Z,
+    ITEM_ROCKIUM_Z,
+    ITEM_BUGINIUM_Z,
+    ITEM_GHOSTIUM_Z,
+    ITEM_STEELIUM_Z,
+    ITEM_FIRIUM_Z,
+    ITEM_WATERIUM_Z,
+    ITEM_GRASSIUM_Z,
+    ITEM_ELECTRIUM_Z,
+    ITEM_PSYCHIUM_Z,
+    ITEM_ICIUM_Z,
+    ITEM_DRAGONIUM_Z,
+    ITEM_DARKINIUM_Z,
+    ITEM_FAIRIUM_Z,
+    ITEM_ALORAICHIUM_Z,
+    ITEM_DECIDIUM_Z,
+    ITEM_EEVIUM_Z,
+    ITEM_INCINIUM_Z,
+    ITEM_KOMMONIUM_Z,
+    ITEM_LUNALIUM_Z,
+    ITEM_LYCANIUM_Z,
+    ITEM_MARSHADIUM_Z,
+    ITEM_MEWNIUM_Z,
+    ITEM_MIMIKIUM_Z,
+    ITEM_PIKANIUM_Z,
+    ITEM_PIKASHUNIUM_Z,
+    ITEM_PRIMARIUM_Z,
+    ITEM_SNORLIUM_Z,
+    ITEM_SOLGANIUM_Z,
+    ITEM_TAPUNIUM_Z,
+    ITEM_ULTRANECROZIUM_Z,
+
+    // TERA_SHARD
+    ITEM_BUG_TERA_SHARD,
+    ITEM_DARK_TERA_SHARD,
+    ITEM_DRAGON_TERA_SHARD,
+    ITEM_ELECTRIC_TERA_SHARD,
+    ITEM_FAIRY_TERA_SHARD,
+    ITEM_FIGHTING_TERA_SHARD,
+    ITEM_FIRE_TERA_SHARD,
+    ITEM_FLYING_TERA_SHARD,
+    ITEM_GHOST_TERA_SHARD,
+    ITEM_GRASS_TERA_SHARD,
+    ITEM_GROUND_TERA_SHARD,
+    ITEM_ICE_TERA_SHARD,
+    ITEM_NORMAL_TERA_SHARD,
+    ITEM_POISON_TERA_SHARD,
+    ITEM_PSYCHIC_TERA_SHARD,
+    ITEM_ROCK_TERA_SHARD,
+    ITEM_STEEL_TERA_SHARD,
+    ITEM_WATER_TERA_SHARD,
+    ITEM_STELLAR_TERA_SHARD,
+
+	// FLUTE
+    ITEM_BLUE_FLUTE,
+    ITEM_YELLOW_FLUTE,
+    ITEM_RED_FLUTE,
+    ITEM_BLACK_FLUTE,
+    ITEM_WHITE_FLUTE,
+
+    // MULCH
+    ITEM_GROWTH_MULCH,
+    ITEM_DAMP_MULCH,
+    ITEM_STABLE_MULCH,
+    ITEM_GOOEY_MULCH,
+    ITEM_RICH_MULCH,
+    ITEM_SURPRISE_MULCH,
+    ITEM_BOOST_MULCH,
+    ITEM_AMAZE_MULCH,
+
+	// MAIL   
+    ITEM_ORANGE_MAIL,
+    ITEM_HARBOR_MAIL,
+    ITEM_GLITTER_MAIL,
+    ITEM_MECH_MAIL,
+    ITEM_WOOD_MAIL,
+    ITEM_WAVE_MAIL,
+    ITEM_BEAD_MAIL,
+    ITEM_SHADOW_MAIL,
+    ITEM_TROPIC_MAIL,
+    ITEM_DREAM_MAIL,
+    ITEM_FAB_MAIL,
+    ITEM_RETRO_MAIL,
+
+/*MEDICINE*/
+    // POTION
+    ITEM_POTION,
+    ITEM_SUPER_POTION,
+    ITEM_HYPER_POTION,
+    ITEM_MAX_POTION,
+    ITEM_FULL_RESTORE,
+
+    // REVIVAL
+    ITEM_REVIVE,
+    ITEM_MAX_REVIVE,
+    ITEM_MAX_HONEY,
+    ITEM_SACRED_ASH,
+
+    // REFRESHMENT
+    ITEM_FRESH_WATER,
+    ITEM_SODA_POP,
+    ITEM_LEMONADE,
+    ITEM_MOOMOO_MILK,
+    ITEM_BERRY_JUICE,
+    ITEM_SWEET_HEART,
+
+    // HERBAL_MEDICINE
+    ITEM_HEAL_POWDER,
+    ITEM_ENERGY_POWDER,
+    ITEM_ENERGY_ROOT,
+    ITEM_REVIVAL_HERB,
+    ITEM_REMEDY,
+    ITEM_FINE_REMEDY,
+    ITEM_SUPERB_REMEDY,
+
+	// STATUS_RECOVERY
+    ITEM_ANTIDOTE,
+    ITEM_PARALYZE_HEAL,
+    ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
+    ITEM_AWAKENING,
+    ITEM_FULL_HEAL,
+   
+	// PP_RECOVERY
+    ITEM_ETHER,
+    ITEM_MAX_ETHER,
+    ITEM_ELIXIR,
+    ITEM_MAX_ELIXIR,
+
+    // REGIONAL_SPECIALTY
+    ITEM_PEWTER_CRUNCHIES,
+    ITEM_RAGE_CANDY_BAR,
+    ITEM_LAVA_COOKIE,
+    ITEM_OLD_GATEAU,
+    ITEM_CASTELIACONE,
+    ITEM_LUMIOSE_GALETTE,
+    ITEM_SHALOUR_SABLE,
+    ITEM_BIG_MALASADA,
+    ITEM_JUBILIFE_MUFFIN,
+
+    // CANDY
+    ITEM_RARE_CANDY,
+    ITEM_EXP_CANDY_XS,
+    ITEM_EXP_CANDY_S,
+    ITEM_EXP_CANDY_M,
+    ITEM_EXP_CANDY_L,
+    ITEM_EXP_CANDY_XL,
+    ITEM_DYNAMAX_CANDY,
+
+	// VITAMIN
+    ITEM_HP_UP,
+    ITEM_PROTEIN,
+    ITEM_IRON,
+    ITEM_CALCIUM,
+    ITEM_ZINC,
+    ITEM_CARBOS,
+    ITEM_PP_UP,
+    ITEM_PP_MAX,
+  
+	// EV_FEATHER
+    ITEM_HEALTH_FEATHER,
+    ITEM_MUSCLE_FEATHER,
+    ITEM_RESIST_FEATHER,
+    ITEM_GENIUS_FEATHER,
+    ITEM_CLEVER_FEATHER,
+    ITEM_SWIFT_FEATHER,
+    ITEM_PRETTY_FEATHER,
+
+    // MOCHI
+    ITEM_HEALTH_MOCHI,
+    ITEM_MUSCLE_MOCHI,
+    ITEM_RESIST_MOCHI,
+    ITEM_GENIUS_MOCHI,
+    ITEM_CLEVER_MOCHI,
+    ITEM_SWIFT_MOCHI,
+    ITEM_FRESH_START_MOCHI,
+
+/*BALLS*/
+    ITEM_POKE_BALL,
+    ITEM_GREAT_BALL,
+    ITEM_ULTRA_BALL,
+    ITEM_MASTER_BALL,
+    ITEM_PREMIER_BALL,
+    ITEM_HEAL_BALL,
+    ITEM_NET_BALL,
+    ITEM_NEST_BALL,
+    ITEM_DIVE_BALL,
+    ITEM_DUSK_BALL,
+    ITEM_TIMER_BALL,
+    ITEM_QUICK_BALL,
+    ITEM_REPEAT_BALL,
+    ITEM_LUXURY_BALL,
+    ITEM_LEVEL_BALL,
+    ITEM_LURE_BALL,
+    ITEM_MOON_BALL,
+    ITEM_FRIEND_BALL,
+    ITEM_LOVE_BALL,
+    ITEM_FAST_BALL,
+    ITEM_HEAVY_BALL,
+    ITEM_DREAM_BALL,
+    ITEM_SAFARI_BALL,
+    ITEM_SPORT_BALL,
+    ITEM_PARK_BALL,
+    ITEM_BEAST_BALL,
+    ITEM_CHERISH_BALL,
+
+/*BATTLE ITEMS*/
+	// STAT_BOOSTER
+    ITEM_GUARD_SPEC,
+    ITEM_DIRE_HIT,
+    ITEM_X_ATTACK,
+    ITEM_X_DEFEND,
+    ITEM_X_SPEED,
+    ITEM_X_ACCURACY,
+    ITEM_X_SPECIAL,
+    ITEM_AUX_EVASION,
+    ITEM_AUX_GUARD,
+    ITEM_AUX_POWER,
+    ITEM_AUX_POWERGUARD,
+    ITEM_MAX_MUSHROOMS,
+    
+    // ESCAPE_ITEM
+    ITEM_POKE_DOLL,
+    ITEM_FLUFFY_TAIL,
+    ITEM_POKE_TOY,
+    ITEM_POKESHI_DOLL,
+
+    // ABILITY_MODIFIER
+    ITEM_ABILITY_CAPSULE,
+    ITEM_ABILITY_PATCH,
+
+    // MINT
+    ITEM_LONELY_MINT,
+    ITEM_ADAMANT_MINT,
+    ITEM_NAUGHTY_MINT,
+    ITEM_BRAVE_MINT,
+    ITEM_BOLD_MINT,
+    ITEM_IMPISH_MINT,
+    ITEM_LAX_MINT,
+    ITEM_RELAXED_MINT,
+    ITEM_MODEST_MINT,
+    ITEM_MILD_MINT,
+    ITEM_RASH_MINT,
+    ITEM_QUIET_MINT,
+    ITEM_CALM_MINT,
+    ITEM_GENTLE_MINT,
+    ITEM_CAREFUL_MINT,
+    ITEM_SASSY_MINT,
+    ITEM_TIMID_MINT,
+    ITEM_HASTY_MINT,
+    ITEM_JOLLY_MINT,
+    ITEM_NAIVE_MINT,
+    ITEM_SERIOUS_MINT,
+
+/*BERRIES*/
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_RAWST_BERRY,
+    ITEM_ASPEAR_BERRY,
+    ITEM_LEPPA_BERRY,
+    ITEM_ORAN_BERRY,
+    ITEM_PERSIM_BERRY,
+    ITEM_LUM_BERRY,
+    ITEM_SITRUS_BERRY,
+    ITEM_FIGY_BERRY,
+    ITEM_WIKI_BERRY,
+    ITEM_MAGO_BERRY,
+    ITEM_AGUAV_BERRY,
+    ITEM_IAPAPA_BERRY,
+    ITEM_RAZZ_BERRY,
+    ITEM_BLUK_BERRY,
+    ITEM_NANAB_BERRY,
+    ITEM_WEPEAR_BERRY,
+    ITEM_PINAP_BERRY,
+    ITEM_POMEG_BERRY,
+    ITEM_KELPSY_BERRY,
+    ITEM_QUALOT_BERRY,
+    ITEM_HONDEW_BERRY,
+    ITEM_GREPA_BERRY,
+    ITEM_TAMATO_BERRY,
+    ITEM_CORNN_BERRY,
+    ITEM_MAGOST_BERRY,
+    ITEM_RABUTA_BERRY,
+    ITEM_NOMEL_BERRY,
+    ITEM_SPELON_BERRY,
+    ITEM_PAMTRE_BERRY,
+    ITEM_WATMEL_BERRY,
+    ITEM_DURIN_BERRY,
+    ITEM_BELUE_BERRY,
+    ITEM_CHILAN_BERRY,
+    ITEM_OCCA_BERRY,
+    ITEM_PASSHO_BERRY,
+    ITEM_WACAN_BERRY,
+    ITEM_RINDO_BERRY,
+    ITEM_YACHE_BERRY,
+    ITEM_CHOPLE_BERRY,
+    ITEM_KEBIA_BERRY,
+    ITEM_SHUCA_BERRY,
+    ITEM_COBA_BERRY,
+    ITEM_PAYAPA_BERRY,
+    ITEM_TANGA_BERRY,
+    ITEM_CHARTI_BERRY,
+    ITEM_KASIB_BERRY,
+    ITEM_HABAN_BERRY,
+    ITEM_COLBUR_BERRY,
+    ITEM_BABIRI_BERRY,
+    ITEM_ROSELI_BERRY,
+    ITEM_LIECHI_BERRY,
+    ITEM_GANLON_BERRY,
+    ITEM_SALAC_BERRY,
+    ITEM_PETAYA_BERRY,
+    ITEM_APICOT_BERRY,
+    ITEM_LANSAT_BERRY,
+    ITEM_STARF_BERRY,
+    ITEM_ENIGMA_BERRY,
+    ITEM_MICLE_BERRY,
+    ITEM_CUSTAP_BERRY,
+    ITEM_JABOCA_BERRY,
+    ITEM_ROWAP_BERRY,
+    ITEM_KEE_BERRY,
+    ITEM_MARANGA_BERRY,
+    ITEM_ENIGMA_BERRY_E_READER,
+
+/*TREASURES*/
+	// FOSSIL
+    ITEM_HELIX_FOSSIL,
+    ITEM_DOME_FOSSIL,
+    ITEM_OLD_AMBER,
+    ITEM_ROOT_FOSSIL,
+    ITEM_CLAW_FOSSIL,
+    ITEM_ARMOR_FOSSIL,
+    ITEM_SKULL_FOSSIL,
+    ITEM_COVER_FOSSIL,
+    ITEM_PLUME_FOSSIL,
+    ITEM_JAW_FOSSIL,
+    ITEM_SAIL_FOSSIL,
+    ITEM_FOSSILIZED_BIRD,
+    ITEM_FOSSILIZED_FISH,
+    ITEM_FOSSILIZED_DRAKE,
+    ITEM_FOSSILIZED_DINO,
+
+	// TREASURE
+    ITEM_BOTTLE_CAP,
+    ITEM_GOLD_BOTTLE_CAP,
+    ITEM_NUGGET,
+    ITEM_BIG_NUGGET,
+    ITEM_PEARL,
+    ITEM_BIG_PEARL,
+    ITEM_PEARL_STRING,
+    ITEM_TINY_MUSHROOM,
+    ITEM_BIG_MUSHROOM,
+    ITEM_BALM_MUSHROOM,
+    ITEM_TINY_BAMBOO_SHOOT,
+    ITEM_BIG_BAMBOO_SHOOT,
+    ITEM_STARDUST,
+    ITEM_STAR_PIECE,
+    ITEM_COMET_SHARD,
+    ITEM_RARE_BONE,
+    ITEM_SHOAL_SALT,
+    ITEM_SHOAL_SHELL,
+    ITEM_ODD_KEYSTONE,
+    ITEM_STRANGE_SOUVENIR,
+    ITEM_WISHING_PIECE,
+
+	// SHARD
+    ITEM_RED_SHARD,
+    ITEM_BLUE_SHARD,
+    ITEM_YELLOW_SHARD,
+    ITEM_GREEN_SHARD,
+
+	// RELIC
+    ITEM_RELIC_COPPER,
+    ITEM_RELIC_SILVER,
+    ITEM_RELIC_GOLD,
+    ITEM_RELIC_VASE,
+    ITEM_RELIC_BAND,
+    ITEM_RELIC_STATUE,
+    ITEM_RELIC_CROWN,
+
+	// NECTAR
+    ITEM_RED_NECTAR,
+    ITEM_YELLOW_NECTAR,
+    ITEM_PINK_NECTAR,
+    ITEM_PURPLE_NECTAR,
+
+/*MEGA STONES*/
+    ITEM_RED_ORB,
+    ITEM_BLUE_ORB,
+    ITEM_VENUSAURITE,
+    // ITEM_DELPHOXITE,
+    // ITEM_EMPOLEONITE,
+    ITEM_HOUNDOOMINITE,
+    ITEM_GARDEVOIRITE,
+    ITEM_GALLADITE,
+    ITEM_GYARADOSITE,
+    ITEM_LUCARIONITE,
+    ITEM_STEELIXITE,
+    ITEM_AGGRONITE,
+    ITEM_MAWILITE,
+    ITEM_AMPHAROSITE,
+    ITEM_CAMERUPTITE,
+    ITEM_ALTARIANITE,
+    ITEM_AUDINITE,
+    ITEM_ABSOLITE,
+    ITEM_BANETTITE,
+    ITEM_GENGARITE,
+    ITEM_SHARPEDONITE,
+    ITEM_SCIZORITE,
+    ITEM_HERACRONITE,
+    ITEM_KANGASKHANITE,
+    ITEM_GLALITITE,
+    ITEM_GARCHOMPITE,
+
+    ITEM_CHARIZARDITE_X,
+    ITEM_CHARIZARDITE_Y,
+    ITEM_BLASTOISINITE,
+    ITEM_BEEDRILLITE,
+    ITEM_PIDGEOTITE,
+    ITEM_ALAKAZITE,
+    ITEM_SLOWBRONITE,
+    ITEM_PINSIRITE,
+    ITEM_AERODACTYLITE,
+    ITEM_MEWTWONITE_X,
+    ITEM_MEWTWONITE_Y,
+    ITEM_TYRANITARITE,
+    ITEM_SCEPTILITE,
+    ITEM_BLAZIKENITE,
+    ITEM_SWAMPERTITE,
+    ITEM_SABLENITE,
+    ITEM_MEDICHAMITE,
+    ITEM_MANECTITE,
+    ITEM_SALAMENCITE,
+    ITEM_METAGROSSITE,
+    ITEM_LATIASITE,
+    ITEM_LATIOSITE,
+    ITEM_LOPUNNITE,
+    ITEM_ABOMASITE,
+    ITEM_DIANCITE,
+
+/*TMs and HMS*/
+    ITEM_TM01,
+    ITEM_TM02,
+    ITEM_TM03,
+    ITEM_TM04,
+    ITEM_TM05,
+    ITEM_TM06,
+    ITEM_TM07,
+    ITEM_TM08,
+    ITEM_TM09,
+    ITEM_TM10,
+    ITEM_TM11,
+    ITEM_TM12,
+    ITEM_TM13,
+    ITEM_TM14,
+    ITEM_TM15,
+    ITEM_TM16,
+    ITEM_TM17,
+    ITEM_TM18,
+    ITEM_TM19,
+    ITEM_TM20,
+    ITEM_TM21,
+    ITEM_TM22,
+    ITEM_TM23,
+    ITEM_TM24,
+    ITEM_TM25,
+    ITEM_TM26,
+    ITEM_TM27,
+    ITEM_TM28,
+    ITEM_TM29,
+    ITEM_TM30,
+    ITEM_TM31,
+    ITEM_TM32,
+    ITEM_TM33,
+    ITEM_TM34,
+    ITEM_TM35,
+    ITEM_TM36,
+    ITEM_TM37,
+    ITEM_TM38,
+    ITEM_TM39,
+    ITEM_TM40,
+    ITEM_TM41,
+    ITEM_TM42,
+    ITEM_TM43,
+    ITEM_TM44,
+    ITEM_TM45,
+    ITEM_TM46,
+    ITEM_TM47,
+    ITEM_TM48,
+    ITEM_TM49,
+    ITEM_TM50,
+    ITEM_TM51,
+    ITEM_TM52,
+    ITEM_TM53,
+    ITEM_TM54,
+    ITEM_TM55,
+    ITEM_TM56,
+    ITEM_TM57,
+    ITEM_TM58,
+    ITEM_TM59,
+    ITEM_TM60,
+    ITEM_TM61,
+    ITEM_TM62,
+    ITEM_TM63,
+    ITEM_TM64,
+    ITEM_TM65,
+    ITEM_TM66,
+    ITEM_TM67,
+    ITEM_TM68,
+    ITEM_TM69,
+    ITEM_TM70,
+    ITEM_TM71,
+    ITEM_TM72,
+    ITEM_TM73,
+    ITEM_TM74,
+    ITEM_TM75,
+    ITEM_TM76,
+    ITEM_TM77,
+    ITEM_TM78,
+    ITEM_TM79,
+    ITEM_TM80,
+    ITEM_TM81,
+    ITEM_TM82,
+    ITEM_TM83,
+    ITEM_TM84,
+    ITEM_TM85,
+    ITEM_TM86,
+    ITEM_TM87,
+    ITEM_TM88,
+    ITEM_TM89,
+    ITEM_TM90,
+    ITEM_TM91,
+    ITEM_TM92,
+    ITEM_TM93,
+    ITEM_TM94,
+    ITEM_TM95,
+    ITEM_TM96,
+    ITEM_TM97,
+    ITEM_TM98,
+    ITEM_TM99,
+    ITEM_TM100,
+    ITEM_HM01,
+    ITEM_HM02,
+    ITEM_HM03,
+    ITEM_HM04,
+    ITEM_HM05,
+    ITEM_HM06,
+    ITEM_HM07,
+    ITEM_HM08,
+
+/*KEY ITEMS*/
+    // Key Items
+    ITEM_BICYCLE,
+    ITEM_MACH_BIKE,
+    ITEM_ACRO_BIKE,
+    ITEM_OLD_ROD,
+    ITEM_GOOD_ROD,
+    ITEM_SUPER_ROD,
+    ITEM_DOWSING_MACHINE,
+    ITEM_TOWN_MAP,
+    ITEM_VS_SEEKER,
+    ITEM_TM_CASE,
+    ITEM_BERRY_POUCH,
+    ITEM_POKEMON_BOX_LINK,
+    ITEM_COIN_CASE,
+    ITEM_POWDER_JAR,
+    ITEM_WAILMER_PAIL,
+    ITEM_POKE_RADAR,
+    ITEM_POKEBLOCK_CASE,
+    ITEM_SOOT_SACK,
+    ITEM_POKE_FLUTE,
+    ITEM_FAME_CHECKER,
+    ITEM_TEACHY_TV,
+
+    // Form-changing Items
+    ITEM_ROTOM_CATALOG,
+    ITEM_GRACIDEA,
+    ITEM_REVEAL_GLASS,
+    ITEM_DNA_SPLICERS,
+    ITEM_ZYGARDE_CUBE,
+    ITEM_PRISON_BOTTLE,
+    ITEM_N_SOLARIZER,
+    ITEM_N_LUNARIZER,
+    ITEM_REINS_OF_UNITY,
+    ITEM_SCROLL_OF_DARKNESS,
+    ITEM_SCROLL_OF_WATERS,
+
+    // Battle Mechanic Items
+    ITEM_MEGA_RING,
+    ITEM_Z_POWER_RING,
+    ITEM_DYNAMAX_BAND,
+    ITEM_TERA_ORB,
+
+    // Story Items
+    ITEM_SS_TICKET,
+    ITEM_EON_TICKET,
+    ITEM_MYSTIC_TICKET,
+    ITEM_AURORA_TICKET,
+    ITEM_OLD_SEA_MAP,
+    ITEM_LETTER,
+    ITEM_DEVON_PARTS,
+    ITEM_GO_GOGGLES,
+    ITEM_DEVON_SCOPE,
+    ITEM_BASEMENT_KEY,
+    ITEM_SCANNER,
+    ITEM_STORAGE_KEY,
+    ITEM_KEY_TO_ROOM_1,
+    ITEM_KEY_TO_ROOM_2,
+    ITEM_KEY_TO_ROOM_4,
+    ITEM_KEY_TO_ROOM_6,
+    ITEM_METEORITE,
+    ITEM_MAGMA_EMBLEM,
+    ITEM_CONTEST_PASS,
+    ITEM_PARCEL,
+    ITEM_SECRET_KEY,
+    ITEM_BIKE_VOUCHER,
+    ITEM_GOLD_TEETH,
+    ITEM_CARD_KEY,
+    ITEM_LIFT_KEY,
+    ITEM_SILPH_SCOPE,
+    ITEM_TRI_PASS,
+    ITEM_RAINBOW_PASS,
+    ITEM_TEA,
+    ITEM_RUBY,
+    ITEM_SAPPHIRE,
+
+    // Charms
+    ITEM_OVAL_CHARM,
+    ITEM_SHINY_CHARM,
+    ITEM_CATCHING_CHARM,
+    ITEM_EXP_CHARM,
+    ITEM_GLIMMERING_CHARM,
+};
+
+static void AddBagSortSubMenu(void)
+{
+    gBagMenu->contextMenuItemsPtr = sBagMenuSortItems;
+    memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortItems, NELEMS(sBagMenuSortItems));
+    gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortItems);
+    
+    StringExpandPlaceholders(gStringVar4, sText_SortItemsHow);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    BagMenu_Print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
+    
+    if (gBagMenu->contextMenuNumItems == 2)
+        PrintContextMenuItems(BagMenu_AddWindow(ITEMWIN_1x2));
+    else if (gBagMenu->contextMenuNumItems == 4)
+        PrintContextMenuItemGrid(BagMenu_AddWindow(ITEMWIN_2x2), 2, 2);
+    else
+        PrintContextMenuItemGrid(BagMenu_AddWindow(ITEMWIN_2x3), 2, 3);
+}
+
+static void Task_LoadBagSortOptions(u8 taskId)
+{
+    AddBagSortSubMenu();
+    if (gBagMenu->contextMenuNumItems <= 2)
+        gTasks[taskId].func = Task_ItemContext_SingleRow;
+    else
+        gTasks[taskId].func = Task_ItemContext_MultipleRows;
+}
+
+#define tSortType data[2]
+static void ItemMenu_SortByName(u8 taskId)
+{
+    gTasks[taskId].tSortType = SORT_ALPHABETICALLY;
+    StringCopy(gStringVar1, sSortTypeStrings[SORT_ALPHABETICALLY]);
+    gTasks[taskId].func = SortBagItems;
+}
+static void ItemMenu_SortByType(u8 taskId)
+{
+    gTasks[taskId].tSortType = SORT_BY_TYPE;
+    StringCopy(gStringVar1, sSortTypeStrings[SORT_BY_TYPE]);
+    gTasks[taskId].func = SortBagItems;
+}
+static void ItemMenu_SortByAmount(u8 taskId)
+{
+    gTasks[taskId].tSortType = SORT_BY_AMOUNT; //greatest->least
+    StringCopy(gStringVar1, sSortTypeStrings[SORT_BY_AMOUNT]);
+    gTasks[taskId].func = SortBagItems;
+}
+
+static void SortBagItems(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+
+    RemoveContextWindow();
+    
+    SortItemsInBag(gBagPosition.pocket, tSortType);
+    DestroyListMenuTask(data[0], scrollPos, cursorPos);
+    UpdatePocketListPosition(gBagPosition.pocket);
+    LoadBagItemListBuffers(gBagPosition.pocket);
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
+    ScheduleBgCopyTilemapToVram(0);
+
+    StringCopy(gStringVar1, sSortTypeStrings[tSortType]);
+    StringExpandPlaceholders(gStringVar4, sText_ItemsSorted);
+    DisplayItemMessage(taskId, 1, gStringVar4, Task_SortFinish);
+}
+
+static void Task_SortFinish(u8 taskId)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        RemoveItemMessageWindow(4);
+        ReturnToItemList(taskId);
+    }
+}
+
+static void SortItemsInBag(u8 pocket, u8 type)
+{
+    struct ItemSlot* itemMem;
+    u16 itemAmount;
+
+    switch (pocket)
+    {
+    case ITEMS_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_Items;
+        itemAmount = BAG_ITEMS_COUNT;
+        break;
+    case KEYITEMS_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_KeyItems;
+        itemAmount = BAG_KEYITEMS_COUNT;
+        break;
+    case BALLS_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_PokeBalls;
+        itemAmount = BAG_POKEBALLS_COUNT;
+        break;
+    case BERRIES_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_Berries;
+        itemAmount = BAG_BERRIES_COUNT;
+        break;
+    case TMHM_POCKET:
+        itemMem = gSaveBlock2Ptr->bagPocket_TMHM;
+        itemAmount = BAG_TMHM_COUNT;
+        break;
+    case MEDICINE_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_Medicine;
+        itemAmount = BAG_MEDICINE_COUNT;
+        break;
+    case BATTLEITEMS_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_BattleItems;
+        itemAmount = BAG_BATTLEITEMS_COUNT;
+        break;
+    case TREASURES_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_Treasures;
+        itemAmount = BAG_TREASURES_COUNT;
+        break;
+    case MEGASTONES_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_MegaStones;
+        itemAmount = BAG_MEGASTONES_COUNT;
+        break;
+    default:
+        return;
+    }
+
+    switch (type)
+    {
+    case SORT_ALPHABETICALLY:
+        MergeSort(itemMem, 0, itemAmount - 1, CompareItemsAlphabetically);
+        break;
+    case SORT_BY_AMOUNT:
+        MergeSort(itemMem, 0, itemAmount - 1, CompareItemsByMost);
+        break;
+    default:
+        MergeSort(itemMem, 0, itemAmount - 1, CompareItemsByType);
+        break;
+    }
+}
+
+static void MergeSort(struct ItemSlot* array, u32 low, u32 high, s8 (*comparator)(struct ItemSlot*, struct ItemSlot*))
+{
+    u32 mid;
+    
+    if (high <= low)
+        return;
+
+    mid = low + (high - low) / 2;
+    MergeSort(array, low, mid, comparator); //Sort left half.
+    MergeSort(array, mid + 1, high, comparator); //Sort right half.
+    Merge(array, low, mid, high, comparator); //Merge results.
+}
+
+static void Merge(struct ItemSlot* array, u32 low, u32 mid, u32 high, s8 (*comparator)(struct ItemSlot*, struct ItemSlot*))
+{
+    u32 i = low;
+    u32 j = mid + 1;
+    u32 k;
+    struct ItemSlot aux[high + 1];
+
+    for (k = low; k <= high; ++k)
+        aux[k] = array[k];
+
+    for (k = low; k <= high; ++k)
+    { //Merge back to a[low..high]
+        if (i > mid)
+            array[k] = aux[j++];
+        else if (j > high)
+            array[k] = aux[i++];
+        else if (comparator(&aux[j], &aux[i]) < 0)
+            array[k] = aux[j++];
+        else
+            array[k] = aux[i++];
+    }
+}
+
+static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2)
+{
+    u16 item1 = itemSlot1->itemId;
+    u16 item2 = itemSlot2->itemId;
+    int i;
+    const u8 *name1;
+    const u8 *name2;
+
+    if (item1 == ITEM_NONE)
+        return 1;
+    else if (item2 == ITEM_NONE)
+        return -1;
+
+    name1 = ItemId_GetName(item1);
+    name2 = ItemId_GetName(item2);
+
+    for (i = 0; ; ++i)
+    {
+        if (name1[i] == EOS && name2[i] != EOS)
+            return -1;
+        else if (name1[i] != EOS && name2[i] == EOS)
+            return 1;
+        else if (name1[i] == EOS && name2[i] == EOS)
+            return 0;
+
+        if (name1[i] < name2[i])
+            return -1;
+        else if (name1[i] > name2[i])
+            return 1;
+    }
+
+    return 0; //Will never be reached
+}
+
+static s8 CompareItemsByMost(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2)
+{
+    u16 quantity1 = GetBagItemQuantity(&itemSlot1->quantity);
+    u16 quantity2 = GetBagItemQuantity(&itemSlot2->quantity);
+
+    if (itemSlot1->itemId == ITEM_NONE)
+        return 1;
+    else if (itemSlot2->itemId == ITEM_NONE)
+        return -1;
+
+    if (quantity1 < quantity2)
+        return 1;
+    else if (quantity1 > quantity2)
+        return -1;
+
+    return CompareItemsAlphabetically(itemSlot1, itemSlot2); //Items have same quantity so sort alphabetically
+}
+
+static s8 CompareItemsByType(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2)
+{
+    //Null items go last
+    u16 type1 = (itemSlot1->itemId == ITEM_NONE) ? ITEMS_COUNT : FindPositionInArray(itemSlot1->itemId);
+    u16 type2 = (itemSlot2->itemId == ITEM_NONE) ? ITEMS_COUNT : FindPositionInArray(itemSlot2->itemId);
+
+    if (type1 < type2)
+        return -1;
+    else if (type1 > type2)
+        return 1;
+
+    return CompareItemsAlphabetically(itemSlot1, itemSlot2); //Items are of same type so sort alphabetically
+}
+
+static s16 FindPositionInArray(u16 itemId)
+{
+    for (int i = 0; i < ITEMS_COUNT; ++i)
+    {
+        if (sItemsByType[i] == itemId)
+            return i;
+    }
+
+    return ITEMS_COUNT;
 }

@@ -58,15 +58,15 @@
 #define SECRET_BASES_COUNT 20
 #define POKE_NEWS_COUNT 16
 #define PC_ITEMS_COUNT 50
-#define BAG_ITEMS_COUNT 40
+#define BAG_ITEMS_COUNT 120
 #define BAG_KEYITEMS_COUNT 38
 #define BAG_POKEBALLS_COUNT 23
 #define BAG_TMHM_COUNT 108
-#define BAG_BERRIES_COUNT 66
-#define BAG_MEDICINE_COUNT 1 // Needs to reduce used space in SaveBlock1 to properly use.
-#define BAG_BATTLEITEMS_COUNT 1 // Needs to reduce used space in SaveBlock1 to properly use.
-#define BAG_TREASURES_COUNT 1 // Needs to reduce used space in SaveBlock1 to properly use.
-#define BAG_MEGASTONES_COUNT 1 // Needs to reduce used space in SaveBlock1 to properly use.
+#define BAG_BERRIES_COUNT 67
+#define BAG_MEDICINE_COUNT 34 // Needs to reduce used space in SaveBlock1 to properly use.
+#define BAG_BATTLEITEMS_COUNT 32 // Needs to reduce used space in SaveBlock1 to properly use.
+#define BAG_TREASURES_COUNT 21 // Needs to reduce used space in SaveBlock1 to properly use.
+#define BAG_MEGASTONES_COUNT 26 // Needs to reduce used space in SaveBlock1 to properly use.
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
 #define DECOR_MAX_SECRET_BASE 16
 #define DECOR_MAX_PLAYERS_HOUSE 12

@@ -8315,7 +8315,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .catchRate = 190,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 65 : 89,
         .evYield_SpAttack = 1,
-        .itemRare = ITEM_METAL_COAT,
+        .itemRare = ITEM_METAL_ALLOY,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
@@ -8370,7 +8370,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .catchRate = 60,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 163 : 161,
         .evYield_SpAttack = 2,
-        .itemRare = ITEM_METAL_COAT,
+        .itemRare = ITEM_METAL_ALLOY,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
@@ -8433,7 +8433,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .expYield = 211,
     #endif
         .evYield_SpAttack = 3,
-        .itemRare = ITEM_METAL_COAT,
+        .itemRare = ITEM_METAL_ALLOY,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
@@ -9583,8 +9583,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Onix)
         .levelUpLearnset = sOnixLevelUpLearnset,
         .teachableLearnset = sOnixTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_STEELIX},
-                                {EVO_ITEM, ITEM_METAL_COAT, SPECIES_STEELIX}),
+        .evolutions = EVOLUTION({EVO_TRADE_ITEM, ITEM_METAL_ALLOY, SPECIES_STEELIX},
+                                {EVO_ITEM, ITEM_METAL_ALLOY, SPECIES_STEELIX}),
     },
 
 #if P_GEN_2_CROSS_EVOS
@@ -9600,7 +9600,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .catchRate = 25,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 179 : 196,
         .evYield_Defense = 2,
-        .itemRare = ITEM_METAL_COAT,
+        .itemRare = ITEM_METAL_ALLOY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = STANDARD_FRIENDSHIP,
@@ -9661,7 +9661,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .catchRate = 25,
         .expYield = 214,
         .evYield_Defense = 2,
-        .itemRare = ITEM_METAL_COAT,
+        .itemRare = ITEM_METAL_ALLOY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = STANDARD_FRIENDSHIP,
@@ -12427,9 +12427,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Scyther)
         .levelUpLearnset = sScytherLevelUpLearnset,
         .teachableLearnset = sScytherTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_SCIZOR},
+        .evolutions = EVOLUTION({EVO_TRADE_ITEM, ITEM_METAL_ALLOY, SPECIES_SCIZOR},
                                 {EVO_ITEM, ITEM_BLACK_AUGURITE, SPECIES_KLEAVOR},
-                                {EVO_ITEM, ITEM_METAL_COAT, SPECIES_SCIZOR}),
+                                {EVO_ITEM, ITEM_METAL_ALLOY, SPECIES_SCIZOR}),
     },
 
 #if P_GEN_2_CROSS_EVOS
