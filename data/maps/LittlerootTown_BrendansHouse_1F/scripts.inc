@@ -424,7 +424,7 @@ PlayersHouse_1F_Text_LatiEmergencyNewsFlash:
 	.string "news flash!\p"
 	.string "In various Hoenn locales, there have\n"
 	.string "been reports of a BZZT…colored\l"
-	.string "Pokémon in flight.\p"
+	.string "Pokémon galloping around.\p"
 	.string "The identity of this Pokémon is\n"
 	.string "currently unknown.\p"
 	.string "We now return you to the regular\n"

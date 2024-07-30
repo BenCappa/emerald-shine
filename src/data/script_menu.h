@@ -722,8 +722,8 @@ static const struct MenuAction MultichoiceList_GoOnRetire[] =
 
 static const struct MenuAction MultichoiceList_TVLati[] =
 {
-    {gText_Red},
-    {gText_Blue},
+    {gText_White},
+    {gText_Black},
 };
 
 static const struct MenuAction MultichoiceList_BattleTowerFeelings[] =
