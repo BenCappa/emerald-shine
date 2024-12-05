@@ -482,7 +482,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "A slicing move that's super\n"
             "effective on Grass-types."),
-        .effect = EFFECT_CUT,
+        .effect = EFFECT_SUPER_EFFECTIVE_ON_ARG,
         .power = 50,
         .type = TYPE_NORMAL,
         .accuracy = 95,
@@ -490,6 +490,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
+        .argument = TYPE_GRASS,
         .makesContact = TRUE,
         .slicingMove = TRUE,
         .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_MONS_WITH_GOOD_APPEALS,
@@ -10138,12 +10139,13 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("X-Scissor"),
         .description = COMPOUND_STRING(
-            "Slashes the foe with crossed\n"
-            "scythes, claws, etc."),
+            "Slices as if using scissors.\n"
+            "High critical-hit ratio."),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_BUG,
         .accuracy = 100,
+        .criticalHitStage = 1,
         .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -19098,6 +19100,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_DARK,
         .accuracy = 90,
         .pp = 15,
+        .criticalHitStage = 1,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,

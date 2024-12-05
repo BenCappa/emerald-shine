@@ -296,7 +296,7 @@ static const struct TrainerMon sParty_Matt[] = {
     .ability = ABILITY_HYPER_CUTTER,
     .gigantamaxFactor = TRUE,
     .dynamaxLevel = 5,
-    .shouldDynamax = TRUE,
+    .shouldUseDynamax = TRUE,
     .moves = {MOVE_CRABHAMMER, MOVE_HAMMER_ARM, MOVE_METAL_CLAW, MOVE_PROTECT}
     }
 };
@@ -343,7 +343,7 @@ static const struct TrainerMon sParty_ShellySeafloorCavern[] = {
     .ability = ABILITY_STRONG_JAW,
     .gigantamaxFactor = TRUE,
     .dynamaxLevel = 5,
-    .shouldDynamax = TRUE,
+    .shouldUseDynamax = TRUE,
     .moves = {MOVE_JAW_LOCK, MOVE_ROCK_TOMB, MOVE_RAZOR_SHELL, MOVE_HEADBUTT}
     }
 };
@@ -3669,7 +3669,7 @@ static const struct TrainerMon sParty_Flannery1[] = {
     .nature = NATURE_BRAVE,
     .dynamaxLevel = 10,
     .gigantamaxFactor = TRUE,
-    .shouldDynamax = TRUE,
+    .shouldUseDynamax = TRUE,
     .heldItem = ITEM_EXPERT_BELT,
     .moves = {MOVE_COIL, MOVE_BUG_BITE, MOVE_FLAME_WHEEL, MOVE_THUNDER_FANG}
     },
@@ -3727,7 +3727,7 @@ static const struct TrainerMon sParty_Norman1[] = {
     .nature = NATURE_ADAMANT,
     .dynamaxLevel = 10,
     .gigantamaxFactor = TRUE,
-    .shouldDynamax = TRUE,
+    .shouldUseDynamax = TRUE,
     .heldItem = ITEM_FLAME_ORB,
     .moves = {MOVE_REVENGE, MOVE_KNOCK_OFF, MOVE_FACADE, MOVE_BULLET_PUNCH}
     },
@@ -3773,7 +3773,7 @@ static const struct TrainerMon sParty_Winona1[] = {
     .ability = ABILITY_HARVEST,
     .nature = NATURE_BOLD,
     .dynamaxLevel = 10,
-    .shouldDynamax = TRUE,
+    .shouldUseDynamax = TRUE,
     .heldItem = ITEM_SITRUS_BERRY,
     .moves = {MOVE_LEECH_SEED, MOVE_SUBSTITUTE, MOVE_AIR_SLASH, MOVE_PROTECT}
     },
@@ -3836,7 +3836,7 @@ static const struct TrainerMon sParty_TateAndLiza1[] = {
     .nature = NATURE_BOLD,
     .dynamaxLevel = 10,
     .gigantamaxFactor = TRUE,
-    .shouldDynamax = TRUE,
+    .shouldUseDynamax = TRUE,
     .heldItem = ITEM_WEAKNESS_POLICY,
     .moves = {MOVE_AGILITY, MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_STORED_POWER}
     },
@@ -3890,7 +3890,7 @@ static const struct TrainerMon sParty_Juan1[] = {
     .nature = NATURE_MODEST,
     .dynamaxLevel = 10,
     .gigantamaxFactor = TRUE,
-    .shouldDynamax = TRUE,
+    .shouldUseDynamax = TRUE,
     .heldItem = ITEM_LIGHT_CLAY,
     .moves = {MOVE_ICE_BEAM, MOVE_CHILLING_WATER, MOVE_THUNDER, MOVE_REST}
     },
@@ -4800,7 +4800,7 @@ static const struct TrainerMon sParty_Elliot1[] = {
 
 static const struct TrainerMon sParty_Ned[] = {
     {
-    .lvl = 11,
+    .lvl = 12,
     .species = SPECIES_BRUXISH,
     }
 };
@@ -6822,7 +6822,7 @@ static const struct TrainerMon sParty_TabithaMossdeep[] = {
     .ability = ABILITY_STEAM_ENGINE,
     .gigantamaxFactor = TRUE,
     .dynamaxLevel = 5,
-    .shouldDynamax = TRUE,
+    .shouldUseDynamax = TRUE,
     .moves = {MOVE_FLAME_CHARGE, MOVE_TAR_SHOT, MOVE_ROCK_SLIDE, MOVE_HEAVY_SLAM}
     }
 };
