@@ -51,6 +51,7 @@ extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
 extern u8 gLocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
+extern bool8 gExitStairsMovementDisabled;
 
 extern const struct UCoords32 gDirectionToVectors[];
 
@@ -161,6 +162,6 @@ enum ItemObtainFlags
     FLAG_GET_ITEM_OBTAINED,
     FLAG_SET_ITEM_OBTAINED,
 };
-bool8 GetSetItemObtained(u16 item, u8 caseId);
+bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId);
 
 #endif // GUARD_OVERWORLD_H

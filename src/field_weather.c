@@ -5,6 +5,7 @@
 #include "util.h"
 #include "event_object_movement.h"
 #include "field_weather.h"
+#include "fieldmap.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -65,7 +66,7 @@ EWRAM_DATA static u8 ALIGNED(2) sFieldEffectPaletteColorMapTypes[32] = {0};
 
 static const u8 *sPaletteColorMapTypes;
 
-static const u8 sDarkenedContrastColorMaps[NUM_WEATHER_COLOR_MAPS][32] = 
+static const u8 sDarkenedContrastColorMaps[NUM_WEATHER_COLOR_MAPS][32] =
 {
     {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29},
     {0, 0, 1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 10, 11, 12, 13, 14, 14, 15, 16, 17, 18, 19, 20, 21, 21, 22, 23, 24, 25, 26, 27},
@@ -203,7 +204,9 @@ void StartWeather(void)
     {
         u8 index = AllocSpritePalette(PALTAG_WEATHER);
         CpuCopy32(gFogPalette, &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
+
         sPaletteColorMapTypes = sBasePaletteColorMapTypes;
+
         gWeatherPtr->contrastColorMapSpritePalIndex = index;
         gWeatherPtr->weatherPicSpritePalIndex = AllocSpritePalette(PALTAG_WEATHER_2);
         gWeatherPtr->rainSpriteCount = 0;
@@ -457,7 +460,7 @@ static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
                 if (sPaletteColorMapTypes[curPalIndex] == COLOR_MAP_CONTRAST || curPalIndex - 16 == gWeatherPtr->contrastColorMapSpritePalIndex)
                     colorMap = sContrastColorMaps[colorMapIndex];
                 else
-                    colorMap = sContrastColorMaps[colorMapIndex];
+                    colorMap = sDarkenedContrastColorMaps[colorMapIndex];
 
                 for (i = 0; i < 16; i++)
                 {
@@ -538,7 +541,7 @@ static void ApplyColorMapWithBlend(u8 startPalIndex, u8 numPalettes, s8 colorMap
             if (sPaletteColorMapTypes[curPalIndex] == COLOR_MAP_DARK_CONTRAST)
                 colorMap = sDarkenedContrastColorMaps[colorMapIndex];
             else
-                colorMap = sDarkenedContrastColorMaps[colorMapIndex];
+                colorMap = sContrastColorMaps[colorMapIndex];
 
             for (i = 0; i < 16; i++)
             {
