@@ -61,11 +61,73 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_ManClearOutSale::
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_ThirstyMan::
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_BoneDryThirsty, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_set FLAG_RECEIVED_LEFTOVERS, LilycoveCity_DepartmentStoreRooftop_EventScript_Burp
+	goto_if_set FLAG_GAVE_SODA_POP, LilycoveCity_DepartmentStoreRooftop_EventScript_OfferLeftovers
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_BoneDryThirsty, MSGBOX_DEFAULT
+	checkitem ITEM_SODA_POP, 1
+	compare VAR_RESULT, 1
+	goto_if_ge LilycoveCity_DepartmentStoreRooftop_EventScript_GiveManSoda
+	release
+	end
+
+LilycoveCity_DepartmentStoreRooftop_EventScript_GiveManSoda::
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_GiveManSoda, MSGBOX_YESNO
+	compare VAR_RESULT, 0
+	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_RefusedManSoda
+	removeitem ITEM_SODA_POP, 1
+	setflag FLAG_GAVE_SODA_POP
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_OfferLeftovers
+	release
+	end
+
+LilycoveCity_DepartmentStoreRooftop_EventScript_RefusedManSoda::
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_RefuseManSoda, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_DepartmentStoreRooftop_EventScript_OfferLeftovers::
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_HitsTheSpot, MSGBOX_DEFAULT
+	checkitemspace ITEM_LEFTOVERS, 1
+	compare VAR_RESULT, 0
+	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_YoureStuffedToo
+	giveitem ITEM_LEFTOVERS, 1
+	setflag FLAG_RECEIVED_LEFTOVERS
+	release
+	end
+
+LilycoveCity_DepartmentStoreRooftop_EventScript_YoureStuffedToo::
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_YoureStuffedToo, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_DepartmentStoreRooftop_EventScript_Burp::
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_Burp, MSGBOX_DEFAULT
+	release
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_VendingMachine::
 	lockall
+	goto_if_unset FLAG_RECEIVED_GENGARITE, LilycoveCity_DepartmentStoreRooftop_EventScript_SomethingUnderneath
+	message LilycoveCity_DepartmentStoreRooftop_Text_WhichDrinkWouldYouLike
+	waitmessage
+	showmoneybox 0, 0
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink
+	end
+
+LilycoveCity_DepartmentStoreRooftop_EventScript_SomethingUnderneath::
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_SomethingUnderneath, MSGBOX_YESNO
+	compare VAR_RESULT, 0
+	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_IgnoredGengarite
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_PulledOutGengarite, MSGBOX_DEFAULT
+	giveitem ITEM_GENGARITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_GENGARITE
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_VendingMachine
+	end
+
+LilycoveCity_DepartmentStoreRooftop_EventScript_IgnoredGengarite::
 	message LilycoveCity_DepartmentStoreRooftop_Text_WhichDrinkWouldYouLike
 	waitmessage
 	showmoneybox 0, 0
@@ -197,10 +259,30 @@ LilycoveCity_DepartmentStoreRooftop_Text_BeenWaitingForClearOutSale:
 	.string "here. I'm going to load up, that I am!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_BoneDryThirsty:
-	.string "Ohh… I'm bone-dry thirsty!$"
+	.string "Ohh… I'm bone-dry thirsty!\p"
+	.string "I bought too much food and didn't have\n"
+	.string "enough money left over for a soda!$"
+
+LilycoveCity_DepartmentStoreRooftop_Text_GiveManSoda:
+	.string "Will you give the man a Soda Pop?$"
+
+LilycoveCity_DepartmentStoreRooftop_Text_RefuseManSoda:
+	.string "Your Pokémon need it more.$"
+
+LilycoveCity_DepartmentStoreRooftop_Text_HitsTheSpot:
+	.string "Ah, that hits the spot.\p"
+	.string "I'm completely satisfied, you should\n"
+	.string "have my Leftovers.$"
+
+LilycoveCity_DepartmentStoreRooftop_Text_YoureStuffedToo:
+	.string "Woah, looks like you're stuffed too.\n"
+	.string "You have no room for these Leftovers.$"
+
+LilycoveCity_DepartmentStoreRooftop_Text_Burp:
+	.string "BUUUURP!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_WhichDrinkWouldYouLike:
-	.string "It's a VENDING MACHINE.\n"
+	.string "It's a Vending Machine.\n"
 	.string "Which drink would you like?$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_CanOfDrinkDroppedDown:
@@ -217,3 +299,12 @@ LilycoveCity_DepartmentStoreRooftop_Text_NotEnoughMoney:
 
 LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink:
 	.string "Decided against buying a drink.$"
+
+LilycoveCity_DepartmentStoreRooftop_Text_SomethingUnderneath:
+	.string "Something is glinting from the shadow\n"
+	.string "underneath the vending machine.\p"
+	.string "Would you like to pick it up?$"
+
+LilycoveCity_DepartmentStoreRooftop_Text_PulledOutGengarite:
+	.string "You reached under and picked up the\n"
+	.string "sparkling stone.$"

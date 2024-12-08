@@ -656,9 +656,9 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
 
-#define FLAG_UNUSED_0x264  0x264 // Unused Flag
-#define FLAG_UNUSED_0x265  0x265 // Unused Flag
-#define FLAG_UNUSED_0x266  0x266 // Unused Flag
+#define FLAG_RECEIVED_GENGARITE  0x264 // Previously unused Flag
+#define FLAG_GAVE_SODA_POP  0x265 // Previously unused Flag
+#define FLAG_RECEIVED_LEFTOVERS  0x266 // Previously unused Flag
 #define FLAG_UNUSED_0x267  0x267 // Unused Flag
 #define FLAG_UNUSED_0x268  0x268 // Unused Flag
 #define FLAG_UNUSED_0x269  0x269 // Unused Flag
@@ -1011,7 +1011,7 @@
 #define FLAG_HIDE_ROUTE_111_SECRET_POWER_MAN                        0x3C0
 #define FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION                       0x3C1
 #define FLAG_HIDE_LILYCOVE_DEPARTMENT_STORE_ROOFTOP_SALE_WOMAN      0x3C2
-#define FLAG_HIDE_MIRAGE_TOWER_SKULL_FOSSIL                          0x3C3
+#define FLAG_HIDE_MIRAGE_TOWER_SKULL_FOSSIL                         0x3C3
 #define FLAG_HIDE_MIRAGE_TOWER_SAIL_FOSSIL                          0x3C4
 #define FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_FAMILIAR_AQUA_GRUNT 0x3C5
 #define FLAG_HIDE_ROUTE_118_STEVEN                                  0x3C6
