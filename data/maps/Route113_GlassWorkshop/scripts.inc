@@ -2,14 +2,14 @@ Route113_GlassWorkshop_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route113_GlassWorkshop_OnTransition
 	.byte 0
 
-	.set BLUE_FLUTE_PRICE,   250
-	.set YELLOW_FLUTE_PRICE, 500
-	.set RED_FLUTE_PRICE,    500
-	.set WHITE_FLUTE_PRICE,  1000
-	.set BLACK_FLUTE_PRICE,  1000
-	.set PRETTY_CHAIR_PRICE, 6000
-	.set PRETTY_DESK_PRICE,  8000
-	.set LOWEST_ASH_PRICE,   BLUE_FLUTE_PRICE
+	.set ABILITY_CAPSULE_PRICE,	200
+	.set FLAME_ORB_PRICE,		350
+	.set TOXIC_ORB_PRICE,		350
+	.set LIFE_ORB_PRICE,		500
+	.set ABILITY_PATCH_PRICE,	750
+	.set PRETTY_CHAIR_PRICE,	1000
+	.set PRETTY_DESK_PRICE,		2000
+	.set LOWEST_ASH_PRICE,		ABILITY_CAPSULE_PRICE
 
 Route113_GlassWorkshop_OnTransition:
 	setflag FLAG_LANDMARK_GLASS_WORKSHOP
@@ -60,74 +60,74 @@ Route113_GlassWorkshop_EventScript_ChooseGlassItem::
 	special ShowScrollableMultichoice
 	waitstate
 	switch VAR_RESULT
-	case 0, Route113_GlassWorkshop_EventScript_BlueFlute
-	case 1, Route113_GlassWorkshop_EventScript_YellowFlute
-	case 2, Route113_GlassWorkshop_EventScript_RedFlute
-	case 3, Route113_GlassWorkshop_EventScript_WhiteFlute
-	case 4, Route113_GlassWorkshop_EventScript_BlackFlute
+	case 0, Route113_GlassWorkshop_EventScript_AbilityCapsule
+	case 1, Route113_GlassWorkshop_EventScript_FlameOrb
+	case 2, Route113_GlassWorkshop_EventScript_ToxicOrb
+	case 3, Route113_GlassWorkshop_EventScript_LifeOrb
+	case 4, Route113_GlassWorkshop_EventScript_AbilityPatch
 	case 5, Route113_GlassWorkshop_EventScript_PrettyChair
 	case 6, Route113_GlassWorkshop_EventScript_PrettyDesk
 	case 7, Route113_GlassWorkshop_EventScript_CancelGlassItemSelect
 	case MULTI_B_PRESSED, Route113_GlassWorkshop_EventScript_CancelGlassItemSelect
 	end
 
-Route113_GlassWorkshop_EventScript_BlueFlute::
-	setvar VAR_0x8008, ITEM_BLUE_FLUTE
+Route113_GlassWorkshop_EventScript_AbilityCapsule::
+	setvar VAR_0x8008, ITEM_ABILITY_CAPSULE
 	bufferitemname STR_VAR_1, VAR_0x8008
-	setvar VAR_0x800A, BLUE_FLUTE_PRICE
-	goto_if_lt VAR_ASH_GATHER_COUNT, BLUE_FLUTE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	setvar VAR_0x800A, ABILITY_CAPSULE_PRICE
+	goto_if_lt VAR_ASH_GATHER_COUNT, ABILITY_CAPSULE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 10
-	subvar VAR_ASH_GATHER_COUNT, BLUE_FLUTE_PRICE
+	subvar VAR_ASH_GATHER_COUNT, ABILITY_CAPSULE_PRICE
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_YellowFlute::
-	setvar VAR_0x8008, ITEM_YELLOW_FLUTE
+Route113_GlassWorkshop_EventScript_FlameOrb::
+	setvar VAR_0x8008, ITEM_FLAME_ORB
 	bufferitemname STR_VAR_1, VAR_0x8008
-	setvar VAR_0x800A, YELLOW_FLUTE_PRICE
-	goto_if_lt VAR_ASH_GATHER_COUNT, YELLOW_FLUTE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	setvar VAR_0x800A, FLAME_ORB_PRICE
+	goto_if_lt VAR_ASH_GATHER_COUNT, FLAME_ORB_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 11
-	subvar VAR_ASH_GATHER_COUNT, YELLOW_FLUTE_PRICE
+	subvar VAR_ASH_GATHER_COUNT, FLAME_ORB_PRICE
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_RedFlute::
-	setvar VAR_0x8008, ITEM_RED_FLUTE
+Route113_GlassWorkshop_EventScript_ToxicOrb::
+	setvar VAR_0x8008, ITEM_TOXIC_ORB
 	bufferitemname STR_VAR_1, VAR_0x8008
-	setvar VAR_0x800A, RED_FLUTE_PRICE
-	goto_if_lt VAR_ASH_GATHER_COUNT, RED_FLUTE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	setvar VAR_0x800A, TOXIC_ORB_PRICE
+	goto_if_lt VAR_ASH_GATHER_COUNT, TOXIC_ORB_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 12
-	subvar VAR_ASH_GATHER_COUNT, RED_FLUTE_PRICE
+	subvar VAR_ASH_GATHER_COUNT, TOXIC_ORB_PRICE
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_WhiteFlute::
-	setvar VAR_0x8008, ITEM_WHITE_FLUTE
+Route113_GlassWorkshop_EventScript_LifeOrb::
+	setvar VAR_0x8008, ITEM_LIFE_ORB
 	bufferitemname STR_VAR_1, VAR_0x8008
-	setvar VAR_0x800A, WHITE_FLUTE_PRICE
-	goto_if_lt VAR_ASH_GATHER_COUNT, WHITE_FLUTE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	setvar VAR_0x800A, LIFE_ORB_PRICE
+	goto_if_lt VAR_ASH_GATHER_COUNT, LIFE_ORB_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 13
-	subvar VAR_ASH_GATHER_COUNT, WHITE_FLUTE_PRICE
+	subvar VAR_ASH_GATHER_COUNT, LIFE_ORB_PRICE
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_BlackFlute::
-	setvar VAR_0x8008, ITEM_BLACK_FLUTE
+Route113_GlassWorkshop_EventScript_AbilityPatch::
+	setvar VAR_0x8008, ITEM_ABILITY_PATCH
 	bufferitemname STR_VAR_1, VAR_0x8008
-	setvar VAR_0x800A, BLACK_FLUTE_PRICE
-	goto_if_lt VAR_ASH_GATHER_COUNT, BLACK_FLUTE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	setvar VAR_0x800A, ABILITY_PATCH_PRICE
+	goto_if_lt VAR_ASH_GATHER_COUNT, ABILITY_PATCH_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 14
-	subvar VAR_ASH_GATHER_COUNT, BLACK_FLUTE_PRICE
+	subvar VAR_ASH_GATHER_COUNT, ABILITY_PATCH_PRICE
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
@@ -222,46 +222,46 @@ Route113_GlassWorkshop_EventScript_NoRoomForDecor::
 
 Route113_GlassWorkshop_EventScript_GiveItemAfterNoRoom::
 	switch VAR_GLASS_WORKSHOP_STATE
-	case 10, Route113_GlassWorkshop_EventScript_GiveBlueFlute
-	case 11, Route113_GlassWorkshop_EventScript_GiveYellowFlute
-	case 12, Route113_GlassWorkshop_EventScript_GiveRedFlute
-	case 13, Route113_GlassWorkshop_EventScript_GiveWhiteFlute
-	case 14, Route113_GlassWorkshop_EventScript_GiveBlackFlute
+	case 10, Route113_GlassWorkshop_EventScript_GiveAbilityCapsule
+	case 11, Route113_GlassWorkshop_EventScript_GiveFlameOrb
+	case 12, Route113_GlassWorkshop_EventScript_GiveToxicOrb
+	case 13, Route113_GlassWorkshop_EventScript_GiveLifeOrb
+	case 14, Route113_GlassWorkshop_EventScript_GiveAbilityPatch
 	case 15, Route113_GlassWorkshop_EventScript_GivePrettyChair
 	case 16, Route113_GlassWorkshop_EventScript_GivePrettyDesk
 	end
 
-Route113_GlassWorkshop_EventScript_GiveBlueFlute::
+Route113_GlassWorkshop_EventScript_GiveAbilityCapsule::
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, ITEM_BLUE_FLUTE
+	setvar VAR_0x8008, ITEM_ABILITY_CAPSULE
 	bufferitemname STR_VAR_1, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GiveYellowFlute::
+Route113_GlassWorkshop_EventScript_GiveFlameOrb::
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, ITEM_YELLOW_FLUTE
+	setvar VAR_0x8008, ITEM_FLAME_ORB
 	bufferitemname STR_VAR_1, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GiveRedFlute::
+Route113_GlassWorkshop_EventScript_GiveToxicOrb::
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, ITEM_RED_FLUTE
+	setvar VAR_0x8008, ITEM_TOXIC_ORB
 	bufferitemname STR_VAR_1, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GiveWhiteFlute::
+Route113_GlassWorkshop_EventScript_GiveLifeOrb::
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, ITEM_WHITE_FLUTE
+	setvar VAR_0x8008, ITEM_LIFE_ORB
 	bufferitemname STR_VAR_1, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GiveBlackFlute::
+Route113_GlassWorkshop_EventScript_GiveAbilityPatch::
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, ITEM_BLACK_FLUTE
+	setvar VAR_0x8008, ITEM_ABILITY_PATCH
 	bufferitemname STR_VAR_1, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
@@ -301,7 +301,7 @@ Route113_GlassWorkshop_Text_GoCollectAshWithThis:
 	.string "Go collect ashes with this, huff-puff.$"
 
 Route113_GlassWorkshop_Text_ExplainSootSack:
-	.string "Just take that SOOT SACK and walk\n"
+	.string "Just take that Soot Sack and walk\n"
 	.string "through piles of ash, huff-puff.\p"
 	.string "And it will fill up with the volcanic ash,\n"
 	.string "huff-puff.\p"
@@ -318,7 +318,7 @@ Route113_GlassWorkshop_Text_NotEnoughAshNeedX:
 	.string "I can't make glass with this, huff-puff.\p"
 	.string "Let's see… {STR_VAR_1} is the number of steps\n"
 	.string "you'll need to walk for me to make you\l"
-	.string "a BLUE FLUTE, huff-puff.$"
+	.string "a Ability Capsule, huff-puff.$"
 
 Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike:
 	.string "Oh!\n"
@@ -358,7 +358,7 @@ Route113_GlassWorkshop_Text_IveFinishedGlassItem:
 
 Route113_GlassWorkshop_Text_NoRoomInBag:
 	.string "Oh?\n"
-	.string "You've no room in your BAG, huff-puff.\p"
+	.string "You've no room in your Bag, huff-puff.\p"
 	.string "I'll hold on to it, so come back later,\n"
 	.string "huff-puff.$"
 
@@ -369,13 +369,13 @@ Route113_GlassWorkshop_Text_NoRoomInPC:
 	.string "huff-puff.$"
 
 Route113_GlassWorkshop_Text_HaventGotYourSootSack:
-	.string "Hah? You haven't got your SOOT SACK\n"
+	.string "Hah? You haven't got your Soot Sack\n"
 	.string "with you, huff-puff.\p"
 	.string "You have to keep it with you to collect\n"
 	.string "volcanic ash, huff-puff.$"
 
 Route113_GlassWorkshop_Text_FunToBlowGlassFlute:
-	.string "It's fun to blow a glass flute while\n"
-	.string "my boss is talking.\p"
+	.string "It's fun to make TikToks of my boss\n"
+	.string "at work.\p"
 	.string "Huff-huff! Puff-puff!$"
 
