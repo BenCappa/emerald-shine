@@ -592,6 +592,33 @@ PetalburgCity_EventScript_ScottExit3::
 	waitmovement 0
 	return
 
+PetalburgCity_EventScript_WallyMegaRing::
+	lockall
+	msgbox PetalburgCity_Text_ASHLEY, MSGBOX_DEFAULT
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	addobject LOCALID_WALLY
+	setobjectxy LOCALID_WALLY, 15, 15
+	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyApproachPlayer
+	waitmovement 0
+	delay 30
+	msgbox PetalburgCity_Text_IWantToRepayYou, MSGBOX_DEFAULT
+	giveitem ITEM_MEGA_RING
+	closemessage
+	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	msgbox PetalburgCity_Text_WallyPause, MSGBOX_DEFAULT
+	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	msgbox PetalburgCity_Text_HopeWeBattleSoon, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyExit
+	waitmovement 0
+	setvar VAR_WALLY_MEGA_RING_STATE, 0
+	removeobject LOCALID_WALLY
+	releaseall
+	end
+
 PetalburgCity_Movement_ScottStartWalkLeft:
 	walk_left
 	walk_left
@@ -700,6 +727,22 @@ PetalburgCity_Movement_PlayerWatchScottExit3:
 	walk_in_place_faster_left
 	step_end
 
+PetalburgCity_Movement_WallyApproachPlayer:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	step_end
+
+PetalburgCity_Movement_WallyExit:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
 PetalburgCity_EventScript_GymBoy::
 	msgbox PetalburgCity_Text_AreYouRookieTrainer, MSGBOX_NPC
 	end
@@ -765,3 +808,28 @@ PetalburgCity_Text_ImLookingForTalentedTrainers:
 	.string "I'm roaming the land in search of\n"
 	.string "talented TRAINERS.\p"
 	.string "I'm sorry to have taken your time.$"
+
+PetalburgCity_Text_ASHLEY:
+	.string "Wally: ASHLEY!$"
+
+PetalburgCity_Text_IWantToRepayYou:
+	.string "Wally: I'm glad I caught you before\n"
+	.string "you went in there!\p"
+	.string "I heard you're finally about to\n"
+	.string "battle your older brother.\p"
+	.string "It goes without saying, this gym is an\n"
+	.string "important milestone for us both.\p"
+	.string "It was my first one and it's gonna be\n"
+	.string "your next one.\p"
+	.string "Let me be the one who helps this time.\p"
+	.string "Take this and kick Micheal's butt.$"
+
+PetalburgCity_Text_WallyPause:
+	.string "Wally: … … … … … … …$"
+
+PetalburgCity_Text_HopeWeBattleSoon:
+	.string "Wally: The next time we battle, I'm\n"
+	.string "gonna be a whole lot stronger.\p"
+	.string "I'm not ready yet but…\n"
+	.string "I will be.\p"
+	.string "See ya soon, {PLAYER}.$"
