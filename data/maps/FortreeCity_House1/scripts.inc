@@ -47,7 +47,9 @@ FortreeCity_House1_EventScript_TradeCompleted::
 	end
 
 FortreeCity_House1_EventScript_ExpertF::
-	msgbox FortreeCity_House1_Text_TradingMemoriesWithOthers, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox FortreeCity_House1_Text_TradingMemoriesWithOthers, MSGBOX_DEFAULT
 	end
 
 FortreeCity_House1_EventScript_Zigzagoon::
@@ -88,9 +90,10 @@ FortreeCity_House1_Text_GoingToMakeVolbeatStrong:
 	.string "don't you agree?$"
 
 FortreeCity_House1_Text_TradingMemoriesWithOthers:
-	.string "Trading Pokémon with others…\p"
-	.string "It's as if you're trading your own\n"
-	.string "memories with other people.$"
+	.string "A queen does not fret, but Amelia must\n"
+	.string "understand that if she refuses to\l"
+	.string "accept the throne, then Genovia will\l"
+	.string "cease to exist as we know it.$"
 
 FortreeCity_House1_Text_Zigzagoon:
 	.string "Zigzagoon: Gumomoh?$"

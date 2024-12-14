@@ -202,12 +202,6 @@ SafariZone_Southwest_Text_Woman:
 	.string "Do POKéMON have likes and dislikes\n"
 	.string "about what they eat?$"
 
-SafariZone_Northwest_Text_Man:
-	.string "Gasp… Gasp…\n"
-	.string "I…made it out here…but…\p"
-	.string "I'm exhausted… I don't have the\n"
-	.string "energy to catch POKéMON…$"
-
 SafariZone_North_Text_Fisherman:
 	.string "I'm on a mission to find WATER POKéMON\n"
 	.string "you don't see in HOENN.\p"

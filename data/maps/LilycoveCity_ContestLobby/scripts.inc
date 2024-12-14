@@ -972,25 +972,27 @@ LilycoveCity_ContestLobby_Movement_LinkReceptionistFacePlayer:
 LilycoveCity_ContestLobby_EventScript_LittleGirl::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase
-	msgbox LilycoveCity_ContestLobby_Text_LadyGaveMePokeblockCase, MSGBOX_DEFAULT
+	goto_if_set FLAG_RECEIVED_ALTARIANITE, LilycoveCity_ContestLobby_EventScript_PleaseWinContests
+	msgbox LilycoveCity_ContestLobby_Text_YouAreBeautiful, MSGBOX_DEFAULT
+	giveitem ITEM_ALTARIANITE
+	setflag FLAG_RECEIVED_ALTARIANITE
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase::
-	msgbox LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries, MSGBOX_DEFAULT
+LilycoveCity_ContestLobby_EventScript_PleaseWinContests::
+	msgbox LilycoveCity_ContestLobby_Text_PleaseWinContests, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_ContestLobby_Text_LadyGaveMePokeblockCase:
-	.string "Yippee!\p"
-	.string "The lady at the reception counter\n"
-	.string "gave me a case for {POKEBLOCK}S!$"
+LilycoveCity_ContestLobby_Text_YouAreBeautiful:
+	.string "You are beautiful!\p"
+	.string "You've just gotta be a contest star!\n"
+	.string "Take this, I promise it'll help you!$"
 
-LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries:
-	.string "Make {POKEBLOCK}S and put them in there.\p"
-	.string "When you make a {POKEBLOCK}, everyone\n"
-	.string "has to put in a different BERRY.$"
+LilycoveCity_ContestLobby_Text_PleaseWinContests:
+	.string "Please make sure you win as many\n"
+	.string "contests as you can!\p"
+	.string "Especially if you're using Altaria!$"
 
 LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint:
 	.string "Congratulations!\p"

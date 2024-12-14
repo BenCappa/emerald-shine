@@ -47,7 +47,24 @@ PacifidlogTown_House3_EventScript_TradeCompleted::
 	end
 
 PacifidlogTown_House3_EventScript_Girl::
-	msgbox PacifidlogTown_House3_Text_IsThatAPokedex, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_set FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED, PacifidlogTown_House3_EventScript_YouveProvenYourself
+	msgbox PacifidlogTown_House3_Text_NotReadyForMegaEvolution, MSGBOX_NPC
+	release
+	end
+
+PacifidlogTown_House3_EventScript_YouveProvenYourself::
+	goto_if_set FLAG_RECEIVED_GARCHOMPITE, PacifidlogTown_House3_EventScript_NotReadyForMegaEvolution
+	msgbox PacifidlogTown_House3_Text_YouSeeTruePotential, MSGBOX_DEFAULT
+	giveitem ITEM_GARCHOMPITE
+	setflag FLAG_RECEIVED_GARCHOMPITE
+	release
+	end
+
+PacifidlogTown_House3_EventScript_NotReadyForMegaEvolution::
+	msgbox PacifidlogTown_House3_Text_NotReadyForMegaEvolution, MSGBOX_NPC
+	release
 	end
 
 PacifidlogTown_House3_Text_WillingToTradeIt:
@@ -82,8 +99,15 @@ PacifidlogTown_House3_Text_ReallyWantedToGetBagon:
 	.string "but it won't listen to a word I say!\p"
 	.string "I can't believe I still have to train…$"
 
-PacifidlogTown_House3_Text_IsThatAPokedex:
+PacifidlogTown_House3_Text_NotReadyForMegaEvolution:
 	.string "My little brother over there wants to\n"
 	.string "be a world-famous Dragon Tamer but\l"
 	.string "he keeps cutting corners to get there.\p"
-	.string "He's not ready for this Mega Stone.$"
+	.string "He's not ready for Mega Evolution.$"
+
+PacifidlogTown_House3_Text_YouSeeTruePotential:
+	.string "I see you accepted the trade my little\n"
+	.string "brother was offering.\p"
+	.string "You obviously see the true potential\n"
+	.string "that Dragon Pokémon can achieve.\p"
+	.string "Please, take this$"

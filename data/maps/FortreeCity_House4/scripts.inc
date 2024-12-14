@@ -4,7 +4,20 @@ FortreeCity_House4_MapScripts::
 	.byte 0
 
 FortreeCity_House4_EventScript_Woman::
-	msgbox FortreeCity_House4_Text_BringsWorldCloserTogether, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_set FLAG_RECEIVED_GARDEVOIRITE, FortreeCity_House4_EventScript_ICantBeAPrincess
+	msgbox FortreeCity_House4_Text_ImFreakingOut, MSGBOX_DEFAULT
+	giveitem ITEM_GARDEVOIRITE
+	setflag FLAG_RECEIVED_GARDEVOIRITE
+	msgbox FortreeCity_House4_Text_ICantBeAPrincess, MSGBOX_DEFAULT
+	release
+	end
+
+
+FortreeCity_House4_EventScript_ICantBeAPrincess::
+	msgbox FortreeCity_House4_Text_ICantBeAPrincess, MSGBOX_DEFAULT
+	release
 	end
 
 FortreeCity_House4_EventScript_Boy::
@@ -64,34 +77,44 @@ FortreeCity_House4_EventScript_Wingull::
 	release
 	end
 
-FortreeCity_House4_Text_BringsWorldCloserTogether:
-	.string "By being together with POKéMON,\n"
-	.string "people make more and more friends.\p"
-	.string "And that brings the world closer\n"
-	.string "together. I think it's wonderful!$"
+FortreeCity_House4_Text_ImFreakingOut:
+	.string "I'm freaking out!\p"
+	.string "Imagine living for 15 years and then\n"
+	.string "suddenly find out you're a princess!\p"
+	.string "Then my grandmother gave me this\n"
+	.string "precious Genovian stone as a bribe!\p"
+	.string "You take it! I'm not ready for all this!$"
+
+FortreeCity_House4_Text_ICantBeAPrincess:
+	.string "I can't be a princess!\p"
+	.string "I'm still waiting for normal body parts\n"
+	.string "to arrive!$"
 
 FortreeCity_House4_Text_GoBirdPokemon:
 	.string "There!\n"
-	.string "Go, BIRD POKéMON!$"
+	.string "Go, Wingull!$"
 
 FortreeCity_House4_Text_AskedWingullToRunErrand:
-	.string "Heheh, I asked my WINGULL to run\n"
-	.string "an errand for me.$"
+	.string "Heheh, I've trained my Wingull to run\n"
+	.string "errands for me.\p"
+	.string "It seems more fun than getting\n"
+	.string "involved in Mia's whole thing right now.$"
 
 FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
-	.string "Good!\n"
-	.string "Welcome back, WINGULL!\p"
+	.string "Awesome!\n"
+	.string "Welcome back, Wingull!\p"
 	.string "Huh? What is this?\n"
 	.string "What is it holding?\p"
-	.string "A MENTAL HERB?\n"
+	.string "A Mental Herb?\n"
 	.string "It must have picked it up somewhere.\p"
-	.string "But I'm not a TRAINER, so you can\n"
+	.string "But I'm not a Trainer, so you can\n"
 	.string "have it.$"
 
 FortreeCity_House4_Text_FriendsFarAwayThanksToWingull:
-	.string "Thanks to my WINGULL, I have friends\n"
-	.string "who live far away.$"
+	.string "Thanks to my Wingull, I'll be able to\n"
+	.string "have friends who live places far away.\p"
+	.string "Places like Genovia!$"
 
 FortreeCity_House4_Text_Wingull:
-	.string "WINGULL: Pihyoh!$"
+	.string "Wingull: Pihyoh!$"
 
