@@ -153,9 +153,7 @@ SlateportCity_Pokemart_EnergyGuru:
 	.2byte ITEM_ENERGY_POWDER
 	.2byte ITEM_ENERGY_ROOT
 	.2byte ITEM_REVIVAL_HERB
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 SlateportCity_EventScript_EffortRibbonWoman::
 	lock
@@ -210,9 +208,7 @@ SlateportCity_Pokemart_Cook:
 	.2byte ITEM_SYRUPY_APPLE
 	.2byte ITEM_CRACKED_POT
 	.2byte ITEM_CHIPPED_POT
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 SlateportCity_EventScript_CookSternInterview::
 	msgbox SlateportCity_Text_CaptainComeBackWithBigFish, MSGBOX_DEFAULT
@@ -539,9 +535,7 @@ SlateportCity_Pokemart_ApricornBalls:
 	.2byte ITEM_FAST_BALL
 	.2byte ITEM_HEAVY_BALL
 	.2byte ITEM_DREAM_BALL
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 SlateportCity_EventScript_DollClerk::
 	lock
@@ -561,9 +555,7 @@ SlateportCity_PokemartDecor_Dolls:
 	.2byte DECOR_TREECKO_DOLL
 	.2byte DECOR_TORCHIC_DOLL
 	.2byte DECOR_MUDKIP_DOLL
-	.2byte DECOR_NONE
-	release
-	end
+	pokemartlistend
 
 SlateportCity_EventScript_ComeBackWithSecretPower::
 	msgbox gText_ComeBackWithSecretPower, MSGBOX_DEFAULT
@@ -597,9 +589,7 @@ SlateportCity_PokemartDecor:
 	.2byte DECOR_A_NOTE_MAT
 	.2byte DECOR_B_NOTE_MAT
 	.2byte DECOR_C_HIGH_NOTE_MAT
-	.2byte DECOR_NONE
-	release
-	end
+	pokemartlistend
 
 SlateportCity_EventScript_PowerTMClerk::
 	lock
@@ -615,9 +605,7 @@ SlateportCity_EventScript_PowerTMClerk::
 SlateportCity_Pokemart_PowerTMs:
 	.2byte ITEM_TM_HIDDEN_POWER
 	.2byte ITEM_TM_SECRET_POWER
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 @ Scene with Capt Sterns interview and Team Aqua announcing plans to steal Submarine
 SlateportCity_EventScript_CaptStern::

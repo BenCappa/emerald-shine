@@ -22,9 +22,7 @@ LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins:
 	.2byte ITEM_MOON_STONE
 	.2byte ITEM_SHINY_STONE
 	.2byte ITEM_DUSK_STONE
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight::
 	lock
@@ -55,12 +53,8 @@ LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:
 	.2byte ITEM_PROTECTIVE_PADS
 	.2byte ITEM_THROAT_SPRAY
 	.2byte ITEM_HEAVY_DUTY_BOOTS
-	.2byte ITEM_UTILITY_UMBRELLA
 	.2byte ITEM_PUNCHING_GLOVE
-	.2byte ITEM_LOADED_DICE
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM::
 	msgbox LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC
