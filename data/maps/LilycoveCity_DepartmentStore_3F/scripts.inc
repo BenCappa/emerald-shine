@@ -13,12 +13,15 @@ LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft::
 
 	.align 2
 LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins:
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_IRON
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
-	.2byte ITEM_HP_UP
+	.2byte ITEM_FIRE_STONE
+	.2byte ITEM_WATER_STONE
+	.2byte ITEM_THUNDER_STONE
+	.2byte ITEM_LEAF_STONE
+	.2byte ITEM_ICE_STONE
+	.2byte ITEM_SUN_STONE
+	.2byte ITEM_MOON_STONE
+	.2byte ITEM_SHINY_STONE
+	.2byte ITEM_DUSK_STONE
 	.2byte ITEM_NONE
 	release
 	end
@@ -35,13 +38,26 @@ LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight::
 
 	.align 2
 LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_SP_ATK
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_X_ACCURACY
+	.2byte ITEM_SCOPE_LENS
+	.2byte ITEM_ZOOM_LENS
+	.2byte ITEM_WIDE_LENS
+	.2byte ITEM_FOCUS_SASH
+	.2byte ITEM_FOCUS_BAND
+	.2byte ITEM_ROCKY_HELMET
+	.2byte ITEM_RED_CARD
+	.2byte ITEM_RING_TARGET
+	.2byte ITEM_BINDING_BAND
+	.2byte ITEM_EJECT_BUTTON
+	.2byte ITEM_EJECT_PACK
+	.2byte ITEM_ASSAULT_VEST
+	.2byte ITEM_SAFETY_GOGGLES
+	.2byte ITEM_TERRAIN_EXTENDER
+	.2byte ITEM_PROTECTIVE_PADS
+	.2byte ITEM_THROAT_SPRAY
+	.2byte ITEM_HEAVY_DUTY_BOOTS
+	.2byte ITEM_UTILITY_UMBRELLA
+	.2byte ITEM_PUNCHING_GLOVE
+	.2byte ITEM_LOADED_DICE
 	.2byte ITEM_NONE
 	release
 	end

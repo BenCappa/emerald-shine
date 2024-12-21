@@ -210,7 +210,6 @@ SlateportCity_Pokemart_Cook:
 	.2byte ITEM_SYRUPY_APPLE
 	.2byte ITEM_CRACKED_POT
 	.2byte ITEM_CHIPPED_POT
-	.2byte ITEM_ROOM_SERVICE
 	.2byte ITEM_NONE
 	release
 	end
@@ -559,6 +558,9 @@ SlateportCity_PokemartDecor_Dolls:
 	.2byte DECOR_AZURILL_DOLL
 	.2byte DECOR_MARILL_DOLL
 	.2byte DECOR_SKITTY_DOLL
+	.2byte DECOR_TREECKO_DOLL
+	.2byte DECOR_TORCHIC_DOLL
+	.2byte DECOR_MUDKIP_DOLL
 	.2byte DECOR_NONE
 	release
 	end
