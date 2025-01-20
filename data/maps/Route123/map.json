@@ -786,8 +786,8 @@
       "x": 75,
       "y": 1,
       "elevation": 3,
-      "item": "ITEM_SUPER_REPEL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_SUPER_REPEL"
+      "item": "ITEM_LURE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_LURE"
     },
     {
       "type": "sign",
@@ -831,10 +831,18 @@
     {
       "type": "hidden_item",
       "x": 138,
-      "y": 18,
+      "y": 17,
       "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY"
+      "item": "ITEM_MILD_MINT",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_MILD_MINT"
+    },
+    {
+      "type": "hidden_item",
+      "x": 44,
+      "y": 3,
+      "elevation": 0,
+      "item": "ITEM_SHINY_STONE",
+      "flag": "FLAG_DAILY_SHINY_STONE"
     }
   ]
 }

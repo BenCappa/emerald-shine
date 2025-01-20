@@ -370,16 +370,16 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 29,
-      "y": 53,
+      "x": 31,
+      "y": 56,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_POKE_BALL",
+      "trainer_sight_or_berry_tree_id": "ITEM_HEAL_BALL",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_104_POKE_BALL"
+      "flag": "FLAG_ITEM_ROUTE_104_HEAL_BALL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
@@ -403,9 +403,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_X_ACCURACY",
+      "trainer_sight_or_berry_tree_id": "ITEM_RARE_CANDY",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_104_X_ACCURACY"
+      "flag": "FLAG_ITEM_ROUTE_104_RARE_CANDY"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
@@ -429,9 +429,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_POTION",
+      "trainer_sight_or_berry_tree_id": "ITEM_POKE_BALL",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_104_POTION"
+      "flag": "FLAG_ITEM_ROUTE_104_POKE_BALL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BOY_2",
@@ -596,8 +596,8 @@
       "x": 3,
       "y": 9,
       "elevation": 3,
-      "item": "ITEM_POKE_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_POKE_BALL"
+      "item": "ITEM_AWAKENING",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_AWAKENING"
     },
     {
       "type": "hidden_item",
@@ -617,11 +617,11 @@
     },
     {
       "type": "hidden_item",
-      "x": 16,
-      "y": 64,
+      "x": 30,
+      "y": 53,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_HEART_SCALE"
+      "item": "ITEM_RELAXED_MINT",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_RELAXED_MINT"
     }
   ]
 }

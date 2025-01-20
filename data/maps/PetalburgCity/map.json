@@ -329,11 +329,11 @@
     },
     {
       "type": "hidden_item",
-      "x": 11,
-      "y": 29,
+      "x": 23,
+      "y": 25,
       "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_CITY_RARE_CANDY"
+      "item": "ITEM_HASTY_MINT",
+      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_CITY_HASTY_MINT"
     }
   ]
 }

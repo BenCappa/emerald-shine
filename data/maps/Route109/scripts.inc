@@ -326,22 +326,22 @@ Route109_EventScript_SandCastleBoy::
 	release
 	end
 
-Route109_EventScript_SoftSandGirl::
+Route109_EventScript_ShedShellGirl::
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	goto_if_set FLAG_RECEIVED_SOFT_SAND, Route109_EventScript_AlreadyReceivedSoftSand
+	goto_if_set FLAG_RECEIVED_SHED_SHELL, Route109_EventScript_AlreadyReceivedShedShell
 	msgbox Route109_Text_YouCanHaveThis, MSGBOX_DEFAULT
-	giveitem ITEM_SOFT_SAND
+	giveitem ITEM_SHED_SHELL
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
-	setflag FLAG_RECEIVED_SOFT_SAND
+	setflag FLAG_RECEIVED_SHED_SHELL
 	release
 	end
 
-Route109_EventScript_AlreadyReceivedSoftSand::
+Route109_EventScript_AlreadyReceivedShedShell::
 	msgbox Route109_Text_WereGoingToMakeBigCastle, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -528,7 +528,9 @@ Route109_Text_SandCastleTakingLongTime:
 	.string "to make.$"
 
 Route109_Text_YouCanHaveThis:
-	.string "You can have this!$"
+	.string "This weird shell won't look good on\n"
+	.string "our sand castle.\p"
+	.string "You can have it!$"
 
 Route109_Text_WereGoingToMakeBigCastle:
 	.string "We're going to get all the sand from\n"

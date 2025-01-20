@@ -219,22 +219,22 @@ Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRYBG::
 
 Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard::
 	setvar VAR_0x8008, ITEM_RED_SHARD
-	setvar VAR_0x8009, ITEM_FIRE_STONE
+	setvar VAR_0x8009, ITEM_PSYCHIC_SEED
 	goto Route124_DivingTreasureHuntersHouse_EventScript_TryTradeShard
 
 Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard::
 	setvar VAR_0x8008, ITEM_YELLOW_SHARD
-	setvar VAR_0x8009, ITEM_THUNDER_STONE
+	setvar VAR_0x8009, ITEM_ELECTRIC_SEED
 	goto Route124_DivingTreasureHuntersHouse_EventScript_TryTradeShard
 
 Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard::
 	setvar VAR_0x8008, ITEM_BLUE_SHARD
-	setvar VAR_0x8009, ITEM_WATER_STONE
+	setvar VAR_0x8009, ITEM_MISTY_SEED
 	goto Route124_DivingTreasureHuntersHouse_EventScript_TryTradeShard
 
 Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard::
 	setvar VAR_0x8008, ITEM_GREEN_SHARD
-	setvar VAR_0x8009, ITEM_LEAF_STONE
+	setvar VAR_0x8009, ITEM_GRASSY_SEED
 	goto Route124_DivingTreasureHuntersHouse_EventScript_TryTradeShard
 
 Route124_DivingTreasureHuntersHouse_EventScript_TryTradeShard::
@@ -284,24 +284,24 @@ Route124_DivingTreasureHuntersHouse_EventScript_ShardTradeBoard::
 	end
 
 Route124_DivingTreasureHuntersHouse_Text_Greeting:
-	.string "I'm the DIVING TREASURE HUNTER!\p"
+	.string "I'm the Diving Treasure Hunter!\p"
 	.string "I'm the awesome dude who makes\n"
 	.string "deep-sea dives to gather treasures\l"
 	.string "resting at the bottom.$"
 
 Route124_DivingTreasureHuntersHouse_Text_HaveYouSeenAnyShards:
-	.string "Tell me, have you seen any SHARDS of\n"
+	.string "Tell me, have you seen any Shards of\n"
 	.string "tools made in ancient times?$"
 
 Route124_DivingTreasureHuntersHouse_Text_YouHaventGotAnyShards:
 	.string "You haven't got any treasures\n"
 	.string "for me…\p"
-	.string "If you see any SHARDS, like the RED\n"
-	.string "SHARD, you've got to trade it with me!$"
+	.string "If you see any Shards, like the Red\n"
+	.string "Shard, you've got to trade it with me!$"
 
 Route124_DivingTreasureHuntersHouse_Text_ThatsAShardIllTradeYou:
 	.string "Oh, hey! That…\n"
-	.string "That's a SHARD! I'm looking for those!\p"
+	.string "That's a Shard! I'm looking for those!\p"
 	.string "Oh, man, you've got to trade that\n"
 	.string "with me! I'll give you something good!$"
 
@@ -320,7 +320,7 @@ Route124_DivingTreasureHuntersHouse_Text_TradeSomethingElse:
 	.string "Do you want to trade something else?$"
 
 Route124_DivingTreasureHuntersHouse_Text_BagFull:
-	.string "Whoops, your BAG's full.\n"
+	.string "Whoops, your Bag's full.\n"
 	.string "Get rid of some items, friend!$"
 
 Route124_DivingTreasureHuntersHouse_Text_ComeBackIfYouChangeMind:
@@ -329,10 +329,10 @@ Route124_DivingTreasureHuntersHouse_Text_ComeBackIfYouChangeMind:
 
 Route124_DivingTreasureHuntersHouse_Text_ShardTradeBoard:
 	.string "{CLEAR_TO 0x0a}Wanted item{CLEAR_TO 0x7c}Trade item\n"
-	.string "{CLEAR_TO 0x0f}RED SHARD{CLEAR_TO 0x59}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 0x7b}FIRE STONE{CLEAR_TO 0xc8}\p"
+	.string "{CLEAR_TO 0x0f}Red Shard{CLEAR_TO 0x59}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 0x7b}Psychic Seed{CLEAR_TO 0xc8}\p"
 	.string "{CLEAR_TO 0x0a}Wanted item{CLEAR_TO 0x7c}Trade item\n"
-	.string "{CLEAR_TO 0x06}YELLOW SHARD{CLEAR_TO 0x59}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 0x73}THUNDERSTONE{CLEAR_TO 0xc8}\p"
+	.string "{CLEAR_TO 0x06}Yellow Shard{CLEAR_TO 0x59}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 0x73}Electric Seed{CLEAR_TO 0xc8}\p"
 	.string "{CLEAR_TO 0x0a}Wanted item{CLEAR_TO 0x7c}Trade item\n"
-	.string "{CLEAR_TO 0x0c}BLUE SHARD{CLEAR_TO 0x59}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 0x79}WATER STONE{CLEAR_TO 0xc8}\p"
+	.string "{CLEAR_TO 0x0c}Blue Shard{CLEAR_TO 0x59}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 0x79}Misty Seed{CLEAR_TO 0xc8}\p"
 	.string "{CLEAR_TO 0x0a}Wanted item{CLEAR_TO 0x7c}Trade item\n"
-	.string "{CLEAR_TO 0x08}GREEN SHARD{CLEAR_TO 0x59}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 0x7b}LEAF STONE$"
+	.string "{CLEAR_TO 0x08}Green Shard{CLEAR_TO 0x59}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 0x7b}Grassy Seed$"

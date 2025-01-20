@@ -672,6 +672,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SlateportCity_EventScript_SternsShipyardSign"
+    },
+    {
+      "type": "hidden_item",
+      "x": 15,
+      "y": 38,
+      "elevation": 0,
+      "item": "ITEM_CALM_MINT",
+      "flag": "FLAG_HIDDEN_ITEM_SLATEPORT_CITY_CALM_MINT"
     }
   ]
 }

@@ -178,16 +178,16 @@
       "x": 28,
       "y": 6,
       "elevation": 3,
-      "item": "ITEM_EVERSTONE",
-      "flag": "FLAG_HIDDEN_ITEM_GRANITE_CAVE_B2F_EVERSTONE_1"
+      "item": "ITEM_METAL_COAT",
+      "flag": "FLAG_HIDDEN_ITEM_GRANITE_CAVE_B2F_METAL_COAT"
     },
     {
       "type": "hidden_item",
       "x": 15,
       "y": 11,
       "elevation": 3,
-      "item": "ITEM_EVERSTONE",
-      "flag": "FLAG_HIDDEN_ITEM_GRANITE_CAVE_B2F_EVERSTONE_2"
+      "item": "ITEM_BLACK_AUGURITE",
+      "flag": "FLAG_HIDDEN_ITEM_GRANITE_CAVE_B2F_BLACK_AUGURITE"
     }
   ]
 }

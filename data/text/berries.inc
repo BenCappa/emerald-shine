@@ -192,11 +192,11 @@ Route104_PrettyPetalFlowerShop_Text_ImGrowingFlowers:
 	.string "It's for you!$"
 
 Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries:
-	.string "I get special seeds from my sister's\n"
-	.string "flowers.\p"
-	.string "You can't plant them and grow more like\n"
-	.string "you can with Berries, so visit me every\l"
-	.string "day you want some more.$"
+	.string "That Absorb Bulb comes from a special\n"
+	.string "kind of flower my sister grows.\p"
+	.string "You can't plant it and grow more like\n"
+	.string "you can with Berries, but I hear some\l"
+	.string "Pokémon carry them in the wild.$"
 
 SootopolisCity_Text_NameIsKiriHaveOneOfThese:
 	.string "Hi, what's your name?\p"

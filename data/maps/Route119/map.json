@@ -242,9 +242,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_SUPER_REPEL",
+      "trainer_sight_or_berry_tree_id": "ITEM_REPEL",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_119_SUPER_REPEL"
+      "flag": "FLAG_ITEM_ROUTE_119_REPEL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -268,9 +268,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ELIXIR",
+      "trainer_sight_or_berry_tree_id": "ITEM_REVIVAL_HERB",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_119_ELIXIR_1"
+      "flag": "FLAG_ITEM_ROUTE_119_REVIVAL_HERB"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -281,9 +281,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_LEAF_STONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MIRROR_HERB",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_119_LEAF_STONE"
+      "flag": "FLAG_ITEM_ROUTE_119_MIRROR_HERB"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -294,9 +294,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_RARE_CANDY",
+      "trainer_sight_or_berry_tree_id": "ITEM_RAZOR_CLAW",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_119_RARE_CANDY"
+      "flag": "FLAG_ITEM_ROUTE_119_RAZOR_CLAW"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -569,7 +569,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_ELIXIR",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_119_ELIXIR_2"
+      "flag": "FLAG_ITEM_ROUTE_119_ELIXIR"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SCOTT",
@@ -846,8 +846,8 @@
       "x": 17,
       "y": 82,
       "elevation": 3,
-      "item": "ITEM_CALCIUM",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_CALCIUM"
+      "item": "ITEM_MODEST_MINT",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_MODEST_MINT"
     },
     {
       "type": "hidden_item",
@@ -905,8 +905,8 @@
       "x": 20,
       "y": 29,
       "elevation": 3,
-      "item": "ITEM_MAX_ETHER",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_MAX_ETHER"
+      "item": "ITEM_CAREFUL_MINT",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_CAREFUL_MINT"
     },
     {
       "type": "sign",

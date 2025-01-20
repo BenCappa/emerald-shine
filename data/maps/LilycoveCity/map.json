@@ -514,11 +514,11 @@
     },
     {
       "type": "hidden_item",
-      "x": 64,
-      "y": 31,
+      "x": 43,
+      "y": 23,
       "elevation": 0,
-      "item": "ITEM_POKE_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_POKE_BALL"
+      "item": "ITEM_RASH_MINT",
+      "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_RASH_MINT"
     }
   ]
 }

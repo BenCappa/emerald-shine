@@ -9,12 +9,12 @@ Route114_LanettesHouse_OnTransition:
 Route114_LanettesHouse_EventScript_Lanette::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_DOLL_LANETTE, Route114_LanettesHouse_EventScript_OfferAdvice
+	goto_if_set FLAG_RECEIVED_BOX_LINK_LANETTE, Route114_LanettesHouse_EventScript_OfferAdvice
 	setflag FLAG_SYS_PC_LANETTE
 	msgbox Route114_LanettesHouse_Text_EverythingClutteredKeepThis, MSGBOX_DEFAULT
-	givedecoration DECOR_LOTAD_DOLL
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowNoRoomForDecor
-	setflag FLAG_RECEIVED_DOLL_LANETTE
+	giveitem ITEM_POKEMON_BOX_LINK
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_BOX_LINK_LANETTE
 	release
 	end
 
@@ -93,12 +93,11 @@ Route114_LanettesHouse_Text_EmailFromBill:
 	.string "“… … … … … … …\p"
 	.string "“Your Storage System offers more\n"
 	.string "convenience than mine.\p"
-	.string "“It has a lot of user-friendly features\n"
-	.string "that make it fun and useful, too.\p"
+	.string "“Being able to access it wirelessly\n"
+	.string "with the Box Link is incredible!\p"
 	.string "“It makes me proud that I played\n"
 	.string "a part in its development.\p"
 	.string "“Here's hoping that you'll continue\n"
 	.string "research in Storage Systems.\p"
 	.string "“From Bill\n"
 	.string "… … … … … … … …”$"
-

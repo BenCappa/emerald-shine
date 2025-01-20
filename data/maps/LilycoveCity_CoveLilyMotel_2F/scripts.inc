@@ -40,7 +40,19 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_GraphicArtist::
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_FatMan::
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_set FLAG_RECEIVED_ROOM_SERVICE, LilycoveCity_CoveLilyMotel_2F_EventScript_FeelSoEntitled
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ImOnMyBreak, MSGBOX_DEFAULT
+	giveitem ITEM_ROOM_SERVICE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_ROOM_SERVICE
+	release
+	end
+
+LilycoveCity_CoveLilyMotel_2F_EventScript_FeelSoEntitled::
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_FeelSoEntitled
+	release
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_Woman::
@@ -94,13 +106,15 @@ LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist:
 	.string "I'm the GRAPHIC ARTIST! Aren't the\n"
 	.string "POKéMON of HOENN interesting?$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute:
-	.string "The girl TUBERS, they're cute, hey?\n"
-	.string "To battle against a cute TUBER…\p"
-	.string "Whoop, it's so awesome!\p"
-	.string "And the TWINS! Aren't they cute?\n"
-	.string "A 2-on-2 battle with TWINS…\p"
-	.string "Whoop, it's unbearably fun!$"
+LilycoveCity_CoveLilyMotel_2F_Text_ImOnMyBreak:
+	.string "What? Can't you see I'm on my break?\p"
+	.string "Are you waiting on your Room Service\n"
+	.string "or something?\p"
+	.string "Here, just take it!$"
+
+LilycoveCity_CoveLilyMotel_2F_Text_FeelSoEntitled:
+	.string "Why do people these days feel so\n"
+	.string "entitled to the services they pay for?$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart:
 	.string "The sea breeze tickles my heart.\n"

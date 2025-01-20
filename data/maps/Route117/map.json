@@ -403,11 +403,11 @@
     },
     {
       "type": "hidden_item",
-      "x": 3,
+      "x": 4,
       "y": 18,
       "elevation": 3,
-      "item": "ITEM_REPEL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_117_REPEL"
+      "item": "ITEM_SERIOUS_MINT",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_117_SERIOUS_MINT"
     }
   ]
 }

@@ -255,8 +255,16 @@
       "x": 4,
       "y": 5,
       "elevation": 3,
-      "item": "ITEM_ICE_HEAL",
-      "flag": "FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_ICE_HEAL"
+      "item": "ITEM_BURN_HEAL",
+      "flag": "FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_BURN_HEAL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 13,
+      "y": 16,
+      "elevation": 0,
+      "item": "ITEM_IMPISH_MINT",
+      "flag": "FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_IMPISH_MINT"
     }
   ]
 }
