@@ -1638,7 +1638,11 @@
 #define SPECIES_MIMIKYU_BUSTED_TOTEM                    1523
 #define SPECIES_MIMIKYU_TOTEM_BUSTED                    SPECIES_MIMIKYU_BUSTED_TOTEM
 
-#define SPECIES_EGG                                     (SPECIES_MIMIKYU_BUSTED_TOTEM + 1)
+// Custom Mega Evolutions
+#define SPECIES_EMPOLEON_MEGA                           1524
+#define SPECIES_DELPHOX_MEGA                            1525
+
+#define SPECIES_EGG                                     (SPECIES_DELPHOX_MEGA + 1)
 
 #define NUM_SPECIES SPECIES_EGG
 

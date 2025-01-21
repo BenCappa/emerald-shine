@@ -983,6 +983,10 @@ extern const u32 gItemIcon_Audinite[];
 extern const u32 gItemIconPalette_Audinite[];
 extern const u32 gItemIcon_Diancite[];
 extern const u32 gItemIconPalette_Diancite[];
+extern const u32 gItemIcon_Empoleonite[];
+extern const u32 gItemIconPalette_Empoleonite[];
+extern const u32 gItemIcon_Delphoxite[];
+extern const u32 gItemIconPalette_Delphoxite[];
 // Gems
 extern const u32 gItemIcon_NormalGem[];
 extern const u32 gItemIconPalette_NormalGem[];
