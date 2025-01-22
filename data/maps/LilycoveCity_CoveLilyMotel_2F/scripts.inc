@@ -1,3 +1,5 @@
+.set LOCALID_FAT_MAN, 3
+
 LilycoveCity_CoveLilyMotel_2F_MapScripts::
 	.byte 0
 
@@ -41,12 +43,14 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_GraphicArtist::
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_FatMan::
 	lock
-	faceplayer
 	goto_if_set FLAG_RECEIVED_ROOM_SERVICE, LilycoveCity_CoveLilyMotel_2F_EventScript_FeelSoEntitled
+	faceplayer
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ImOnMyBreak, MSGBOX_DEFAULT
 	giveitem ITEM_ROOM_SERVICE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_ROOM_SERVICE
+	applymovement LOCALID_FAT_MAN, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
 	release
 	end
 

@@ -187,7 +187,7 @@ SlateportCity_EventScript_Cook::
 	lock
 	faceplayer
 	call_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_CookSternInterview
-	msgbox SlateportCity_Text_SeaweedFullOfLife, MSGBOX_DEFAULT
+	msgbox SlateportCity_Text_CookGreeting, MSGBOX_DEFAULT
 	waitmessage
 	pokemart SlateportCity_Pokemart_Cook
 	msgbox SlateportCity_Text_CookGoodbye, MSGBOX_DEFAULT
@@ -205,9 +205,6 @@ SlateportCity_Pokemart_Cook:
 	.2byte ITEM_RIBBON_SWEET
 	.2byte ITEM_SWEET_APPLE
 	.2byte ITEM_TART_APPLE
-	.2byte ITEM_SYRUPY_APPLE
-	.2byte ITEM_CRACKED_POT
-	.2byte ITEM_CHIPPED_POT
 	pokemartlistend
 
 SlateportCity_EventScript_CookSternInterview::
@@ -854,7 +851,7 @@ SlateportCity_Text_WonderIfLighthouseStartlesPokemon:
 	.string "I wonder if it doesn't startle POKéMON\n"
 	.string "in the sea.$"
 
-SlateportCity_Text_SeaweedFullOfLife:
+SlateportCity_Text_CookGreeting:
 	.string "Ah, bonjour!\p"
 	.string "I 'ave many culinary treats for\n"
 	.string "you an' your Pokémon!\p"
