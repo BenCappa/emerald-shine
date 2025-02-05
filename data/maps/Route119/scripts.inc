@@ -1,21 +1,10 @@
 .set LOCALID_RIVAL, 16
 .set LOCALID_RIVAL_ON_BIKE, 25
-.set LOCALID_SCOTT, 43
+.set LOCALID_SCOTT, 41
 
 Route119_MapScripts::
-	map_script MAP_SCRIPT_ON_RESUME, Route119_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route119_OnTransition
 	.byte 0
-
-Route119_OnResume:
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route119_EventScript_TryRemoveKecleon
-	end
-
-Route119_EventScript_TryRemoveKecleon::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject VAR_LAST_TALKED
-	return
 
 Route119_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
@@ -527,7 +516,7 @@ Route119_Text_BrendanExplainFly:
 	.string "Ben: Use Fly, and your Pokémon\n"
 	.string "instantly carries you to any town\l"
 	.string "you've already visited.\p"
-	.string "But you need the Fortree Gym Badge \n"
+	.string "But you need the Fortree Gym Badge\n"
 	.string "to do that.\p"
 	.string "Anyway, I have to move along.$"
 

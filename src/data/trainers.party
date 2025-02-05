@@ -17719,3 +17719,47 @@ Double Battle: No
 
 Kyogre
 Level: 5
+
+=== TRAINER_KIT ===
+Name: Kit
+Class: RS Protag
+Pic: RS Brendan
+Gender: Male
+Music: Male
+Double Battle: No
+
+Blastoise (M)
+Level: 36
+- Water Pulse
+- Shell Smash
+- Flash Cannon
+- Protect
+
+Raichu (M)
+Level: 30
+- Thunder Punch
+- Iron Tail
+- Brick Break
+- Light Screen
+
+=== TRAINER_CECE ===
+Name: Cece
+Class: RS Protag
+Pic: RS May
+Gender: Female
+Music: Male
+Double Battle: No
+
+Charizard (F)
+Level: 36
+- Heat Wave
+- Air Cutter
+- Slash
+- Helping Hand
+
+Raichu-Alola (F)
+Level: 30
+- Thunderbolt
+- Psychic
+- Grass Knot
+- Reflect

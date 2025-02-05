@@ -13,10 +13,11 @@ Gender: Male
 Music: Male
 
 Metang
-Brave Nature
+Jolly Nature
 Level: 42
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 252 Atk / 252 Def / 6 SpA
+Ability: Clear Body
+Ball: Cherish Ball
+Shiny: Yes
 - Light Screen
 - Psychic
 - Reflect
@@ -25,19 +26,124 @@ EVs: 252 Atk / 252 Def / 6 SpA
 Skarmory
 Impish Nature
 Level: 43
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 252 HP / 6 SpA / 252 SpD
-- Toxic
+Ability: Sturdy
+Ball: Park Ball
+- Curse
 - Aerial Ace
 - Protect
 - Steel Wing
 
-Aggron
-Adamant Nature
+Duraludon
+Bold Nature
 Level: 44
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 252 Atk / 252 SpA / 6 SpD
+Ability: Stalwart
+Ball: Heavy Ball
 - Thunder
 - Protect
-- Solar Beam
-- Dragon Claw
+- Steel Beam
+- Breaking Swipe
+
+=== PARTNER_BEN_BULBASAUR ===
+Name: Ben
+Class: Rival
+Pic: Brendan
+Gender: Male
+Music: Male
+
+Bella (Boltund) (F)
+Jolly Nature
+Level: 32
+Ability: Strong Jaw
+- Thunder Fang
+- Bite
+- Bulk Up
+- Nuzzle
+
+Goomy (F) @ Chesto Berry
+Relaxed Nature
+Level: 30
+Ability: Gooey
+Ball: Great Ball
+- Absorb
+- Water Pulse
+- Dragon Breath
+- Rest
+
+Braixen (F) @ Binding Band
+Relaxed Nature
+Level: 33
+Ability: Blaze
+- Swift
+- Nasty Plot
+- Psybeam
+- Fire Spin
+
+=== PARTNER_BEN_FENNEKIN ===
+Name: Ben
+Class: Rival
+Pic: Brendan
+Gender: Male
+Music: Male
+
+Bella (Boltund) (F)
+Jolly Nature
+Level: 32
+Ability: Strong Jaw
+- Thunder Fang
+- Bite
+- Bulk Up
+- Nuzzle
+
+Goomy (F) @ Chesto Berry
+Relaxed Nature
+Level: 30
+Ability: Gooey
+Ball: Great Ball
+- Absorb
+- Water Pulse
+- Dragon Breath
+- Rest
+
+Prinplup (M) @ Razor Fang
+Modest Nature
+Level: 33
+Ability: Torrent
+- Metal Claw
+- Brine
+- Icy Wind
+- Agility
+
+=== PARTNER_BEN_PIPLUP ===
+Name: Ben
+Class: Rival
+Pic: Brendan
+Gender: Male
+Music: Male
+
+Bella (Boltund) (F)
+Jolly Nature
+Level: 32
+Ability: Strong Jaw
+- Thunder Fang
+- Bite
+- Bulk Up
+- Nuzzle
+
+Goomy (F) @ Chesto Berry
+Relaxed Nature
+Level: 30
+Ability: Gooey
+Ball: Great Ball
+- Absorb
+- Water Pulse
+- Dragon Breath
+- Rest
+
+Ivysaur (M) @ Black Sludge
+Modest Nature
+Level: 33
+Ability: Overgrow
+- Take Down
+- Leech Seed
+- Giga Drain
+- Toxic

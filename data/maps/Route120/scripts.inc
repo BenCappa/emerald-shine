@@ -1,62 +1,32 @@
-.set LOCALID_BRIDGE_KECLEON, 30
-.set LOCALID_STEVEN, 31
-.set LOCALID_BRIDGE_KECLEON_SHADOW, 36  @ They use a second object which is identical to Kecleon but has a reflection palette tag for the bridge shadow
+.set LOCALID_STEVEN, 30
+.set LOCALID_CECE, 38
+.set LOCALID_KIT, 39
+.set LOCALID_RIVAL, 40
+.set LOCALID_RIVAL_ON_BIKE, 41
 
 Route120_MapScripts::
-	map_script MAP_SCRIPT_ON_RESUME, Route120_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route120_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route120_OnLoad
 	.byte 0
 
-Route120_OnResume:
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route120_EventScript_RemoveKecleonObject
-	end
-
-Route120_EventScript_RemoveKecleonObject::
-	call_if_eq VAR_0x8009, 0, Route120_EventScript_RemoveBridgeKecleon
-	call_if_eq VAR_0x8009, 1, Route120_EventScript_RemoveKecleon
-	call_if_eq VAR_0x8009, 2, Route120_EventScript_RemoveKecleon
-	call_if_eq VAR_0x8009, 3, Route120_EventScript_RemoveKecleon
-	call_if_eq VAR_0x8009, 4, Route120_EventScript_RemoveKecleon
-	call_if_eq VAR_0x8009, 5, Route120_EventScript_RemoveKecleon
-	return
-
-Route120_EventScript_RemoveBridgeKecleon::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject LOCALID_BRIDGE_KECLEON
-	removeobject LOCALID_BRIDGE_KECLEON_SHADOW
-	return
-
-Route120_EventScript_RemoveKecleon::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject VAR_LAST_TALKED
-	return
-
 Route120_OnLoad:
 	call_if_unset FLAG_REGI_DOORS_OPENED, Route120_EventScript_CloseAncientTomb
-	call_if_set FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_SetBridgeClearMetatiles
-	call_if_unset FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_SetBridgeKecleonMovement
+	call_if_unset FLAG_HIDE_ROUTE_120_RIVAL_ON_BIKE, Route120_EventScript_HideRivalOnBike
 	end
+
+Route120_EventScript_HideRivalOnBike::
+	removeobject LOCALID_RIVAL_ON_BIKE
+	setflag FLAG_HIDE_ROUTE_120_RIVAL_ON_BIKE
+	return
 
 Route120_EventScript_CloseAncientTomb::
 	setmetatile 7, 54, METATILE_General_RockWall_RockBase, TRUE
 	setmetatile 7, 55, METATILE_General_RockWall_SandBase, TRUE
 	return
 
-Route120_EventScript_SetBridgeClearMetatiles::
-	setmetatile 13, 15, METATILE_Fortree_WoodBridge1_Top, FALSE
-	setmetatile 12, 16, METATILE_Fortree_WoodBridge1_Bottom, FALSE
-	setmetatile 12, 17, METATILE_General_ReflectiveWater, FALSE
-	setmetatile 13, 17, METATILE_General_ReflectiveWater, FALSE
-	return
-
-Route120_EventScript_SetBridgeKecleonMovement::
-	setobjectmovementtype LOCALID_BRIDGE_KECLEON_SHADOW, MOVEMENT_TYPE_FACE_RIGHT
-	return
-
 Route120_OnTransition:
+	call Common_EventScript_SetupRivalGfxId
+@	call Common_EventScript_SetupRivalOnBikeGfxId
 	call GabbyAndTy_EventScript_UpdateLocation
 	call Route120_EventScript_SetWeather
 	end
@@ -154,75 +124,160 @@ Route120_EventScript_BerryNotLove::
 	msgbox Route120_Text_MakeYourOwnImpressions, MSGBOX_DEFAULT
 	return
 
-Route120_EventScript_Steven::
+Route120_EventScript_Rival::
 	lock
 	faceplayer
-	goto_if_set FLAG_NOT_READY_FOR_BATTLE_ROUTE_120, Route120_EventScript_StevenAskReadyForBattle
-	msgbox Route120_Text_StevenGreeting, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, Route120_EventScript_StevenNotReady
-	goto Route120_EventScript_StevenBattleKecleon
-	end
-
-Route120_EventScript_StevenNotReady::
-	msgbox Route120_Text_StevenIllWaitHere, MSGBOX_DEFAULT
-	setflag FLAG_NOT_READY_FOR_BATTLE_ROUTE_120
-	release
-	end
-
-Route120_EventScript_StevenAskReadyForBattle::
-	msgbox Route120_Text_StevenReadyForBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, Route120_EventScript_StevenNotReady
-	goto Route120_EventScript_StevenBattleKecleon
-	end
-
-Route120_EventScript_StevenBattleKecleon::
-	msgbox Route120_Text_StevenShowMeYourPower, MSGBOX_DEFAULT
+	goto_if_unset FLAG_DEFEATED_FORTREE_GYM, Route120_EventScript_RivalFaceTheGym
+	msgbox Route120_Text_RivalExplanation, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_FACING, DIR_NORTH, Route120_EventScript_PlayerApproachKecleonNorth
-	call_if_eq VAR_FACING, DIR_WEST, Route120_EventScript_PlayerApproachKecleonWest
-	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
+	releaseall
+	end
+
+Route120_EventScript_RivalFaceTheGym::
+	msgbox Route120_Text_RivalFaceTheGym, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	releaseall
+	end
+
+Route120_EventScript_Siblings::
+	lock
+	faceplayer
+	goto_if_unset FLAG_DEFEATED_FORTREE_GYM, Route120_EventScript_SiblingsFaceTheGym
+	goto Route120_EventScript_SiblingsAskReadyForBattle
+	end
+
+Route120_EventScript_SiblingsFaceTheGym::
+	msgbox Route120_Text_SiblingsFaceTheGym, MSGBOX_DEFAULT
+	closemessage
+	releaseall
+	end
+
+Route120_EventScript_SiblingsAskReadyForBattle::
+	msgbox Route120_Text_SiblingsReadyToBattle, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route120_EventScript_ChoosePartyForMultiBattle
+	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
+	waitmovement 0
+	msgbox Route120_Text_RivalNotReady, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	releaseall
+	end
+
+Route120_EventScript_ChoosePartyForMultiBattle::
+	special SavePlayerParty
+	fadescreen FADE_TO_BLACK
+	special ChooseHalfPartyForBattle
+	waitstate
+	goto_if_ne VAR_RESULT, 0, Route120_EventScript_DetermineRivalMultiBattle
+	special LoadPlayerParty
+	goto Route120_EventScript_SiblingsAskReadyForBattle
+
+Route120_EventScript_DetermineRivalMultiBattle::
+	msgbox Route120_Text_SiblingsGonnaBeatYa, MSGBOX_DEFAULT
+	switch VAR_STARTER_MON
+	case 0, Route120_EventScript_RivalMultiBattleBulbasaur
+	case 1, Route120_EventScript_RivalMultiBattleFennekin
+	case 2, Route120_EventScript_RivalMultiBattlePiplup
+	end
+
+Route120_EventScript_RivalMultiBattleBulbasaur::
+	multi_2_vs_2 TRAINER_CECE, Route120_Text_CeceDefeat, TRAINER_KIT, Route120_Text_KitDefeat, PARTNER_BEN_BULBASAUR
+	switch VAR_RESULT
+	case 1, Route120_EventScript_DefeatedSiblings
+	fadescreen FADE_TO_BLACK
+	special SetCB2WhiteOut
+	waitstate
+
+Route120_EventScript_RivalMultiBattleFennekin::
+	multi_2_vs_2 TRAINER_CECE, Route120_Text_CeceDefeat, TRAINER_KIT, Route120_Text_KitDefeat, PARTNER_BEN_FENNEKIN
+	switch VAR_RESULT
+	case 1, Route120_EventScript_DefeatedSiblings
+	fadescreen FADE_TO_BLACK
+	special SetCB2WhiteOut
+	waitstate
+
+Route120_EventScript_RivalMultiBattlePiplup::
+	multi_2_vs_2 TRAINER_CECE, Route120_Text_CeceDefeat, TRAINER_KIT, Route120_Text_KitDefeat, PARTNER_BEN_PIPLUP
+	switch VAR_RESULT
+	case 1, Route120_EventScript_DefeatedSiblings
+	fadescreen FADE_TO_BLACK
+	special SetCB2WhiteOut
+	waitstate
+
+Route120_EventScript_DefeatedSiblings::
+	msgbox Route120_Text_SiblingsDefeat, MSGBOX_DEFAULT
+	closemessage
 	delay 20
-	msgbox Route120_Text_StevenUsedDevonScope, MSGBOX_DEFAULT
+	applymovement LOCALID_STEVEN, Route120_Movement_StevenApproachSiblings
+	waitmovement 0
+	turnobject LOCALID_CECE, DIR_WEST
+	turnobject LOCALID_KIT, DIR_WEST
+	waitmovement 0
+	msgbox Route120_Text_StevenThatWillBeAll, MSGBOX_DEFAULT
+	applymovement LOCALID_CECE, Route120_Movement_CeceHop
+	msgbox Route120_Text_CeceOhRight, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_BRIDGE_KECLEON, Common_Movement_WalkInPlaceFasterRight
+	turnobject LOCALID_CECE, DIR_EAST
+	turnobject LOCALID_KIT, DIR_EAST
+	delay 15
+	msgbox Route120_Text_SiblingsByeGuys, MSGBOX_DEFAULT
+	closemessage
+	turnobject LOCALID_STEVEN, DIR_SOUTH
+	applymovement LOCALID_CECE, Route120_Movement_CeceExit
+	applymovement LOCALID_KIT, Route120_Movement_KitExit
+	delay 48
+	turnobject LOCALID_STEVEN, DIR_WEST
 	waitmovement 0
-	applymovement LOCALID_BRIDGE_KECLEON, Movement_KecleonAppears
+	applymovement LOCALID_STEVEN, Route120_Movement_StevenApproachRival
 	waitmovement 0
-	waitse
-	playmoncry SPECIES_KECLEON, CRY_MODE_ENCOUNTER
-	delay 40
-	waitmoncry
-	setwildbattle SPECIES_KECLEON, 30
-	setvar VAR_0x8009, 0
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	dowildbattle
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route120_EventScript_RemoveBridgeKecleonPostBattle
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route120_EventScript_RemoveBridgeKecleonPostBattle
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route120_EventScript_RemoveBridgeKecleonPostBattle
-	goto Route120_EventScript_StevenGiveDeconScope
+	msgbox Route120_Text_StevenSorryToPutYouThroughThat, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_STEVEN, Route120_Movement_StevenApproachPlayer
+	waitmovement 0
+	msgbox Route120_Text_StevenHaveAGift, MSGBOX_DEFAULT
+	switch VAR_STARTER_MON
+	case 0, Route120_EventScript_StevenGiveVenusaurite
+	case 1, Route120_EventScript_StevenGiveDelphoxite
+	case 2, Route120_EventScript_StevenGiveEmpoleonite
 	end
 
-Route120_EventScript_RemoveBridgeKecleonPostBattle::
-	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_BRIDGE_KECLEON
-	removeobject LOCALID_BRIDGE_KECLEON_SHADOW
-	fadescreenswapbuffers FADE_FROM_BLACK
-	goto Route120_EventScript_StevenGiveDeconScope
+Route120_EventScript_StevenGiveVenusaurite::
+	giveitem ITEM_VENUSAURITE
+	setflag FLAG_RECEIVED_STARTER_MEGA_STONE
+	goto Route120_EventScript_StevenExit
 	end
 
-Route120_EventScript_StevenGiveDeconScope::
-	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterDown
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
-	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
-	giveitem ITEM_DEVON_SCOPE
-	setflag FLAG_RECEIVED_DEVON_SCOPE
-	msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
+Route120_EventScript_StevenGiveDelphoxite::
+	giveitem ITEM_DELPHOXITE
+	setflag FLAG_RECEIVED_STARTER_MEGA_STONE
+	goto Route120_EventScript_StevenExit
+	end
+
+Route120_EventScript_StevenGiveEmpoleonite::
+	giveitem ITEM_EMPOLEONITE
+	setflag FLAG_RECEIVED_STARTER_MEGA_STONE
+	goto Route120_EventScript_StevenExit
+	end
+
+Route120_EventScript_StevenExit::
+	msgbox Route120_Text_StevenThePowerOfMegaStones, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_STEVEN, Route120_Movement_StevenWalkAway
+	waitmovement 0
+	delay 90
+	msgbox Route120_Text_StevenSomethingIsComing, MSGBOX_DEFAULT
+	closemessage
+	delay 15
+	turnobject LOCALID_STEVEN, DIR_EAST
+	waitmovement 0
+	msgbox Route120_Text_StevenRiseToTheOccasion, MSGBOX_DEFAULT
+	closemessage
+	turnobject LOCALID_STEVEN, DIR_SOUTH
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
@@ -230,32 +285,100 @@ Route120_EventScript_StevenGiveDeconScope::
 	delay 15
 	removeobject LOCALID_STEVEN
 	waitfieldeffect FLDEFF_NPCFLY_OUT
-	setmetatile 13, 15, METATILE_Fortree_WoodBridge1_Top, FALSE
-	setmetatile 12, 16, METATILE_Fortree_WoodBridge1_Bottom, FALSE
-	setmetatile 12, 17, METATILE_General_ReflectiveWater, FALSE
-	setmetatile 13, 17, METATILE_General_ReflectiveWater, FALSE
-	special DrawWholeMapView
-	release
+	delay 60
+	goto Route120_EventScript_RivalExit
 	end
 
-Route120_EventScript_PlayerApproachKecleonNorth::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+Route120_EventScript_RivalExit::
+	turnobject LOCALID_RIVAL, DIR_SOUTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	waitmovement 0
-	return
-
-Route120_EventScript_PlayerApproachKecleonWest::
-	applymovement OBJ_EVENT_ID_PLAYER, Route120_Movement_ApproachKecleonWest
+	msgbox Route120_Text_RivalHaveAnyIdea, MSGBOX_DEFAULT
+	turnobject LOCALID_RIVAL, DIR_WEST
 	waitmovement 0
-	return
+	delay 24
+	msgbox Route120_Text_RivalFamiliar, MSGBOX_DEFAULT
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_WEST
+	closemessage
+	delay 120
+	waitbuttonpress
+	turnobject LOCALID_RIVAL, DIR_SOUTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	waitmovement 0
+	msgbox Route120_Text_RivalHeadedToLilycove, MSGBOX_DEFAULT
+	closemessage
+	removeobject LOCALID_RIVAL
+	addobject LOCALID_RIVAL_ON_BIKE
+	setobjectxy LOCALID_RIVAL_ON_BIKE, 17, 15
+	delay 24
+	applymovement LOCALID_RIVAL_ON_BIKE, Route120_Movement_RivalExit
+	delay 24
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_WEST
+	waitmovement 0
+	removeobject LOCALID_RIVAL_ON_BIKE
+	setflag FLAG_HIDE_ROUTE_120_BRIDGE_ENCOUNTERS
+	releaseall
+	end
 
-Route120_Movement_ApproachKecleonWest:
+Route120_Movement_StevenApproachSiblings:
+	walk_right
+	walk_right
+	step_end
+
+Route120_Movement_StevenApproachRival:
+	walk_right
+	step_end
+
+Route120_Movement_StevenApproachPlayer:
 	walk_down
+	face_player
+	step_end
+
+Route120_Movement_StevenWalkAway:
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	step_end
+
+Route120_Movement_CeceHop:
+	jump_in_place_left
+	step_end
+
+Route120_Movement_CeceExit:
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	walk_left
 	step_end
 
-Route120_EventScript_BridgeKecleon::
-	msgbox Kecleon_Text_SomethingUnseeable, MSGBOX_NPC
-	end
+Route120_Movement_KitExit:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+Route120_Movement_RivalExit:
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	step_end
 
 Route120_EventScript_RouteSignFortree::
 	msgbox Route120_Text_RouteSignFortree, MSGBOX_SIGN
@@ -360,67 +483,118 @@ Route120_EventScript_Callie::
 	msgbox Route120_Text_CalliePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route120_Text_StevenGreeting:
-	.string "STEVEN: Hm? {PLAYER}{KUN}, hi.\n"
-	.string "It's been a while.\p"
-	.string "There's something here that you can't\n"
-	.string "see, right?\p"
-	.string "Now, if I were to use this device on\n"
-	.string "the invisible obstacle…\p"
-	.string "No, no. Rather than describing it,\n"
-	.string "I should just show you.\l"
-	.string "That would be more fun.\p"
-	.string "{PLAYER}{KUN}, are your POKéMON ready for\n"
-	.string "battle?$"
+Route120_Text_RivalFaceTheGym:
+	.string "Ben: Hey, {PLAYER}. I guess these two\n"
+	.string "are gonna block the way forward for us\l"
+	.string "until we beat them in a battle?\p"
+	.string "I'm not sure what's going on but they\n"
+	.string "say you need to beat the gym first,\l"
+	.string "so you should probably do that.$"
 
-Route120_Text_StevenIllWaitHere:
-	.string "STEVEN: No?\p"
-	.string "I'll wait here, so you can get ready.$"
+Route120_Text_RivalExplanation:
+	.string "Ben: {PLAYER}! Good, you're here now.\p"
+	.string "These two aren't gonna let us through\n"
+	.string "until we both beat them in a battle.\p"
+	.string "It seems Steven Stone over there\n"
+	.string "wants to test us or something.\p"
+	.string "I'm expecting a challenge of some sort,\n"
+	.string "but I'm ready if you are.$"
 
-Route120_Text_StevenReadyForBattle:
-	.string "STEVEN: {PLAYER}{KUN}, are your POKéMON\n"
-	.string "ready for battle?$"
+Route120_Text_RivalNotReady:
+	.string "Ben: Don't worry.\p"
+	.string "I'll be right here until you are.$"
 
-Route120_Text_StevenShowMeYourPower:
-	.string "STEVEN: {PLAYER}{KUN}, show me your true\n"
-	.string "power as a TRAINER!$"
+Route120_Text_SiblingsFaceTheGym:
+	.string "???: Mr. Stone says we can't battle you\n"
+	.string "until you've beaten the Fortree Gym.$"
 
-Route120_Text_StevenUsedDevonScope:
-	.string "STEVEN used the DEVON SCOPE.\p"
-	.string "An invisible POKéMON became completely\n"
-	.string "visible!\p"
-	.string "The startled POKéMON attacked!$"
+Route120_Text_SiblingsReadyToBattle:
+	.string "???: So, sure you're ready to take\n"
+	.string "on the both of us?$"
 
-Route120_Text_StevenGiveDevonScope:
-	.string "STEVEN: I see…\n"
-	.string "Your battle style is intriguing.\p"
-	.string "Your POKéMON have obviously grown\n"
-	.string "since I first met you in DEWFORD.\p"
-	.string "I'd like you to have this\n"
-	.string "DEVON SCOPE.\p"
-	.string "Who knows, there may be other\n"
-	.string "concealed POKéMON.$"
+Route120_Text_SiblingsGonnaBeatYa:
+	.string "???: We're gonna beat ya, Ben!\n"
+	.string "???: We're gonna beat ya, {PLAYER}!$"
 
-Route120_Text_StevenGoodbye:
-	.string "STEVEN: {PLAYER}{KUN}.\p"
-	.string "I enjoy seeing POKéMON and TRAINERS\n"
-	.string "who strive together.\p"
-	.string "I think you're doing great.\p"
-	.string "Well, let's meet again somewhere.$"
+Route120_Text_SiblingsDefeat:
+	.string "Cece: How did you do that?\p"
+	.string "Kit: I want to battle again!$"
+
+Route120_Text_CeceDefeat:
+	.string "Cece: You beat us? No fair!$"
+
+Route120_Text_KitDefeat:
+	.string "Kit: You made me upset!$"
+
+Route120_Text_StevenThatWillBeAll:
+	.string "Calliope, Christopher, thank you.\n"
+	.string "That will be all for now.$"
+
+Route120_Text_CeceOhRight:
+	.string "Cece: Oh, right!$"
+
+Route120_Text_SiblingsByeGuys:
+	.string "Cece: Buh-bye guys!\n"
+	.string "Kit: We'll see you later!$"
+
+Route120_Text_StevenSorryToPutYouThroughThat:
+	.string "Steven: I'm sorry for putting you two\n"
+	.string "through that but those two were eager\l"
+	.string "eager to have a battle you both.\p"
+	.string "I hope you found it as entertaining\n"
+	.string "as they did.$"
+
+Route120_Text_StevenHaveAGift:
+	.string "Steven: Incidentally, I had gifts\n"
+	.string "I wanted to give the two of you.\p"
+	.string "I just needed to see how strong you\n"
+	.string "had gotten before I handed them over.$"
+
+Route120_Text_StevenThePowerOfMegaStones:
+	.string "Steven: Mega Stones are very powerful,\n"
+	.string "as I'm sure you've learned by now.\p"
+	.string "But remember: true power is only\n"
+	.string "achieved by exceptional Pokémon\l"
+	.string "and their trainers.$"
+
+Route120_Text_StevenSomethingIsComing:
+	.string "Steven: Something is coming…\p"
+	.string "The people of this region will need\n"
+	.string "someone exceptional.$"
+
+Route120_Text_StevenRiseToTheOccasion:
+	.string "Steven: I look forward to seeing you\n"
+	.string "both rise to the occasion.$"
+
+Route120_Text_RivalHaveAnyIdea:
+	.string "Ben: … … … … … …\p"
+	.string "Do you have any idea what all that was?\p"
+	.string "And what was with those two?\p"
+	.string "Something about them was oddly…$"
+
+Route120_Text_RivalFamiliar:
+	.string "… … …familiar.\p"
+	.string "… … … … … …\n"
+	.string "… … … … … …$"
+
+Route120_Text_RivalHeadedToLilycove:
+	.string "Ah, whatever. It's probably nothing.\p"
+	.string "I'm heading over to Lilycove now,\n"
+	.string "see you there?\p"
+	.string "Maybe we can try out these new\n"
+	.string "Mega Stones while we're there.\p"
+	.string "… … … … … …\p"
+	.string "Alright, see ya.$"
 
 Kecleon_Text_SomethingUnseeable:
-	.string "Something unseeable is in the way.$"
+	.string "$"
 
 Kecleon_Text_WantToUseDevonScope:
-	.string "Something unseeable is in the way.\p"
-	.string "Want to use the DEVON SCOPE?$"
+	.string "$"
 
 Kecleon_Text_UseDevonScopeMonAttacked:
-	.string "{PLAYER} used the DEVON SCOPE.\p"
-	.string "An invisible POKéMON became completely\n"
-	.string "visible!\p"
-	.string "The startled POKéMON attacked!$"
-
+	.string "$"
+	
 Route120_Text_RouteSignFortree:
 	.string "ROUTE 120\n"
 	.string "{LEFT_ARROW} FORTREE CITY$"
