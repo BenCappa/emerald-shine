@@ -1,7 +1,8 @@
-.set LOCALID_CHALLENGE_BIKER, 21
-.set LOCALID_RIVAL, 28
-.set LOCALID_RIVAL_ON_BIKE, 29
-.set LOCALID_BIRCH, 36
+.set LOCALID_CHALLENGE_BIKER, 20
+.set LOCALID_RIVAL, 27
+.set LOCALID_RIVAL_ON_BIKE, 28
+.set LOCALID_CECE, 35
+.set LOCALID_MINCCINO, 36
 
 Route110_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, Route110_OnResume
@@ -371,9 +372,7 @@ Route110_EventScript_RivalTrigger3::
 
 Route110_EventScript_RivalScene::
 	lockall
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, Route110_EventScript_PlayMayMusic
-	call_if_eq VAR_RESULT, FEMALE, Route110_EventScript_PlayBrendanMusic
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
@@ -384,83 +383,88 @@ Route110_EventScript_RivalScene::
 	call_if_eq VAR_0x8008, 1, Route110_EventScript_RivalApproachPlayer1
 	call_if_eq VAR_0x8008, 2, Route110_EventScript_RivalApproachPlayer2
 	call_if_eq VAR_0x8008, 3, Route110_EventScript_RivalApproachPlayer3
-	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, Route110_EventScript_MayBattle
-	goto_if_eq VAR_RESULT, FEMALE, Route110_EventScript_BrendanBattle
+	goto Route110_EventScript_BenBattle
 	releaseall
 	end
 
-Route110_EventScript_PlayMayMusic::
-	playbgm MUS_ENCOUNTER_MAY, TRUE
-	return
-
-Route110_EventScript_PlayBrendanMusic::
-	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
-	return
-
-Route110_EventScript_MayBattle::
-	msgbox Route110_Text_MayLetsBattle, MSGBOX_DEFAULT
+Route110_EventScript_BenBattle::
+	msgbox Route110_Text_BenLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
-	case 0, Route110_EventScript_MayBattleBulbasaur
-	case 1, Route110_EventScript_MayBattleFennekin
-	case 2, Route110_EventScript_MayBattlePiplup
+	case 0, Route110_EventScript_BenBattleBulbasaur
+	case 1, Route110_EventScript_BenBattleFennekin
+	case 2, Route110_EventScript_BenBattlePiplup
 	end
 
-Route110_EventScript_MayBattleBulbasaur::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_110_BULBASAUR, Route110_Text_MayDefeated
-	goto Route110_EventScript_MayDefeated
+Route110_EventScript_BenBattleBulbasaur::
+	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_BULBASAUR, Route110_Text_BenDefeated
+	goto Route110_EventScript_BenDefeated
 	end
 
-Route110_EventScript_MayBattleFennekin::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_110_FENNEKIN, Route110_Text_MayDefeated
-	goto Route110_EventScript_MayDefeated
+Route110_EventScript_BenBattleFennekin::
+	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_FENNEKIN, Route110_Text_BenDefeated
+	goto Route110_EventScript_BenDefeated
 	end
 
-Route110_EventScript_MayBattlePiplup::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_110_PIPLUP, Route110_Text_MayDefeated
-	goto Route110_EventScript_MayDefeated
+Route110_EventScript_BenBattlePiplup::
+	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_PIPLUP, Route110_Text_BenDefeated
+	goto Route110_EventScript_BenDefeated
 	end
 
-Route110_EventScript_MayDefeated::
-	msgbox Route110_Text_MayTakeThis, MSGBOX_DEFAULT
-	call Route110_EventScript_GiveItemfinder
-	msgbox Route110_Text_MayExplainItemfinder, MSGBOX_DEFAULT
+Route110_EventScript_BenDefeated::
+	msgbox Route110_Text_BenTakeThis, MSGBOX_DEFAULT
+	givemon SPECIES_LUVDISC, 20, ITEM_HEART_SCALE, ITEM_LOVE_BALL, abilityNum=2, gender=FEMALE, isShiny=TRUE
+	bufferspeciesname STR_VAR_1, SPECIES_LUVDISC
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_LUVDISC
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route110_EventScript_ReceiveParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route110_EventScript_ReceivePC
+	end
+
+Route110_EventScript_ReceiveParty::
+	call Route110_EventScript_ReceivedPokemonFanfare
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route110_EventScript_BenExplainLuvdisc
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto Route110_EventScript_BenExplainLuvdisc
+	end
+
+Route110_EventScript_ReceivePC::
+	call Route110_EventScript_ReceivedPokemonFanfare
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route110_EventScript_SentPokemonToPC
+	call Common_EventScript_NameReceivedBoxMon
+	goto Route110_EventScript_BenExplainLuvdisc
+	end
+
+Route110_EventScript_SentPokemonToPC::
+	call Common_EventScript_TransferredToPC
+	goto Route110_EventScript_BenExplainLuvdisc
+	end
+
+Route110_EventScript_ReceivedPokemonFanfare::
+	playfanfare MUS_OBTAIN_ITEM
+	message Route110_Text_PlayerReceivedPokemon
+	waitmessage
+	waitfanfare
+	return
+
+Route110_EventScript_BenExplainLuvdisc::
+	closemessage
+	delay 20
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	msgbox Route110_Text_BenExplainLuvdisc, MSGBOX_DEFAULT
+	closemessage
+	delay 20
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterUp
+	delay 60
+	waitbuttonpress
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterDown
+	waitmovement 0
+	delay 30
+	msgbox Route110_Text_BenOffToLookForNewPokemon, MSGBOX_DEFAULT
 	goto Route110_EventScript_RivalExit
 	end
-
-Route110_EventScript_BrendanBattle::
-	msgbox Route110_Text_BrendanLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
-	case 0, Route110_EventScript_BrendanBattleBulbasaur
-	case 1, Route110_EventScript_BrendanBattleFennekin
-	case 2, Route110_EventScript_BrendanBattlePiplup
-	end
-
-Route110_EventScript_BrendanBattleBulbasaur::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_BULBASAUR, Route110_Text_BrendanDefeated
-	goto Route110_EventScript_BrendanDefeated
-	end
-
-Route110_EventScript_BrendanBattleFennekin::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_FENNEKIN, Route110_Text_BrendanDefeated
-	goto Route110_EventScript_BrendanDefeated
-	end
-
-Route110_EventScript_BrendanBattlePiplup::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_PIPLUP, Route110_Text_BrendanDefeated
-	goto Route110_EventScript_BrendanDefeated
-	end
-
-Route110_EventScript_BrendanDefeated::
-	msgbox Route110_Text_BrendanTakeThis, MSGBOX_DEFAULT
-	call Route110_EventScript_GiveItemfinder
-	msgbox Route110_Text_BrendanExplainItemfinder, MSGBOX_DEFAULT
-	goto Route110_EventScript_RivalExit
-	end
-
-Route110_EventScript_GiveItemfinder::
-	giveitem ITEM_DOWSING_MACHINE
-	return
 
 Route110_EventScript_RivalExit::
 	closemessage
@@ -571,136 +575,194 @@ Route110_Movement_RivalExit3:
 	walk_fast_up
 	step_end
 
-Route110_EventScript_BirchScene1::
-	lockall
+Route110_EventScript_CeceScene1::
+	lock
 	setvar VAR_0x8008, 1
-	goto Route110_EventScript_BirchScene
+	goto Route110_EventScript_CeceScene
 
-Route110_EventScript_BirchScene2::
-	lockall
+Route110_EventScript_CeceScene2::
+	lock
 	setvar VAR_0x8008, 2
-	goto Route110_EventScript_BirchScene
+	goto Route110_EventScript_CeceScene
 
-Route110_EventScript_BirchScene3::
-	lockall
+Route110_EventScript_CeceScene3::
+	lock
 	setvar VAR_0x8008, 3
-	goto Route110_EventScript_BirchScene
+	goto Route110_EventScript_CeceScene
 
-Route110_EventScript_BirchScene4::
-	lockall
+Route110_EventScript_CeceScene4::
+	lock
 	setvar VAR_0x8008, 4
-	goto Route110_EventScript_BirchScene
+	goto Route110_EventScript_CeceScene
 
-Route110_EventScript_BirchScene::
-	addobject LOCALID_BIRCH
-	applymovement LOCALID_BIRCH, Route110_Movement_BirchEntrance
+Route110_EventScript_CeceScene::
+	addobject LOCALID_CECE
+	addobject LOCALID_MINCCINO
+	applymovement LOCALID_CECE, Route110_Movement_CeceEntrance
+	applymovement LOCALID_MINCCINO, Route110_Movement_CeceEntrance
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_BIRCH, Common_Movement_ExclamationMark
+	applymovement LOCALID_CECE, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_BIRCH, Common_Movement_Delay48
+	applymovement LOCALID_CECE, Route110_Movement_CeceHop
 	waitmovement 0
-	call_if_eq VAR_0x8008, 1, Route110_EventScript_BirchApproachPlayer1
-	call_if_eq VAR_0x8008, 2, Route110_EventScript_BirchApproachPlayer2
-	call_if_eq VAR_0x8008, 3, Route110_EventScript_BirchApproachPlayer3
-	call_if_eq VAR_0x8008, 4, Route110_EventScript_BirchApproachPlayer4
-	msgbox Route110_Text_ImagineSeeingYouHere, MSGBOX_DEFAULT
+	call_if_eq VAR_0x8008, 1, Route110_EventScript_CeceApproachPlayer1
+	call_if_eq VAR_0x8008, 2, Route110_EventScript_CeceApproachPlayer2
+	call_if_eq VAR_0x8008, 3, Route110_EventScript_CeceApproachPlayer3
+	call_if_eq VAR_0x8008, 4, Route110_EventScript_CeceApproachPlayer4
+	msgbox Route110_Text_ConvenientSeeingYouHere, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	delay 10
-	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	delay 20
-	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_CECE, Common_Movement_WalkInPlaceFasterUp
+	delay 60
+	applymovement LOCALID_CECE, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
-	msgbox Route110_Text_HeardYouInstallMatchCall, MSGBOX_DEFAULT
+	msgbox Route110_Text_BePrepared, MSGBOX_DEFAULT
+	giveitem ITEM_DOWSING_MACHINE
+	msgbox Route110_Text_ExplainDowsingMachine, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	msgbox Route110_Text_KeepAnEyeOutForRival, MSGBOX_DEFAULT
-	closemessage
-	call_if_eq VAR_0x8008, 1, Route110_EventScript_BirchExit1
-	call_if_eq VAR_0x8008, 2, Route110_EventScript_BirchExit2
-	call_if_eq VAR_0x8008, 3, Route110_EventScript_BirchExit3
-	call_if_eq VAR_0x8008, 4, Route110_EventScript_BirchExit4
-	removeobject LOCALID_BIRCH
+	call_if_eq VAR_0x8008, 1, Route110_EventScript_CeceExit1
+	call_if_eq VAR_0x8008, 2, Route110_EventScript_CeceExit2
+	call_if_eq VAR_0x8008, 3, Route110_EventScript_CeceExit3
+	call_if_eq VAR_0x8008, 4, Route110_EventScript_CeceExit4
+	removeobject LOCALID_CECE
+	removeobject LOCALID_MINCCINO
 	setvar VAR_REGISTER_BIRCH_STATE, 2
 	releaseall
 	end
 
-Route110_EventScript_BirchApproachPlayer1::
-	applymovement LOCALID_BIRCH, Route110_Movement_BirchApproachPlayer1
+Route110_EventScript_CeceApproachPlayer1::
+	applymovement LOCALID_CECE, Route110_Movement_CeceApproachPlayer1
+	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoApproachPlayer1
 	waitmovement 0
 	return
 
-Route110_EventScript_BirchApproachPlayer2::
-	applymovement LOCALID_BIRCH, Route110_Movement_BirchApproachPlayer2
+Route110_EventScript_CeceApproachPlayer2::
+	applymovement LOCALID_CECE, Route110_Movement_CeceApproachPlayer2
+	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoApproachPlayer2
 	waitmovement 0
 	return
 
-Route110_EventScript_BirchApproachPlayer3::
-	applymovement LOCALID_BIRCH, Route110_Movement_BirchApproachPlayer3
+Route110_EventScript_CeceApproachPlayer3::
+	applymovement LOCALID_CECE, Route110_Movement_CeceApproachPlayer3
+	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoApproachPlayer3
 	waitmovement 0
 	return
 
-Route110_EventScript_BirchApproachPlayer4::
-	applymovement LOCALID_BIRCH, Route110_Movement_BirchApproachPlayer4
+Route110_EventScript_CeceApproachPlayer4::
+	applymovement LOCALID_CECE, Route110_Movement_CeceApproachPlayer4
+	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoApproachPlayer4
 	waitmovement 0
 	return
 
-Route110_EventScript_BirchExit1::
-	applymovement LOCALID_BIRCH, Route110_Movement_BirchExit1
+Route110_EventScript_CeceExit1::
+	applymovement LOCALID_CECE, Route110_Movement_CeceExit1
+	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoExit1
 	waitmovement 0
 	return
 
-Route110_EventScript_BirchExit2::
-	applymovement LOCALID_BIRCH, Route110_Movement_BirchExit2
+Route110_EventScript_CeceExit2::
+	applymovement LOCALID_CECE, Route110_Movement_CeceExit2
+	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoExit2
 	waitmovement 0
 	return
 
-Route110_EventScript_BirchExit3::
-	applymovement LOCALID_BIRCH, Route110_Movement_BirchExit3
+Route110_EventScript_CeceExit3::
+	applymovement LOCALID_CECE, Route110_Movement_CeceExit3
+	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoExit3
 	waitmovement 0
 	return
 
-Route110_EventScript_BirchExit4::
-	applymovement LOCALID_BIRCH, Route110_Movement_BirchExit4
+Route110_EventScript_CeceExit4::
+	applymovement LOCALID_CECE, Route110_Movement_CeceExit4
+	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoExit4
 	waitmovement 0
 	return
 
-Route110_Movement_BirchEntrance:
+Route110_Movement_CeceEntrance:
 	walk_down
 	walk_down
 	walk_down
 	step_end
 
-Route110_Movement_BirchApproachPlayer1:
-	walk_down
-	walk_left
-	walk_left
-	walk_down
+Route110_Movement_CeceHop:
+	delay_16
+	delay_16
+	delay_16
+	jump_in_place_down
 	step_end
 
-Route110_Movement_BirchApproachPlayer2:
-	walk_down
-	walk_left
-	walk_down
+Route110_Movement_CeceApproachPlayer1:
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_down
 	step_end
 
-Route110_Movement_BirchApproachPlayer3:
-	walk_down
-	walk_down
+Route110_Movement_MinccinoApproachPlayer1:
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	face_down
+	enter_pokeball
+	walk_fast_down
 	step_end
 
-Route110_Movement_BirchApproachPlayer4:
-	walk_down
+Route110_Movement_CeceApproachPlayer2:
+	walk_fast_down
+	walk_fast_left
+	walk_fast_down
+	step_end
+
+Route110_Movement_MinccinoApproachPlayer2:
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	face_down
+	enter_pokeball
+	walk_fast_down
+	step_end
+
+Route110_Movement_CeceApproachPlayer3:
+	walk_fast_down
+	walk_fast_down
+	step_end
+
+Route110_Movement_MinccinoApproachPlayer3:
+	walk_fast_down
+	walk_fast_down
+	enter_pokeball
+	walk_fast_down
+	step_end
+
+Route110_Movement_CeceApproachPlayer4:
+	walk_fast_down
+	walk_fast_right
+	walk_fast_down
+	step_end
+
+Route110_Movement_MinccinoApproachPlayer4:
+	walk_fast_down
+	walk_fast_down
+	walk_fast_right
+	face_down
+	enter_pokeball
+	walk_fast_down
+	step_end
+
+Route110_Movement_CeceExit1:
+	walk_up
+	walk_up
 	walk_right
-	walk_down
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
-Route110_Movement_BirchExit1:
+Route110_Movement_MinccinoExit1:
+	exit_pokeball
 	walk_up
 	walk_up
 	walk_right
@@ -709,7 +771,7 @@ Route110_Movement_BirchExit1:
 	walk_up
 	step_end
 
-Route110_Movement_BirchExit2:
+Route110_Movement_CeceExit2:
 	walk_up
 	walk_up
 	walk_up
@@ -717,7 +779,8 @@ Route110_Movement_BirchExit2:
 	walk_up
 	step_end
 
-Route110_Movement_BirchExit3:
+Route110_Movement_MinccinoExit2:
+	exit_pokeball
 	walk_up
 	walk_up
 	walk_up
@@ -725,7 +788,33 @@ Route110_Movement_BirchExit3:
 	walk_up
 	step_end
 
-Route110_Movement_BirchExit4:
+Route110_Movement_CeceExit3:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+Route110_Movement_MinccinoExit3:
+	exit_pokeball
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+Route110_Movement_CeceExit4:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+Route110_Movement_MinccinoExit4:
+	exit_pokeball
 	walk_up
 	walk_up
 	walk_up
@@ -749,57 +838,36 @@ Route110_Text_AquaActionsBringSmiles:
 	.string "Team Aqua's actions should bring\n"
 	.string "smiles to people's faces!$"
 
-Route110_Text_MayLetsBattle:
-	.string "MAY: Hi, {PLAYER}{KUN}, long time no see!\p"
-	.string "While I was searching for other\n"
-	.string "Pokémon, my Pokémon grew stronger.\p"
-	.string "So…\n"
-	.string "How about a little battle?$"
-
-Route110_Text_MayDefeated:
-	.string "Yikes!\n"
-	.string "You're better than I expected!$"
-
-Route110_Text_MayTakeThis:
-	.string "MAY: {PLAYER}{KUN}, you've been busy\n"
-	.string "training, too, haven't you?\p"
-	.string "I think you deserve a reward!\n"
-	.string "This is from me!$"
-
-Route110_Text_MayExplainItemfinder:
-	.string "MAY: That's an ITEMFINDER.\p"
-	.string "Try it out. If there is an item that's\n"
-	.string "not visible, it emits a sound.\p"
-	.string "Okay, {PLAYER}{KUN}, let's meet again!\p"
-	.string "I know it's a little silly coming from\n"
-	.string "me, but I think you should train a lot\l"
-	.string "harder for the next time.$"
-
-Route110_Text_BrendanLetsBattle:
+Route110_Text_BenLetsBattle:
 	.string "Ben: Hey, {PLAYER}.\n"
-	.string "So this is where you were.\l"
 	.string "How's it going?\p"
 	.string "Have you been raising your Pokémon?\n"
 	.string "I'll check for you.$"
 
-Route110_Text_BrendanDefeated:
+Route110_Text_BenDefeated:
 	.string "Hmm…\n"
 	.string "You're pretty good.$"
 
-Route110_Text_BrendanTakeThis:
+Route110_Text_BenTakeThis:
 	.string "Ben: {PLAYER}, you've trained\n"
-	.string "without me noticing…\p"
-	.string "Good enough!\n"
-	.string "Here, take this.$"
+	.string "your Pokémon pretty well…\p"
+	.string "That settles it!\n"
+	.string "You should take this.$"
 
-Route110_Text_BrendanExplainItemfinder:
-	.string "Ben: That's a Dowsing Machine.\p"
-	.string "Use it to root around for items that\n"
-	.string "aren't visible.\p"
-	.string "If it senses something, it emits\n"
-	.string "a sound.\p"
-	.string "Anyway, I'm off to look for new\n"
-	.string "Pokémon.$"
+Route110_Text_PlayerReceivedPokemon:
+	.string "{PLAYER} received {STR_VAR_1}!$"
+
+Route110_Text_BenExplainLuvdisc:
+	.string "Ben: Pretty cool, right?\p"
+	.string "I finally--uh, I mean--I happened to\n"
+	.string "catch this one a little bit ago.\p"
+	.string "Catching it made me think of you and\n"
+	.string "that you'd maybe like it or something…$"
+
+Route110_Text_BenOffToLookForNewPokemon:
+	.string "Ben: Anyway!\p"
+	.string "I'm off to look for new Pokémon.\n"
+	.string "See ya around!$"
 
 Route110_Text_RideBikeAtFullSpeed:
 	.string "Wouldn't it be great to ride a Bike\n"
@@ -954,20 +1022,24 @@ Route110_Text_ThereIsNoRecord:
 	.string "No one seems to have taken the\n"
 	.string "challenge. There is no record…$"
 
-Route110_Text_ImagineSeeingYouHere:
-	.string "Gump: Oh, {PLAYER}{KUN}!\n"
-	.string "Imagine seeing you here!\p"
-	.string "And where might {RIVAL} be?$"
+Route110_Text_ConvenientSeeingYouHere:
+	.string "???: Oh, {PLAYER}{KUN}!\n"
+	.string "How convenient seeing you here!\p"
+	.string "{RIVAL} is looking for you as we speak.\n"
+	.string "I just bumped into {RIVAL} up there.$"
 
-Route110_Text_HeardYouInstallMatchCall:
-	.string "Oh, I see!\n"
-	.string "You two are running separately.\l"
-	.string "Well, that's fine.$"
+Route110_Text_BePrepared:
+	.string "???: He'd been fishing in Slateport\n"
+	.string "for a while looking for something\l"
+	.string "special but didn't tell me what…\p"
+	.string "Anyway, I have something from Gump.\p"
+	.string "Consider it a gift from the old man!$"
 
-Route110_Text_KeepAnEyeOutForRival:
-	.string "Can you please do me a favor though?\p"
-	.string "Just make sure he stays out of trouble.\n"
-	.string "Simply for my peace of mind?\p"
-	.string "It would help keep my anxiety down.\n"
-	.string "Thanks again, {PLAYER}{KUN}!$"
-
+Route110_Text_ExplainDowsingMachine:
+	.string "???: That's a Dowsing Machine.\p"
+	.string "It'll point you in the direction of\n"
+	.string "items hidden nearby.\p"
+	.string "That's all for now.\p"
+	.string "I've gotta go but I'm sure we'll\n"
+	.string "meet up again soon, {PLAYER}{KUN}!\p"
+	.string "Buh-bye!$"
