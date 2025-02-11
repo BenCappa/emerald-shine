@@ -413,6 +413,7 @@ Route110_EventScript_BenBattlePiplup::
 Route110_EventScript_BenDefeated::
 	msgbox Route110_Text_BenTakeThis, MSGBOX_DEFAULT
 	givemon SPECIES_LUVDISC, 20, ITEM_HEART_SCALE, ITEM_LOVE_BALL, abilityNum=2, gender=FEMALE, isShiny=TRUE
+	showmonpic SPECIES_LUVDISC, 10, 3, TRUE
 	bufferspeciesname STR_VAR_1, SPECIES_LUVDISC
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_LUVDISC
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route110_EventScript_ReceiveParty
@@ -422,6 +423,7 @@ Route110_EventScript_BenDefeated::
 Route110_EventScript_ReceiveParty::
 	call Route110_EventScript_ReceivedPokemonFanfare
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	hidemonpic
 	goto_if_eq VAR_RESULT, NO, Route110_EventScript_BenExplainLuvdisc
 	call Common_EventScript_GetGiftMonPartySlot
 	call Common_EventScript_NameReceivedPartyMon
@@ -431,6 +433,7 @@ Route110_EventScript_ReceiveParty::
 Route110_EventScript_ReceivePC::
 	call Route110_EventScript_ReceivedPokemonFanfare
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	hidemonpic
 	goto_if_eq VAR_RESULT, NO, Route110_EventScript_SentPokemonToPC
 	call Common_EventScript_NameReceivedBoxMon
 	goto Route110_EventScript_BenExplainLuvdisc
