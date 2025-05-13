@@ -136,7 +136,7 @@ DewfordTown_Gym_EventScript_Brawly::
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
-	goto_if_unset FLAG_RECEIVED_TM_ROCK_TOMB, DewfordTown_Gym_EventScript_GiveRockTomb2
+	goto_if_unset FLAG_RECEIVED_TM_STEALTH_ROCK, DewfordTown_Gym_EventScript_GiveStealthRock2
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -153,7 +153,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 2
 	call Common_EventScript_SetGymTrainers
-	call DewfordTown_Gym_EventScript_GiveRockTomb
+	call DewfordTown_Gym_EventScript_GiveStealthRock
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -167,18 +167,18 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	release
 	end
 
-DewfordTown_Gym_EventScript_GiveRockTomb::
-	giveitem ITEM_TM_ROCK_TOMB
+DewfordTown_Gym_EventScript_GiveStealthRock::
+	giveitem ITEM_TM_STEALTH_ROCK
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_BagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_ROCK_TOMB
+	msgbox DewfordTown_Gym_Text_ExplainStealthRock, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_STEALTH_ROCK
 	return
 
-DewfordTown_Gym_EventScript_GiveRockTomb2:
-	giveitem ITEM_TM_ROCK_TOMB
+DewfordTown_Gym_EventScript_GiveStealthRock2:
+	giveitem ITEM_TM_STEALTH_ROCK
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_ROCK_TOMB
+	msgbox DewfordTown_Gym_Text_ExplainStealthRock, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_STEALTH_ROCK
 	release
 	end
 
@@ -283,21 +283,21 @@ DewfordTown_Gym_EventScript_GymStatue::
 	end
 
 DewfordTown_Gym_Text_GymGuideAdvice:
-	.string "Hey, how's it going, CHAMPION-\n"
+	.string "Hey, how's it going, Champion-\n"
 	.string "bound {PLAYER}?\p"
-	.string "DEWFORD's GYM LEADER Niles specializes\n"
-	.string "in ROCK-type POKéMON.\p"
+	.string "Dewford's Gym Leader Niles specializes\n"
+	.string "in Rock-type Pokémon.\p"
 	.string "Fun fact: Almost all the Pokémon in\n"
 	.string "this gym were revived from fossils!\p"
-	.string "Now, you may have noticed the GYM is\n"
+	.string "Now, you may have noticed the Gym is\n"
 	.string "currently as dark as Granite Cave.\p"
 	.string "Every time you defeat a Trainer in\n"
 	.string "here it will get a little brighter.\p"
 	.string "Oh, one more thing!\p"
-	.string "Be prepared for Niles to use a\n"
-	.string "Z-Move during your battle.\p"
 	.string "Gym Leaders are instructed to use more\n"
 	.string "gimmicks with the more badges you earn.\p"
+	.string "Niles could have anything up his sleeve\n"
+	.string "so be prepared.\p"
 	.string "Hey, okay, go for it!$"
 
 DewfordTown_Gym_Text_GymGuidePostVictory:
@@ -327,9 +327,9 @@ DewfordTown_Gym_Text_JocelynDefeat:
 DewfordTown_Gym_Text_JocelynPostBattle:
 	.string "I'm not going to waste this loss.\n"
 	.string "I'll use it to motivate me to train!\p"
-	.string "One day I'll become a GYM LEADER…\p"
-	.string "No, I'll become the POKéMON LEAGUE\n"
-	.string "CHAMPION!$"
+	.string "One day I'll become a Gym Leader…\p"
+	.string "No, I'll become the Pokémon League\n"
+	.string "Champion!$"
 
 DewfordTown_Gym_Text_LauraIntro:
 	.string "Don't you dare brush me off!\n"
@@ -365,7 +365,7 @@ DewfordTown_Gym_Text_BrendenDefeat:
 
 DewfordTown_Gym_Text_BrendenPostBattle:
 	.string "Oh, aye! You're worthy of seeing\n"
-	.string "our GYM LEADER.$"
+	.string "our Gym Leader.$"
 
 DewfordTown_Gym_Text_CristianIntro:
 	.string "If you mean to pass, it has to be\n"
@@ -377,7 +377,7 @@ DewfordTown_Gym_Text_CristianDefeat:
 
 DewfordTown_Gym_Text_CristianPostBattle:
 	.string "You win!\n"
-	.string "Go after that BADGE!$"
+	.string "Go after that Badge!$"
 
 DewfordTown_Gym_Text_BrawlyIntro:
 	.string "Hey Ashley.\p"
@@ -393,25 +393,26 @@ DewfordTown_Gym_Text_BrawlyDefeat:
 	.string "Okay, you've got me.\n"
 	.string "I'll admit it!\p"
 	.string "You did a lot better I expected.\p"
-	.string "Take this GYM BADGE.$"
+	.string "Take this Gym Badge.$"
 
 DewfordTown_Gym_Text_ReceivedStoneBadge:
 	.string "{PLAYER} received the Stone Badge\n"
 	.string "from Niles.$"
 
 DewfordTown_Gym_Text_StoneBadgeInfoTakeThis:
-	.string "The Stone Badge makes all POKéMON\n"
+	.string "The Stone Badge makes all Pokémon\n"
 	.string "up to Level 30, even those you get in\l"
 	.string "trades, obey without question.\p"
 	.string "And, you'll be able to use the HM move\n"
-	.string "FLASH outside of battle.\p"
-	.string "If you'd like, use this TECHNICAL\n"
-	.string "MACHINE, too.$"
+	.string "Flash outside of battle.\p"
+	.string "If you'd like, use this Technical\n"
+	.string "Machine, too.$"
 
-DewfordTown_Gym_Text_ExplainRockTomb:
-	.string "That TM39 contains Rock Tomb.\p"
-	.string "It's a move that can lower an\n"
-	.string "opponents Speed stat.\p"
+DewfordTown_Gym_Text_ExplainStealthRock:
+	.string "That TM82 contains Stealth Rock.\p"
+	.string "Set it up right away to chip away at\n"
+	.string "your opponents health every time they\l"
+	.string "enter the battlefield.\p"
 	.string "… … … … … …$"
 
 DewfordTown_Gym_Text_RegisteredBrawly:
@@ -449,7 +450,7 @@ DewfordTown_Gym_Text_BrawlyPostRematch:
 DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons:
 	.string "Niles: You want to battle?\n"
 	.string "I guess I can spare some time.\p"
-	.string "Oh? You only have one POKéMON\n"
+	.string "Oh? You only have one Pokémon\n"
 	.string "that can battle.\p"
 	.string "I'm sorry, but I'd like you to come back\n"
-	.string "with at least two POKéMON.$"
+	.string "with at least two Pokémon.$"

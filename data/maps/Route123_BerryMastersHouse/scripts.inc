@@ -128,3 +128,48 @@ Route123_BerryMastersHouse_EventScript_GaveBerry::
 	release
 	end
 
+Route123_BerryMastersHouse_EventScript_DazzlingGleamGirl::
+	lock
+	faceplayer
+	goto_if_set FLAG_RECEIVED_TM_DAZZLING_GLEAM, Route123_BerryMastersHouse_EventScript_ExplainDazzlingGleam
+	msgbox Route123_BerryMastersHouse_Text_IWatchContestsAllDay, MSGBOX_DEFAULT
+	specialvar VAR_RESULT, CheckLeadMonBeauty
+	goto_if_eq VAR_RESULT, TRUE, Route123_BerryMastersHouse_EventScript_GiveDazzlingGleam
+	release
+	end
+
+Route123_BerryMastersHouse_EventScript_GiveDazzlingGleam::
+	closemessage
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
+	waitmovement 0
+	msgbox Route123_BerryMastersHouse_Text_TakeThisTM, MSGBOX_DEFAULT
+	giveitem ITEM_TM_DAZZLING_GLEAM
+	setflag FLAG_RECEIVED_TM_DAZZLING_GLEAM
+	goto Route123_BerryMastersHouse_EventScript_ExplainDazzlingGleam
+
+Route123_BerryMastersHouse_EventScript_ExplainDazzlingGleam::
+	msgbox Route123_BerryMastersHouse_Text_ExplainDazzlingGleam, MSGBOX_DEFAULT
+	release
+	end
+
+Route123_BerryMastersHouse_Text_IWatchContestsAllDay:
+	.string "I watch Pokémon Contests all day long!\p"
+	.string "They always have the most beautiful\n"
+	.string "Pokémon I've ever seen!\p"
+	.string "If you showed me a Pokémon that was\n"
+	.string "beautiful enough to win a Contest,\l"
+	.string "I'd for sure give you this TM that\l"
+	.string "I stole from my grandparents!$"
+
+Route123_BerryMastersHouse_Text_TakeThisTM:
+	.string "Your Pokémon!\n"
+	.string "It's so beautiful!\p"
+	.string "Here, take this TM before my\n"
+	.string "grandparents find out!$"
+
+Route123_BerryMastersHouse_Text_ExplainDazzlingGleam:
+	.string "Dazzling Gleam dazzles everyone\n"
+	.string "watching your Pokémon.\p"
+	.string "I hope I get to see you use it on TV!$"

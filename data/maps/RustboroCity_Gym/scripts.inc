@@ -5,7 +5,7 @@ RustboroCity_Gym_EventScript_Roxanne::
 	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_RoxanneRematch
-	goto_if_unset FLAG_RECEIVED_TM_RETURN, RustboroCity_Gym_EventScript_GiveRockTomb
+	goto_if_unset FLAG_RECEIVED_TM_FALSE_SWIPE, RustboroCity_Gym_EventScript_GiveFalseSwipe
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -22,14 +22,14 @@ RustboroCity_Gym_EventScript_RoxanneDefeated::
 	setvar VAR_0x8008, 1
 	call Common_EventScript_SetGymTrainers
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
-	goto RustboroCity_Gym_EventScript_GiveRockTomb
+	goto RustboroCity_Gym_EventScript_GiveFalseSwipe
 	end
 
-RustboroCity_Gym_EventScript_GiveRockTomb::
-	giveitem ITEM_TM_RETURN
+RustboroCity_Gym_EventScript_GiveFalseSwipe::
+	giveitem ITEM_TM_FALSE_SWIPE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_RETURN
-	msgbox RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_FALSE_SWIPE
+	msgbox RustboroCity_Gym_Text_ExplainFalseSwipe, MSGBOX_DEFAULT
 	release
 	end
 
@@ -168,7 +168,7 @@ RustboroCity_Gym_Text_MarcPostBattle:
 	.string "make a Gym out of Baby Pokémon.$"
 
 RustboroCity_Gym_Text_RoxanneIntro:
-	.string "Hey Ash-Ash! Welcome to my Gym!\p"
+	.string "Oreo: Hey Ash-Ash! Welcome to my Gym!\p"
 	.string "Were you surprised to hear that I was\n"
 	.string "already a Gym Leader?\p"
 	.string "You see, I joined the Trainer School and\n"
@@ -178,7 +178,7 @@ RustboroCity_Gym_Text_RoxanneIntro:
 	.string "Wanna see why?$"
 
 RustboroCity_Gym_Text_RoxanneDefeat:
-	.string "Urgh…\n"
+	.string "Oreo: Urgh…\n"
 	.string "I can't believe I lost…\p"
 	.string "Ah, whatever.\n"
 	.string "I'm not gonna lose so easily next time!\p"
@@ -193,21 +193,23 @@ RustboroCity_Gym_Text_ReceivedBalanceBadge:
 	.string "from Oriana.$"
 
 RustboroCity_Gym_Text_BalanceBadgeInfoTakeThis:
-	.string "The Balance Badge heightens the\n"
+	.string "Oreo: The Balance Badge heightens the\n"
 	.string "Attack power of your Pokémon.\p"
 	.string "It also enables them to use the HM move\n"
 	.string "Cut outside of battle.\p"
 	.string "Please take this with you, too.$"
 
-RustboroCity_Gym_Text_ExplainRockTomb:
-	.string "That Technical Machine, TM27,\n"
-	.string "contains Return.\p"
+RustboroCity_Gym_Text_ExplainFalseSwipe:
+	.string "Oreo: That Technical Machine, TM01,\n"
+	.string "contains False Swipe.\p"
 	.string "You use a TM to instantly teach a move\n"
-	.string "to a Pokémon, in this case: Return.\p"
-	.string "The friendlier a Pokémon is with you,\n"
-	.string "the more Return's power is enhanced.\p"
-	.string "And don't worry about wasting it, a TM\n"
-	.string "can be used as many times as you want!$"
+	.string "to a Pokémon, in this case: False Swipe.\p"
+	.string "It'll only ever bring a Pokémon down to\n"
+	.string "1 HP no matter how much damage it does.\p"
+	.string "That makes it super useful for\n"
+	.string "capturing wild Pokémon!\p"
+	.string "And don't worry about wasting it,\n"
+	.string "a TM can be used over and over again!$"
 
 RustboroCity_Gym_Text_RoxannePostBattle:
 	.string "Since you are so strong, you should\n"

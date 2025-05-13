@@ -50,6 +50,7 @@ FortreeCity_House1_EventScript_ExpertF::
 	lock
 	faceplayer
 	msgbox FortreeCity_House1_Text_TradingMemoriesWithOthers, MSGBOX_DEFAULT
+	release
 	end
 
 FortreeCity_House1_EventScript_Zigzagoon::

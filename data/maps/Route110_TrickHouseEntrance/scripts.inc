@@ -338,7 +338,7 @@ Route110_TrickHouseEntrance_EventScript_GiveReward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward::
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_PP_UP
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
@@ -346,7 +346,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward::
-	giveitem ITEM_TIMER_BALL
+	giveitem ITEM_GRIP_CLAW
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
@@ -354,7 +354,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward::
-	giveitem ITEM_HARD_STONE
+	giveitem ITEM_FLOAT_STONE
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
@@ -362,7 +362,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward::
-	giveitem ITEM_SMOKE_BALL
+	giveitem ITEM_SPORT_BALL
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
@@ -370,7 +370,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward::
-	giveitem ITEM_TM_TAUNT
+	giveitem ITEM_TM_TRICK_ROOM
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
@@ -378,15 +378,75 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward::
-	giveitem ITEM_MAGNET
+	switch VAR_STARTER_MON
+	case 0, Route110_TrickHouseEntrance_EventScript_GivePiplup
+	case 1, Route110_TrickHouseEntrance_EventScript_GiveBulbasaur
+	case 2, Route110_TrickHouseEntrance_EventScript_GiveFennekin
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_GiveBulbasaur::
+	givemon SPECIES_BULBASAUR, 5, ITEM_ABILITY_PATCH, ITEM_CHERISH_BALL
+	showmonpic SPECIES_BULBASAUR, 10, 3
+	bufferspeciesname STR_VAR_1, SPECIES_BULBASAUR
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_BULBASAUR
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route110_TrickHouseEntrance_EventScript_ReceiveParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route110_TrickHouseEntrance_EventScript_ReceivePC
+	@ goto Route110_TrickHouseEntrance_EventScript_NoMoreRoomForPokemon
+	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_GiveFennekin::
+	givemon SPECIES_FENNEKIN, 5, ITEM_ABILITY_PATCH, ITEM_CHERISH_BALL
+	showmonpic SPECIES_FENNEKIN, 10, 3
+	bufferspeciesname STR_VAR_1, SPECIES_FENNEKIN
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_FENNEKIN
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route110_TrickHouseEntrance_EventScript_ReceiveParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route110_TrickHouseEntrance_EventScript_ReceivePC
+	@ goto Route110_TrickHouseEntrance_EventScript_NoMoreRoomForPokemon
+	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_GivePiplup::
+	givemon SPECIES_PIPLUP, 5, ITEM_ABILITY_PATCH, ITEM_CHERISH_BALL
+	showmonpic SPECIES_PIPLUP, 10, 3
+	bufferspeciesname STR_VAR_1, SPECIES_PIPLUP
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_PIPLUP
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route110_TrickHouseEntrance_EventScript_ReceiveParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route110_TrickHouseEntrance_EventScript_ReceivePC
+	@ goto Route110_TrickHouseEntrance_EventScript_NoMoreRoomForPokemon
+	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward::
+	switch VAR_STARTER_MON
+	case 0, Route110_TrickHouseEntrance_EventScript_GiveEmpoleonite
+	case 1, Route110_TrickHouseEntrance_EventScript_GiveVenusaurite
+	case 2, Route110_TrickHouseEntrance_EventScript_GiveDelphoxite
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_GiveVenusaurite::
+	giveitem ITEM_VENUSAURITE
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward::
-	giveitem ITEM_PP_MAX
+Route110_TrickHouseEntrance_EventScript_GiveDelphoxite::
+	giveitem ITEM_DELPHOXITE
+	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_GiveEmpoleonite::
+	giveitem ITEM_EMPOLEONITE
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
@@ -394,6 +454,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GotReward::
+	goto_if_eq VAR_TRICK_HOUSE_ENTRANCE_STATE, 6, Route110_TrickHouseEntrance_EventScript_ReceivedFinalPrize
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 3
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_WalkInPlaceFasterUp
@@ -404,29 +465,58 @@ Route110_TrickHouseEntrance_EventScript_GotReward::
 Route110_TrickHouseEntrance_EventScript_MechadollReward::
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox Route110_TrickHouseEntrance_Text_MechadollWhichTent, MSGBOX_DEFAULT
-	call Route110_TrickHouseEntrance_EventScript_ChooseTent
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_ReceivedTent
+	msgbox Route110_TrickHouseEntrance_Text_IfRewardIsNotTaken, MSGBOX_DEFAULT
+	call Route110_TrickHouseEntrance_EventScript_GiveFinalPrize
+	goto_if_eq VAR_RESULT, TRUE, 
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_NoRoomForDecor
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_GiveFinalPrize::
+	switch VAR_STARTER_MON
+	case 0, Route110_TrickHouseEntrance_EventScript_GiveFennekinAndStone
+	case 1, Route110_TrickHouseEntrance_EventScript_GivePiplupAndStone
+	case 2, Route110_TrickHouseEntrance_EventScript_GiveBulbasaurAndStone
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_GiveBulbasaurAndStone::
+	givemon SPECIES_BULBASAUR, 5, ITEM_VENUSAURITE, ITEM_CHERISH_BALL, abilityNum=2
+	showmonpic SPECIES_BULBASAUR, 10, 3
+	bufferspeciesname STR_VAR_1, SPECIES_BULBASAUR
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_BULBASAUR
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route110_TrickHouseEntrance_EventScript_ReceiveParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route110_TrickHouseEntrance_EventScript_ReceivePC
+	@ goto Route110_TrickHouseEntrance_EventScript_NoMoreRoomForPokemon
 	msgbox Route110_TrickHouseEntrance_Text_PCFullAgain, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_ChooseTent::
-	multichoice 0, 0, MULTI_TENT, TRUE
-	switch VAR_RESULT
-	case 0, Route110_TrickHouseEntrance_EventScript_GiveRedTent
-	goto Route110_TrickHouseEntrance_EventScript_GiveBlueTent
+Route110_TrickHouseEntrance_EventScript_GiveFennekinAndStone::
+	givemon SPECIES_FENNEKIN, 5, ITEM_DELPHOXITE, ITEM_CHERISH_BALL, abilityNum=2
+	showmonpic SPECIES_FENNEKIN, 10, 3
+	bufferspeciesname STR_VAR_1, SPECIES_FENNEKIN
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_FENNEKIN
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route110_TrickHouseEntrance_EventScript_ReceiveParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route110_TrickHouseEntrance_EventScript_ReceivePC
+	@ goto Route110_TrickHouseEntrance_EventScript_NoMoreRoomForPokemon
+	msgbox Route110_TrickHouseEntrance_Text_PCFullAgain, MSGBOX_DEFAULT
+	releaseall
+	end
 
-Route110_TrickHouseEntrance_EventScript_GiveRedTent::
-	givedecoration DECOR_RED_TENT
-	return
+Route110_TrickHouseEntrance_EventScript_GivePiplupAndStone::
+	givemon SPECIES_PIPLUP, 5, ITEM_EMPOLEONITE, ITEM_CHERISH_BALL, abilityNum=2
+	showmonpic SPECIES_PIPLUP, 10, 3
+	bufferspeciesname STR_VAR_1, SPECIES_PIPLUP
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_PIPLUP
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route110_TrickHouseEntrance_EventScript_ReceiveParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route110_TrickHouseEntrance_EventScript_ReceivePC
+	@ goto Route110_TrickHouseEntrance_EventScript_NoMoreRoomForPokemon
+	msgbox Route110_TrickHouseEntrance_Text_PCFullAgain, MSGBOX_DEFAULT
+	releaseall
+	end
 
-Route110_TrickHouseEntrance_EventScript_GiveBlueTent::
-	givedecoration DECOR_BLUE_TENT
-	return
-
-Route110_TrickHouseEntrance_EventScript_ReceivedTent::
+Route110_TrickHouseEntrance_EventScript_ReceivedFinalPrize::
 	msgbox Route110_TrickHouseEntrance_Text_ThenFarewell, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_TRICK_MASTER, Route110_TrickHousePuzzle5_Movement_MechadollShake
@@ -441,6 +531,37 @@ Route110_TrickHouseEntrance_EventScript_ReceivedTent::
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 5
 	releaseall
 	end
+
+Route110_TrickHouseEntrance_EventScript_ReceiveParty::
+	call Route110_TrickHouseEntrance_EventScript_ReceivedPokemonFanfare
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	hidemonpic
+	goto_if_eq VAR_RESULT, NO, Route110_TrickHouseEntrance_EventScript_GotReward
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto Route110_TrickHouseEntrance_EventScript_GotReward
+	end
+
+Route110_TrickHouseEntrance_EventScript_ReceivePC::
+	call Route110_TrickHouseEntrance_EventScript_ReceivedPokemonFanfare
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	hidemonpic
+	goto_if_eq VAR_RESULT, NO, Route110_TrickHouseEntrance_EventScript_SentPokemonToPC
+	call Common_EventScript_NameReceivedBoxMon
+	goto Route110_TrickHouseEntrance_EventScript_SentPokemonToPC
+	end
+
+Route110_TrickHouseEntrance_EventScript_SentPokemonToPC::
+	call Common_EventScript_TransferredToPC
+	goto Route110_TrickHouseEntrance_EventScript_GotReward
+	end
+
+Route110_TrickHouseEntrance_EventScript_ReceivedPokemonFanfare::
+	playfanfare MUS_OBTAIN_ITEM
+	message Route110_TrickHouseEnd_Text_PlayerReceivedPokemon
+	waitmessage
+	waitfanfare
+	return
 
 Route110_TrickHouseEntrance_EventScript_Door::
 	lockall
@@ -796,12 +917,10 @@ Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward:
 	.string "Hah?\n"
 	.string "Did you not come to claim your reward?$"
 
-Route110_TrickHouseEntrance_Text_MechadollWhichTent:
+Route110_TrickHouseEntrance_Text_IfRewardIsNotTaken:
 	.string "MECHA-DOLL 5 I AM!\n"
 	.string "IF REWARD IS NOT TAKEN BY YOU,\l"
-	.string "THEN TRICK MASTER YOU CANNOT FOLLOW.\p"
-	.string "RED TENT OR BLUE TENT,\n"
-	.string "WHICH DO YOU PREFER?$"
+	.string "THEN TRICK MASTER YOU CANNOT FOLLOW.$"
 
 Route110_TrickHouseEntrance_Text_ThenFarewell:
 	.string "THEN FAREWELL.$"

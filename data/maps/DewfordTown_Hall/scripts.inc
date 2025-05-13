@@ -242,20 +242,20 @@ DewfordTown_Hall_Movement_SchoolKidWalkInPlaceRight:
 	walk_in_place_right
 	step_end
 
-DewfordTown_Hall_EventScript_SludgeBombMan::
+DewfordTown_Hall_EventScript_PoisonJabMan::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
-	goto_if_set FLAG_RECEIVED_TM_SLUDGE_BOMB, DewfordTown_Hall_EventScript_ReceivedSludgeBomb
-	msgbox DewfordTown_Hall_Text_GiveYouSludgeBomb, MSGBOX_DEFAULT
-	giveitem ITEM_TM_SLUDGE_BOMB
+	goto_if_set FLAG_RECEIVED_TM_POISON_JAB, DewfordTown_Hall_EventScript_ReceivedPoisonJab
+	msgbox DewfordTown_Hall_Text_GiveYouPoisonJab, MSGBOX_DEFAULT
+	giveitem ITEM_TM_POISON_JAB
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_SLUDGE_BOMB
+	setflag FLAG_RECEIVED_TM_POISON_JAB
 	release
 	end
 
-DewfordTown_Hall_EventScript_ReceivedSludgeBomb::
-	msgbox DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo, MSGBOX_DEFAULT
+DewfordTown_Hall_EventScript_ReceivedPoisonJab::
+	msgbox DewfordTown_Hall_Text_LovePoisonJabButTrendInToo, MSGBOX_DEFAULT
 	release
 	end
 
@@ -429,17 +429,17 @@ DewfordTown_Hall_Text_WellBeTrendDuo:
 	.string "Isn't that a ripe image?\n"
 	.string "Hahahah!$"
 
-DewfordTown_Hall_Text_GiveYouSludgeBomb:
-	.string "For me, SLUDGE BOMB is at the peak\n"
+DewfordTown_Hall_Text_GiveYouPoisonJab:
+	.string "For me, Poison Jab is at the peak\n"
 	.string "of popularity. It's the one.\p"
 	.string "Hunh? You're telling me that you don't\n"
-	.string "know about SLUDGE BOMB?\p"
+	.string "know about Poison Jab?\p"
 	.string "That's outright pitiful.\n"
 	.string "I'll give you one.$"
 
-DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo:
-	.string "I love SLUDGE BOMB.\p"
-	.string "But POKéMON with the move\n"
+DewfordTown_Hall_Text_LovePoisonJabButTrendInToo:
+	.string "I love Poison Jab.\p"
+	.string "But Pokémon with the move\n"
 	.string "“{STR_VAR_1}”\l"
 	.string "are in, too.$"
 

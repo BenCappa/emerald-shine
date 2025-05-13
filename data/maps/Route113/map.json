@@ -442,16 +442,16 @@
       "x": 66,
       "y": 3,
       "elevation": 3,
-      "item": "ITEM_ETHER",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_ETHER"
+      "item": "ITEM_TM_TRIPLE_AXEL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_TM_TRIPLE_AXEL"
     },
     {
       "type": "hidden_item",
       "x": 22,
       "y": 5,
       "elevation": 3,
-      "item": "ITEM_TM_DOUBLE_TEAM",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_TM_DOUBLE_TEAM"
+      "item": "ITEM_TM_TRICK",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_TM_TRICK"
     },
     {
       "type": "hidden_item",

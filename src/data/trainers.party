@@ -1566,14 +1566,12 @@ Gender: Male
 Music: Cool
 Items: Hyper Potion
 Double Battle: No
-AI: Check Bad Move / Try To Faint / Check Viability
+AI: Smart Trainer
 
-Pignite @ Blunder Policy
+Pignite @ Metronome
 Level: 26
 Ability: Blaze
-- Arm Thrust
 - Flame Charge
-- Take Down
 - Low Sweep
 
 === TRAINER_PARKER ===
@@ -1584,7 +1582,7 @@ Gender: Male
 Music: Cool
 Items: Hyper Potion
 Double Battle: No
-AI: Check Bad Move / Try To Faint / Check Viability
+AI: Smart Trainer
 
 Croagunk @ Leppa Berry
 Level: 26
@@ -1602,7 +1600,7 @@ Gender: Male
 Music: Cool
 Items: Hyper Potion
 Double Battle: No
-AI: Check Bad Move / Try To Faint / Check Viability
+AI: Smart Trainer
 
 Breloom @ Toxic Orb
 Level: 26
@@ -2162,7 +2160,7 @@ Gender: Female
 Music: Cool
 Items: Hyper Potion
 Double Battle: No
-AI: Check Bad Move / Try To Faint / Check Viability
+AI: Smart Trainer
 
 Mankey @ Wide Lens
 Level: 26
@@ -2180,7 +2178,7 @@ Gender: Female
 Music: Cool
 Items: Hyper Potion
 Double Battle: No
-AI: Check Bad Move / Try To Faint / Check Viability
+AI: Smart Trainer
 
 Hawlucha @ Kee Berry
 Level: 26
@@ -2198,15 +2196,15 @@ Gender: Female
 Music: Cool
 Items: Hyper Potion
 Double Battle: No
-AI: Check Bad Move / Try To Faint / Force Setup First Turn
+AI: Smart Trainer
 
-Scraggy @ Metronome
+Scraggy @ Focus Sash
 Level: 26
 Ability: Moxie
 - Power-Up Punch
-- Payback
-- Detect
-- Bulk Up
+- Counter
+- Revenge
+- Trailblaze
 
 === TRAINER_WENDY ===
 Name: WENDY

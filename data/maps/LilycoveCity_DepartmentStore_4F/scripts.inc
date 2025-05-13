@@ -25,9 +25,13 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft::
 
 	.align 2
 LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs:
+	.2byte ITEM_TM_FOCUS_BLAST
 	.2byte ITEM_TM_FIRE_BLAST
 	.2byte ITEM_TM_THUNDER
 	.2byte ITEM_TM_BLIZZARD
+	.2byte ITEM_TM_GUNK_SHOT
+	.2byte ITEM_TM_STONE_EDGE
+	.2byte ITEM_TM_GIGA_IMPACT
 	.2byte ITEM_TM_HYPER_BEAM
 	pokemartlistend
 
@@ -44,9 +48,13 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight::
 	.align 2
 LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 	.2byte ITEM_TM_PROTECT
-	.2byte ITEM_TM_SAFEGUARD
-	.2byte ITEM_TM_REFLECT
 	.2byte ITEM_TM_LIGHT_SCREEN
+	.2byte ITEM_TM_REFLECT
+	.2byte ITEM_TM_BATON_PASS
+	.2byte ITEM_TM_ELECTRIC_TERRAIN
+	.2byte ITEM_TM_GRASSY_TERRAIN
+	.2byte ITEM_TM_MISTY_TERRAIN
+	.2byte ITEM_TM_PSYCHIC_TERRAIN
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM:
@@ -54,7 +62,7 @@ LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM:
 	.string "An attacking move…\n"
 	.string "Or a defensive move…\p"
 	.string "It's no easy matter to decide which TM\n"
-	.string "moves should be taught to POKéMON…$"
+	.string "moves should be taught to Pokémon…$"
 
 LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs:
 	.string "There are so many different kinds of\n"
@@ -64,5 +72,5 @@ LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs:
 
 LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves:
 	.string "I'd like to get all the different TMs,\n"
-	.string "but a POKéMON learns only four moves.$"
+	.string "but a Pokémon learns only four moves.$"
 

@@ -83,7 +83,7 @@ SootopolisCity_Gym_1F_EventScript_Juan::
 	trainerbattle_single TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, SootopolisCity_Gym_1F_EventScript_JuanRematch
-	goto_if_unset FLAG_RECEIVED_TM_WATER_PULSE, SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2
+	goto_if_unset FLAG_RECEIVED_TM_SCALD, SootopolisCity_Gym_1F_EventScript_GiveScald2
 	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge
 	msgbox SootopolisCity_Gym_1F_Text_JuanPostBattle, MSGBOX_DEFAULT
 	release
@@ -103,7 +103,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
 	setvar VAR_0x8008, 8
 	call Common_EventScript_SetGymTrainers
-	call SootopolisCity_Gym_1F_EventScript_GiveWaterPulse
+	call SootopolisCity_Gym_1F_EventScript_GiveScald
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -115,18 +115,18 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_GiveWaterPulse::
-	giveitem ITEM_TM_WATER_PULSE
+SootopolisCity_Gym_1F_EventScript_GiveScald::
+	giveitem ITEM_TM_SCALD
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_WATER_PULSE
+	msgbox SootopolisCity_Gym_1F_Text_ExplainScald, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_SCALD
 	return
 
-SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2::
-	giveitem ITEM_TM_WATER_PULSE
+SootopolisCity_Gym_1F_EventScript_GiveScald2::
+	giveitem ITEM_TM_SCALD
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_WATER_PULSE
+	msgbox SootopolisCity_Gym_1F_Text_ExplainScald, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM_SCALD
 	release
 	end
 
@@ -176,10 +176,10 @@ SootopolisCity_Gym_1F_EventScript_GymStatue::
 	end
 
 SootopolisCity_Gym_1F_Text_GymGuideAdvice:
-	.string "Yo! How's it going, CHAMPION-\n"
+	.string "Yo! How's it going, Champion-\n"
 	.string "bound {PLAYER}?\p"
-	.string "SOOTOPOLIS's GYM LEADER Rheannon is\n"
-	.string "a master of WATER-type POKéMON.\p"
+	.string "Sootopolis's Gym Leader Rheannon is\n"
+	.string "a master of Water-type Pokémon.\p"
 	.string "And, to get to her, an icy floor\n"
 	.string "will hamper your progress…\p"
 	.string "Listen, I'm sorry, but that's all the\n"
@@ -189,10 +189,10 @@ SootopolisCity_Gym_1F_Text_GymGuideAdvice:
 
 SootopolisCity_Gym_1F_Text_GymGuidePostVictory:
 	.string "Yow! You've beaten Rheannon, who\n"
-	.string "was supposedly the best in all HOENN!\p"
-	.string "Okay! Check out your TRAINER CARD.\p"
-	.string "If you've gotten all the BADGES, you're\n"
-	.string "set for the POKéMON LEAGUE challenge!$"
+	.string "was supposedly the best in all Hoenn!\p"
+	.string "Okay! Check out your Trainer Card.\p"
+	.string "If you've gotten all the Badges, you're\n"
+	.string "set for the Pokémon League challenge!$"
 
 SootopolisCity_Gym_1F_Text_JuanIntro:
 	.string "Rhen: You finally made it.\p"
@@ -216,47 +216,46 @@ SootopolisCity_Gym_1F_Text_JuanDefeat:
 	.string "we have a hard time showing it,\l"
 	.string "we're all proud of you big sis.\p"
 	.string "So it's my honor to reward\n"
-	.string "you with this, the RAIN BADGE!$"
+	.string "you with this, the Rain Badge!$"
 
 SootopolisCity_Gym_1F_Text_ReceivedRainBadge:
-	.string "{PLAYER} received the RAIN BADGE\n"
+	.string "{PLAYER} received the Rain Badge\n"
 	.string "from Rheannon.$"
 
 SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
-	.string "The RAIN BADGE assures POKéMON of\n"
+	.string "The Rain Badge assures Pokémon of\n"
 	.string "all level obey your every command.\p"
-	.string "The RAIN BADGE also allows the use\n"
-	.string "of the HM move WATERFALL to scale\l"
+	.string "The Rain Badge also allows the use\n"
+	.string "of the HM move Waterfall to scale\l"
 	.string "walls of cascading water.\p"
 	.string "And, so that you never forget the\n"
 	.string "battle we shared, take this…$"
 
-SootopolisCity_Gym_1F_Text_ExplainWaterPulse:
-	.string "The TECHNICAL MACHINE I gave you\n"
-	.string "contains WATER PULSE.\p"
-	.string "In use, it will occasionally confuse\n"
-	.string "the target with ultrasonic waves.\p"
-	.string "… … … … … …$"
+SootopolisCity_Gym_1F_Text_ExplainScald:
+	.string "The Technical Machine I gave you\n"
+	.string "contains a nifty move called Scald.\p"
+	.string "In use, it will occasionally burn\n"
+	.string "the target with a boiling splash.$"
 
 SootopolisCity_Gym_1F_Text_RegisteredJuan:
 	.string "Registered GYM LEADER Rheannon\n"
 	.string "in the POKéNAV.$"
 
 SootopolisCity_Gym_1F_Text_JuanPostBattle:
-	.string "The TRAINERS who have gathered all\n"
-	.string "the GYM BADGES of HOENN should make\l"
+	.string "The Trainers who have gathered all\n"
+	.string "the Gym Badges of Hoenn should make\l"
 	.string "way to the ultimate destination.\p"
-	.string "The POKéMON LEAGUE.\p"
+	.string "The Pokémon League.\p"
 	.string "Travel to the easternmost reaches\n"
-	.string "of HOENN, to the island EVER GRANDE.\p"
+	.string "of Hoenn, to the island Ever Grande.\p"
 	.string "Why don't you go over there and\n"
 	.string "make yourself the Champion?$"
 
 SootopolisCity_Gym_1F_Text_GoGetFortreeBadge:
-	.string "Wait, you don't have all of the badges?\p"
-	.string "If you want to challenge the POKéMON\n"
-	.string "LEAGUE, you have to earn the last\l"
-	.string "BADGE from the GYM in FORTREE.$"
+	.string "Wait, you don't have all of the Badges?\p"
+	.string "If you want to challenge the Pokémon\n"
+	.string "League, you have to earn the last\l"
+	.string "Badge from the Gym in Fortree.$"
 
 SootopolisCity_Gym_1F_Text_GymStatue:
 	.string "SOOTOPOLIS CITY POKéMON GYM$"
@@ -275,7 +274,7 @@ SootopolisCity_Gym_1F_Text_JuanPreRematch:
 	.string "Bring it on!$"
 
 SootopolisCity_Gym_1F_Text_JuanRematchDefeat:
-	.string "You're such a butthead!$"
+	.string "You're such a putz!$"
 
 SootopolisCity_Gym_1F_Text_JuanPostRematch:
 	.string "Rhen: Battling like this is fun,\n"
@@ -288,6 +287,6 @@ SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons:
 	.string "Rhen: Back for more?\n"
 	.string "You sure you're ready?\p"
 	.string "Apparently not.\n"
-	.string "You only have one POKéMON with you.\p"
+	.string "You only have one Pokémon with you.\p"
 	.string "When you're really ready return with\n"
-	.string "two, preferably more, POKéMON, please.$"
+	.string "two, preferably more, Pokémon, please.$"

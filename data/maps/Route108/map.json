@@ -112,9 +112,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_STAR_PIECE",
+      "trainer_sight_or_berry_tree_id": "ITEM_TM_CALM_MIND",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_108_STAR_PIECE"
+      "flag": "FLAG_ITEM_ROUTE_108_TM_CALM_MIND"
     }
   ],
   "warp_events": [
@@ -135,8 +135,8 @@
       "x": 38,
       "y": 14,
       "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_108_RARE_CANDY"
+      "item": "ITEM_STAR_PIECE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_108_STAR_PIECE"
     }
   ]
 }

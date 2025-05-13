@@ -128,8 +128,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Hall_EventScript_SludgeBombMan",
-      "flag": "FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN"
+      "script": "DewfordTown_Hall_EventScript_PoisonJabMan",
+      "flag": "FLAG_HIDE_DEWFORD_HALL_POISON_JAB_MAN"
     }
   ],
   "warp_events": [
