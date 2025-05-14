@@ -778,7 +778,7 @@ PlayersHouse_1F_Text_MomBalanceBadge:
 	.string "T is up next, and you know how he is\n"
 	.string "when it comes to Rock-type Pokémon.\p"
 	.string "I suggest you bring something to deal\n"
-	.string "with sandstorms and entry hazards.\p$"
+	.string "with sandstorms and entry hazards.$"
 
 PlayersHouse_1F_Text_MomStoneBadge:
 	.string "Nice job beating Niles, Asha!\n"
@@ -788,7 +788,7 @@ PlayersHouse_1F_Text_MomStoneBadge:
 	.string "Watch out for his ace, Manetric.\n"
 	.string "It's incredibly strong.\p"
 	.string "Bring a Ground-type Pokémon since they\n"
-	.string "are immune to Electric type attacks.\p$"
+	.string "are immune to Electric type attacks.$"
 
 PlayersHouse_1F_Text_MomDynamoBadge:
 	.string "Look at your Dynamo Badge! So pretty!\p"
@@ -797,7 +797,7 @@ PlayersHouse_1F_Text_MomDynamoBadge:
 	.string "her red-hot temper!\p"
 	.string "Be prepared for any Harsh Sunlight.\n"
 	.string "It weakens Water-type attacks but\l"
-	.string "strenghtens Fire-type attacks.\p$"
+	.string "strenghtens Fire-type attacks.$"
 
 PlayersHouse_1F_Text_MomHeatBadge:
 	.string "Great job getting the Heat Badge!\n"
@@ -807,7 +807,7 @@ PlayersHouse_1F_Text_MomHeatBadge:
 	.string "hit hard and hit fast.\p"
 	.string "You'll need to hit harder with Psychic\l"
 	.string "or Flying-type attacks and hit faster"
-	.string "before they get to land too many hits.\p$"
+	.string "before they get to land too many hits.$"
 
 PlayersHouse_1F_Text_MomKnuckleBadge:
 	.string "Congratulations on defeating Micheal,\n"
@@ -819,7 +819,7 @@ PlayersHouse_1F_Text_MomKnuckleBadge:
 	.string "super fast and she utilizes Tailwind to\l"
 	.string "make them even faster for a bit.\p"
 	.string "So unless your defense is rock solid,\n"
-	.string "you'll need to slow them down.\p$"
+	.string "you'll need to slow them down.$"
 
 PlayersHouse_1F_Text_MomFeatherBadge:
 	.string "Well done getting the Feather Badge,\n"
@@ -830,7 +830,7 @@ PlayersHouse_1F_Text_MomFeatherBadge:
 	.string "that seriously damage everyone on the\l"
 	.string "battlefield except their teammate.\p"
 	.string "I'd bring a Dark-type Pokémon that's\n"
-	.string "immune to their Psychic-type attacks.\p$"
+	.string "immune to their Psychic-type attacks.$"
 
 PlayersHouse_1F_Text_MomMindBadge:
 	.string "Very impressive defeating the twins,\n"
@@ -841,7 +841,7 @@ PlayersHouse_1F_Text_MomMindBadge:
 	.string "the power of her Water-type Pokémon,\l"
 	.string "so I'd say use that against her.\p"
 	.string "Either change the weather or embrace\n"
-	.string "it with a perfectly accurate Thunder.\p$"
+	.string "it with a perfectly accurate Thunder.$"
 
 PlayersHouse_1F_Text_MomRainBadge:
 	.string "Asha, I'm so proud of you. You've\n"
@@ -855,14 +855,14 @@ PlayersHouse_1F_Text_MomRainBadge:
 	.string "Wallace. He's a Water-type specialist.\p"
 	.string "I can't help you much more than that.\p"
 	.string "Trust yourself and use everything that\n"
-	.string "you've learned up to this point.\p$"
+	.string "you've learned up to this point.$"
 
 PlayersHouse_1F_Text_MomChampion:
 	.string "My Asha, a champion…\p"
 	.string "Of course I already knew that. You've\n"
 	.string "been a champion your whole life.\p"
 	.string "I'm unbelievably proud of you. I can't\n"
-	.string "wait to see what you do next.\p$"
+	.string "wait to see what you do next.$"
 
 PlayersHouse_1F_Text_MomMissedYou:
 	.string "I've missed you so much, Asha!\p"
@@ -870,26 +870,26 @@ PlayersHouse_1F_Text_MomMissedYou:
 	.string "I'm a bit tired from the move though,\n"
 	.string "so why don't you finish getting settled\l"
 	.string "in and meeting our new neighbors?\p"
-	.string "I'll be here when you're done.\p$"
+	.string "I'll be here when you're done.$"
 
 PlayersHouse_1F_Text_MomFollowHeart:
 	.string "Remember, Asha…\n"
 	.string "always follow your heart.\p"
 	.string "If you do that, the rest will take\n"
-	.string "care of itself.\p$"
+	.string "care of itself.$"
 
 PlayersHouse_1F_Text_MomBelieveInYou:
 	.string "I believe in you, Asha.\p"
 	.string "No matter what happens, know that\n"
-	.string "I'll be here for you.\p$"
+	.string "I'll be here for you.$"
 
 PlayersHouse_1F_Text_MomEnjoyJourney:
 	.string "Don't forget to take breaks and enjoy\n"
 	.string "the journey, Asha.\p"
 	.string "Before you know it, you'll have a gallery\n"
-	.string "of memories to reminisce.\p$"
+	.string "of memories to reminisce.$"
 
 PlayersHouse_1F_Text_MomGrowSoFast:
 	.string "You're growing up so fast, Asha.\p"
 	.string "Just remember to stay true to yourself\n"
-	.string "and never give up on those dreams.\p$"
+	.string "and never give up on those dreams.$"

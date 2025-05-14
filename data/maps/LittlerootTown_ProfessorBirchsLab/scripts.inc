@@ -697,8 +697,8 @@ LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival:
 LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou:
 	.string "Gump: Great!\n"
 	.string "Get him to teach you what it means to\n"
-	.string "be a Trainer.$"
-	.string "{RIVAL} should be happy to do so.\p"
+	.string "be a Trainer.\p"
+	.string "{RIVAL} should be happy to do so.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay:
 	.string "Gump: Okay, while that is funny,\n"

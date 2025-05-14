@@ -9909,7 +9909,7 @@ static const struct TrainerMon sParty_Chris[] = {
 static const struct TrainerMon sParty_Dawson[] = {
     {
     .lvl = 8,
-    .species = SPECIES_FURFROU_DANDY_TRIM,
+    .species = SPECIES_FURFROU_DANDY,
     .heldItem = ITEM_NUGGET
     },
     {
@@ -9927,7 +9927,7 @@ static const struct TrainerMon sParty_Dawson[] = {
 static const struct TrainerMon sParty_Sarah[] = {
     {
     .lvl = 8,
-    .species = SPECIES_FURFROU_DEBUTANTE_TRIM,
+    .species = SPECIES_FURFROU_DEBUTANTE,
     .heldItem = ITEM_NUGGET
     },
     {

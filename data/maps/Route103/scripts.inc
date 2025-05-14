@@ -97,6 +97,7 @@ Route103_EventScript_AfterMayBattle::
 	end
 
 Route103_EventScript_AfterBrendanBattle::
+	bufferleadmonspeciesname 0
 	msgbox Route103_Text_BrendanTimeToHeadBack, MSGBOX_DEFAULT
 	goto Route103_EventScript_RivalExit
 	end

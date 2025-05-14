@@ -9905,7 +9905,7 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
         break;
     case HOLD_EFFECT_HEART_SCALE:
-        if ((atkBaseSpeciesId == SPECIES_LUVDISC || atkBaseSpeciesId == SPECIES_ALOMOMOLA) && IS_MOVE_SPECIAL(move))
+        if ((atkBaseSpeciesId == SPECIES_LUVDISC || atkBaseSpeciesId == SPECIES_ALOMOMOLA) && IsBattleMoveSpecial(move))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
         break;
     }

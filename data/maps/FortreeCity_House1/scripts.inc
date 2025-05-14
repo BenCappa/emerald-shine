@@ -53,12 +53,12 @@ FortreeCity_House1_EventScript_ExpertF::
 	release
 	end
 
-FortreeCity_House1_EventScript_Zigzagoon::
+FortreeCity_House1_EventScript_Combee::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
-	msgbox FortreeCity_House1_Text_Zigzagoon, MSGBOX_DEFAULT
+	playmoncry SPECIES_COMBEE, CRY_MODE_NORMAL
+	msgbox FortreeCity_House1_Text_Combee, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -96,6 +96,6 @@ FortreeCity_House1_Text_TradingMemoriesWithOthers:
 	.string "accept the throne, then Genovia will\l"
 	.string "cease to exist as we know it.$"
 
-FortreeCity_House1_Text_Zigzagoon:
-	.string "Zigzagoon: Gumomoh?$"
+FortreeCity_House1_Text_Combee:
+	.string "Combee: Bzbzbzbzbzbzzz?$"
 

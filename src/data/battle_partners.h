@@ -112,7 +112,7 @@
         },
     },
 #line 46
-    [PARTNER_BEN_BULBASAUR] =
+    [DIFFICULTY_NORMAL][PARTNER_BEN_BULBASAUR] =
     {
 #line 47
         .trainerName = _("Ben"),
@@ -203,7 +203,7 @@
         },
     },
 #line 81
-    [PARTNER_BEN_FENNEKIN] =
+    [DIFFICULTY_NORMAL][PARTNER_BEN_FENNEKIN] =
     {
 #line 82
         .trainerName = _("Ben"),
@@ -294,7 +294,7 @@
         },
     },
 #line 116
-    [PARTNER_BEN_PIPLUP] =
+    [DIFFICULTY_NORMAL][PARTNER_BEN_PIPLUP] =
     {
 #line 117
         .trainerName = _("Ben"),

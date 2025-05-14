@@ -324,7 +324,7 @@ PlayersHouse_1F_Text_ItsOverWeMissedHim:
 	.string "Too bad.$"
 
 PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
-	.string "Oh, yes. Speaking of Mike's:\n"
+	.string "Oh, yes. Speaking of Mikes:\n"
 	.string "The region's professor lives here too.\p"
 	.string "Prof. Mike is his name.\p"
 	.string "His family lives right next door, so you\n"
