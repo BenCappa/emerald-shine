@@ -7,5 +7,6 @@
 #define PARTNER_BEN_BULBASAUR       2
 #define PARTNER_BEN_FENNEKIN        3
 #define PARTNER_BEN_PIPLUP          4
+#define PARTNER_COUNT               5
 
 #endif  // GUARD_CONSTANTS_BATTLE_PARTNERS_H
