@@ -31,8 +31,8 @@ BattleFrontier_Lounge7_EventScript_ChooseLeftTutorMove::
 	case 1, BattleFrontier_Lounge7_EventScript_Snore
 	case 2, BattleFrontier_Lounge7_EventScript_TerrainPulse
 	case 3, BattleFrontier_Lounge7_EventScript_FireFang
-	case 4, BattleFrontier_Lounge7_EventScript_ThunderFang
-	case 5, BattleFrontier_Lounge7_EventScript_IceFang
+	case 4, BattleFrontier_Lounge7_EventScript_IceFang
+	case 5, BattleFrontier_Lounge7_EventScript_ThunderFang
 	case 6, BattleFrontier_Lounge7_EventScript_GrassyGlide
 	case 7, BattleFrontier_Lounge7_EventScript_Liquidation
 	case 8, BattleFrontier_Lounge7_EventScript_Poltergeist
@@ -55,8 +55,8 @@ BattleFrontier_Lounge7_EventScript_ChooseNewLeftTutorMove::
 	case 1, BattleFrontier_Lounge7_EventScript_Snore
 	case 2, BattleFrontier_Lounge7_EventScript_TerrainPulse
 	case 3, BattleFrontier_Lounge7_EventScript_FireFang
-	case 4, BattleFrontier_Lounge7_EventScript_ThunderFang
-	case 5, BattleFrontier_Lounge7_EventScript_IceFang
+	case 4, BattleFrontier_Lounge7_EventScript_IceFang
+	case 5, BattleFrontier_Lounge7_EventScript_ThunderFang
 	case 6, BattleFrontier_Lounge7_EventScript_GrassyGlide
 	case 7, BattleFrontier_Lounge7_EventScript_Liquidation
 	case 8, BattleFrontier_Lounge7_EventScript_Poltergeist
@@ -89,16 +89,16 @@ BattleFrontier_Lounge7_EventScript_FireFang::
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
+BattleFrontier_Lounge7_EventScript_IceFang::
+	setvar VAR_0x8008, 36
+	setvar VAR_0x8005, MOVE_ICE_FANG
+	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
+
 BattleFrontier_Lounge7_EventScript_ThunderFang::
 	setvar VAR_0x8008, 36
 	setvar VAR_0x8005, MOVE_THUNDER_FANG
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
-
-BattleFrontier_Lounge7_EventScript_IceFang::
-	setvar VAR_0x8008, 36
-	setvar VAR_0x8005, MOVE_ICE_FANG
-	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_GrassyGlide::
@@ -414,15 +414,15 @@ BattleFrontier_Lounge7_Text_FireFangDesc::
 	.string "may flinch or\n"
 	.string "burn the foe.$"
 
-BattleFrontier_Lounge7_Text_ThunderFangDesc::
-	.string "An electric bite\n"
-	.string "that may flinch or\n"
-	.string "paralyze the foe.$"
-
 BattleFrontier_Lounge7_Text_IceFangDesc::
 	.string "An icy bite that\n"
 	.string "may flinch or\n"
 	.string "freeze the foe.$"
+
+BattleFrontier_Lounge7_Text_ThunderFangDesc::
+	.string "An electric bite\n"
+	.string "that may flinch or\n"
+	.string "paralyze the foe.$"
 
 BattleFrontier_Lounge7_Text_GrassyGlideDesc::
 	.string "Glides along grass\n"
