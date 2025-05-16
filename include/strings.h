@@ -625,26 +625,26 @@ extern const u8 BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc[];
 
 // Battle Frontier Move Tutors
-extern const u8 BattleFrontier_Lounge7_Text_SoftboiledDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_SeismicTossDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_DreamEaterDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_MegaPunchDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_MegaKickDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_BodySlamDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_RockSlideDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_CounterDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_ThunderWaveDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_SwordsDanceDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_DefenseCurlDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_SnoreDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_MudSlapDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_SwiftDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_IcyWindDesc[];
 extern const u8 BattleFrontier_Lounge7_Text_EndureDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_PsychUpDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_IcePunchDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_ThunderPunchDesc[];
-extern const u8 BattleFrontier_Lounge7_Text_FirePunchDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_SnoreDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_TerrainPulseDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_FireFangDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_ThunderFangDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_IceFangDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_GrassyGlideDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_LiquidationDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_PoltergeistDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_ScaleShotDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_RoostDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_CorrosiveGasDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_SeismicTossDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_RockSlideDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_SkitterSmackDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_DreamEaterDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_SteelRollerDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_StompingTantrumDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_LashOutDesc[];
+extern const u8 BattleFrontier_Lounge7_Text_MistyExplosionDesc[];
 
 extern const u8 gText_YourPartnerHasRetired[];
 
