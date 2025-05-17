@@ -221,7 +221,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE_BALL",
       "x": 9,
       "y": 1,
       "elevation": 3,
