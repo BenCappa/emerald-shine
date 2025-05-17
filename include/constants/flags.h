@@ -1062,7 +1062,7 @@
 #define FLAG_ITEM_ROUTE_111_SMOOTH_ROCK                             0x3F1
 #define FLAG_ITEM_ROUTE_111_TM_FLASH_CANNON                         0x3F2
 #define FLAG_ITEM_ROUTE_112_TM_FLAME_CHARGE                         0x3F3
-#define FLAG_ITEM_ROUTE_113_MAX_ETHER                               0x3F4
+#define FLAG_ITEM_ROUTE_113_ETHER                                   0x3F4
 #define FLAG_ITEM_ROUTE_113_LURE                                    0x3F5
 #define FLAG_ITEM_ROUTE_114_TM_SKILL_SWAP                           0x3F6
 #define FLAG_ITEM_ROUTE_114_LIGHT_CLAY                              0x3F7
@@ -1134,7 +1134,7 @@
 #define FLAG_ITEM_SHOAL_CAVE_ENTRANCE_BIG_PEARL                     0x439
 #define FLAG_ITEM_SHOAL_CAVE_INNER_ROOM_RARE_CANDY                  0x43A
 #define FLAG_ITEM_SHOAL_CAVE_STAIRS_ROOM_ICE_HEAL                   0x43B
-#define FLAG_ITEM_VICTORY_ROAD_1F_MAX_ELIXIR                        0x43C
+#define FLAG_ITEM_VICTORY_ROAD_1F_ELIXIR                            0x43C
 #define FLAG_ITEM_VICTORY_ROAD_1F_PP_UP                             0x43D
 #define FLAG_ITEM_VICTORY_ROAD_B1F_TM_PLAY_ROUGH                    0x43E
 #define FLAG_ITEM_VICTORY_ROAD_B1F_FULL_RESTORE                     0x43F
@@ -1214,7 +1214,7 @@
 #define FLAG_ITEM_ROUTE_115_PP_UP                                   0x489
 #define FLAG_ITEM_ARTISAN_CAVE_B1F_HP_UP                            0x48A
 #define FLAG_ITEM_ARTISAN_CAVE_1F_CARBOS                            0x48B
-#define FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_MAX_ELIXIR                    0x48C
+#define FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_ELIXIR                        0x48C
 #define FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_FULL_RESTORE                  0x48D
 #define FLAG_ITEM_MAGMA_HIDEOUT_3F_1R_NUGGET                        0x48E
 #define FLAG_ITEM_MAGMA_HIDEOUT_3F_2R_PP_UP                         0x48F

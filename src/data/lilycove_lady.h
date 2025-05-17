@@ -311,9 +311,9 @@ static const u16 sQuizLadyPrizes[] =
     ITEM_GLITTER_MAIL,
     ITEM_BEAD_MAIL,
     ITEM_TROPIC_MAIL,
-    ITEM_MAX_ETHER,
-    ITEM_MAX_ETHER,
-    ITEM_MAX_ETHER,
+    ITEM_ETHER,
+    ITEM_ETHER,
+    ITEM_ETHER,
     ITEM_WATMEL_BERRY,
     ITEM_BELUE_BERRY,
     ITEM_DURIN_BERRY,
@@ -340,14 +340,13 @@ static const u8 *const sFavorLadyRequests[] =
 static const u16 sFavorLadyAcceptedItems_Slippery[] =
 {
     ITEM_REPEL,
-    ITEM_SUPER_REPEL,
-    ITEM_MAX_REPEL,
+    ITEM_LURE,
     ITEM_ANTIDOTE,
     ITEM_PARALYZE_HEAL,
     ITEM_BURN_HEAL,
+    ITEM_ICE_HEAL,
     ITEM_BELUE_BERRY,
     ITEM_AWAKENING,
-    ITEM_ICE_HEAL,
     ITEM_REVIVE,
     ITEM_MAX_REVIVE,
     ITEM_ENERGY_POWDER,
@@ -356,7 +355,7 @@ static const u16 sFavorLadyAcceptedItems_Slippery[] =
 
 static const u16 sFavorLadyAcceptedItems_Roundish[] =
 {
-    ITEM_FLUFFY_TAIL,
+    ITEM_POKE_DOLL,
     ITEM_PEARL,
     ITEM_BIG_PEARL,
     ITEM_HARD_STONE,
@@ -396,17 +395,17 @@ static const u16 sFavorLadyAcceptedItems_Whamish[] =
 
 static const u16 sFavorLadyAcceptedItems_Shiny[] =
 {
-    ITEM_HEAL_POWDER,
-    ITEM_X_SPEED,
-    ITEM_X_ATTACK,
-    ITEM_X_DEFENSE,
-    ITEM_BLUE_FLUTE,
-    ITEM_YELLOW_FLUTE,
-    ITEM_RED_FLUTE,
-    ITEM_BLACK_FLUTE,
-    ITEM_WHITE_FLUTE,
-    ITEM_NUGGET,
+    ITEM_FIRE_STONE,
+    ITEM_WATER_STONE,
+    ITEM_THUNDER_STONE,
+    ITEM_LEAF_STONE,
+    ITEM_ICE_STONE,
+    ITEM_SHINY_STONE,
+    ITEM_DUSK_STONE,
+    ITEM_DAWN_STONE,
+    ITEM_MOON_STONE,
     ITEM_SUN_STONE,
+    ITEM_NUGGET,
     ITEM_STARDUST,
     ITEM_STAR_PIECE,
     ITEM_PEARL,
@@ -424,9 +423,9 @@ static const u16 sFavorLadyAcceptedItems_Sticky[] =
     ITEM_ENERGY_ROOT,
     ITEM_FULL_RESTORE,
     ITEM_MAX_POTION,
-    ITEM_DIRE_HIT,
-    ITEM_X_ACCURACY,
-    ITEM_GUARD_SPEC,
+    ITEM_SERIOUS_MINT,
+    ITEM_ADAMANT_MINT,
+    ITEM_MODEST_MINT,
     ITEM_WATMEL_BERRY,
     ITEM_LEFTOVERS,
     ITEM_TINY_MUSHROOM,
@@ -463,8 +462,8 @@ static const u16 sFavorLadyPrizes[] =
 {
     ITEM_LUXURY_BALL,
     ITEM_NUGGET,
-    ITEM_PROTEIN,
+    ITEM_ELIXIR,
     ITEM_HEART_SCALE,
     ITEM_RARE_CANDY,
-    ITEM_PP_MAX
+    ITEM_PP_UP
 };
