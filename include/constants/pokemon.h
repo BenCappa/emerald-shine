@@ -288,6 +288,7 @@ enum EvolutionMethods {
     EVO_ITEM_NIGHT,                      // specified item is used on Pokémon, is night
     EVO_ITEM_DAY,                        // specified item is used on Pokémon, is day
     EVO_ITEM_HOLD,                       // Pokémon levels up, holds specified item
+    EVO_LEVEL_STRANGE_SOUVENIR,          // Pokémon reaches the specified level, holds strange souvenir
     EVO_LEVEL_FOG,                       // Pokémon reaches the specified level during fog in the overworld
     EVO_MOVE_TWO_SEGMENT,                // Pokémon levels up, knows specified move, has a personality value with a modulus of 0
     EVO_MOVE_THREE_SEGMENT,              // Pokémon levels up, knows specified move, has a personality value with a modulus of 1-99

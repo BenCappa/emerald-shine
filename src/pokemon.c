@@ -4857,6 +4857,10 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
                     consumeItem = TRUE;
                 }
                 break;
+            case EVO_LEVEL_STRANGE_SOUVENIR:
+                if (evolutions[i].param <= level && heldItem == ITEM_STRANGE_SOUVENIR)
+                    targetSpecies = evolutions[i].targetSpecies;
+                break;
             case EVO_USE_MOVE_TWENTY_TIMES:
                 if (evolutionTracker >= 20)
                     targetSpecies = evolutions[i].targetSpecies;
