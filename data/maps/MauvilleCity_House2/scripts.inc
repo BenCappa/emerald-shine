@@ -6,12 +6,12 @@ MauvilleCity_House2_EventScript_Woman::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_COIN_CASE, MauvilleCity_House2_EventScript_ReceivedCoinCase
 	msgbox MauvilleCity_House2_Text_BuyHarborMailAtSlateport, MSGBOX_DEFAULT
-	checkitem ITEM_SODA_POP
-	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_House2_EventScript_AskToTradeForHarborMail
+	checkitem ITEM_MOOMOO_MILK
+	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_House2_EventScript_AskToTradeForMoomooMilk
 	release
 	end
 
-MauvilleCity_House2_EventScript_AskToTradeForHarborMail::
+MauvilleCity_House2_EventScript_AskToTradeForMoomooMilk::
 	playse SE_PIN
 	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
 	waitmovement 0
@@ -26,7 +26,7 @@ MauvilleCity_House2_EventScript_AcceptTrade::
 	msgbox MauvilleCity_House2_Text_IllTradeYouCoinCase, MSGBOX_DEFAULT
 	giveitem ITEM_COIN_CASE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	removeitem ITEM_SODA_POP
+	removeitem ITEM_MOOMOO_MILK
 	setflag FLAG_RECEIVED_COIN_CASE
 	goto MauvilleCity_House2_EventScript_ReceivedCoinCase
 	end
@@ -44,12 +44,12 @@ MauvilleCity_House2_EventScript_DeclineTrade::
 MauvilleCity_House2_Text_BuyHarborMailAtSlateport:
 	.string "I'm so thirsty…\p"
 	.string "Water's good and all I'm just dying for\n"
-	.string "a Soda Pop right now.\p"
-	.string "Like the ones they sell on the\n"
+	.string "some Moomoo Milk right now.\p"
+	.string "Like the kind they sell on the\n"
 	.string "Slateport Beach…$"
 
 MauvilleCity_House2_Text_TradeHarborMailForCoinCase:
-	.string "Oh! You have a some Soda?\n"
+	.string "Oh! You have a some Moomoo Milk?\n"
 	.string "Can I please have it? I'm desperate!\l"
 	.string "How 'bout a trade for this Coin Case?$"
 
@@ -58,7 +58,7 @@ MauvilleCity_House2_Text_IllTradeYouCoinCase:
 	.string "Here's that Coin Case I promised you.$"
 
 MauvilleCity_House2_Text_UseCoinCaseAtGameCorner:
-	.string "That Soda Pop totally hit the spot.\n"
+	.string "That Moomoo Milk totally hit the spot.\n"
 	.string "I am getting a bit hungry though…$"
 
 MauvilleCity_House2_Text_ThatsDisappointing:
