@@ -1098,12 +1098,12 @@
 #define NUM_TRENDY_SAYINGS                                                 33
 
 // Special Berry Masters Wife phrases
-#define NOT_SPECIAL_PHRASE          0
-#define PHRASE_GREAT_BATTLE         1
-#define PHRASE_CHALLENGE_CONTEST    2
-#define PHRASE_OVERWHELMING_LATIAS  3
-#define PHRASE_COOL_LATIOS          4
-#define PHRASE_SUPER_HUSTLE         5
+#define NOT_SPECIAL_PHRASE     0
+#define PHRASE_GREAT_POWER     1
+#define PHRASE_ROMANTIC_SONG   2
+#define PHRASE_PRETTY_GIRL     3
+#define PHRASE_ALMOST_DONE     4
+#define PHRASE_I_DO            5
 
 #define EC_NUM_ALPHABET_GROUPS 27 // 26 (1 for each letter) + 1 (Others)
 

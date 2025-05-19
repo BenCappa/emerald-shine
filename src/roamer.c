@@ -273,8 +273,14 @@ bool8 TryStartRoamerEncounter(void)
 void UpdateRoamerHPStatus(struct Pokemon *mon)
 {
     u32 status = GetMonData(mon, MON_DATA_STATUS);
+    u32 currentHP = GetMonData(mon, MON_DATA_HP);
+    u32 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    u32 newHP = currentHP + (maxHP / 4);
+    
+    if (newHP > maxHP)
+        newHP = maxHP;
 
-    ROAMER(gEncounteredRoamerIndex)->hp = GetMonData(mon, MON_DATA_HP);
+    ROAMER(gEncounteredRoamerIndex)->hp = newHP;
     ROAMER(gEncounteredRoamerIndex)->statusA = status;
     ROAMER(gEncounteredRoamerIndex)->statusB = status >> 8;
 

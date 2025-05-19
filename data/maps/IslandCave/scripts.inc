@@ -30,12 +30,13 @@ IslandCave_EventScript_HideRegiEntrance::
 IslandCave_OnTransition:
 	setflag FLAG_LANDMARK_ISLAND_CAVE
 	call IslandCave_EventScript_ClearSteps
-	call_if_unset FLAG_DEFEATED_REGICE, IslandCave_EventScript_ShowRegice
+	goto_if_set FLAG_CAUGHT_REGICE, IslandCave_EventScript_HideRegice
+	goto_if_set FLAG_DAILY_BATTLED_REGICE, IslandCave_EventScript_HideRegice
 	end
 
-IslandCave_EventScript_ShowRegice::
-	clearflag FLAG_HIDE_REGICE
-	return
+IslandCave_EventScript_HideRegice::
+	setflag FLAG_HIDE_REGICE
+	end
 
 IslandCave_EventScript_OpenRegiEntrance::
 	setmetatile 7, 19, METATILE_Cave_SealedChamberEntrance_TopLeft, TRUE
@@ -100,19 +101,18 @@ IslandCave_EventScript_Regice::
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IslandCave_EventScript_DefeatedRegice
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, IslandCave_EventScript_RanFromRegice
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, IslandCave_EventScript_RanFromRegice
-	setflag FLAG_DEFEATED_REGICE
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AncientTomb_EventScript_DefeatedRegice
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, AncientTomb_EventScript_CaughtRegice
 	release
 	end
 
-IslandCave_EventScript_DefeatedRegice::
-	setflag FLAG_DEFEATED_REGICE
-	goto Common_EventScript_RemoveStaticPokemon
-	end
-
-IslandCave_EventScript_RanFromRegice::
+AncientTomb_EventScript_DefeatedRegice::
+	setflag FLAG_DAILY_BATTLED_REGICE
 	setvar VAR_0x8004, SPECIES_REGICE
 	goto Common_EventScript_LegendaryFlewAway
+	end
+
+AncientTomb_EventScript_CaughtRegice::
+	setflag FLAG_CAUGHT_REGICE
+	release
 	end

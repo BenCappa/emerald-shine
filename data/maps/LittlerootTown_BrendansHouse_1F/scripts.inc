@@ -396,15 +396,13 @@ PlayersHouse_1F_Text_TicketFromBrineyCameForYou:
 	.string "It's been a while since I saw you,\n"
 	.string "but you look…stronger, somehow.\p"
 	.string "That's the impression I get.\n"
-	.string "But your old man hasn't given up yet!\p"
-	.string "Oh, yes, I have something for you.\n"
-	.string "This came to you from someone named\l"
-	.string "Mr. Briney.$"
-
-PlayersHouse_1F_Text_PortsInSlateportLilycove:
-	.string "Micheal: Hm, a Ticket for a ferry?\p"
-	.string "If I recall, there are ferry ports in\n"
-	.string "Slateport and Lilycove.$"
+	.string "But don't think I've given up yet!\p"
+	.string "Oh, yeah, I have message for you.\n"
+	.string "Someone named Scott wanted to meet\l"
+	.string "up on a boat or something.\p"
+	.string "Aren't there, like, ferry ports in\n"
+	.string "Slateport and Lilycove?\p"
+	.string "Maybe go see what that's about.$"
 
 PlayersHouse_1F_Text_BetterGetBackToGym:
 	.string "I'd better get back to Petalburg Gym.\p"
@@ -425,7 +423,7 @@ PlayersHouse_1F_Text_LatiEmergencyNewsFlash:
 	.string "In various Hoenn locales, there have\n"
 	.string "been reports of a BZZT…colored\l"
 	.string "Pokémon galloping around.\p"
-	.string "The identity of this Pokémon is\n"
+	.string "The identity of this noble steed is\n"
 	.string "currently unknown.\p"
 	.string "We now return you to the regular\n"
 	.string "movie program.$"

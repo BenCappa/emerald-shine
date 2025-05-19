@@ -692,18 +692,18 @@ static const u8 sAlphabetGroupIdMap[NUM_ALPHABET_ROWS][NUM_ALPHABET_COLUMNS] = {
 };
 
 static const u16 sMysteryGiftPhrase[NUM_QUESTIONNAIRE_WORDS] = {
-    EC_WORD_LINK,
-    EC_WORD_TOGETHER,
-    EC_WORD_WITH,
-    EC_WORD_ALL,
+    EC_WORD_I_CHOOSE_YOU,
+    EC_WORD_ALWAYS,
+    EC_WORD_AND,
+    EC_WORD_FOREVER,
 };
 
 static const u16 sBerryMasterWifePhrases[][2] = {
-    [PHRASE_GREAT_BATTLE - 1]        = {EC_WORD_GREAT, EC_WORD_BATTLE},
-    [PHRASE_CHALLENGE_CONTEST - 1]   = {EC_WORD_CHALLENGE, EC_WORD_CONTEST},
-    [PHRASE_OVERWHELMING_LATIAS - 1] = {EC_WORD_OVERWHELMING, EC_POKEMON(LATIAS)},
-    [PHRASE_COOL_LATIOS - 1]         = {EC_WORD_COOL, EC_POKEMON(LATIOS)},
-    [PHRASE_SUPER_HUSTLE - 1]        = {EC_WORD_SUPER, EC_WORD_HUSTLE},
+    [PHRASE_GREAT_POWER - 1]   = {EC_WORD_GREAT, EC_WORD_POWER},
+    [PHRASE_ROMANTIC_SONG - 1] = {EC_WORD_ROMANTIC, EC_WORD_SONG},
+    [PHRASE_PRETTY_GIRL - 1]   = {EC_WORD_PRETTY, EC_WORD_GIRL},
+    [PHRASE_ALMOST_DONE - 1]   = {EC_WORD_ALMOST, EC_WORD_DONE},
+    [PHRASE_I_DO - 1]          = {EC_WORD_I, EC_WORD_DO},
 };
 
 static const u16 sTriangleCursor_Pal[] = INCBIN_U16("graphics/easy_chat/triangle_cursor.gbapal");

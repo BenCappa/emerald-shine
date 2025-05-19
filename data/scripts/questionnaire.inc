@@ -31,17 +31,12 @@ Questionnaire_EventScript_PlayerInputMysteryEventPhrase::
 
 Questionnaire_EventScript_PlayerInputMysteryGiftPhrase::
 	goto_if_unset FLAG_SYS_POKEDEX_GET, Questionnaire_EventScript_ThankYou
-	goto_if_set FLAG_SYS_MYSTERY_GIFT_ENABLE, Questionnaire_EventScript_ThankYou
-	applymovement VAR_0x8008, Common_Movement_FaceDown
-	waitmovement 0
-	playse SE_PIN
-	applymovement VAR_0x8008, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement VAR_0x8008, Common_Movement_Delay48
-	waitmovement 0
+	goto_if_set FLAG_RECEIVED_AURORA_TICKET, Questionnaire_EventScript_ThankYou
 	msgbox Questionnaire_Text_YouKnowThoseWordsGift, MSGBOX_DEFAULT
-	setflag FLAG_SYS_MYSTERY_GIFT_ENABLE
-	msgbox Questionnaire_Text_YouCanAccessMysteryGift, MSGBOX_DEFAULT
+	giveitem ITEM_AURORA_TICKET
+	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	setflag FLAG_RECEIVED_AURORA_TICKET
+	msgbox MysteryGift_Text_TryUsingItAtLilycovePort, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -50,8 +45,6 @@ Questionnaire_EventScript_Release::
 	end
 
 Questionnaire_EventScript_ThankYou::
-	applymovement VAR_0x8008, Common_Movement_FaceDown
-	waitmovement 0
 	msgbox Questionnaire_Text_ThankYou, MSGBOX_DEFAULT
 	releaseall
 	end

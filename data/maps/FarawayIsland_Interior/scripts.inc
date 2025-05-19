@@ -37,11 +37,11 @@ FarawayIsland_Interior_EventScript_TryRemoveMew::
 FarawayIsland_Interior_OnTransition:
 	setvar VAR_FARAWAY_ISLAND_STEP_COUNTER, 0
 	setvar VAR_TEMP_1, 1
-	call_if_unset FLAG_CAUGHT_MEW, FarawayIsland_Interior_EventScript_TryShowMew
+	call_if_unset FLAG_DAILY_BATTLED_MEW, FarawayIsland_Interior_EventScript_TryShowMew
 	end
 
 FarawayIsland_Interior_EventScript_TryShowMew::
-	goto_if_set FLAG_DEFEATED_MEW, Common_EventScript_NopReturn
+	goto_if_set FLAG_CAUGHT_MEW, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_MEW
 	setvar VAR_TEMP_1, 0
 	return
@@ -129,7 +129,8 @@ FarawayIsland_Interior_EventScript_Mew::
 	special DestroyMewEmergingGrassSprite
 	delay 40
 	waitmoncry
-	seteventmon SPECIES_MEW, 30
+	@ seteventmon SPECIES_MEW, 30
+	createmon 1, 0, SPECIES_MEW, 30, move1=MOVE_POUND, move2=MOVE_REFLECT_TYPE, move3=MOVE_ANCIENT_POWER, move4=MOVE_METRONOME
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate
@@ -144,7 +145,7 @@ FarawayIsland_Interior_EventScript_Mew::
 	end
 
 FarawayIsland_Interior_EventScript_MewDefeated::
-	setflag FLAG_DEFEATED_MEW
+	setflag FLAG_DAILY_BATTLED_MEW
 	setvar VAR_0x8004, SPECIES_MEW
 	goto Common_EventScript_LegendaryFlewAway
 	end

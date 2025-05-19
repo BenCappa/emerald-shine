@@ -1,4 +1,4 @@
-.set LOCALID_LATI, 2
+.set LOCALID_STEED, 2
 
 SouthernIsland_Interior_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, SouthernIsland_Interior_OnResume
@@ -6,29 +6,29 @@ SouthernIsland_Interior_MapScripts::
 	.byte 0
 
 SouthernIsland_Interior_OnResume:
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SouthernIsland_Interior_EventScript_TryRemoveLati
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SouthernIsland_Interior_EventScript_TryRemoveSteed
 	end
 
-SouthernIsland_Interior_EventScript_TryRemoveLati::
+SouthernIsland_Interior_EventScript_TryRemoveSteed::
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject LOCALID_LATI
+	removeobject LOCALID_STEED
 	return
 
 SouthernIsland_Interior_OnTransition:
-	call_if_eq VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetUpLatios
-	call_if_ne VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetUpLatias
+	call_if_eq VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetUpSpectrier
+	call_if_ne VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetUpGlastrier
 	call SouthernIsland_Interior_EventScript_SetUpPlayerGfx
 	end
 
-SouthernIsland_Interior_EventScript_SetUpLatios::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LATIOS
-	setvar VAR_TEMP_4, SPECIES_LATIOS
+SouthernIsland_Interior_EventScript_SetUpSpectrier::
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_SPECIES(SPECTRIER)
+	setvar VAR_TEMP_4, SPECIES_SPECTRIER
 	return
 
-SouthernIsland_Interior_EventScript_SetUpLatias::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LATIAS
-	setvar VAR_TEMP_4, SPECIES_LATIAS
+SouthernIsland_Interior_EventScript_SetUpGlastrier::
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_SPECIES(GLASTRIER)
+	setvar VAR_TEMP_4, SPECIES_GLASTRIER
 	return
 
 SouthernIsland_Interior_EventScript_SetUpPlayerGfx::
@@ -45,18 +45,18 @@ SouthernIsland_Interior_EventScript_SetMayGfx::
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
-SouthernIsland_Interior_EventScript_TryLatiEncounter::
+SouthernIsland_Interior_EventScript_TrySteedEncounter::
 	lockall
 	setvar VAR_0x8008, 12  @ Player's Y coordinate. Not read
-	goto SouthernIsland_Interior_EventScript_Lati
+	goto SouthernIsland_Interior_EventScript_Steed
 	end
 
-SouthernIsland_Interior_EventScript_Lati::
+SouthernIsland_Interior_EventScript_Steed::
 	goto_if_set FLAG_TEMP_2, SouthernIsland_Interior_EventScript_Sign
-	goto_if_set FLAG_DEFEATED_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Sign
-	goto_if_set FLAG_CAUGHT_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Sign
+	goto_if_set FLAG_DAILY_BATTLED_NOBLE_STEED, SouthernIsland_Interior_EventScript_Sign
+	goto_if_set FLAG_CAUGHT_NOBLE_STEED, SouthernIsland_Interior_EventScript_Sign
 	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, SouthernIsland_Interior_EventScript_Sign
-	setflag FLAG_ENCOUNTERED_LATIAS_OR_LATIOS
+	setflag FLAG_ENCOUNTERED_NOBLE_STEED
 	setflag FLAG_TEMP_2
 	special SpawnCameraObject
 	applymovement OBJ_EVENT_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanUp
@@ -66,37 +66,37 @@ SouthernIsland_Interior_EventScript_Lati::
 	playmoncry VAR_TEMP_4, CRY_MODE_NORMAL
 	delay 30
 	waitmoncry
-	addobject LOCALID_LATI
+	addobject LOCALID_STEED
 	delay 30
 	applymovement OBJ_EVENT_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanDown
-	applymovement LOCALID_LATI, SouthernIsland_Interior_Movement_LatiApproach
+	applymovement LOCALID_STEED, SouthernIsland_Interior_Movement_SteedApproach
 	waitmovement 0
 	delay 50
 	special RemoveCameraObject
-	setvar VAR_LAST_TALKED, LOCALID_LATI
-	call_if_eq VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetLatiosBattleVars
-	call_if_ne VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetLatiasBattleVars
+	setvar VAR_LAST_TALKED, LOCALID_STEED
+	call_if_eq VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetSpectrierBattleVars
+	call_if_ne VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetGlastrierBattleVars
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	setflag FLAG_NO_RUNNING
 	special BattleSetup_StartLatiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_NO_RUNNING
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SouthernIsland_Interior_EventScript_LatiDefeated
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SouthernIsland_Interior_EventScript_RanFromLati
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SouthernIsland_Interior_EventScript_RanFromLati
-	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SouthernIsland_Interior_EventScript_DefeatedSteed
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SouthernIsland_Interior_EventScript_CaughtSteed
 	releaseall
 	end
 
-SouthernIsland_Interior_EventScript_LatiDefeated::
-	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
+SouthernIsland_Interior_EventScript_DefeatedSteed::
+	setflag FLAG_DAILY_BATTLED_NOBLE_STEED
 	copyvar VAR_0x8004, VAR_TEMP_4
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-SouthernIsland_Interior_EventScript_RanFromLati::
-	copyvar VAR_0x8004, VAR_TEMP_4
-	goto Common_EventScript_LegendaryFlewAway
+SouthernIsland_Interior_EventScript_CaughtSteed::
+	setflag FLAG_CAUGHT_NOBLE_STEED
+	releaseall
 	end
 
 SouthernIsland_Interior_EventScript_Sign::
@@ -104,12 +104,12 @@ SouthernIsland_Interior_EventScript_Sign::
 	releaseall
 	end
 
-SouthernIsland_Interior_EventScript_SetLatiosBattleVars::
-	seteventmon SPECIES_LATIOS, 50, ITEM_SOUL_DEW
+SouthernIsland_Interior_EventScript_SetSpectrierBattleVars::
+	seteventmon SPECIES_SPECTRIER, 50
 	return
 
-SouthernIsland_Interior_EventScript_SetLatiasBattleVars::
-	seteventmon SPECIES_LATIAS, 50, ITEM_SOUL_DEW
+SouthernIsland_Interior_EventScript_SetGlastrierBattleVars::
+	seteventmon SPECIES_GLASTRIER, 50
 	return
 
 SouthernIsland_Interior_Movement_CameraPanUp:
@@ -132,7 +132,7 @@ SouthernIsland_Interior_Movement_CameraPanDown:
 	walk_in_place_faster_up
 	step_end
 
-SouthernIsland_Interior_Movement_LatiApproach:
+SouthernIsland_Interior_Movement_SteedApproach:
 	walk_down
 	walk_down
 	walk_down

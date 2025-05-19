@@ -11,13 +11,13 @@ Route103_OnTransition:
 	end
 
 Route103_OnLoad:
-	call_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_OpenAlteringCave
+@	call_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_OpenAlteringCave
 	end
 
-Route103_EventScript_OpenAlteringCave::
-	setmetatile 45, 5, METATILE_General_CaveEntrance_Top, TRUE
-	setmetatile 45, 6, METATILE_General_CaveEntrance_Bottom, FALSE
-	return
+@Route103_EventScript_OpenAlteringCave::
+@	setmetatile 45, 5, METATILE_General_CaveEntrance_Top, TRUE
+@	setmetatile 45, 6, METATILE_General_CaveEntrance_Bottom, FALSE
+@	return
 
 Route103_EventScript_Rival::
 	lockall

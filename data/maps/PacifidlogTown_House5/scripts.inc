@@ -30,7 +30,7 @@ PacifidlogTown_House5_Text_MirageIslandAppearDependingOnGracidea:
 	.string "Mirage Island…\p"
 	.string "There are rumors of an island appearing\n"
 	.string "on Route 130 to certain Trainers who\l"
-	.string "carry a Gracidea flower in bloom."
+	.string "carry a Gracidea flower in bloom.p"
 	.string "I think it's just a fun folktale used to\n"
 	.string "sell flowers.\p"
 	.string "Such a place couldn't exist… right?$"

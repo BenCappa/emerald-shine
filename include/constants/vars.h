@@ -69,8 +69,8 @@
 #define VAR_FRONTIER_GAMBLER_AMOUNT_BET                  0x4032
 #define VAR_FRONTIER_GAMBLER_STATE                       0x4033
 
-#define VAR_DEOXYS_ROCK_STEP_COUNT                       0x4034
-#define VAR_DEOXYS_ROCK_LEVEL                            0x4035
+#define VAR_CELEBI_ROCK_STEP_COUNT                       0x4034
+#define VAR_CELEBI_ROCK_LEVEL                            0x4035
 #define VAR_PC_BOX_TO_SEND_MON                           0x4036
 #define VAR_ABNORMAL_WEATHER_LOCATION                    0x4037
 #define VAR_ABNORMAL_WEATHER_STEP_COUNTER                0x4038
@@ -230,7 +230,7 @@
 #define VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE               0x40D2
 #define VAR_DEX_UPGRADE_JOHTO_STARTER_STATE              0x40D3
 #define VAR_SS_TIDAL_SCOTT_STATE                         0x40D4 // Always equal to FLAG_MET_SCOTT_ON_SS_TIDAL
-#define VAR_ROAMER_POKEMON                               0x40D5 // 0 = Latias, 1 = Latios
+#define VAR_ROAMER_POKEMON                               0x40D5 // 0 = Latias/Glastrier, 1 = Latios/Spectrier
 #define VAR_TRAINER_HILL_IS_ACTIVE                       0x40D6
 #define VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE                 0x40D7
 #define VAR_SOOTOPOLIS_WALLACE_STATE                     0x40D8

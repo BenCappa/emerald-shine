@@ -9,12 +9,9 @@ Questionnaire_Text_ThankYou::
 	.string "future reference.$"
 
 Questionnaire_Text_YouKnowThoseWordsGift::
-	.string "Oh, hello!\n"
-	.string "You know those words?\p"
-	.string "That means you must know about\n"
-	.string "the MYSTERY GIFT.\p"
-	.string "From now on, you should be\n"
-	.string "receiving MYSTERY GIFTS!$"
+	.string "What's this?\n"
+	.string "A ticket appeared in your hand.\p"
+	.string "Where did it come from?$"
 
 Questionnaire_Text_YouCanAccessMysteryGift::
 	.string "Once you save your game, you can\n"
@@ -38,6 +35,6 @@ MysteryGift_Text_TheresATicketForYou::
 
 MysteryGift_Text_TryUsingItAtLilycovePort::
 	.string "It appears to be for use at\n"
-	.string "the LILYCOVE CITY port.\p"
+	.string "the Lilycove City port.\p"
 	.string "Why not give it a try and see what\n"
 	.string "it is about?$"

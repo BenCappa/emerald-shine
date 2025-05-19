@@ -27,12 +27,13 @@ SkyPillar_Top_EventScript_SetCleanLayout::
 	return
 
 SkyPillar_Top_EventScript_TryShowRayquaza::
-	call_if_unset FLAG_DEFEATED_RAYQUAZA, SkyPillar_Top_EventScript_ShowRayquaza
+	goto_if_set FLAG_CAUGHT_RAYQUAZA, SkyPillar_Top_EventScript_HideRayquaza
+	goto_if_set FLAG_DAILY_BATTLED_RAYQUAZA, SkyPillar_Top_EventScript_HideRayquaza
 	return
 
-SkyPillar_Top_EventScript_ShowRayquaza::
-	clearflag FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL
-	return
+SkyPillar_Top_EventScript_HideRayquaza::
+	setflag FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL
+	end
 
 SkyPillar_Top_OnWarp:
 	map_script_2 VAR_SKY_PILLAR_STATE, 0, SkyPillar_Top_EventScript_RayquazaFaceDown
@@ -51,40 +52,34 @@ SkyPillar_Top_EventScript_Rayquaza::
 	@ setwildbattle SPECIES_RAYQUAZA, 70
 	createmon 1, 0, SPECIES_RAYQUAZA, 70, move1=MOVE_EXTREME_SPEED, move2=MOVE_DRAGON_PULSE, move3=MOVE_DRAGON_DANCE, move4=MOVE_FLY
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	setflag FLAG_NO_RUNNING
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_NO_RUNNING
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SkyPillar_Top_EventScript_DefeatedRayquaza
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SkyPillar_Top_EventScript_RanFromRayquaza
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SkyPillar_Top_EventScript_RanFromRayquaza
-	setflag FLAG_DEFEATED_RAYQUAZA
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, SkyPillar_Top_EventScript_CaughtRayquaza
 	releaseall
 	end
 
 SkyPillar_Top_EventScript_DefeatedRayquaza::
-	setflag FLAG_DEFEATED_RAYQUAZA
-	goto SkyPillar_Top_EventScript_DefeatedRayquaza2
-	end
-
-SkyPillar_Top_EventScript_RanFromRayquaza::
+	setflag FLAG_DAILY_BATTLED_RAYQUAZA
 	setvar VAR_0x8004, SPECIES_RAYQUAZA
-	goto SkyPillar_Top_EventScript_RanFromRayquaza2
+	goto SkyPillar_Top_EventScript_DefeatedRayquaza2
 	end
 
 SkyPillar_Top_EventScript_DefeatedRayquaza2::
 	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers FADE_FROM_BLACK
+	bufferspeciesname STR_VAR_1, VAR_0x8004
+	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SkyPillar_Top_EventScript_RanFromRayquaza2::
-	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject VAR_LAST_TALKED
-	fadescreenswapbuffers FADE_FROM_BLACK
-	bufferspeciesname STR_VAR_1, VAR_0x8004
-	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
+SkyPillar_Top_EventScript_CaughtRayquaza::
+	setflag FLAG_CAUGHT_RAYQUAZA
 	releaseall
 	end
 

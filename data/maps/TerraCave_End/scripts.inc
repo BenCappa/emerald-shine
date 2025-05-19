@@ -16,13 +16,15 @@ TerraCave_End_EventScript_TryRemoveGroudon::
 	return
 
 TerraCave_End_OnTransition:
-	call_if_unset FLAG_DEFEATED_GROUDON, TerraCave_End_EventScript_ShowGroudon
+	setvar VAR_TEMP_1, 1
+	goto_if_set FLAG_CAUGHT_GROUDON, TerraCave_End_EventScript_HideGroudon
+	goto_if_set FLAG_DAILY_BATTLED_GROUDON, TerraCave_End_EventScript_HideGroudon
 	end
 
-TerraCave_End_EventScript_ShowGroudon::
-	clearflag FLAG_HIDE_TERRA_CAVE_GROUDON
-	setvar VAR_TEMP_1, 1
-	return
+TerraCave_End_EventScript_HideGroudon::
+	setflag FLAG_HIDE_TERRA_CAVE_GROUDON
+	setvar VAR_TEMP_1, 0
+	end
 
 TerraCave_End_EventScript_Groudon::
 	lockall
@@ -35,31 +37,33 @@ TerraCave_End_EventScript_Groudon::
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_GROUDON
-	@ setwildbattle SPECIES_GROUDON, 70, ITEM_RED_ORB
-	createmon 1, 0, SPECIES_GROUDON, 70, ITEM_RED_ORB, move1=MOVE_LAVA_PLUME, move2=MOVE_REST, move3=MOVE_FISSURE, move4=MOVE_PRECIPICE_BLADES
+	@ setwildbattle SPECIES_GROUDON, 60, ITEM_RED_ORB
+	createmon 1, 0, SPECIES_GROUDON, 60, ITEM_RED_ORB, move1=MOVE_LAVA_PLUME, move2=MOVE_REST, move3=MOVE_FISSURE, move4=MOVE_PRECIPICE_BLADES
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	setflag FLAG_NO_RUNNING
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_NO_RUNNING
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, TerraCave_End_EventScript_DefeatedGroudon
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, TerraCave_End_EventScript_RanFromGroudon
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, TerraCave_End_EventScript_RanFromGroudon
-	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
-	setflag FLAG_DEFEATED_GROUDON
-	releaseall
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, TerraCave_End_EventScript_CaughtGroudon
+	setvar VAR_0x8004, SPECIES_GROUDON
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 TerraCave_End_EventScript_DefeatedGroudon::
+	setflag FLAG_DAILY_BATTLED_GROUDON
 	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
-	setflag FLAG_DEFEATED_GROUDON
-	goto Common_EventScript_RemoveStaticPokemon
-	end
-
-TerraCave_End_EventScript_RanFromGroudon::
 	setvar VAR_0x8004, SPECIES_GROUDON
 	goto Common_EventScript_LegendaryFlewAway
+	end
+
+TerraCave_End_EventScript_CaughtGroudon::
+	setflag FLAG_CAUGHT_GROUDON
+	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	releaseall
 	end
 
 TerraCave_End_Movement_GroudonApproach:

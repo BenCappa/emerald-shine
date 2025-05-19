@@ -53,9 +53,9 @@ SealedChamber_OuterRoom_Braille_DigHere:
 SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth:
 	brailleformat 0, 0, 29, 19, 3, 3
 	.braille "FIRST COMES\n"
-	.braille "WAILORD.\n"
+	.braille "KINGDRA.\n"
 	.braille "LAST COMES\n"
-	.braille "RELICANTH.$"
+	.braille "CARBINK.$"
 
 SealedChamber_InnerRoom_Braille_InThisCaveWeHaveLived:
 	brailleformat 2, 0, 26, 19, 5, 3

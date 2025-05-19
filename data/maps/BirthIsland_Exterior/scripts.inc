@@ -1,4 +1,4 @@
-.set LOCALID_DEOXYS, 2
+.set LOCALID_CELEBI, 2
 
 @ Note: LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK is a local id for this map used elsewhere. It's defined in event_objects.h
 
@@ -13,23 +13,23 @@ BirthIsland_Exterior_OnReturnToField:
 	end
 
 BirthIsland_Exterior_OnTransition:
-	setflag FLAG_MAP_SCRIPT_CHECKED_DEOXYS
+	setflag FLAG_MAP_SCRIPT_CHECKED_CELEBI
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	setvar VAR_DEOXYS_ROCK_STEP_COUNT, 0
-	setvar VAR_DEOXYS_ROCK_LEVEL, 0
-	call_if_set FLAG_BATTLED_DEOXYS, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
-	call_if_unset FLAG_BATTLED_DEOXYS, BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle
+	setvar VAR_CELEBI_ROCK_STEP_COUNT, 0
+	setvar VAR_CELEBI_ROCK_LEVEL, 0
+	call_if_set FLAG_CAUGHT_CELEBI, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
+	call_if_unset FLAG_CAUGHT_CELEBI, BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle
 	end
 
 BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle::
-	setflag FLAG_HIDE_DEOXYS
-	setflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
+	setflag FLAG_HIDE_CELEBI
+	setflag FLAG_HIDE_BIRTH_ISLAND_CELEBI_TRIANGLE
 	return
 
 BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle::
-	goto_if_set FLAG_DEFEATED_DEOXYS, Common_EventScript_NopReturn
-	clearflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
-	clearflag FLAG_DEOXYS_ROCK_COMPLETE
+	goto_if_set FLAG_CAUGHT_CELEBI, Common_EventScript_NopReturn
+	clearflag FLAG_HIDE_BIRTH_ISLAND_CELEBI_TRIANGLE
+	clearflag FLAG_CELEBI_ROCK_COMPLETE
 	return
 
 BirthIsland_Exterior_OnResume:
@@ -39,7 +39,7 @@ BirthIsland_Exterior_OnResume:
 BirthIsland_Exterior_EventScript_TryRemoveDeoxys::
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject LOCALID_DEOXYS
+	removeobject LOCALID_CELEBI
 	return
 
 BirthIsland_Exterior_EventScript_Triangle::
@@ -77,15 +77,16 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
 	playbgm MUS_RG_ENCOUNTER_DEOXYS, FALSE
 	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
-	addobject LOCALID_DEOXYS
-	applymovement LOCALID_DEOXYS, BirthIsland_Exterior_Movement_DeoxysApproach
+	addobject LOCALID_CELEBI
+	applymovement LOCALID_CELEBI, BirthIsland_Exterior_Movement_DeoxysApproach
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_DEOXYS_NORMAL, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_CELEBI, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	setvar VAR_LAST_TALKED, LOCALID_DEOXYS
-	seteventmon SPECIES_DEOXYS_NORMAL, 30
+	setvar VAR_LAST_TALKED, LOCALID_CELEBI
+	@ seteventmon SPECIES_CELEBI, 30
+	createmon 1, 0, SPECIES_CELEBI, 30, move1=MOVE_CONFUSION, move2=MOVE_HEAL_BELL, move3=MOVE_ANCIENT_POWER, move4=MOVE_MAGICAL_LEAF
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate
@@ -94,18 +95,18 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BirthIsland_Exterior_EventScript_RanFromDeoxys
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BirthIsland_Exterior_EventScript_RanFromDeoxys
-	setflag FLAG_BATTLED_DEOXYS
+	setflag FLAG_CAUGHT_CELEBI
 	release
 	end
 
 BirthIsland_Exterior_EventScript_DefeatedDeoxys::
-	setflag FLAG_DEFEATED_DEOXYS
-	setvar VAR_0x8004, SPECIES_DEOXYS_NORMAL
+	setflag FLAG_DAILY_BATTLED_CELEBI
+	setvar VAR_0x8004, SPECIES_CELEBI
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
 BirthIsland_Exterior_EventScript_RanFromDeoxys::
-	setvar VAR_0x8004, SPECIES_DEOXYS_NORMAL
+	setvar VAR_0x8004, SPECIES_CELEBI
 	goto Common_EventScript_LegendaryFlewAway
 	end
 

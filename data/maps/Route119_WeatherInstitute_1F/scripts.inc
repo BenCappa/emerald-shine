@@ -30,10 +30,10 @@ Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere::
 Route119_WeatherInstitute_1F_EventScript_InstituteWorker1::
 	lock
 	faceplayer
-	goto_if_unset FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_1F_EventScript_StudyingRain
+	goto_if_unset FLAG_DEFEATED_SOOTOPOLIS_GYM, Route119_WeatherInstitute_1F_EventScript_StudyingRain
 	setvar VAR_0x8004, 0
-	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
-	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
+	call_if_set FLAG_CAUGHT_KYOGRE, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
+	call_if_set FLAG_CAUGHT_GROUDON, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
 	goto_if_eq VAR_0x8004, 2, Route119_WeatherInstitute_1F_EventScript_StudyingRain  @ Both defeated
 	msgbox Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather, MSGBOX_DEFAULT
 	release
@@ -71,7 +71,7 @@ Route119_WeatherInstitute_1F_EventScript_Grunt4::
 	end
 
 Route119_WeatherInstitute_1F_Text_Grunt1Intro:
-	.string "The BOSS got interested in\n"
+	.string "The Boss got interested in\n"
 	.string "the research they have going here,\l"
 	.string "so he sent us out.\p"
 	.string "You quit meddling!$"
@@ -81,8 +81,8 @@ Route119_WeatherInstitute_1F_Text_Grunt1Defeat:
 	.string "Blasted by a kid…$"
 
 Route119_WeatherInstitute_1F_Text_Grunt1PostBattle:
-	.string "Our BOSS knows everything.\p"
-	.string "But I'm just a GRUNT. What would I know\n"
+	.string "Our Boss knows everything.\p"
+	.string "But I'm just a Grunt. What would I know\n"
 	.string "about what he's thinking?$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4Intro:
@@ -104,21 +104,21 @@ Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs:
 
 Route119_WeatherInstitute_1F_Text_WowYoureStrong:
 	.string "Wow, you're really strong!\p"
-	.string "I wish I could be a POKéMON TRAINER\n"
+	.string "I wish I could be a Pokémon Trainer\n"
 	.string "like you!$"
 
 Route119_WeatherInstitute_1F_Text_ProfStudyingRain:
-	.string "The PROFESSOR loves rain.\n"
+	.string "The Professor loves rain.\n"
 	.string "That's a fact.\p"
 	.string "But if it keeps raining, people will be in\n"
 	.string "trouble. That's another fact.\p"
-	.string "And thus, the PROFESSOR is studying\n"
+	.string "And thus, the Professor is studying\n"
 	.string "if the rain can be put to good use.$"
 
 Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather:
-	.string "On the 2nd floor of the INSTITUTE,\n"
+	.string "On the 2nd floor of the Institute,\n"
 	.string "we study the weather patterns over\l"
-	.string "the HOENN region.\p"
+	.string "the Hoenn region.\p"
 	.string "We've been noticing temporary and\n"
 	.string "isolated cases of droughts and\l"
 	.string "heavy rain lately…$"
@@ -127,7 +127,7 @@ Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo:
 	.string "Hello!\n"
 	.string "We've been saved by your actions!\p"
 	.string "What I don't understand is what on\n"
-	.string "earth the AQUAS were up to.$"
+	.string "earth the Aquas were up to.$"
 
 Route119_WeatherInstitute_1F_Text_TakeRestInBed:
 	.string "There's a bed…\n"
