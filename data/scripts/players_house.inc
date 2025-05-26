@@ -660,18 +660,18 @@ EventScript_RunningShoesManual::
 	end
 
 PlayersHouse_1F_EventScript_MomConversations::
-	lock
+	lockall
 	faceplayer
 	goto_if_unset FLAG_ADVENTURE_STARTED, PlayersHouse_1F_EventScript_BeginningDialogue
 	random 2
 	goto_if_eq VAR_RESULT, 0, PlayersHouse_1F_EventScript_BadgeDialogue
-	goto_if_eq VAR_RESULT, 1, PlayersHouse_1F_EventScript_RandomDialogue
-	return
+	goto PlayersHouse_1F_EventScript_RandomDialogue
+	end
 
 PlayersHouse_1F_EventScript_BeginningDialogue::
 	msgbox PlayersHouse_1F_Text_MomMissedYou, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_BadgeDialogue::
 	goto_if_set FLAG_IS_CHAMPION, PlayersHouse_1F_EventScript_MomChampion
@@ -683,86 +683,87 @@ PlayersHouse_1F_EventScript_BadgeDialogue::
 	goto_if_set FLAG_BADGE03_GET, PlayersHouse_1F_EventScript_MomDynamoBadge
 	goto_if_set FLAG_BADGE02_GET, PlayersHouse_1F_EventScript_MomStoneBadge
 	goto_if_set FLAG_BADGE01_GET, PlayersHouse_1F_EventScript_MomBalanceBadge
-	return
+	end
 
 PlayersHouse_1F_EventScript_RandomDialogue::
 	random 4
-	goto_if_eq VAR_RESULT, 0, PlayersHouse_1F_EventScript_MomFollowHeart
-	goto_if_eq VAR_RESULT, 1, PlayersHouse_1F_EventScript_MomBelieveInYou
-	goto_if_eq VAR_RESULT, 2, PlayersHouse_1F_EventScript_MomEnjoyJourney
-	goto_if_eq VAR_RESULT, 3, PlayersHouse_1F_EventScript_MomGrowSoFast
-	return
+	switch VAR_RESULT
+	case 0, PlayersHouse_1F_EventScript_MomFollowHeart
+	case 1, PlayersHouse_1F_EventScript_MomBelieveInYou
+	case 2, PlayersHouse_1F_EventScript_MomEnjoyJourney
+	case 3, PlayersHouse_1F_EventScript_MomGrowSoFast
+	end
 
 PlayersHouse_1F_EventScript_MomBalanceBadge::
 	msgbox PlayersHouse_1F_Text_MomBalanceBadge, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomStoneBadge::
 	msgbox PlayersHouse_1F_Text_MomStoneBadge, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomDynamoBadge::
 	msgbox PlayersHouse_1F_Text_MomDynamoBadge, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomHeatBadge::
 	msgbox PlayersHouse_1F_Text_MomHeatBadge, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomKnuckleBadge::
 	msgbox PlayersHouse_1F_Text_MomKnuckleBadge, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomFeatherBadge::
 	msgbox PlayersHouse_1F_Text_MomFeatherBadge, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomMindBadge::
 	msgbox PlayersHouse_1F_Text_MomMindBadge, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomRainBadge::
 	msgbox PlayersHouse_1F_Text_MomRainBadge, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomChampion::
 	msgbox PlayersHouse_1F_Text_MomChampion, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomFollowHeart::
 	msgbox PlayersHouse_1F_Text_MomFollowHeart, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomBelieveInYou::
 	msgbox PlayersHouse_1F_Text_MomBelieveInYou, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomEnjoyJourney::
 	msgbox PlayersHouse_1F_Text_MomEnjoyJourney, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_MomGrowSoFast::
 	msgbox PlayersHouse_1F_Text_MomGrowSoFast, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_EndMomConversation
-	return
+	end
 
 PlayersHouse_1F_EventScript_EndMomConversation::
 	msgbox PlayersHouse_1F_Text_MomLoveYou, MSGBOX_DEFAULT
 	closemessage
-	face_right
-	release
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceFasterRight
+	releaseall
 	end
 
 PlayersHouse_1F_Text_MomLoveYou:

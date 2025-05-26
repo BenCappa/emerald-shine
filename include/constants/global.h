@@ -70,7 +70,7 @@
 #define BAG_MEDICINE_COUNT 34 // Needs to reduce used space in SaveBlock1 to properly use.
 #define BAG_BATTLEITEMS_COUNT 32 // Needs to reduce used space in SaveBlock1 to properly use.
 #define BAG_TREASURES_COUNT 21 // Needs to reduce used space in SaveBlock1 to properly use.
-#define BAG_MEGASTONES_COUNT 26 // Needs to reduce used space in SaveBlock1 to properly use.
+#define BAG_MEGASTONES_COUNT 49 // Needs to reduce used space in SaveBlock1 to properly use.
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
 #define DECOR_MAX_SECRET_BASE 16
 #define DECOR_MAX_PLAYERS_HOUSE 12

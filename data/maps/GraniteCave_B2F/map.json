@@ -178,8 +178,8 @@
       "x": 28,
       "y": 6,
       "elevation": 3,
-      "item": "ITEM_METAL_COAT",
-      "flag": "FLAG_HIDDEN_ITEM_GRANITE_CAVE_B2F_METAL_COAT"
+      "item": "ITEM_METAL_ALLOY",
+      "flag": "FLAG_HIDDEN_ITEM_GRANITE_CAVE_B2F_METAL_ALLOY"
     },
     {
       "type": "hidden_item",

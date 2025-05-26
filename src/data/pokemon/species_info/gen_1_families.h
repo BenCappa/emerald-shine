@@ -16615,6 +16615,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         )
         .levelUpLearnset = sTaurosLevelUpLearnset,
         .teachableLearnset = sTaurosTeachableLearnset,
+        .eggMoveLearnset = sTaurosEggMoveLearnset,
         .formSpeciesIdTable = sTaurosFormSpeciesIdTable,
     },
 
@@ -16680,7 +16681,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .isPaldeanForm = TRUE,
         .levelUpLearnset = sTaurosPaldeaCombatLevelUpLearnset,
         .teachableLearnset = sTaurosPaldeaCombatTeachableLearnset,
-        .eggMoveLearnset = sTaurosPaldeaCombatEggMoveLearnset,
+        .eggMoveLearnset = sTaurosEggMoveLearnset,
         .formSpeciesIdTable = sTaurosFormSpeciesIdTable,
     },
 
@@ -16745,7 +16746,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .isPaldeanForm = TRUE,
         .levelUpLearnset = sTaurosPaldeaBlazeLevelUpLearnset,
         .teachableLearnset = sTaurosPaldeaBlazeTeachableLearnset,
-        .eggMoveLearnset = sTaurosPaldeaBlazeEggMoveLearnset,
+        .eggMoveLearnset = sTaurosEggMoveLearnset,
         .formSpeciesIdTable = sTaurosFormSpeciesIdTable,
     },
 
@@ -16810,7 +16811,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .isPaldeanForm = TRUE,
         .levelUpLearnset = sTaurosPaldeaAquaLevelUpLearnset,
         .teachableLearnset = sTaurosPaldeaAquaTeachableLearnset,
-        .eggMoveLearnset = sTaurosPaldeaAquaEggMoveLearnset,
+        .eggMoveLearnset = sTaurosEggMoveLearnset,
         .formSpeciesIdTable = sTaurosFormSpeciesIdTable,
     },
 #endif //P_PALDEAN_FORMS
@@ -17341,8 +17342,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sEeveeEggMoveLearnset,
         .formSpeciesIdTable = sEeveeFormSpeciesIdTable,
         .formChangeTable = sEeveeFormChangeTable,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
-                                {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
+                                {EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
                                 {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
                                 {EVO_ITEM, ITEM_SUN_STONE, SPECIES_ESPEON},
                                 {EVO_ITEM, ITEM_MOON_STONE, SPECIES_UMBREON},

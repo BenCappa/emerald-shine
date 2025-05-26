@@ -5599,6 +5599,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .isHisuianForm = TRUE,
         .levelUpLearnset = sSneaselHisuiLevelUpLearnset,
         .teachableLearnset = sSneaselHisuiTeachableLearnset,
+        .eggMoveLearnset = sSneaselHisuiEggMoveLearnset,
         .formSpeciesIdTable = sSneaselFormSpeciesIdTable,
         .evolutions = EVOLUTION({EVO_ITEM_HOLD_DAY, ITEM_RAZOR_CLAW, SPECIES_SNEASLER},
                                 {EVO_ITEM_DAY, ITEM_RAZOR_CLAW, SPECIES_SNEASLER}),

@@ -1,3 +1,5 @@
+.set LOCALID_TEALA, 1
+
 CableClub_OnTransition:
 	call CableClub_EventScript_HideOrShowMysteryGiftMan
 	end
@@ -226,10 +228,11 @@ CableClub_EventScript_PlayerExitLinkRoom::
 
 CableClub_EventScript_Tutorial::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_TEALA, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox CableClub_Text_FirstTimeRightThisWay, MSGBOX_DEFAULT
 	closemessage
+	applymovement LOCALID_TEALA, Common_Movement_WalkInPlaceFasterDown
 	applymovement OBJ_EVENT_ID_PLAYER, CableClub_Movement_PlayerApproachCounter
 	waitmovement 0
 	delay 30
@@ -239,6 +242,10 @@ CableClub_EventScript_Tutorial::
 	end
 
 CableClub_Movement_PlayerApproachCounter:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	walk_up
 	walk_up
 	step_end
@@ -1423,4 +1430,52 @@ MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingRecords::
 	special ShowDodrioBerryPickingRecords
 	waitstate
 	releaseall
+	end
+
+Common_EventScript_WonderTradeAttendant::
+	lock
+	faceplayer
+	goto Common_EventScript_WonderTrade
+	end
+
+Common_EventScript_WonderTrade::
+	showmoneybox 0, 0
+	msgbox CableClub_Text_WouldYouLikeToWonderTrade, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Common_EventScript_CheckWonderTradeFee
+	closemessage
+	hidemoneybox
+	release
+	end
+
+Common_EventScript_CheckWonderTradeFee::
+	checkmoney 100
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NotEnoughMoneyForWonderTrade
+	removemoney 100
+	updatemoneybox
+	playse SE_SHOP
+	delay 48
+	msgbox CableClub_Text_PleaseSelectAPokemon, MSGBOX_DEFAULT
+	waitmessage
+	hidemoneybox
+	special ChoosePartyMon
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, Common_EventScript_DeniedWonderTrade
+	copyvar VAR_0x8005, VAR_0x8004
+	special CreateWonderTradePokemon
+	special DoInGameTradeScene
+	waitstate
+	msgbox CableClub_Text_HopeYouEnjoyWirelessSystem, MSGBOX_DEFAULT
+	release
+	end
+
+Common_EventScript_DeniedWonderTrade:
+	addmoney 100
+	goto Common_EventScript_WonderTrade
+	end
+
+Common_EventScript_NotEnoughMoneyForWonderTrade:
+	msgbox Common_Text_NotEnoughMoneyForWonderTrade, MSGBOX_DEFAULT
+	closemessage
+	hidemoneybox
+	release
 	end

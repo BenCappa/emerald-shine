@@ -415,36 +415,28 @@ CableClub_Text_EnjoyUnionRoom:
 
 CableClub_Text_FirstTimeRightThisWay:
 	.string "Hello!\n"
-	.string "My name is TEALA.\p"
+	.string "My name is Teala.\p"
 	.string "This must be your first time\n"
 	.string "up here.\p"
-	.string "I'll show you how the Wireless\n"
-	.string "Communication System works.\p"
-	.string "First, I need to show you this\n"
-	.string "floor of our POKéMON CENTER.\p"
+	.string "Allow me to show you how our\n"
+	.string "Wonder Trade System works.\p"
 	.string "Right this way, please.$"
 
 CableClub_Text_ExplainWirelessClubFirstTime:
-	.string "On the top floor, there are two\n"
-	.string "rooms.\p"
-	.string "First, the room on the left.\n"
-	.string "It's the UNION ROOM.\p"
-	.string "You may link up with TRAINERS\n"
-	.string "around you who have also entered\l"
-	.string "the UNION ROOM.\p"
-	.string "With them, you may do things like\n"
-	.string "chat, battle, and trade.\p"
-	.string "Second, the room on the right is\n"
-	.string "the DIRECT CORNER.\p"
-	.string "You may trade or battle POKéMON\n"
-	.string "with your friends in this room.\p"
-	.string "If the Wireless Adapter isn't\n"
-	.string "connected, you may still link up\l"
-	.string "using a GBA Game Link cable.\p"
-	.string "If that is the case, you must go\n"
-	.string "to the DIRECT CORNER.\p"
-	.string "I hope you enjoy the Wireless \n"
-	.string "Communication System.$"
+	.string "For a small fee, Wonder Trade allows you\n"
+	.string "to trade with Trainers who may have\l"
+	.string "caught Pokémon you've never even seen!\p"
+	.string "The process is simple:\p"
+	.string "First, you select a Pokémon you want to\n"
+	.string "send out into the big, wide world.\p"
+	.string "Next, we connect you to a random\n"
+	.string "Trainer trading their chosen Pokémon.\p"
+	.string "Finally, the trade goes forward and\n"
+	.string "everyone enjoys their new partners!\p"
+	.string "It's a surprise every time because you\n"
+	.string "never know who you're gonna get.\p"
+	.string "I hope you enjoy using our\n"
+	.string "Wonder Trade System.$"
 
 CableClub_Text_AskAboutLinking:
 	.string "Hello, {PLAYER}!\p"
@@ -483,5 +475,17 @@ CableClub_Text_ExplainWirelessClub:
 	.string "Communication System.$"
 
 CableClub_Text_HopeYouEnjoyWirelessSystem:
-	.string "I hope you enjoy the Wireless\n"
-	.string "Communication System.$"
+	.string "We hope you enjoy using the\n"
+	.string "Wonder Trade System.$"
+
+CableClub_Text_WouldYouLikeToWonderTrade:
+	.string "Hello! Would you like to Wonder Trade?\n"
+	.string "The fee is ¥100.$"
+
+CableClub_Text_PleaseSelectAPokemon:
+	.string "Excellent! Please select a Pokémon.$"
+
+Common_Text_NotEnoughMoneyForWonderTrade:
+	.string "Unfortunately, it seems you cannot\n"
+	.string "afford our services at the moment.\p"
+	.string "We eagerly await your return!$"
