@@ -30,6 +30,6 @@ Exceptions:
 #define DECAP_EASY_CHAT     TRUE // Easy Chat words and interface.
 #define DECAP_FIELD_MSG     TRUE // Field messages (including scripts!).
 #define DECAP_SUMMARY       TRUE // Summary interface text.
-#define DECAP_ITEM_NAMES    TRUE // Item names (obtained via ItemId_GetName).
+#define DECAP_ITEM_NAMES    TRUE // Item names (obtained via GetItemName).
 
 #endif // GUARD_CONFIG_DECAP_H
