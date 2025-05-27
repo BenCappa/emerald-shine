@@ -3,8 +3,8 @@
 
 extern struct ItemSlot gMartPurchaseHistory[3];
 
-void CreatePokemartMenu(const u16 *, u8);
-void CreateDecorationShopMenu(const u16 *, u8);
+void CreatePokemartMenu(const u16 *itemsForSale, u8 martType);
+void CreateDecorationShopMenu(const u16 *itemsForSale, u8 martType);
 void CB2_ExitSellMenu(void);
 
 #endif // GUARD_SHOP_H
