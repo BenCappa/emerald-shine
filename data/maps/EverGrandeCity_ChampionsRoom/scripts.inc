@@ -1,6 +1,8 @@
-.set LOCALID_WALLACE, 1
+.set LOCALID_STEVEN, 1
 .set LOCALID_RIVAL, 2
 .set LOCALID_BIRCH, 3
+.set LOCALID_CECE, 4
+.set LOCALID_KIT, 5
 
 EverGrandeCity_ChampionsRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_ChampionsRoom_OnTransition
@@ -29,110 +31,130 @@ EverGrandeCity_ChampionsRoom_EventScript_EnterRoom::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp4
 	waitmovement 0
 	delay 40
-	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_PlayerApproachSteven
 	waitmovement 0
 	setvar VAR_TEMP_1, 1
-	goto EverGrandeCity_ChampionsRoom_EventScript_Wallace
+	goto EverGrandeCity_ChampionsRoom_EventScript_Steven
 	releaseall
 	end
 
-EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace:
+EverGrandeCity_ChampionsRoom_Movement_PlayerApproachSteven:
 	walk_up
 	walk_up
 	step_end
 
-EverGrandeCity_ChampionsRoom_EventScript_Wallace::
-	playbgm MUS_ENCOUNTER_CHAMPION, FALSE
+EverGrandeCity_ChampionsRoom_EventScript_Steven::
 	msgbox EverGrandeCity_ChampionsRoom_Text_IntroSpeech, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_Defeat
-	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
-	end
-
-EverGrandeCity_ChampionsRoom_EventScript_Defeated::
+	closemessage
+	playse SE_DOOR
+	delay 60
+	addobject LOCALID_CECE
+	addobject LOCALID_KIT
+	applymovement LOCALID_STEVEN, EverGrandeCity_ChampionsRoom_Movement_StevenStepAside
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_CECE, EverGrandeCity_ChampionsRoom_Movement_CeceArrives
+	applymovement LOCALID_KIT, EverGrandeCity_ChampionsRoom_Movement_KitArrives
+	waitmovement 0
+	delay 30
+	msgbox EverGrandeCity_ChampionsRoom_Text_KidsFakeOut, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_CECE, EverGrandeCity_ChampionsRoom_Movement_CeceUpToLeft
+	applymovement LOCALID_KIT, EverGrandeCity_ChampionsRoom_Movement_KitUpToRight
+	applymovement LOCALID_STEVEN, EverGrandeCity_ChampionsRoom_Movement_WatchCeceGoUp
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_WatchKitGoUp
+	waitmovement 0
+	delay 30
 	playse SE_DOOR
 	setmetatile 6, 1, METATILE_EliteFour_OpenDoorChampion_Frame, FALSE
 	setmetatile 6, 2, METATILE_EliteFour_OpenDoorChampion_Opening, FALSE
 	special DrawWholeMapView
+	waitse
+	playbgm MUS_ENCOUNTER_BRENDAN, FALSE
+	delay 120
+	addobject LOCALID_RIVAL
+	delay 60
+	applymovement LOCALID_RIVAL, EverGrandeCity_ChampionsRoom_Movement_RivalApproachPlayer
+	waitmovement 0
+	msgbox EverGrandeCity_ChampionsRoom_Text_BenIntroSpeech, MSGBOX_DEFAULT
+	switch VAR_STARTER_MON
+	case 0, EverGrandeCity_ChampionsRoom_EventScript_BattleChampionBulbasaur
+	case 1, EverGrandeCity_ChampionsRoom_EventScript_BattleChampionFennekin
+	case 2, EverGrandeCity_ChampionsRoom_EventScript_BattleChampionPiplup
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_BattleChampionBulbasaur:
+	trainerbattle_no_intro TRAINER_BEN_CHAMPION_BULBASAUR, EverGrandeCity_ChampionsRoom_Text_Defeat
+	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_BattleChampionFennekin:
+	trainerbattle_no_intro TRAINER_BEN_CHAMPION_FENNEKIN, EverGrandeCity_ChampionsRoom_Text_Defeat
+	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_BattleChampionPiplup:
+	trainerbattle_no_intro TRAINER_BEN_CHAMPION_PIPLUP, EverGrandeCity_ChampionsRoom_Text_Defeat
+	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_Defeated::
+	delay 20
+	applymovement LOCALID_STEVEN, Common_Movement_FacePlayer
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
 	closemessage
-	playse SE_DOOR
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, EverGrandeCity_ChampionsRoom_EventScript_PlayMayMusic
-	call_if_eq VAR_RESULT, FEMALE, EverGrandeCity_ChampionsRoom_EventScript_PlayBrendanMusic
-	addobject LOCALID_RIVAL
-	call EverGrandeCity_ChampionsRoom_EventScript_RivalApproachPlayer
-	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, EverGrandeCity_ChampionsRoom_EventScript_MayAdvice
-	goto_if_eq VAR_RESULT, FEMALE, EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice
-	end
-
-EverGrandeCity_ChampionsRoom_EventScript_PlayMayMusic::
-	playbgm MUS_ENCOUNTER_MAY, FALSE
-	return
-
-EverGrandeCity_ChampionsRoom_EventScript_PlayBrendanMusic::
-	playbgm MUS_ENCOUNTER_BRENDAN, FALSE
-	return
-
-EverGrandeCity_ChampionsRoom_EventScript_MayAdvice::
-	msgbox EverGrandeCity_ChampionsRoom_Text_MayAdvice, MSGBOX_DEFAULT
-	delay 40
-	playse SE_PIN
+	delay 10
+	applymovement LOCALID_STEVEN, EverGrandeCity_ChampionsRoom_Movement_StevenApproachRival
+	msgbox EverGrandeCity_ChampionsRoom_Text_StevenComeWithMe, MSGBOX_DEFAULT
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	msgbox EverGrandeCity_ChampionsRoom_Text_LetsGo, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_RIVAL, EverGrandeCity_ChampionsRoom_Movement_PlayerRivalExitStart
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_PlayerRivalExitStart
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_CECE, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_KIT, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	msgbox EverGrandeCity_ChampionsRoom_Text_GumpWait, MSGBOX_DEFAULT
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	applymovement LOCALID_CECE, Common_Movement_ExclamationMark
+	applymovement LOCALID_KIT, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	delay 60
+	closemessage
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_CECE, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_KIT, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	call EverGrandeCity_ChampionsRoom_EventScript_RivalLookBackAndForth
-	msgbox EverGrandeCity_ChampionsRoom_Text_MayItsAlreadyOver, MSGBOX_DEFAULT
-	goto EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF
-	end
-
-EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice::
-	msgbox EverGrandeCity_ChampionsRoom_Text_BrendanAdvice, MSGBOX_DEFAULT
-	delay 40
-	playse SE_PIN
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	call EverGrandeCity_ChampionsRoom_EventScript_RivalLookBackAndForth
-	msgbox EverGrandeCity_ChampionsRoom_Text_BrendanYouveWon, MSGBOX_DEFAULT
-	goto EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF
-	end
-
-EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF::
+	msgbox EverGrandeCity_ChampionsRoom_Text_RivalDad, MSGBOX_DEFAULT
 	closemessage
 	addobject LOCALID_BIRCH
-	applymovement LOCALID_BIRCH, EverGrandeCity_ChampionsRoom_Movement_BirchArrives
+	applymovement LOCALID_BIRCH, EverGrandeCity_ChampionsRoom_Movement_GumpArrives
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_CECE, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_KIT, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex, MSGBOX_DEFAULT
+	msgbox EverGrandeCity_ChampionsRoom_Text_GumpRatePokedex, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_RIVAL, EverGrandeCity_ChampionsRoom_Movement_RivalLookBackAndForth
+	waitmovement 0
+	msgbox EverGrandeCity_ChampionsRoom_Text_AreYouSerious, MSGBOX_DEFAULT
 	call ProfBirch_EventScript_RatePokedex
-	msgbox EverGrandeCity_ChampionsRoom_Text_BirchCongratulations, MSGBOX_DEFAULT
-	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
-	delay 20
-	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_WallaceComeWithMe, MSGBOX_DEFAULT
+	msgbox EverGrandeCity_ChampionsRoom_Text_GumpCongratulations, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	applymovement LOCALID_WALLACE, EverGrandeCity_ChampionsRoom_Movement_WallaceExitStart
-	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_PlayerExitStart
-	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFasterUp
-	applymovement LOCALID_RIVAL, EverGrandeCity_ChampionsRoom_Movement_RivalFollows
-	waitmovement 0
 	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside, MSGBOX_DEFAULT
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, EverGrandeCity_ChampionsRoom_EventScript_MayCongratulations
-	call_if_eq VAR_RESULT, FEMALE, EverGrandeCity_ChampionsRoom_EventScript_BrendanCongratulations
-	closemessage
-	applymovement LOCALID_WALLACE, EverGrandeCity_ChampionsRoom_Movement_WallaceExit
+	applymovement LOCALID_RIVAL, EverGrandeCity_ChampionsRoom_Movement_RivalExit
 	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_PlayerExit
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_CECE, EverGrandeCity_ChampionsRoom_Movement_WatchPlayerExit
+	applymovement LOCALID_KIT, EverGrandeCity_ChampionsRoom_Movement_WatchPlayerExit
 	waitmovement 0
 	setflag FLAG_HIDE_PETALBURG_GYM_GREETER
 	warp MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 7, 16
@@ -140,29 +162,114 @@ EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF::
 	releaseall
 	end
 
-EverGrandeCity_ChampionsRoom_EventScript_MayCongratulations::
-	msgbox EverGrandeCity_ChampionsRoom_Text_MayCongratulations, MSGBOX_DEFAULT
-	return
+EverGrandeCity_ChampionsRoom_Movement_StevenStepAside:
+	walk_left
+	walk_down
+	step_end
 
-EverGrandeCity_ChampionsRoom_EventScript_BrendanCongratulations::
-	msgbox EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations, MSGBOX_DEFAULT
-	return
-
-EverGrandeCity_ChampionsRoom_EventScript_RivalApproachPlayer::
-	applymovement LOCALID_RIVAL, EverGrandeCity_ChampionsRoom_Movement_RivalApproachPlayer
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	return
-
-EverGrandeCity_ChampionsRoom_EventScript_RivalLookBackAndForth::
-	applymovement LOCALID_RIVAL, EverGrandeCity_ChampionsRoom_Movement_RivalLookBackAndForth
-	waitmovement 0
-	return
-
-EverGrandeCity_ChampionsRoom_Movement_PlayerExitStart:
+EverGrandeCity_ChampionsRoom_Movement_CeceArrives:
 	walk_up
 	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_KitArrives:
+	delay_16
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_CeceUpToLeft:
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_16
+	walk_in_place_faster_down
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_KitUpToRight:
+	delay_16
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	delay_16
+	walk_in_place_faster_down
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_WatchCeceGoUp:
+	delay_16
+	delay_16
+	walk_in_place_faster_left
+	delay_16
+	walk_in_place_faster_up
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_WatchKitGoUp:
+	delay_16
+	delay_16
+	walk_in_place_faster_right
+	delay_16
+	walk_in_place_faster_up
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_RivalApproachPlayer:
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_StevenApproachRival:
+	walk_up
+	walk_in_place_faster_right
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_PlayerRivalExitStart:
+	face_up
+	delay_16
+	walk_up
+	walk_up
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_GumpArrives:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_RivalLookBackAndForth:
+	walk_in_place_faster_left
+	delay_16
+	walk_in_place_faster_right
+	delay_16
+	walk_in_place_faster_up
+	delay_8
+	walk_in_place_faster_down
+	delay_16
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_WatchPlayerExit:
+	delay_16
+	walk_in_place_faster_up
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_RivalExit:
+	walk_up
+	delay_8
+	set_invisible
 	step_end
 
 EverGrandeCity_ChampionsRoom_Movement_PlayerExit:
@@ -173,172 +280,95 @@ EverGrandeCity_ChampionsRoom_Movement_PlayerExit:
 	set_invisible
 	step_end
 
-EverGrandeCity_ChampionsRoom_Movement_RivalApproachPlayer:
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_left
-	walk_up
-	walk_in_place_faster_right
-	step_end
-
-EverGrandeCity_ChampionsRoom_Movement_RivalLookBackAndForth:
-	walk_in_place_faster_up
-	delay_16
-	walk_in_place_faster_right
-	delay_16
-	walk_in_place_faster_up
-	delay_8
-	walk_in_place_faster_right
-	delay_16
-	step_end
-
-EverGrandeCity_ChampionsRoom_Movement_RivalFollows:
-	walk_right
-	walk_up
-	step_end
-
-EverGrandeCity_ChampionsRoom_Movement_WallaceExitStart:
-	walk_up
-	walk_up
-	walk_in_place_faster_down
-	step_end
-
-EverGrandeCity_ChampionsRoom_Movement_WallaceExit:
-	walk_up
-	delay_8
-	set_invisible
-	step_end
-
-EverGrandeCity_ChampionsRoom_Movement_BirchArrives:
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_right
-	walk_up
-	walk_in_place_faster_left
-	step_end
-
 EverGrandeCity_ChampionsRoom_Text_IntroSpeech:
-	.string "WALLACE: Welcome, {PLAYER}{KUN}.\p"
-	.string "That incident in SOOTOPOLIS CITY…\n"
-	.string "That was superb work, putting an end\l"
-	.string "to that crisis all by yourself.\p"
-	.string "Oops!\p"
-	.string "It wouldn't be fair to say that you\n"
-	.string "alone ended the crisis.\p"
-	.string "You overcame that difficult situation\n"
-	.string "by working as one with your POKéMON.\p"
-	.string "We TRAINERS raise POKéMON by giving\n"
-	.string "them items and by teaching them new\l"
-	.string "techniques for battle.\p"
-	.string "But we ourselves also learn many\n"
-	.string "things from POKéMON.\p"
-	.string "And this is where your achievements\n"
-	.string "are put to the test against what\l"
-	.string "others like you have achieved.\p"
-	.string "Now!\p"
-	.string "Who can most elegantly dance with\n"
-	.string "their POKéMON in HOENN?\p"
-	.string "Show me right here and now!$"
+	.string "Steven: Welcome, {PLAYER}{KUN}.\p"
+	.string "You've done well to get to this point.\p"
+	.string "I'm not solely referring to your victory\n"
+	.string "over the Elite Four, either.\p"
+	.string "You've done many incredible things\n"
+	.string "during your time in this world.\p"
+	.string "I also have it on good authority you've\n"
+	.string "done even more so in your own world.\p"
+	.string "I, truly, am impressed with you.\p"
+	.string "As it stands, only one battle stands\n"
+	.string "between you and the Champion title.\p"
+	.string "Ordinarily, that honor would fall to me.\p"
+	.string "But your journey is far from ordinary,\n"
+	.string "wouldn't you say?\p"
+	.string "Yes, some changes have been made so\n"
+	.string "that your deciding battle may be\l"
+	.string "against a very special opponent…$"
+
+EverGrandeCity_ChampionsRoom_Text_KidsFakeOut:
+	.string "Cece: Sorry, Mom! It's not us either!\n"
+	.string "Kit: We just wanted to cheer you on!$"
+
+EverGrandeCity_ChampionsRoom_Text_BenIntroSpeech:
+	.string "Hey, Sunshine.\p"
+	.string "You know, a little bit ago I realized\n"
+	.string "something.\p"
+	.string "I think getting us both here at the\n"
+	.string "same time is a labor of love.\p"
+	.string "I learned that this world was created\n"
+	.string "for you and for some reason I have this\l"
+	.string "feeling that I had a big part in that.\p"
+	.string "And the fact you're standing here now\n"
+	.string "means you've actually engaged with it.\p"
+	.string "That means more to me than you know.\p"
+	.string "Alright. Anyways…\p"
+	.string "There's one last thing to do.\p"
+	.string "For the final battle and any\n"
+	.string "adventures that follow it…\p"
+	.string "Ashley, I choose you!$"
 
 EverGrandeCity_ChampionsRoom_Text_Defeat:
-	.string "I, the CHAMPION, fall in defeat…\p"
-	.string "That was wonderful work.\n"
-	.string "You were elegant, infuriatingly so.\l"
-	.string "And yet it was utterly glorious!\p"
-	.string "Kudos to you, {PLAYER}{KUN}!\p"
-	.string "You are a truly noble POKéMON\n"
-	.string "TRAINER!$"
+	.string "Look at that. You won.\n"
+	.string "You really won.\p"
+	.string "I'm realizing something else right now,\n"
+	.string "{PLAYER}{KUN}.\p"
+	.string "That I'm in love with you.$"
 
 EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech:
-	.string "WALLACE: The POKéMON you sent into\n"
-	.string "battle…\p"
-	.string "At times they danced like a spring\n"
-	.string "breeze, and at times they struck\l"
-	.string "like lightning.\p"
-	.string "It was with light, yet surefooted,\n"
-	.string "elegance that you led your POKéMON.\p"
-	.string "Even I felt bedazzled by your\n"
-	.string "masterful performance!\p"
-	.string "You now stand at the glorious peak\n"
-	.string "of the POKéMON LEAGUE.\p"
-	.string "I now proclaim you to be the new\n"
-	.string "HOENN region…$"
+	.string "Steven: What a terrific battle!\p"
+	.string "You and your Pokémon displayed a real\n"
+	.string "mastery of your skills.\p"
+	.string "We all stand before you at the\n"
+	.string "peak of the Pokémon League.\p"
+	.string "{PLAYER}{KUN}…\p"
+	.string "You are now the new Hoenn Champion!$"
 
-EverGrandeCity_ChampionsRoom_Text_MayAdvice:
-	.string "MAY: {PLAYER}{KUN}!\p"
-	.string "Here's some advice before you challenge\n"
-	.string "the CHAMPION…$"
+EverGrandeCity_ChampionsRoom_Text_StevenComeWithMe:
+	.string "Steven: Ben, would you please escort\n"
+	.string "our new Champion to the next room?\p"
+	.string "Ben: It would be my pleasure.$"
 
-EverGrandeCity_ChampionsRoom_Text_MayItsAlreadyOver:
-	.string "MAY: Huh?\n"
-	.string "What, what, what?\p"
-	.string "{PLAYER}{KUN}…\n"
-	.string "Could it be that…\l"
-	.string "It's already over?$"
+EverGrandeCity_ChampionsRoom_Text_LetsGo:
+	.string "Ben: Let's go, Champion.$"
 
-EverGrandeCity_ChampionsRoom_Text_BrendanAdvice:
-	.string "BRENDAN: {PLAYER}!\p"
-	.string "How would you like some advice before\n"
-	.string "you challenge the CHAMPION?…$"
+EverGrandeCity_ChampionsRoom_Text_GumpWait:
+	.string "WAAAAAAAIT!!!!!!$"
 
-EverGrandeCity_ChampionsRoom_Text_BrendanYouveWon:
-	.string "BRENDAN: {PLAYER}…\p"
-	.string "Are you trying to tell me…\n"
-	.string "You've beaten the CHAMPION?$"
+EverGrandeCity_ChampionsRoom_Text_RivalDad:
+	.string "Ben: Dad?!\p"
+	.string "Cece: Gump?!\n"
+	.string "Kit: Gump?!$"
 
-EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex:
-	.string "PROF. BIRCH: See?\n"
-	.string "What did I tell you, {RIVAL}?\p"
-	.string "Didn't I tell you that you don't need\n"
-	.string "to worry about {PLAYER}{KUN}?\p"
-	.string "… … … … … … … …\n"
-	.string "{PLAYER}{KUN}, you've finally done it.\p"
-	.string "When I heard that you defeated your\n"
-	.string "own father at the PETALBURG GYM,\l"
-	.string "I thought perhaps you had a chance…\p"
-	.string "But to think you've actually become\n"
-	.string "the CHAMPION!\p"
-	.string "Ah, yes!\p"
-	.string "What became of your POKéDEX?\n"
-	.string "Here, let me see.$"
+EverGrandeCity_ChampionsRoom_Text_GumpRatePokedex:
+	.string "Gump: Wait! I'm sorry, but…\p"
+	.string "Can I rate your Pokédex real quick?$"
 
-EverGrandeCity_ChampionsRoom_Text_BirchCongratulations:
-	.string "PROF. BIRCH: Anyways,\n"
+EverGrandeCity_ChampionsRoom_Text_AreYouSerious:
+	.string "Ben: Are you serious?!\n"
+	.string "Can't it wait?\p"
+	.string "Gump: Hey, I deserve it since all this\n"
+	.string "pretty much happened because of me!\p"
+	.string "I'm just messing with ya sweetie\n"
+	.string "but we really should take a look.\p"
+	.string "The progress of your Pokédex is a\n"
+	.string "milestone that shouldn't go ignored!$"
+
+EverGrandeCity_ChampionsRoom_Text_GumpCongratulations:
+	.string "Gump: Alright. Anyways…\n"
 	.string "congratulations!\p"
 	.string "Now, go proudly into the final room!$"
-
-EverGrandeCity_ChampionsRoom_Text_WallaceComeWithMe:
-	.string "WALLACE: {PLAYER}{KUN}…\p"
-	.string "No, let me rephrase that properly.\p"
-	.string "The new CHAMPION!\p"
-	.string "Come with me.$"
-
-EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside:
-	.string "WALLACE: I'm sorry, but…\p"
-	.string "From here on, only those TRAINERS who\n"
-	.string "have become CHAMPIONS may enter.\p"
-	.string "You'll have to wait outside with\n"
-	.string "PROF. BIRCH.$"
-
-EverGrandeCity_ChampionsRoom_Text_MayCongratulations:
-	.string "MAY: Groan…\p"
-	.string "… … … … … … … …\n"
-	.string "… … … … … … … …\p"
-	.string "I'm just joking! That's okay!\n"
-	.string "That's the rule!\p"
-	.string "{PLAYER}{KUN}!\n"
-	.string "Honestly, congratulations!$"
-
-EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations:
-	.string "BRENDAN: Whaaaat?! … … … … …\n"
-	.string "… … … … … … … …\p"
-	.string "It can't be helped if that's the rule.\p"
-	.string "{PLAYER}, way to go!\n"
-	.string "Congratulations!$"
 

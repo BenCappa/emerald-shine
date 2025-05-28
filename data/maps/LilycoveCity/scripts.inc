@@ -294,17 +294,17 @@ LilycoveCity_EventScript_DeclineBrendanBattle::
 	end
 
 LilycoveCity_EventScript_BattleMayBulbasaur::
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_BULBASAUR, LilycoveCity_Text_MayDefeat
+	trainerbattle_no_intro TRAINER_BEN_CHAMPION_BULBASAUR, LilycoveCity_Text_MayDefeat
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
 LilycoveCity_EventScript_BattleMayFennekin::
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_FENNEKIN, LilycoveCity_Text_MayDefeat
+	trainerbattle_no_intro TRAINER_BEN_CHAMPION_FENNEKIN, LilycoveCity_Text_MayDefeat
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
 LilycoveCity_EventScript_BattleMayPiplup::
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_PIPLUP, LilycoveCity_Text_MayDefeat
+	trainerbattle_no_intro TRAINER_BEN_CHAMPION_PIPLUP, LilycoveCity_Text_MayDefeat
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 

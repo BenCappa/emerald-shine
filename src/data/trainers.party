@@ -13539,68 +13539,137 @@ Level: 32
 Marshtomp
 Level: 34
 
-=== TRAINER_MAY_LILYCOVE_PIPLUP ===
-Name: MAY
-Class: Rival
-Pic: May
-Gender: Female
-Music: Female
+=== TRAINER_BEN_CHAMPION_PIPLUP ===
+Name: Ben
+Class: Champion
+Pic: Brendan
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Double Battle: No
-AI: Check Bad Move / Try To Faint / Check Viability
+AI: Smart Trainer / Ace Pokemon
+Mugshot: Yellow
 
-Tropius
-Level: 31
+Toxtricity (M) @ Throat Spray
+Nature: Hasty
+Level: 78
+Ability: Punk Rock
+Ball: Luxury Ball
+Gigantamax: Yes
+- Boomburst
+- Overdrive
+- Shift Gear
+- Sludge Bomb
 
-Slugma
-Level: 32
+Wishiwashi (M)
+Level: 77
 
-Pelipper
-Level: 32
+Armarouge (M)
+Level: 77
 
-Grovyle
-Level: 34
+Mamoswine (M) @ Assault Vest
+Nature: Jolly
+Level: 77
+Ability: Thick Fat
+Ball: Heavy Ball
+- Earthquake
+- Icicle Crash
+- Ice Shard
+- Knock Off
 
-=== TRAINER_MAY_LILYCOVE_BULBASAUR ===
-Name: MAY
-Class: Rival
-Pic: May
-Gender: Female
-Music: Female
+Goodra (F) @ Expert Belt
+Level: 77
+
+Venusaur (M) @ Venusaurite
+Level: 79
+
+=== TRAINER_BEN_CHAMPION_BULBASAUR ===
+Name: Ben
+Class: Champion
+Pic: Brendan
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Double Battle: No
-AI: Check Bad Move / Try To Faint / Check Viability
+AI: Smart Trainer / Ace Pokemon
+Mugshot: Yellow
 
-Tropius
-Level: 31
+Toxtricity (M) @ Throat Spray
+Nature: Hasty
+Level: 78
+Ability: Punk Rock
+Ball: Luxury Ball
+Gigantamax: Yes
+- Boomburst
+- Overdrive
+- Shift Gear
+- Sludge Bomb
 
-Pelipper
-Level: 32
+Leavanny (F)
+Level: 77
 
-Ludicolo
-Level: 32
+Wishiwashi (M)
+Level: 77
 
-Combusken
-Level: 34
+Mamoswine (M) @ Assault Vest
+Nature: Jolly
+Level: 77
+Ability: Thick Fat
+Ball: Heavy Ball
+- Earthquake
+- Icicle Crash
+- Ice Shard
+- Knock Off
 
-=== TRAINER_MAY_LILYCOVE_FENNEKIN ===
-Name: MAY
-Class: Rival
-Pic: May
-Gender: Female
-Music: Female
+Goodra (F) @ Expert Belt
+Level: 77
+
+Delphox (F) @ Delphoxite
+Level: 79
+
+=== TRAINER_BEN_CHAMPION_FENNEKIN ===
+Name: Ben
+Class: Champion
+Pic: Brendan
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore / Full Restore / Full Restore
 Double Battle: No
-AI: Check Bad Move / Try To Faint / Check Viability
+AI: Smart Trainer / Ace Pokemon
+Mugshot: Yellow
 
-Tropius
-Level: 31
+Toxtricity (M) @ Throat Spray
+Nature: Hasty
+Level: 78
+Ability: Punk Rock
+Ball: Luxury Ball
+Gigantamax: Yes
+- Boomburst
+- Overdrive
+- Shift Gear
+- Sludge Bomb
 
-Ludicolo
-Level: 32
+Armarouge (M)
+Level: 77
 
-Slugma
-Level: 32
+Leavanny (F)
+Level: 77
 
-Marshtomp
-Level: 34
+Mamoswine (M) @ Assault Vest
+Nature: Jolly
+Level: 77
+Ability: Thick Fat
+Ball: Heavy Ball
+- Earthquake
+- Icicle Crash
+- Ice Shard
+- Knock Off
+
+Goodra (F) @ Expert Belt
+Level: 77
+
+Empoleon (M) @ Empoleonite
+Level: 79
 
 === TRAINER_JONAH ===
 Name: JONAH

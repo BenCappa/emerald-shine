@@ -6098,7 +6098,7 @@ u16 GetBattleBGM(void)
         case SPECIES_REGIDRAGO:
             return MUS_VS_REGI;
         default:
-            return MUS_RG_VS_LEGEND;
+            return MUS_C_VS_LEGEND_BEAST;
         }
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
@@ -6129,7 +6129,7 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_LEADER:
             return MUS_VS_GYM_LEADER;
         case TRAINER_CLASS_CHAMPION:
-            return MUS_VS_CHAMPION;
+            return MUS_RG_VS_CHAMPION;
         case TRAINER_CLASS_RIVAL:
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 return MUS_VS_RIVAL;
