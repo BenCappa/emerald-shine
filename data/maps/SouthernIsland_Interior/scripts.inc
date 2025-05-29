@@ -1,5 +1,3 @@
-.set LOCALID_STEED, 2
-
 SouthernIsland_Interior_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, SouthernIsland_Interior_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Interior_OnTransition
@@ -12,7 +10,7 @@ SouthernIsland_Interior_OnResume:
 SouthernIsland_Interior_EventScript_TryRemoveSteed::
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject LOCALID_STEED
+	removeobject LOCALID_SOUTHERN_ISLAND_STEED
 	return
 
 SouthernIsland_Interior_OnTransition:
@@ -59,21 +57,21 @@ SouthernIsland_Interior_EventScript_Steed::
 	setflag FLAG_ENCOUNTERED_NOBLE_STEED
 	setflag FLAG_TEMP_2
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanUp
+	applymovement LOCALID_CAMERA, SouthernIsland_Interior_Movement_CameraPanUp
 	waitmovement 0
 	delay 50
 	waitse
 	playmoncry VAR_TEMP_4, CRY_MODE_NORMAL
 	delay 30
 	waitmoncry
-	addobject LOCALID_STEED
+	addobject LOCALID_SOUTHERN_ISLAND_STEED
 	delay 30
 	applymovement OBJ_EVENT_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanDown
-	applymovement LOCALID_STEED, SouthernIsland_Interior_Movement_SteedApproach
+	applymovement LOCALID_SOUTHERN_ISLAND_STEED, SouthernIsland_Interior_Movement_SteedApproach
 	waitmovement 0
 	delay 50
 	special RemoveCameraObject
-	setvar VAR_LAST_TALKED, LOCALID_STEED
+	setvar VAR_LAST_TALKED, LOCALID_SOUTHERN_ISLAND_STEED
 	call_if_eq VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetSpectrierBattleVars
 	call_if_ne VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetGlastrierBattleVars
 	setflag FLAG_SYS_CTRL_OBJ_DELETE

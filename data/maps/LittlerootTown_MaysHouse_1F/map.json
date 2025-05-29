@@ -15,6 +15,7 @@
   "connections": 0,
   "object_events": [
     {
+      "local_id": "LOCALID_PLAYERS_HOUSE_1F_GRAM",
       "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
       "x": 8,
       "y": 6,
@@ -54,6 +55,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2"
     },
     {
+      "local_id": "LOCALID_PLAYERS_HOUSE_1F_MOM",
       "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 5,
       "y": 7,
@@ -67,6 +69,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PLAYERS_HOUSE_1F_MIKE",
       "graphics_id": "OBJ_EVENT_GFX_NORMAN",
       "x": 5,
       "y": 6,
@@ -80,6 +83,7 @@
       "flag": "FLAG_HIDE_PLAYERS_HOUSE_DAD"
     },
     {
+      "local_id": "LOCALID_RIVALS_HOUSE_1F_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
       "x": 2,
       "y": 8,

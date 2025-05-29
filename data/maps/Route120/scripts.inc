@@ -1,9 +1,3 @@
-.set LOCALID_STEVEN, 30
-.set LOCALID_CECE, 38
-.set LOCALID_KIT, 39
-.set LOCALID_RIVAL, 40
-.set LOCALID_RIVAL_ON_BIKE, 41
-
 Route120_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route120_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route120_OnLoad
@@ -15,7 +9,7 @@ Route120_OnLoad:
 	end
 
 Route120_EventScript_HideRivalOnBike::
-	removeobject LOCALID_RIVAL_ON_BIKE
+	removeobject LOCALID_ROUTE120_RIVAL_ON_BIKE
 	setflag FLAG_HIDE_ROUTE_120_RIVAL_ON_BIKE
 	return
 
@@ -130,7 +124,7 @@ Route120_EventScript_Rival::
 	goto_if_unset FLAG_DEFEATED_FORTREE_GYM, Route120_EventScript_RivalFaceTheGym
 	msgbox Route120_Text_RivalExplanation, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_ROUTE120_RIVAL, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	releaseall
 	end
@@ -138,7 +132,7 @@ Route120_EventScript_Rival::
 Route120_EventScript_RivalFaceTheGym::
 	msgbox Route120_Text_RivalFaceTheGym, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_ROUTE120_RIVAL, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	releaseall
 	end
@@ -159,11 +153,11 @@ Route120_EventScript_SiblingsFaceTheGym::
 Route120_EventScript_SiblingsAskReadyForBattle::
 	msgbox Route120_Text_SiblingsReadyToBattle, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route120_EventScript_ChoosePartyForMultiBattle
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
+	applymovement LOCALID_ROUTE120_RIVAL, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route120_Text_RivalNotReady, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_ROUTE120_RIVAL, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	releaseall
 	end
@@ -213,31 +207,31 @@ Route120_EventScript_DefeatedSiblings::
 	msgbox Route120_Text_SiblingsDefeat, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	applymovement LOCALID_STEVEN, Route120_Movement_StevenApproachSiblings
+	applymovement LOCALID_ROUTE120_STEVEN, Route120_Movement_StevenApproachSiblings
 	waitmovement 0
-	turnobject LOCALID_CECE, DIR_WEST
-	turnobject LOCALID_KIT, DIR_WEST
+	turnobject LOCALID_ROUTE120_CECE, DIR_WEST
+	turnobject LOCALID_ROUTE120_KIT, DIR_WEST
 	waitmovement 0
 	msgbox Route120_Text_StevenThatWillBeAll, MSGBOX_DEFAULT
-	applymovement LOCALID_CECE, Route120_Movement_CeceHop
+	applymovement LOCALID_ROUTE120_CECE, Route120_Movement_CeceHop
 	msgbox Route120_Text_CeceOhRight, MSGBOX_DEFAULT
 	closemessage
-	turnobject LOCALID_CECE, DIR_EAST
-	turnobject LOCALID_KIT, DIR_EAST
+	turnobject LOCALID_ROUTE120_CECE, DIR_EAST
+	turnobject LOCALID_ROUTE120_KIT, DIR_EAST
 	delay 15
 	msgbox Route120_Text_SiblingsByeGuys, MSGBOX_DEFAULT
 	closemessage
-	turnobject LOCALID_STEVEN, DIR_SOUTH
-	applymovement LOCALID_CECE, Route120_Movement_CeceExit
-	applymovement LOCALID_KIT, Route120_Movement_KitExit
+	turnobject LOCALID_ROUTE120_STEVEN, DIR_SOUTH
+	applymovement LOCALID_ROUTE120_CECE, Route120_Movement_CeceExit
+	applymovement LOCALID_ROUTE120_KIT, Route120_Movement_KitExit
 	delay 48
-	turnobject LOCALID_STEVEN, DIR_WEST
+	turnobject LOCALID_ROUTE120_STEVEN, DIR_WEST
 	waitmovement 0
-	applymovement LOCALID_STEVEN, Route120_Movement_StevenApproachRival
+	applymovement LOCALID_ROUTE120_STEVEN, Route120_Movement_StevenApproachRival
 	waitmovement 0
 	msgbox Route120_Text_StevenSorryToPutYouThroughThat, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_STEVEN, Route120_Movement_StevenApproachPlayer
+	applymovement LOCALID_ROUTE120_STEVEN, Route120_Movement_StevenApproachPlayer
 	waitmovement 0
 	msgbox Route120_Text_StevenHaveAGift, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
@@ -267,34 +261,34 @@ Route120_EventScript_StevenGiveEmpoleonite::
 Route120_EventScript_StevenExit::
 	msgbox Route120_Text_StevenThePowerOfMegaStones, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_STEVEN, Route120_Movement_StevenWalkAway
+	applymovement LOCALID_ROUTE120_STEVEN, Route120_Movement_StevenWalkAway
 	waitmovement 0
 	delay 90
 	msgbox Route120_Text_StevenSomethingIsComing, MSGBOX_DEFAULT
 	closemessage
 	delay 15
-	turnobject LOCALID_STEVEN, DIR_EAST
+	turnobject LOCALID_ROUTE120_STEVEN, DIR_EAST
 	waitmovement 0
 	msgbox Route120_Text_StevenRiseToTheOccasion, MSGBOX_DEFAULT
 	closemessage
-	turnobject LOCALID_STEVEN, DIR_SOUTH
+	turnobject LOCALID_ROUTE120_STEVEN, DIR_SOUTH
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
 	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
-	removeobject LOCALID_STEVEN
+	removeobject LOCALID_ROUTE120_STEVEN
 	waitfieldeffect FLDEFF_NPCFLY_OUT
 	delay 60
 	goto Route120_EventScript_RivalExit
 	end
 
 Route120_EventScript_RivalExit::
-	turnobject LOCALID_RIVAL, DIR_SOUTH
+	turnobject LOCALID_ROUTE120_RIVAL, DIR_SOUTH
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	waitmovement 0
 	msgbox Route120_Text_RivalHaveAnyIdea, MSGBOX_DEFAULT
-	turnobject LOCALID_RIVAL, DIR_WEST
+	turnobject LOCALID_ROUTE120_RIVAL, DIR_WEST
 	waitmovement 0
 	delay 24
 	msgbox Route120_Text_RivalFamiliar, MSGBOX_DEFAULT
@@ -302,20 +296,20 @@ Route120_EventScript_RivalExit::
 	closemessage
 	delay 120
 	waitbuttonpress
-	turnobject LOCALID_RIVAL, DIR_SOUTH
+	turnobject LOCALID_ROUTE120_RIVAL, DIR_SOUTH
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	waitmovement 0
 	msgbox Route120_Text_RivalHeadedToLilycove, MSGBOX_DEFAULT
 	closemessage
-	removeobject LOCALID_RIVAL
-	addobject LOCALID_RIVAL_ON_BIKE
-	setobjectxy LOCALID_RIVAL_ON_BIKE, 17, 15
+	removeobject LOCALID_ROUTE120_RIVAL
+	addobject LOCALID_ROUTE120_RIVAL_ON_BIKE
+	setobjectxy LOCALID_ROUTE120_RIVAL_ON_BIKE, 17, 15
 	delay 24
-	applymovement LOCALID_RIVAL_ON_BIKE, Route120_Movement_RivalExit
+	applymovement LOCALID_ROUTE120_RIVAL_ON_BIKE, Route120_Movement_RivalExit
 	delay 24
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_WEST
 	waitmovement 0
-	removeobject LOCALID_RIVAL_ON_BIKE
+	removeobject LOCALID_ROUTE120_RIVAL_ON_BIKE
 	setflag FLAG_HIDE_ROUTE_120_BRIDGE_ENCOUNTERS
 	releaseall
 	end

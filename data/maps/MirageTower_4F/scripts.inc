@@ -1,6 +1,3 @@
-.set LOCALID_SKULL_FOSSIL, 1
-.set LOCALID_SAIL_FOSSIL, 2
-
 MirageTower_4F_MapScripts::
 	.byte 0
 
@@ -14,7 +11,7 @@ MirageTower_4F_EventScript_SkullFossil::
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_SKULL_FOSSIL
 	setflag FLAG_HIDE_MIRAGE_TOWER_SAIL_FOSSIL
-	removeobject LOCALID_SKULL_FOSSIL
+	removeobject LOCALID_MIRAGE_SKULL_FOSSIL
 	delay 30
 	setflag FLAG_CHOSE_SKULL_FOSSIL
 	goto MirageTower_4F_EventScript_CollapseMirageTower
@@ -35,7 +32,7 @@ MirageTower_4F_EventScript_SailFossil::
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_SAIL_FOSSIL
 	setflag FLAG_HIDE_MIRAGE_TOWER_SKULL_FOSSIL
-	removeobject LOCALID_SAIL_FOSSIL
+	removeobject LOCALID_MIRAGE_SAIL_FOSSIL
 	delay 30
 	setflag FLAG_CHOSE_SAIL_FOSSIL
 	goto MirageTower_4F_EventScript_CollapseMirageTower

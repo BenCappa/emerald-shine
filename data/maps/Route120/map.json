@@ -234,6 +234,7 @@
       "flag": "FLAG_ITEM_ROUTE_120_NUGGET"
     },
     {
+      "local_id": "LOCALID_ROUTE120_TY_1",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 37,
       "y": 5,
@@ -247,6 +248,7 @@
       "flag": "FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1"
     },
     {
+      "local_id": "LOCALID_ROUTE120_GABBY_1",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 36,
       "y": 5,
@@ -260,6 +262,7 @@
       "flag": "FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1"
     },
     {
+       "local_id": "LOCALID_ROUTE120_GABBY_2",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 36,
       "y": 5,
@@ -273,6 +276,7 @@
       "flag": "FLAG_HIDE_ROUTE_120_GABBY_AND_TY_2"
     },
     {
+      "local_id": "LOCALID_ROUTE120_TY_2",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 37,
       "y": 5,
@@ -403,6 +407,7 @@
       "flag": "FLAG_ITEM_ROUTE_120_HYPER_POTION"
     },
     {
+      "local_id": "LOCALID_ROUTE120_STEVEN",
       "graphics_id": "OBJ_EVENT_GFX_STEVEN",
       "x": 13,
       "y": 15,
@@ -507,6 +512,7 @@
       "flag": "FLAG_ITEM_ROUTE_120_DAMP_ROCK"
     },
     {
+      "local_id": "LOCALID_ROUTE120_CECE",
       "graphics_id": "OBJ_EVENT_GFX_LINK_RS_MAY",
       "x": 16,
       "y": 15,
@@ -520,6 +526,7 @@
       "flag": "FLAG_HIDE_ROUTE_120_BRIDGE_ENCOUNTERS"
     },
     {
+      "local_id": "LOCALID_ROUTE120_KIT",
       "graphics_id": "OBJ_EVENT_GFX_LINK_RS_BRENDAN",
       "x": 16,
       "y": 16,
@@ -533,6 +540,7 @@
       "flag": "FLAG_HIDE_ROUTE_120_BRIDGE_ENCOUNTERS"
     },
     {
+      "local_id": "LOCALID_ROUTE120_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 17,
       "y": 15,
@@ -546,6 +554,7 @@
       "flag": "FLAG_HIDE_ROUTE_120_BRIDGE_ENCOUNTERS"
     },
     {
+      "local_id": "LOCALID_ROUTE120_RIVAL_ON_BIKE",
       "graphics_id": "OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE",
       "x": 17,
       "y": 15,

@@ -1,9 +1,3 @@
-.set LOCALID_CHALLENGE_BIKER, 20
-.set LOCALID_RIVAL, 27
-.set LOCALID_RIVAL_ON_BIKE, 28
-.set LOCALID_CECE, 35
-.set LOCALID_MINCCINO, 36
-
 Route110_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, Route110_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_OnTransition
@@ -373,11 +367,11 @@ Route110_EventScript_RivalTrigger3::
 Route110_EventScript_RivalScene::
 	lockall
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_ROUTE110_RIVAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
+	applymovement LOCALID_ROUTE110_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	applymovement LOCALID_ROUTE110_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	delay 30
 	call_if_eq VAR_0x8008, 1, Route110_EventScript_RivalApproachPlayer1
@@ -454,15 +448,15 @@ Route110_EventScript_ReceivedPokemonFanfare::
 Route110_EventScript_BenExplainLuvdisc::
 	closemessage
 	delay 20
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_ROUTE110_RIVAL, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox Route110_Text_BenExplainLuvdisc, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_ROUTE110_RIVAL, Common_Movement_WalkInPlaceFasterUp
 	delay 60
 	waitbuttonpress
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_ROUTE110_RIVAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
 	msgbox Route110_Text_BenOffToLookForNewPokemon, MSGBOX_DEFAULT
@@ -474,15 +468,15 @@ Route110_EventScript_RivalExit::
 	call_if_eq VAR_0x8008, 1, Route110_EventScript_MoveRival1
 	call_if_eq VAR_0x8008, 2, Route110_EventScript_MoveRival2
 	call_if_eq VAR_0x8008, 3, Route110_EventScript_MoveRival3
-	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_FACE_RIGHT
-	setobjectmovementtype LOCALID_RIVAL_ON_BIKE, MOVEMENT_TYPE_FACE_RIGHT
-	removeobject LOCALID_RIVAL
-	addobject LOCALID_RIVAL_ON_BIKE
+	setobjectmovementtype LOCALID_ROUTE110_RIVAL, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectmovementtype LOCALID_ROUTE110_RIVAL_ON_BIKE, MOVEMENT_TYPE_FACE_RIGHT
+	removeobject LOCALID_ROUTE110_RIVAL
+	addobject LOCALID_ROUTE110_RIVAL_ON_BIKE
 	delay 45
 	call_if_eq VAR_0x8008, 1, Route110_EventScript_RivalExit1
 	call_if_eq VAR_0x8008, 2, Route110_EventScript_RivalExit2
 	call_if_eq VAR_0x8008, 3, Route110_EventScript_RivalExit3
-	removeobject LOCALID_RIVAL_ON_BIKE
+	removeobject LOCALID_ROUTE110_RIVAL_ON_BIKE
 	setvar VAR_ROUTE110_STATE, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
@@ -490,45 +484,45 @@ Route110_EventScript_RivalExit::
 	end
 
 Route110_EventScript_RivalApproachPlayer1::
-	applymovement LOCALID_RIVAL, Route110_Movement_RivalApproachPlayer1
+	applymovement LOCALID_ROUTE110_RIVAL, Route110_Movement_RivalApproachPlayer1
 	waitmovement 0
 	return
 
 Route110_EventScript_RivalApproachPlayer2::
-	applymovement LOCALID_RIVAL, Route110_Movement_RivalApproachPlayer2
+	applymovement LOCALID_ROUTE110_RIVAL, Route110_Movement_RivalApproachPlayer2
 	waitmovement 0
 	return
 
 Route110_EventScript_RivalApproachPlayer3::
-	applymovement LOCALID_RIVAL, Route110_Movement_RivalApproachPlayer3
+	applymovement LOCALID_ROUTE110_RIVAL, Route110_Movement_RivalApproachPlayer3
 	waitmovement 0
 	return
 
 Route110_EventScript_RivalExit1::
-	applymovement LOCALID_RIVAL_ON_BIKE, Route110_Movement_RivalExit1
+	applymovement LOCALID_ROUTE110_RIVAL_ON_BIKE, Route110_Movement_RivalExit1
 	waitmovement 0
 	return
 
 Route110_EventScript_RivalExit2::
-	applymovement LOCALID_RIVAL_ON_BIKE, Route110_Movement_RivalExit2
+	applymovement LOCALID_ROUTE110_RIVAL_ON_BIKE, Route110_Movement_RivalExit2
 	waitmovement 0
 	return
 
 Route110_EventScript_RivalExit3::
-	applymovement LOCALID_RIVAL_ON_BIKE, Route110_Movement_RivalExit3
+	applymovement LOCALID_ROUTE110_RIVAL_ON_BIKE, Route110_Movement_RivalExit3
 	waitmovement 0
 	return
 
 Route110_EventScript_MoveRival1::
-	setobjectxyperm LOCALID_RIVAL_ON_BIKE, 33, 55
+	setobjectxyperm LOCALID_ROUTE110_RIVAL_ON_BIKE, 33, 55
 	return
 
 Route110_EventScript_MoveRival2::
-	setobjectxyperm LOCALID_RIVAL_ON_BIKE, 34, 55
+	setobjectxyperm LOCALID_ROUTE110_RIVAL_ON_BIKE, 34, 55
 	return
 
 Route110_EventScript_MoveRival3::
-	setobjectxyperm LOCALID_RIVAL_ON_BIKE, 35, 55
+	setobjectxyperm LOCALID_ROUTE110_RIVAL_ON_BIKE, 35, 55
 	return
 
 Route110_Movement_RivalApproachPlayer1:
@@ -599,15 +593,15 @@ Route110_EventScript_CeceScene4::
 	goto Route110_EventScript_CeceScene
 
 Route110_EventScript_CeceScene::
-	addobject LOCALID_CECE
-	addobject LOCALID_MINCCINO
-	applymovement LOCALID_CECE, Route110_Movement_CeceEntrance
-	applymovement LOCALID_MINCCINO, Route110_Movement_CeceEntrance
+	addobject LOCALID_ROUTE110_CECE
+	addobject LOCALID_ROUTE110_MINCCINO
+	applymovement LOCALID_ROUTE110_CECE, Route110_Movement_CeceEntrance
+	applymovement LOCALID_ROUTE110_MINCCINO, Route110_Movement_CeceEntrance
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_CECE, Common_Movement_ExclamationMark
+	applymovement LOCALID_ROUTE110_CECE, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_CECE, Route110_Movement_CeceHop
+	applymovement LOCALID_ROUTE110_CECE, Route110_Movement_CeceHop
 	waitmovement 0
 	call_if_eq VAR_0x8008, 1, Route110_EventScript_CeceApproachPlayer1
 	call_if_eq VAR_0x8008, 2, Route110_EventScript_CeceApproachPlayer2
@@ -616,9 +610,9 @@ Route110_EventScript_CeceScene::
 	msgbox Route110_Text_ConvenientSeeingYouHere, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	applymovement LOCALID_CECE, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_ROUTE110_CECE, Common_Movement_WalkInPlaceFasterUp
 	delay 60
-	applymovement LOCALID_CECE, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_ROUTE110_CECE, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
 	msgbox Route110_Text_BePrepared, MSGBOX_DEFAULT
@@ -629,57 +623,57 @@ Route110_EventScript_CeceScene::
 	call_if_eq VAR_0x8008, 2, Route110_EventScript_CeceExit2
 	call_if_eq VAR_0x8008, 3, Route110_EventScript_CeceExit3
 	call_if_eq VAR_0x8008, 4, Route110_EventScript_CeceExit4
-	removeobject LOCALID_CECE
-	removeobject LOCALID_MINCCINO
+	removeobject LOCALID_ROUTE110_CECE
+	removeobject LOCALID_ROUTE110_MINCCINO
 	setvar VAR_REGISTER_BIRCH_STATE, 2
 	releaseall
 	end
 
 Route110_EventScript_CeceApproachPlayer1::
-	applymovement LOCALID_CECE, Route110_Movement_CeceApproachPlayer1
-	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoApproachPlayer1
+	applymovement LOCALID_ROUTE110_CECE, Route110_Movement_CeceApproachPlayer1
+	applymovement LOCALID_ROUTE110_MINCCINO, Route110_Movement_MinccinoApproachPlayer1
 	waitmovement 0
 	return
 
 Route110_EventScript_CeceApproachPlayer2::
-	applymovement LOCALID_CECE, Route110_Movement_CeceApproachPlayer2
-	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoApproachPlayer2
+	applymovement LOCALID_ROUTE110_CECE, Route110_Movement_CeceApproachPlayer2
+	applymovement LOCALID_ROUTE110_MINCCINO, Route110_Movement_MinccinoApproachPlayer2
 	waitmovement 0
 	return
 
 Route110_EventScript_CeceApproachPlayer3::
-	applymovement LOCALID_CECE, Route110_Movement_CeceApproachPlayer3
-	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoApproachPlayer3
+	applymovement LOCALID_ROUTE110_CECE, Route110_Movement_CeceApproachPlayer3
+	applymovement LOCALID_ROUTE110_MINCCINO, Route110_Movement_MinccinoApproachPlayer3
 	waitmovement 0
 	return
 
 Route110_EventScript_CeceApproachPlayer4::
-	applymovement LOCALID_CECE, Route110_Movement_CeceApproachPlayer4
-	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoApproachPlayer4
+	applymovement LOCALID_ROUTE110_CECE, Route110_Movement_CeceApproachPlayer4
+	applymovement LOCALID_ROUTE110_MINCCINO, Route110_Movement_MinccinoApproachPlayer4
 	waitmovement 0
 	return
 
 Route110_EventScript_CeceExit1::
-	applymovement LOCALID_CECE, Route110_Movement_CeceExit1
-	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoExit1
+	applymovement LOCALID_ROUTE110_CECE, Route110_Movement_CeceExit1
+	applymovement LOCALID_ROUTE110_MINCCINO, Route110_Movement_MinccinoExit1
 	waitmovement 0
 	return
 
 Route110_EventScript_CeceExit2::
-	applymovement LOCALID_CECE, Route110_Movement_CeceExit2
-	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoExit2
+	applymovement LOCALID_ROUTE110_CECE, Route110_Movement_CeceExit2
+	applymovement LOCALID_ROUTE110_MINCCINO, Route110_Movement_MinccinoExit2
 	waitmovement 0
 	return
 
 Route110_EventScript_CeceExit3::
-	applymovement LOCALID_CECE, Route110_Movement_CeceExit3
-	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoExit3
+	applymovement LOCALID_ROUTE110_CECE, Route110_Movement_CeceExit3
+	applymovement LOCALID_ROUTE110_MINCCINO, Route110_Movement_MinccinoExit3
 	waitmovement 0
 	return
 
 Route110_EventScript_CeceExit4::
-	applymovement LOCALID_CECE, Route110_Movement_CeceExit4
-	applymovement LOCALID_MINCCINO, Route110_Movement_MinccinoExit4
+	applymovement LOCALID_ROUTE110_CECE, Route110_Movement_CeceExit4
+	applymovement LOCALID_ROUTE110_MINCCINO, Route110_Movement_MinccinoExit4
 	waitmovement 0
 	return
 
