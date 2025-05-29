@@ -275,7 +275,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ZIGZAGOON_2",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(SANDYGAST)",
       "x": 32,
       "y": 6,
       "elevation": 3,
@@ -284,7 +284,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route109_EventScript_Zigzagoon",
+      "script": "Route109_EventScript_Sandygast",
       "flag": "0"
     },
     {
@@ -349,9 +349,7 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",

@@ -5,20 +5,20 @@ RustboroCity_Flat2_1F_EventScript_OldWoman::
 	msgbox RustboroCity_Flat2_1F_Text_DevonWorkersLiveHere, MSGBOX_NPC
 	end
 
-RustboroCity_Flat2_1F_EventScript_Skitty::
+RustboroCity_Flat2_1F_EventScript_Swadloon::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_SKITTY, CRY_MODE_NORMAL
-	msgbox RustboroCity_Flat2_1F_Text_Skitty, MSGBOX_DEFAULT
+	playmoncry SPECIES_SWADLOON, CRY_MODE_NORMAL
+	msgbox RustboroCity_Flat2_1F_Text_Swadloon, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
 RustboroCity_Flat2_1F_Text_DevonWorkersLiveHere:
-	.string "DEVON CORPORATION's workers live in\n"
+	.string "Devon Corporation's workers live in\n"
 	.string "this building.$"
 
-RustboroCity_Flat2_1F_Text_Skitty:
-	.string "SKITTY: Gyaaaah!$"
+RustboroCity_Flat2_1F_Text_Swadloon:
+	.string "Swadloon: Swaddlewaa!$"
 

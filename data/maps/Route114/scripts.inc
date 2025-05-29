@@ -57,12 +57,12 @@ Route114_EventScript_ReceivedSnarl::
 	release
 	end
 
-Route114_EventScript_Poochyena::
+Route114_EventScript_Houndour::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_POOCHYENA, CRY_MODE_ENCOUNTER
-	msgbox Route114_Text_Poochyena, MSGBOX_DEFAULT
+	playmoncry SPECIES_HOUNDOUR, CRY_MODE_ENCOUNTER
+	msgbox Route114_Text_Houndour, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -186,7 +186,7 @@ Route114_Text_ExplainSnarl:
 	.string "Lowering our opponents' Sp. Atk simply\n"
 	.string "hasn't been worth it!$"
 
-Route114_Text_Poochyena:
+Route114_Text_Houndour:
 	.string "Grr! Grrrowr!$"
 
 Route114_Text_MeteorFallsSign:

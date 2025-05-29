@@ -48,22 +48,22 @@ PacifidlogTown_House2_EventScript_ExplainGracidea::
 	release
 	end
 
-PacifidlogTown_House2_EventScript_HappyAzurill::
+PacifidlogTown_House2_EventScript_HappyZorua::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZURILL, CRY_MODE_NORMAL
+	playmoncry SPECIES_ZORUA, CRY_MODE_NORMAL
 	msgbox PacifidlogTown_House2_Text_Rurii, MSGBOX_DEFAULT
 	waitmoncry
 	msgbox PacifidlogTown_House2_Text_VeryFriendlyWithTrainer, MSGBOX_DEFAULT
 	release
 	end
 
-PacifidlogTown_House2_EventScript_UnhappyAzurill::
+PacifidlogTown_House2_EventScript_UnhappyZorua::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZURILL, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_ZORUA, CRY_MODE_ENCOUNTER
 	msgbox PacifidlogTown_House2_Text_Rururi, MSGBOX_DEFAULT
 	waitmoncry
 	msgbox PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch, MSGBOX_DEFAULT
@@ -110,16 +110,15 @@ PacifidlogTown_House2_Text_ExplainGracidea:
 	.string "I wish I could remember the name of it!$"
 
 PacifidlogTown_House2_Text_Rurii:
-	.string "Azurill: Rurii.$"
+	.string "Zorua: Rurii!$"
 
 PacifidlogTown_House2_Text_VeryFriendlyWithTrainer:
-	.string "It appears to be very friendly with the\n"
-	.string "Trainer.$"
+	.string "It appears to be very friendly with you.$"
 
 PacifidlogTown_House2_Text_Rururi:
-	.string "Azurill: Rururi!$"
+	.string "Zorua: Rururi…$"
 
 PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch:
-	.string "It doesn't appear to like the Trainer\n"
-	.string "very much.$"
+	.string "It doesn't appear to like you very\n"
+	.string "much.$"
 

@@ -121,15 +121,15 @@ LilycoveCity_DepartmentStore_1F_EventScript_LittleGirl::
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_PokefanM::
-	msgbox LilycoveCity_DepartmentStore_1F_Text_BuyingSomethingForAzumarill, MSGBOX_NPC
+	msgbox LilycoveCity_DepartmentStore_1F_Text_BuyingSomethingForTinaktuff, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_1F_EventScript_Azumarill::
+LilycoveCity_DepartmentStore_1F_EventScript_Tinkatuff::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZUMARILL, CRY_MODE_NORMAL
-	msgbox LilycoveCity_DepartmentStore_1F_Text_Azumarill, MSGBOX_DEFAULT
+	playmoncry SPECIES_TINKATUFF, CRY_MODE_NORMAL
+	msgbox LilycoveCity_DepartmentStore_1F_Text_Tinkatuff, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -139,23 +139,23 @@ LilycoveCity_DepartmentStore_1F_EventScript_FloorNamesSign::
 	end
 
 LilycoveCity_DepartmentStore_1F_Text_WelcomeToDeptStore:
-	.string "Welcome to LILYCOVE DEPARTMENT STORE.$"
+	.string "Welcome to the Lilycove Department Store.$"
 
 LilycoveCity_DepartmentStore_1F_Text_IBuyAllSortsOfThings:
-	.string "Whenever I come to the DEPARTMENT\n"
-	.string "STORE, I always end up buying all sorts\l"
+	.string "Whenever I come to the Department\n"
+	.string "Store, I always end up buying all sorts\l"
 	.string "of things because it's so fun.$"
 
 LilycoveCity_DepartmentStore_1F_Text_MomBuyingMeFurniture:
 	.string "Today, my mom is going to buy me some\n"
 	.string "nice furniture.$"
 
-LilycoveCity_DepartmentStore_1F_Text_BuyingSomethingForAzumarill:
-	.string "I'm buying something for my AZUMARILL\n"
-	.string "as a reward for winning a CONTEST.$"
+LilycoveCity_DepartmentStore_1F_Text_BuyingSomethingForTinaktuff:
+	.string "I'm buying something for my Tinaktuff\n"
+	.string "as a reward for winning a Contest.$"
 
-LilycoveCity_DepartmentStore_1F_Text_Azumarill:
-	.string "AZUMARILL: Maririroo!$"
+LilycoveCity_DepartmentStore_1F_Text_Tinkatuff:
+	.string "Tinkatuff: Tinkaa tutuff!$"
 
 LilycoveCity_DepartmentStore_1F_Text_FloorNamesSign:
 	.string "1F: SERVICE COUNTER\n"

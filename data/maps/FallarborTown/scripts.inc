@@ -22,19 +22,19 @@ FallarborTown_EventScript_ExpertMNormal::
 	end
 
 FallarborTown_EventScript_Girl::
-	msgbox FallarborTown_Text_MyPreciousAzurill, MSGBOX_NPC
+	msgbox FallarborTown_Text_MyPreciousDonphan, MSGBOX_NPC
 	end
 
 FallarborTown_EventScript_Gentleman::
 	msgbox FallarborTown_Text_HaveYouChallengedIliyah, MSGBOX_NPC
 	end
 
-FallarborTown_EventScript_Azurill::
+FallarborTown_EventScript_Donphan::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZURILL, CRY_MODE_NORMAL
-	msgbox FallarborTown_Text_Azurill, MSGBOX_DEFAULT
+	playmoncry SPECIES_DONPHAN, CRY_MODE_NORMAL
+	msgbox FallarborTown_Text_Donphan, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -63,13 +63,13 @@ FallarborTown_Text_RegionKnownForMeteors:
 	.string "They say Metero Falls was gouged out\n"
 	.string "by a falling meteorite long ago.$"
 
-FallarborTown_Text_MyPreciousAzurill:
-	.string "See! Take a look!\n"
-	.string "This is my precious Azurill!\p"
-	.string "It's slick and smooth and plushy, too!$"
+FallarborTown_Text_MyPreciousDonphan:
+	.string "Take a look at my Pokémon!\n"
+	.string "This is my precious Donphan!\p"
+	.string "It's tough but it's soooooo cute too!$"
 
-FallarborTown_Text_Azurill:
-	.string "AZURILL: Rooreelooo.$"
+FallarborTown_Text_Donphan:
+	.string "Donphan: Dooreephooo.$"
 
 FallarborTown_Text_HaveYouChallengedIliyah:
 	.string "Have you already challenged Iliyah,\n"

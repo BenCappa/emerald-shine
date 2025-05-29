@@ -9,12 +9,12 @@ SootopolisCity_House4_EventScript_Woman::
 	msgbox SootopolisCity_House4_Text_StrollUnderwaterWithPokemon, MSGBOX_NPC
 	end
 
-SootopolisCity_House4_EventScript_Azumarill::
+SootopolisCity_House4_EventScript_Politoed::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZUMARILL, CRY_MODE_NORMAL
-	msgbox SootopolisCity_House4_Text_Azumarill, MSGBOX_DEFAULT
+	playmoncry SPECIES_POLITOED, CRY_MODE_NORMAL
+	msgbox SootopolisCity_House4_Text_Politoed, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -32,8 +32,8 @@ SootopolisCity_House4_Text_StrollUnderwaterWithPokemon:
 	.string "It would be nice if they existed, but\n"
 	.string "even if they didn't, it would be so\l"
 	.string "beautiful to take an underwater\l"
-	.string "stroll with my POKéMON.$"
+	.string "stroll with my Pokémon.$"
 
-SootopolisCity_House4_Text_Azumarill:
-	.string "AZUMARILL: Marurii.$"
+SootopolisCity_House4_Text_Politoed:
+	.string "Politoed: Ribibibit.$"
 

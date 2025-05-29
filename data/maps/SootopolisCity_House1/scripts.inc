@@ -18,12 +18,12 @@ SootopolisCity_House1_EventScript_ReceivedBrickBreak::
 	release
 	end
 
-SootopolisCity_House1_EventScript_Kecleon::
+SootopolisCity_House1_EventScript_Grapploct::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_KECLEON, CRY_MODE_NORMAL
-	msgbox SootopolisCity_House1_Text_Kecleon, MSGBOX_DEFAULT
+	playmoncry SPECIES_GRAPPLOCT, CRY_MODE_NORMAL
+	msgbox SootopolisCity_House1_Text_Grapploct, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -38,6 +38,6 @@ SootopolisCity_House1_Text_ExplainBrickBreak:
 	.string "TM68 contains Brick Break! It's a move\n"
 	.string "so horrible that I can't describe it.$"
 
-SootopolisCity_House1_Text_Kecleon:
-	.string "KECLEON: Puu puhyaah.$"
+SootopolisCity_House1_Text_Grapploct:
+	.string "Grapploct: Pluu puhyaah.$"
 

@@ -87,7 +87,7 @@ SSTidalCorridor_EventScript_Peeko::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
+	playmoncry SPECIES_WATTREL, CRY_MODE_NORMAL
 	msgbox SSTidalCorridor_Text_Peeko, MSGBOX_DEFAULT
 	waitmoncry
 	release
@@ -252,7 +252,7 @@ SSTidalCorridor_Movement_SailorReturn:
 	step_end
 
 SSTidalCorridor_Text_ScottBattleFrontierInvite:
-	.string "SCOTT: Well, hi, hi!\n"
+	.string "Scott: Well, hi, hi!\n"
 	.string "{PLAYER}{KUN}, {PLAYER}{KUN}!\p"
 	.string "Something's come up, so I have to\n"
 	.string "disembark, but am I glad to see you!\p"
@@ -323,7 +323,7 @@ SSTidalCorridor_Text_BrineyWelcomeAboard:
 	.string "soul as a sailor!$"
 
 SSTidalCorridor_Text_Peeko:
-	.string "Peeko: Pihyo pihyohyo…$"
+	.string "Peeko: Skirr reree…$"
 
 SSTidalCorridor_Text_Cabin1:
 	.string "Cabin 1$"
