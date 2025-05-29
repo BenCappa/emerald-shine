@@ -591,25 +591,25 @@ PetalburgCity_EventScript_WallyMegaRing::
 	msgbox PetalburgCity_Text_ASHLEY, MSGBOX_DEFAULT
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
-	addobject LOCALID_WALLY
-	setobjectxy LOCALID_WALLY, 15, 15
-	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyApproachPlayer
+	addobject LOCALID_PETALBURG_WALLY
+	setobjectxy LOCALID_PETALBURG_WALLY, 15, 15
+	applymovement LOCALID_PETALBURG_WALLY, PetalburgCity_Movement_WallyApproachPlayer
 	waitmovement 0
 	delay 30
 	msgbox PetalburgCity_Text_IWantToRepayYou, MSGBOX_DEFAULT
 	giveitem ITEM_MEGA_RING
 	closemessage
-	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_PETALBURG_WALLY, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox PetalburgCity_Text_WallyPause, MSGBOX_DEFAULT
-	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceUp
+	applymovement LOCALID_PETALBURG_WALLY, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox PetalburgCity_Text_HopeWeBattleSoon, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyExit
+	applymovement LOCALID_PETALBURG_WALLY, PetalburgCity_Movement_WallyExit
 	waitmovement 0
 	setvar VAR_WALLY_MEGA_RING_STATE, 0
-	removeobject LOCALID_WALLY
+	removeobject LOCALID_PETALBURG_WALLY
 	releaseall
 	end
 
