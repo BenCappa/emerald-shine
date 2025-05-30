@@ -1,6 +1,14 @@
 GraniteCave_StevensRoom_MapScripts::
 	.byte 0
 
+GraniteCave_StevensRoom_EventScript_Cece::
+	msgbox GraniteCave_StevensRoom_Text_Cece, MSGBOX_NPC
+	end
+
+GraniteCave_StevensRoom_EventScript_Kit::
+	msgbox GraniteCave_StevensRoom_Text_Kit, MSGBOX_NPC
+	end
+
 GraniteCave_StevensRoom_EventScript_Steven::
 	lock
 	faceplayer
@@ -22,12 +30,22 @@ GraniteCave_StevensRoom_EventScript_Steven::
 	setflag FLAG_REGISTERED_STEVEN_POKENAV
 	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
 	closemessage
+	applymovement LOCALID_GRANITE_CAVE_CECE, GraniteCave_StevensRoom_Movement_CeceMoveToLeft
+	applymovement LOCALID_GRANITE_CAVE_KIT, GraniteCave_StevensRoom_Movement_KitMoveToRight
 	call_if_eq VAR_FACING, DIR_NORTH, GraniteCave_StevensRoom_EventScript_StevenExitNorth
 	call_if_eq VAR_FACING, DIR_SOUTH, GraniteCave_StevensRoom_EventScript_StevenExitSouth
 	call_if_eq VAR_FACING, DIR_WEST, GraniteCave_StevensRoom_EventScript_StevenExitWestEast
 	call_if_eq VAR_FACING, DIR_EAST, GraniteCave_StevensRoom_EventScript_StevenExitWestEast
 	playse SE_EXIT
 	removeobject LOCALID_GRANITE_CAVE_STEVEN
+	applymovement LOCALID_GRANITE_CAVE_CECE, GraniteCave_StevensRoom_Movement_CeceExit
+	waitmovement 0
+	playse SE_EXIT
+	removeobject LOCALID_GRANITE_CAVE_CECE
+	applymovement LOCALID_GRANITE_CAVE_KIT, GraniteCave_StevensRoom_Movement_KitExit
+	waitmovement 0
+	playse SE_EXIT
+	removeobject LOCALID_GRANITE_CAVE_KIT
 	release
 	end
 
@@ -79,6 +97,32 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	delay_8
 	step_end
 
+GraniteCave_StevensRoom_Movement_CeceMoveToLeft:
+	walk_right
+	walk_up
+	walk_up
+	walk_in_place_faster_down
+	step_end
+
+GraniteCave_StevensRoom_Movement_KitMoveToRight:
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_faster_down
+	step_end
+
+GraniteCave_StevensRoom_Movement_CeceExit:
+	walk_right
+	walk_up
+	delay_8
+	step_end
+
+GraniteCave_StevensRoom_Movement_KitExit:
+	walk_left
+	walk_up
+	delay_8
+	step_end
+
 GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
 	.string "My name is Steven.\p"
 	.string "I'm interested in rare stones,\n"
@@ -114,6 +158,14 @@ GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
 	.string "Now, I've got to hurry along.$"
 
 GraniteCave_StevensRoom_Text_OhBagIsFull:
-	.string "Oh, your BAG is full…\n"
+	.string "Oh, your Bag is full…\n"
 	.string "That's too bad, then.$"
+
+GraniteCave_StevensRoom_Text_Cece:
+	.string "???: My brother and I are assistants to\n"
+	.string "Steven. It's been a lot of fun so far!$"
+
+GraniteCave_StevensRoom_Text_Kit:
+	.string "???: I'm honestly just here because I'll\n"
+	.string "do whatever my sister is doing.$"
 

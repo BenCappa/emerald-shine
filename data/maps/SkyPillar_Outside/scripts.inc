@@ -27,12 +27,12 @@ SkyPillar_Outside_EventScript_OpenDoor::
 	return
 
 SkyPillar_Outside_OnFrame:
-	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 3, SkyPillar_Outside_EventScript_WallaceScene
+	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 3, SkyPillar_Outside_EventScript_StevenScene
 	.2byte 0
 
-SkyPillar_Outside_EventScript_WallaceScene::
+SkyPillar_Outside_EventScript_StevenScene::
 	lockall
-	applymovement LOCALID_SKY_PILLAR_WALLACE, SkyPillar_Outside_Movement_WallaceApproachPlayer
+	applymovement LOCALID_SKY_PILLAR_STEVEN, SkyPillar_Outside_Movement_WallaceApproachPlayer
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
@@ -49,7 +49,7 @@ SkyPillar_Outside_EventScript_WallaceScene::
 	msgbox SkyPillar_Outside_Text_EarthquakeNotMomentToWaste, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_PLAYER, SkyPillar_Outside_Movement_PlayerClimbSkyPillar
-	applymovement LOCALID_SKY_PILLAR_WALLACE, SkyPillar_Outside_Movement_WallaceClimbSkyPillar
+	applymovement LOCALID_SKY_PILLAR_STEVEN, SkyPillar_Outside_Movement_WallaceClimbSkyPillar
 	waitmovement 0
 	setvar VAR_0x8004, 1   @ vertical pan
 	setvar VAR_0x8005, 3   @ horizontal pan
@@ -58,13 +58,13 @@ SkyPillar_Outside_EventScript_WallaceScene::
 	special ShakeCamera
 	waitstate
 	delay 20
-	applymovement LOCALID_SKY_PILLAR_WALLACE, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_SKY_PILLAR_STEVEN, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	delay 10
-	applymovement LOCALID_SKY_PILLAR_WALLACE, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_SKY_PILLAR_STEVEN, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 20
-	applymovement LOCALID_SKY_PILLAR_WALLACE, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_SKY_PILLAR_STEVEN, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
 	msgbox SkyPillar_Outside_Text_SituationGettingWorse, MSGBOX_DEFAULT
@@ -81,8 +81,8 @@ SkyPillar_Outside_EventScript_WallaceScene::
 	fadescreenswapbuffers FADE_TO_BLACK
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 4
-	removeobject LOCALID_SKY_PILLAR_WALLACE
-	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
+	removeobject LOCALID_SKY_PILLAR_STEVEN
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
 	fadescreenswapbuffers FADE_FROM_BLACK
 	releaseall
 	end
@@ -130,7 +130,7 @@ SkyPillar_Outside_Movement_PlayerClimbSkyPillar:
 	walk_up
 	step_end
 
-SkyPillar_Outside_EventScript_Wallace::
+SkyPillar_Outside_EventScript_Steven::
 	end
 
 SkyPillar_Outside_EventScript_ClosedDoor::
@@ -141,30 +141,30 @@ SkyPillar_Outside_Text_DoorIsClosed:
 	.string "The door is closed.$"
 
 SkyPillar_Outside_Text_OpenedDoorToSkyPillar:
-	.string "WALLACE: Oh, my, I'm terribly sorry!\p"
+	.string "Steven: You'll have to forgive me.\p"
 	.string "In my haste, I didn't notice that\n"
 	.string "I'd left you behind!\p"
 	.string "I've opened the locked door of\n"
-	.string "the SKY PILLAR.\p"
+	.string "the Sky Pillar.\p"
 	.string "{PLAYER}{KUN}, let's be on our way!$"
 
 SkyPillar_Outside_Text_EarthquakeNotMomentToWaste:
-	.string "WALLACE: It's an earthquake!\p"
+	.string "Steven: It's an earthquake!\p"
 	.string "There's not a moment to waste!\n"
 	.string "We've got to hurry!$"
 
 SkyPillar_Outside_Text_SituationGettingWorse:
-	.string "WALLACE: Hmm…\n"
+	.string "Steven: Hmm…\n"
 	.string "The situation is getting worse…$"
 
 SkyPillar_Outside_Text_GotToGoBackForSootopolis:
-	.string "WALLACE: This isn't good…\p"
+	.string "Steven: This isn't good…\p"
 	.string "The weather distortion is spreading\n"
 	.string "even here…\p"
 	.string "{PLAYER}{KUN}.\p"
-	.string "RAYQUAZA should be farther up\n"
+	.string "Rayquaza should be farther up\n"
 	.string "from here.\p"
-	.string "I'm worried about SOOTOPOLIS.\n"
+	.string "I'm worried about Sootopolis.\n"
 	.string "I've got to go back.\p"
 	.string "Everything is in your hands now.\n"
 	.string "Don't fail us!$"

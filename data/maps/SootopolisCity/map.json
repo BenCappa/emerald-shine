@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "local_id": "LOCALID_SOOTOPOLIS_EXPERT",
@@ -98,8 +98,8 @@
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1"
     },
     {
-      "local_id": "LOCALID_SOOTOPOLIS_STEVEN",
-      "graphics_id": "OBJ_EVENT_GFX_STEVEN",
+      "local_id": "LOCALID_SOOTOPOLIS_KIT",
+      "graphics_id": "OBJ_EVENT_GFX_LINK_RS_BRENDAN",
       "x": 20,
       "y": 36,
       "elevation": 3,
@@ -108,8 +108,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_Steven",
-      "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN"
+      "script": "SootopolisCity_EventScript_Kit",
+      "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_KIT"
     },
     {
       "local_id": "LOCALID_SOOTOPOLIS_WOMAN_1",
@@ -252,8 +252,8 @@
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE"
     },
     {
-      "local_id": "LOCALID_SOOTOPOLIS_WALLACE",
-      "graphics_id": "OBJ_EVENT_GFX_WALLACE",
+      "local_id": "LOCALID_SOOTOPOLIS_STEVEN",
+      "graphics_id": "OBJ_EVENT_GFX_STEVEN",
       "x": 31,
       "y": 18,
       "elevation": 3,
@@ -262,8 +262,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_Wallace",
-      "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE"
+      "script": "SootopolisCity_EventScript_Steven",
+      "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN"
     }
   ],
   "warp_events": [
@@ -359,9 +359,7 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
