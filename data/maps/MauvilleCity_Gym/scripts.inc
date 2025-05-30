@@ -102,11 +102,6 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	call MauvilleCity_Gym_EventScript_GiveVoltSwitch
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox MauvilleCity_Gym_Text_RegisteredWattson, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_WATTSON_MATCH_CALL
 	release
 	end
@@ -357,10 +352,11 @@ MauvilleCity_Gym_Text_ReceivedDynamoBadge:
 	.string "from Wattson.$"
 
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
-	.string "With the Dynamo Badge, Pokémon can\n"
-	.string "use Rock Smash out of battle.\p"
-	.string "And, it will make your Pokémon a little\n"
-	.string "bit faster, too.\p"
+	.string "Earning the Dynamo Badge does a lot\n"
+	.string "for your Pokémon.\p"
+	.string "It raises their Speed, allows them to\n"
+	.string "use Rock Smash out of battle, and\l"
+	.string "raises their Level Cap to Level 38!\p"
 	.string "Hmm…\n"
 	.string "You should take this, too!$"
 
@@ -368,10 +364,6 @@ MauvilleCity_Gym_Text_ExplainVoltSwitch:
 	.string "That TM15 there contains Volt Switch.\p"
 	.string "It'll shock your opponents by switching\n"
 	.string "out your Pokémon after it hits!$"
-
-MauvilleCity_Gym_Text_RegisteredWattson:
-	.string "Registered GYM LEADER WATTSON\n"
-	.string "in the POKéNAV.$"
 
 MauvilleCity_Gym_Text_WattsonPostBattle:
 	.string "I swell with optimism, seeing a promising\n"

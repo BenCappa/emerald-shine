@@ -85,11 +85,6 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	call MossdeepCity_Gym_EventScript_GivePsychicFangs
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox MossdeepCity_Gym_Text_RegisteredTateAndLiza, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_TATE_AND_LIZA_MATCH_CALL
 	release
 	end
@@ -581,7 +576,9 @@ MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis:
 	.string "Sp. Atk and Sp. Def of Pokémon.\p"
 	.string "Liza: It also lets you use the HM move\n"
 	.string "Dive outside of battle.\p"
-	.string "Tate: You should also take this, too.$"
+	.string "Tate: Don't forget your Level Cap\n"
+	.string "raises up to Level 67.\p"
+	.string "Liza: You should also take this, too.$"
 
 MossdeepCity_Gym_Text_ExplainPsychicFangs:
 	.string "Tate: That TM69 contains…\n"
@@ -589,12 +586,7 @@ MossdeepCity_Gym_Text_ExplainPsychicFangs:
 	.string "Tate: It breaks barriers and…\n"
 	.string "Liza: It damages the opponent!\p"
 	.string "Tate: It's also a nickname…\n"
-	.string "Liza: That we gave ourselves!\p"
-	.string "… … … … … …$"
-
-MossdeepCity_Gym_Text_RegisteredTateAndLiza:
-	.string "Registered GYM LEADERS TATE & LIZA\n"
-	.string "in the POKéNAV.$"
+	.string "Liza: That we gave ourselves!$"
 
 MossdeepCity_Gym_Text_TateAndLizaPostBattle:
 	.string "Tate: Looks like the bond between you\n"

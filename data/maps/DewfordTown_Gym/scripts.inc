@@ -132,16 +132,16 @@ DewfordTown_Gym_EventScript_CheckLilith::
 DewfordTown_Gym_EventScript_StopCountingTrainers::
 	return
 
-DewfordTown_Gym_EventScript_Brawly::
-	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
+DewfordTown_Gym_EventScript_Niles::
+	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_NilesIntro, DewfordTown_Gym_Text_NilesDefeat, DewfordTown_Gym_EventScript_NilesDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
+	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_NilesRematch
 	goto_if_unset FLAG_RECEIVED_TM_STEALTH_ROCK, DewfordTown_Gym_EventScript_GiveStealthRock2
-	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
+	msgbox DewfordTown_Gym_Text_NilesPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-DewfordTown_Gym_EventScript_BrawlyDefeated::
+DewfordTown_Gym_EventScript_NilesDefeated::
 	call DewfordTown_Gym_EventScript_AnimateFlashFullBrightness
 	message DewfordTown_Gym_Text_ReceivedStoneBadge
 	waitmessage
@@ -154,11 +154,6 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	setvar VAR_0x8008, 2
 	call Common_EventScript_SetGymTrainers
 	call DewfordTown_Gym_EventScript_GiveStealthRock
-	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox DewfordTown_Gym_Text_RegisteredBrawly, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_BRAWLY_MATCH_CALL
@@ -182,9 +177,9 @@ DewfordTown_Gym_EventScript_GiveStealthRock2:
 	release
 	end
 
-DewfordTown_Gym_EventScript_BrawlyRematch::
-	trainerbattle_rematch_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyPreRematch, DewfordTown_Gym_Text_BrawlyRematchDefeat, DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons
-	msgbox DewfordTown_Gym_Text_BrawlyPostRematch, MSGBOX_AUTOCLOSE
+DewfordTown_Gym_EventScript_NilesRematch::
+	trainerbattle_rematch_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_NilesPreRematch, DewfordTown_Gym_Text_NilesRematchDefeat, DewfordTown_Gym_Text_NilesRematchNeedTwoMons
+	msgbox DewfordTown_Gym_Text_NilesPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_Takao::
@@ -379,7 +374,7 @@ DewfordTown_Gym_Text_CristianPostBattle:
 	.string "You win!\n"
 	.string "Go after that Badge!$"
 
-DewfordTown_Gym_Text_BrawlyIntro:
+DewfordTown_Gym_Text_NilesIntro:
 	.string "Hey Ashley.\p"
 	.string "I'm sure you're wondering:\n"
 	.string "Why make my Gym a pitch-black cave?\p"
@@ -389,7 +384,7 @@ DewfordTown_Gym_Text_BrawlyIntro:
 	.string "Anyways, you wanted to challenge me?\n"
 	.string "Let's get started!$"
 
-DewfordTown_Gym_Text_BrawlyDefeat:
+DewfordTown_Gym_Text_NilesDefeat:
 	.string "Okay, you've got me.\n"
 	.string "I'll admit it!\p"
 	.string "You did a lot better I expected.\p"
@@ -400,9 +395,8 @@ DewfordTown_Gym_Text_ReceivedStoneBadge:
 	.string "from Niles.$"
 
 DewfordTown_Gym_Text_StoneBadgeInfoTakeThis:
-	.string "The Stone Badge makes all Pokémon\n"
-	.string "up to Level 30, even those you get in\l"
-	.string "trades, obey without question.\p"
+	.string "The Stone Badge raises the Level Cap\n"
+	.string "of your Pokémon to Level 28.\p"
 	.string "And, you'll be able to use the HM move\n"
 	.string "Flash outside of battle.\p"
 	.string "If you'd like, use this Technical\n"
@@ -412,14 +406,9 @@ DewfordTown_Gym_Text_ExplainStealthRock:
 	.string "That TM82 contains Stealth Rock.\p"
 	.string "Set it up right away to chip away at\n"
 	.string "your opponents health every time they\l"
-	.string "enter the battlefield.\p"
-	.string "… … … … … …$"
+	.string "enter the battlefield.$"
 
-DewfordTown_Gym_Text_RegisteredBrawly:
-	.string "Registered GYM LEADER Niles\n"
-	.string "in the POKéNAV.$"
-
-DewfordTown_Gym_Text_BrawlyPostBattle:
+DewfordTown_Gym_Text_NilesPostBattle:
 	.string "Keep training so I can show you my\n"
 	.string "actually challenging teams.$"
 
@@ -428,10 +417,10 @@ DewfordTown_Gym_Text_GymStatue:
 
 DewfordTown_Gym_Text_GymStatueCertified:
 	.string "DEWFORD TOWN POKéMON GYM\p"
-	.string "Niles'S CERTIFIED TRAINERS:\n"
+	.string "NILES'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
-DewfordTown_Gym_Text_BrawlyPreRematch:
+DewfordTown_Gym_Text_NilesPreRematch:
 	.string "Niles: You want to battle?\n"
 	.string "I guess I can spare some time.\p"
 	.string "Time to face my rock-hard team!\p"
@@ -439,15 +428,15 @@ DewfordTown_Gym_Text_BrawlyPreRematch:
 	.string "I didn't word that the best.\p"
 	.string "Don't be gross, can we just battle?$"
 
-DewfordTown_Gym_Text_BrawlyRematchDefeat:
+DewfordTown_Gym_Text_NilesRematchDefeat:
 	.string "You know, I'm more just\n"
 	.string "disappointed in myself.$"
 
-DewfordTown_Gym_Text_BrawlyPostRematch:
+DewfordTown_Gym_Text_NilesPostRematch:
 	.string "Niles: That was fun.\n"
 	.string "Keep training and lets battle again.$"
 
-DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons:
+DewfordTown_Gym_Text_NilesRematchNeedTwoMons:
 	.string "Niles: You want to battle?\n"
 	.string "I guess I can spare some time.\p"
 	.string "Oh? You only have one Pokémon\n"

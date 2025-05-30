@@ -38,11 +38,6 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	call FortreeCity_Gym_EventScript_GiveAcrobatics
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox FortreeCity_Gym_Text_RegisteredWinona, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_WINONA_MATCH_CALL
 	setvar VAR_SCOTT_FORTREE_CALL_STEP_COUNTER, 0
 	setflag FLAG_SCOTT_CALL_FORTREE_GYM
@@ -255,9 +250,8 @@ FortreeCity_Gym_Text_ReceivedFeatherBadge:
 	.string "from Winona.$"
 
 FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
-	.string "With the Feather Badge, all Pokémon up\n"
-	.string "to LV 70, even those received through\l"
-	.string "trades, will obey your every command.\p"
+	.string "With the Feather Badge, the Level Cap\n"
+	.string "of your Pokémon is raised to Level 62.\p"
 	.string "You will also, of course, be able to use\n"
 	.string "the HM move Fly outside of battle.\p"
 	.string "And this…\n"
@@ -268,10 +262,6 @@ FortreeCity_Gym_Text_ExplainAcrobatics:
 	.string "Free yourself from the weight of items\n"
 	.string "and this move shall bring out your\l"
 	.string "Pokémon's unhindered strength.$"
-
-FortreeCity_Gym_Text_RegisteredWinona:
-	.string "Registered GYM LEADER WINONA\n"
-	.string "in the POKéNAV.$"
 
 FortreeCity_Gym_Text_WinonaPostBattle:
 	.string "Though I fell to you, I will remain\n"

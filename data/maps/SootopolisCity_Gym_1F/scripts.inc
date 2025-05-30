@@ -79,17 +79,17 @@ SootopolisCity_Gym_1F_Movement_FallThroughIce:
 	set_invisible
 	step_end
 
-SootopolisCity_Gym_1F_EventScript_Juan::
-	trainerbattle_single TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
+SootopolisCity_Gym_1F_EventScript_Rheannon::
+	trainerbattle_single TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_RheannonIntro, SootopolisCity_Gym_1F_Text_RheannonDefeat, SootopolisCity_Gym_1F_EventScript_RheannonDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, SootopolisCity_Gym_1F_EventScript_JuanRematch
+	goto_if_eq VAR_RESULT, TRUE, SootopolisCity_Gym_1F_EventScript_RheannonRematch
 	goto_if_unset FLAG_RECEIVED_TM_SCALD, SootopolisCity_Gym_1F_EventScript_GiveScald2
 	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge
-	msgbox SootopolisCity_Gym_1F_Text_JuanPostBattle, MSGBOX_DEFAULT
+	msgbox SootopolisCity_Gym_1F_Text_RheannonPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_JuanDefeated::
+SootopolisCity_Gym_1F_EventScript_RheannonDefeated::
 	message SootopolisCity_Gym_1F_Text_ReceivedRainBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
@@ -104,11 +104,6 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	setvar VAR_0x8008, 8
 	call Common_EventScript_SetGymTrainers
 	call SootopolisCity_Gym_1F_EventScript_GiveScald
-	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox SootopolisCity_Gym_1F_Text_RegisteredJuan, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_JUAN_MATCH_CALL
@@ -135,9 +130,9 @@ SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge::
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_JuanRematch::
-	trainerbattle_rematch_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanPreRematch, SootopolisCity_Gym_1F_Text_JuanRematchDefeat, SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons
-	msgbox SootopolisCity_Gym_1F_Text_JuanPostRematch, MSGBOX_AUTOCLOSE
+SootopolisCity_Gym_1F_EventScript_RheannonRematch::
+	trainerbattle_rematch_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_RheannonPreRematch, SootopolisCity_Gym_1F_Text_RheannonRematchDefeat, SootopolisCity_Gym_1F_Text_RheannonRematchNeedTwoMons
+	msgbox SootopolisCity_Gym_1F_Text_RheannonPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_1F_EventScript_GymGuide::
@@ -194,7 +189,7 @@ SootopolisCity_Gym_1F_Text_GymGuidePostVictory:
 	.string "If you've gotten all the Badges, you're\n"
 	.string "set for the Pokémon League challenge!$"
 
-SootopolisCity_Gym_1F_Text_JuanIntro:
+SootopolisCity_Gym_1F_Text_RheannonIntro:
 	.string "Rhen: You finally made it.\p"
 	.string "Was it tough clearing all those Gyms\n"
 	.string "run by those dodo-heads?\p"
@@ -209,7 +204,7 @@ SootopolisCity_Gym_1F_Text_JuanIntro:
 @ the gDisplayedStringBattle buffer that it's put into, and it stomps all over the gBattleTextBuffs
 @ after, as well as the otherwise unused array after that. One wonders if that's the reason for
 @ the existence of that unused array of ints.
-SootopolisCity_Gym_1F_Text_JuanDefeat:
+SootopolisCity_Gym_1F_Text_RheannonDefeat:
 	.string "Rhen: Oh I hate losing to you!\n"
 	.string "But there's no denying it, you win.\p"
 	.string "I want you to know that even though\n"
@@ -223,8 +218,8 @@ SootopolisCity_Gym_1F_Text_ReceivedRainBadge:
 	.string "from Rheannon.$"
 
 SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
-	.string "The Rain Badge assures Pokémon of\n"
-	.string "all level obey your every command.\p"
+	.string "The Rain Badge raises your Pokémon's\n"
+	.string "Level Cap to Level 72.\p"
 	.string "The Rain Badge also allows the use\n"
 	.string "of the HM move Waterfall to scale\l"
 	.string "walls of cascading water.\p"
@@ -237,11 +232,7 @@ SootopolisCity_Gym_1F_Text_ExplainScald:
 	.string "In use, it will occasionally burn\n"
 	.string "the target with a boiling splash.$"
 
-SootopolisCity_Gym_1F_Text_RegisteredJuan:
-	.string "Registered GYM LEADER Rheannon\n"
-	.string "in the POKéNAV.$"
-
-SootopolisCity_Gym_1F_Text_JuanPostBattle:
+SootopolisCity_Gym_1F_Text_RheannonPostBattle:
 	.string "The Trainers who have gathered all\n"
 	.string "the Gym Badges of Hoenn should make\l"
 	.string "way to the ultimate destination.\p"
@@ -262,10 +253,10 @@ SootopolisCity_Gym_1F_Text_GymStatue:
 
 SootopolisCity_Gym_1F_Text_GymStatueCertified:
 	.string "SOOTOPOLIS CITY POKéMON GYM\p"
-	.string "Rheannon's CERTIFIED TRAINERS:\n"
+	.string "RHEANNON's CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
-SootopolisCity_Gym_1F_Text_JuanPreRematch:
+SootopolisCity_Gym_1F_Text_RheannonPreRematch:
 	.string "Rhen: Back for more?\n"
 	.string "You sure you're ready?\p"
 	.string "Good because I want to reclaim\n"
@@ -273,17 +264,17 @@ SootopolisCity_Gym_1F_Text_JuanPreRematch:
 	.string "in our family.\p"
 	.string "Bring it on!$"
 
-SootopolisCity_Gym_1F_Text_JuanRematchDefeat:
+SootopolisCity_Gym_1F_Text_RheannonRematchDefeat:
 	.string "You're such a putz!$"
 
-SootopolisCity_Gym_1F_Text_JuanPostRematch:
+SootopolisCity_Gym_1F_Text_RheannonPostRematch:
 	.string "Rhen: Battling like this is fun,\n"
 	.string "We need to do it more often.\p"
 	.string "Even if it is infuriating to lose.\p"
 	.string "Oh and if you see Mom before I do,\n"
 	.string "tell her I said hi.$"
 
-SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons:
+SootopolisCity_Gym_1F_Text_RheannonRematchNeedTwoMons:
 	.string "Rhen: Back for more?\n"
 	.string "You sure you're ready?\p"
 	.string "Apparently not.\n"

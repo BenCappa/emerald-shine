@@ -43,16 +43,16 @@ LavaridgeTown_Gym_1F_EventScript_CheckBuryDanielle::
 LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers::
 	return
 
-LavaridgeTown_Gym_1F_EventScript_Flannery::
-	trainerbattle_single TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryIntro, LavaridgeTown_Gym_1F_Text_FlanneryDefeat, LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated, NO_MUSIC
+LavaridgeTown_Gym_1F_EventScript_Iliyah::
+	trainerbattle_single TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_IliyahIntro, LavaridgeTown_Gym_1F_Text_IliyahDefeat, LavaridgeTown_Gym_1F_EventScript_IliyahDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_FlanneryRematch
+	goto_if_eq VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_IliyahRematch
 	goto_if_unset FLAG_RECEIVED_TM_HEAT_WAVE, LavaridgeTown_Gym_1F_EventScript_GiveHeatWave2
-	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
+	msgbox LavaridgeTown_Gym_1F_Text_IliyahPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
+LavaridgeTown_Gym_1F_EventScript_IliyahDefeated::
 	message LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
@@ -68,11 +68,6 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	setvar VAR_LAVARIDGE_TOWN_STATE, 1
 	setvar VAR_WALLY_MEGA_RING_STATE, 1
 	call LavaridgeTown_Gym_1F_EventScript_GiveHeatWave
-	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox LavaridgeTown_Gym_1F_Text_RegisteredFlannery, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_FLANNERY_MATCH_CALL
@@ -94,9 +89,9 @@ LavaridgeTown_Gym_1F_EventScript_GiveHeatWave::
 	setflag FLAG_RECEIVED_TM_HEAT_WAVE
 	return
 
-LavaridgeTown_Gym_1F_EventScript_FlanneryRematch::
-	trainerbattle_rematch_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryPreRematch, LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat, LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons
-	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostRematch, MSGBOX_AUTOCLOSE
+LavaridgeTown_Gym_1F_EventScript_IliyahRematch::
+	trainerbattle_rematch_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_IliyahPreRematch, LavaridgeTown_Gym_1F_Text_IliyahRematchDefeat, LavaridgeTown_Gym_1F_Text_IliyahRematchNeedTwoMons
+	msgbox LavaridgeTown_Gym_1F_Text_IliyahPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_Cole::
@@ -298,7 +293,7 @@ LavaridgeTown_Gym_B1F_Text_EliPostBattle:
 	.string "I stay here because I became a fan\n"
 	.string "of Iliyah's power.$"
 
-LavaridgeTown_Gym_1F_Text_FlanneryIntro:
+LavaridgeTown_Gym_1F_Text_IliyahIntro:
 	.string "May: Hi, Ash… No, wait.\p"
 	.string "Don't expected to be treated any\n"
 	.string "different than the other challengers!\p"
@@ -312,7 +307,7 @@ LavaridgeTown_Gym_1F_Text_FlanneryIntro:
 	.string "I shall demonstrate the hot moves\l"
 	.string "I have forged upon this land!$"
 
-LavaridgeTown_Gym_1F_Text_FlanneryDefeat:
+LavaridgeTown_Gym_1F_Text_IliyahDefeat:
 	.string "Dang it…\n"
 	.string "My temper got the better of me…\p"
 	.string "Everyone's been nagging me, telling me\n"
@@ -330,12 +325,10 @@ LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
 	.string "If you have a Heat Badge, all Pokémon\n"
-	.string "up to Level 50, even those you get in\l"
-	.string "trades from other people, will obey\l"
-	.string "you completely.\p"
+	.string "can level up to Level 42.\p"
 	.string "And, it lets Pokémon use the HM move\n"
 	.string "Strength outside of battle.\p"
-	.string "This is a token of my appreciation.\n"
+	.string "Here, let me give you something.\n"
 	.string "Don't make a big deal about it!$"
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatWave:
@@ -345,11 +338,7 @@ LavaridgeTown_Gym_1F_Text_ExplainHeatWave:
 	.string "Be like me and use it to really bring\n"
 	.string "the heat during a Double Battle.$"
 
-LavaridgeTown_Gym_1F_Text_RegisteredFlannery:
-	.string "Registered GYM LEADER Iliyah\n"
-	.string "in the POKéNAV.$"
-
-LavaridgeTown_Gym_1F_Text_FlanneryPostBattle:
+LavaridgeTown_Gym_1F_Text_IliyahPostBattle:
 	.string "I had to find Pokémon that could\n"
 	.string "match my fiery temper.\p"
 	.string "We end up yelling at each other a lot\n"
@@ -360,10 +349,10 @@ LavaridgeTown_Gym_1F_Text_GymStatue:
 
 LavaridgeTown_Gym_1F_Text_GymStatueCertified:
 	.string "LAVARIDGE TOWN POKéMON GYM\p"
-	.string "Iliyah'S CERTIFIED TRAINERS:\n"
+	.string "ILIYAH'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
-LavaridgeTown_Gym_1F_Text_FlanneryPreRematch:
+LavaridgeTown_Gym_1F_Text_IliyahPreRematch:
 	.string "May: The thought of battling\n"
 	.string "you is getting me pumped!\p"
 	.string "I love Pokémon.\n"
@@ -372,11 +361,11 @@ LavaridgeTown_Gym_1F_Text_FlanneryPreRematch:
 	.string "Let's exchange superhot moves\n"
 	.string "in another battle!$"
 
-LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat:
+LavaridgeTown_Gym_1F_Text_IliyahRematchDefeat:
 	.string "Whew!\n"
 	.string "On the verge of eruption!$"
 
-LavaridgeTown_Gym_1F_Text_FlanneryPostRematch:
+LavaridgeTown_Gym_1F_Text_IliyahPostRematch:
 	.string "May: I may have lost the match,\n"
 	.string "but I get stronger each time I do.\p"
 	.string "It's not often I get to enjoy a battle\n"
@@ -384,7 +373,7 @@ LavaridgeTown_Gym_1F_Text_FlanneryPostRematch:
 	.string "Let's have another one like this\n"
 	.string "again sometime!$"
 
-LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons:
+LavaridgeTown_Gym_1F_Text_IliyahRematchNeedTwoMons:
 	.string "May: The thought of battling\n"
 	.string "you is getting me pumped!\p"
 	.string "I love Pokémon.\n"

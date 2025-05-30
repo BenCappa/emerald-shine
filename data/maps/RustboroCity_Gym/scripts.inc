@@ -1,16 +1,16 @@
 RustboroCity_Gym_MapScripts::
 	.byte 0
 
-RustboroCity_Gym_EventScript_Roxanne::
-	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
+RustboroCity_Gym_EventScript_Oriana::
+	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_OrianaIntro, RustboroCity_Gym_Text_OrianaDefeat, RustboroCity_Gym_EventScript_OrianaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_RoxanneRematch
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_OrianaRematch
 	goto_if_unset FLAG_RECEIVED_TM_FALSE_SWIPE, RustboroCity_Gym_EventScript_GiveFalseSwipe
-	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
+	msgbox RustboroCity_Gym_Text_OrianaPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-RustboroCity_Gym_EventScript_RoxanneDefeated::
+RustboroCity_Gym_EventScript_OrianaDefeated::
 	message RustboroCity_Gym_Text_ReceivedBalanceBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
@@ -33,9 +33,9 @@ RustboroCity_Gym_EventScript_GiveFalseSwipe::
 	release
 	end
 
-RustboroCity_Gym_EventScript_RoxanneRematch::
-	trainerbattle_rematch_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxannePreRematch, RustboroCity_Gym_Text_RoxanneRematchDefeat, RustboroCity_Gym_Text_RoxanneRematchNeedTwoMons
-	msgbox RustboroCity_Gym_Text_RoxannePostRematch, MSGBOX_AUTOCLOSE
+RustboroCity_Gym_EventScript_OrianaRematch::
+	trainerbattle_rematch_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_OrianaPreRematch, RustboroCity_Gym_Text_OrianaRematchDefeat, RustboroCity_Gym_Text_OrianaRematchNeedTwoMons
+	msgbox RustboroCity_Gym_Text_OrianaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_Josh::
@@ -88,7 +88,7 @@ RustboroCity_Gym_EventScript_GymStatue::
 	releaseall
 	end
 
-RustboroCity_Gym_EventScript_RegisterRoxanne::
+RustboroCity_Gym_EventScript_RegisterOriana::
 	setflag FLAG_ENABLE_ROXANNE_MATCH_CALL
 	clearflag FLAG_ENABLE_ROXANNE_FIRST_CALL
 	end
@@ -167,7 +167,7 @@ RustboroCity_Gym_Text_MarcPostBattle:
 	.string "It took smarts and sense for her to\n"
 	.string "make a Gym out of Baby Pokémon.$"
 
-RustboroCity_Gym_Text_RoxanneIntro:
+RustboroCity_Gym_Text_OrianaIntro:
 	.string "Oreo: Hey Ash-Ash! Welcome to my Gym!\p"
 	.string "Were you surprised to hear that I was\n"
 	.string "already a Gym Leader?\p"
@@ -177,7 +177,7 @@ RustboroCity_Gym_Text_RoxanneIntro:
 	.string "begging me to take over the gym."
 	.string "Wanna see why?$"
 
-RustboroCity_Gym_Text_RoxanneDefeat:
+RustboroCity_Gym_Text_OrianaDefeat:
 	.string "Oreo: Urgh…\n"
 	.string "I can't believe I lost…\p"
 	.string "Ah, whatever.\n"
@@ -193,10 +193,14 @@ RustboroCity_Gym_Text_ReceivedBalanceBadge:
 	.string "from Oriana.$"
 
 RustboroCity_Gym_Text_BalanceBadgeInfoTakeThis:
-	.string "Oreo: The Balance Badge heightens the\n"
-	.string "Attack power of your Pokémon.\p"
-	.string "It also enables them to use the HM move\n"
-	.string "Cut outside of battle.\p"
+	.string "Oreo: I'm sure you've noticed by now\n"
+	.string "that your Pokémon can't level up\l"
+	.string "naturally past a certain level.\p"
+	.string "This is called the Level Cap, and the\n"
+	.string "Balance Badge raises it to Level 19!\p"
+	.string "It also raises your Pokémon's Attack\n"
+	.string "and enable them to use the HM move Cut\l"
+	.string "outside of battle.\p"
 	.string "Please take this with you, too.$"
 
 RustboroCity_Gym_Text_ExplainFalseSwipe:
@@ -211,7 +215,7 @@ RustboroCity_Gym_Text_ExplainFalseSwipe:
 	.string "And don't worry about wasting it,\n"
 	.string "a TM can be used over and over again!$"
 
-RustboroCity_Gym_Text_RoxannePostBattle:
+RustboroCity_Gym_Text_OrianaPostBattle:
 	.string "Since you are so strong, you should\n"
 	.string "challenge the other Gym Leaders.\p"
 	.string "Mom knows who you're facing next.\n"
@@ -225,24 +229,24 @@ RustboroCity_Gym_Text_GymStatueCertified:
 	.string "ORIANA'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
-RustboroCity_Gym_Text_RoxannePreRematch:
+RustboroCity_Gym_Text_OrianaPreRematch:
 	.string "Oreo: I'm so glad to see you again.\p"
 	.string "I'm sure we've both experienced many\n"
 	.string "battles since we last met.\p"
 	.string "I would like to see how much better\n"
 	.string "we've become. Let's battle!$"
 
-RustboroCity_Gym_Text_RoxanneRematchDefeat:
+RustboroCity_Gym_Text_OrianaRematchDefeat:
 	.string "Grr…\n"
 	.string "I can't believe I lost again…$"
 
-RustboroCity_Gym_Text_RoxannePostRematch:
+RustboroCity_Gym_Text_OrianaPostRematch:
 	.string "Oreo: I still have much to learn\n"
 	.string "when it comes to battling Pokémon.\p"
 	.string "That awareness makes me love battling\n"
 	.string "all that much more!$"
 
-RustboroCity_Gym_Text_RoxanneRematchNeedTwoMons:
+RustboroCity_Gym_Text_OrianaRematchNeedTwoMons:
 	.string "Oreo: I'm so glad to see you again.\n"
 	.string "I'm sure we've both experienced many\n"
 	.string "battles since we last met.\p"
