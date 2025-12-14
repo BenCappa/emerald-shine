@@ -1,13 +1,13 @@
 #ifndef GUARD_POKEMON_SIZE_RECORD_H
 #define GUARD_POKEMON_SIZE_RECORD_H
 
-void InitSeedotSizeRecord(void);
-void GetSeedotSizeRecordInfo(void);
-void CompareSeedotSize(void);
+void InitSilcoonSizeRecord(void);
+void GetSilcoonSizeRecordInfo(void);
+void CompareSilcoonSize(void);
 
-void InitLotadSizeRecord(void);
-void GetLotadSizeRecordInfo(void);
-void CompareLotadSize(void);
+void InitCascoonSizeRecord(void);
+void GetCascoonSizeRecordInfo(void);
+void CompareCascoonSize(void);
 
 void GiveGiftRibbonToParty(u8 index, u8 ribbonId);
 

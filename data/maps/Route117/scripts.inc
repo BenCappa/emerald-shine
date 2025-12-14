@@ -85,6 +85,7 @@ Route117_EventScript_RegisterIsaac::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route117_Text_IsaacRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ISAAC_1
 	release
 	end
 
@@ -105,6 +106,7 @@ Route117_EventScript_RegisterLydia::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route117_Text_LydiaRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_LYDIA_1
 	release
 	end
 
@@ -125,6 +127,7 @@ Route117_EventScript_RegisterDylan::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route117_Text_DylanRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_DYLAN_1
 	release
 	end
 
@@ -145,6 +148,7 @@ Route117_EventScript_RegisterMaria::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route117_Text_MariaRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_MARIA_1
 	release
 	end
 
@@ -168,6 +172,7 @@ Route117_EventScript_Anna::
 
 Route117_EventScript_RegisterAnna::
 	msgbox Route117_Text_AnnaAndMegRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ANNA_AND_MEG_1
 	release
 	end
 
@@ -186,6 +191,7 @@ Route117_EventScript_Meg::
 
 Route117_EventScript_RegisterMeg::
 	msgbox Route117_Text_AnnaAndMegRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ANNA_AND_MEG_1
 	release
 	end
 
@@ -234,4 +240,3 @@ Route117_Text_RouteSignMauville:
 Route117_Text_DayCareSign:
 	.string "POKéMON DAY CARE\n"
 	.string "“Let us raise your Pokémon.”$"
-

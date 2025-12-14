@@ -1,6 +1,5 @@
 Route103_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route103_OnTransition
-	map_script MAP_SCRIPT_ON_LOAD, Route103_OnLoad
 	.byte 0
 
 Route103_OnTransition:
@@ -8,20 +7,11 @@ Route103_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
 	end
 
-Route103_OnLoad:
-@	call_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_OpenAlteringCave
-	end
-
-@Route103_EventScript_OpenAlteringCave::
-@	setmetatile 45, 5, METATILE_General_CaveEntrance_Top, TRUE
-@	setmetatile 45, 6, METATILE_General_CaveEntrance_Bottom, FALSE
-@	return
-
 Route103_EventScript_Rival::
 	lockall
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, Route103_EventScript_RivalMay
-	goto_if_eq VAR_RESULT, FEMALE, Route103_EventScript_RivalBrendan
+	goto_if_eq VAR_RESULT, FEMALE, Route103_EventScript_RivalBen
 	end
 
 Route103_EventScript_RivalMay::
@@ -41,8 +31,8 @@ Route103_EventScript_RivalMay::
 	case 2, Route103_EventScript_StartMayBattlePiplup
 	end
 
-Route103_EventScript_RivalBrendan::
-	msgbox Route103_Text_BrendanRoute103Pokemon, MSGBOX_DEFAULT
+Route103_EventScript_RivalBen::
+	msgbox Route103_Text_BenRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_FacePlayer
@@ -51,12 +41,11 @@ Route103_EventScript_RivalBrendan::
 	waitmovement 0
 	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_Delay48
 	waitmovement 0
-	bufferleadmonspeciesname 0
-	msgbox Route103_Text_BrendanLetsBattle, MSGBOX_DEFAULT
+	msgbox Route103_Text_BenLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
-	case 0, Route103_EventScript_StartBrendanBattleBulbasaur
-	case 1, Route103_EventScript_StartBrendanBattleFennekin
-	case 2, Route103_EventScript_StartBrendanBattlePiplup
+	case 0, Route103_EventScript_StartBenBattleBulbasaur
+	case 1, Route103_EventScript_StartBenBattleFennekin
+	case 2, Route103_EventScript_StartBenBattlePiplup
 	end
 
 Route103_EventScript_StartMayBattleBulbasaur::
@@ -74,19 +63,19 @@ Route103_EventScript_StartMayBattlePiplup::
 	goto Route103_EventScript_AfterMayBattle
 	end
 
-Route103_EventScript_StartBrendanBattleBulbasaur::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_BULBASAUR, Route103_Text_BrendanDefeated
-	goto Route103_EventScript_AfterBrendanBattle
+Route103_EventScript_StartBenBattleBulbasaur::
+	trainerbattle_no_intro TRAINER_BEN_ROUTE_103_BULBASAUR, Route103_Text_BenDefeated
+	goto Route103_EventScript_AfterBenBattle
 	end
 
-Route103_EventScript_StartBrendanBattleFennekin::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_FENNEKIN, Route103_Text_BrendanDefeated
-	goto Route103_EventScript_AfterBrendanBattle
+Route103_EventScript_StartBenBattleFennekin::
+	trainerbattle_no_intro TRAINER_BEN_ROUTE_103_FENNEKIN, Route103_Text_BenDefeated
+	goto Route103_EventScript_AfterBenBattle
 	end
 
-Route103_EventScript_StartBrendanBattlePiplup::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_PIPLUP, Route103_Text_BrendanDefeated
-	goto Route103_EventScript_AfterBrendanBattle
+Route103_EventScript_StartBenBattlePiplup::
+	trainerbattle_no_intro TRAINER_BEN_ROUTE_103_PIPLUP, Route103_Text_BenDefeated
+	goto Route103_EventScript_AfterBenBattle
 	end
 
 Route103_EventScript_AfterMayBattle::
@@ -94,9 +83,9 @@ Route103_EventScript_AfterMayBattle::
 	goto Route103_EventScript_RivalExit
 	end
 
-Route103_EventScript_AfterBrendanBattle::
+Route103_EventScript_AfterBenBattle::
 	bufferleadmonspeciesname 0
-	msgbox Route103_Text_BrendanTimeToHeadBack, MSGBOX_DEFAULT
+	msgbox Route103_Text_BenTimeToHeadBack, MSGBOX_DEFAULT
 	goto Route103_EventScript_RivalExit
 	end
 
@@ -239,6 +228,7 @@ Route103_EventScript_Amy::
 
 Route102_EventScript_AmyRegisterMatchCallAfterBattle::
 	msgbox Route103_Text_AmyLivRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_AMY_AND_LIV_1
 	release
 	end
 
@@ -256,6 +246,7 @@ Route103_EventScript_Liv::
 
 Route102_EventScript_LivRegisterMatchCallAfterBattle::
 	msgbox Route103_Text_AmyLivRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_AMY_AND_LIV_1
 	release
 	end
 
@@ -281,6 +272,7 @@ Route102_EventScript_MiguelRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route103_Text_MiguelRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_MIGUEL_1
 	release
 	end
 
@@ -336,10 +328,10 @@ Route103_Text_MayTimeToHeadBack:
 	.string "Well, it's time to head back to\n"
 	.string "the LAB.$"
 
-Route103_Text_BrendanRoute103Pokemon:
+Route103_Text_BenRoute103Pokemon:
 	.string "Ben: Okay, if I could just find her a…$"
 
-Route103_Text_BrendanLetsBattle:
+Route103_Text_BenLetsBattle:
 	.string "Hey, it's {PLAYER}!\p"
 	.string "…Oh, Dad already gave you a Pokémon.\p"
 	.string "It's not like he knew I was searching\n"
@@ -352,10 +344,10 @@ Route103_Text_BrendanLetsBattle:
 	.string "I'll teach you what being a Trainer's\n"
 	.string "about!$"
 
-Route103_Text_BrendanDefeated:
+Route103_Text_BenDefeated:
 	.string "Woah, {PLAYER}, you're pretty good!$"
 
-Route103_Text_BrendanTimeToHeadBack:
+Route103_Text_BenTimeToHeadBack:
 	.string "Ben: I think I get it.\n"
 	.string "I think I know why my dad has his eye\l"
 	.string "out for you now.\p"

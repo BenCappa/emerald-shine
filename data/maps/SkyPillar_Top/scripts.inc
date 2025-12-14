@@ -47,7 +47,6 @@ SkyPillar_Top_EventScript_Rayquaza::
 	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	@ setwildbattle SPECIES_RAYQUAZA, 70
 	createmon 1, 0, SPECIES_RAYQUAZA, 70, move1=MOVE_EXTREME_SPEED, move2=MOVE_DRAGON_PULSE, move3=MOVE_DRAGON_DANCE, move4=MOVE_FLY
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	setflag FLAG_NO_RUNNING
@@ -175,5 +174,5 @@ SkyPillar_Top_Movement_CameraPanDown:
 	step_end
 
 SkyPillar_Top_Text_RayquazaFlewOff:
-	.string "The awakened RAYQUAZA flew off…$"
+	.string "The awakened Rayquaza flew off…$"
 

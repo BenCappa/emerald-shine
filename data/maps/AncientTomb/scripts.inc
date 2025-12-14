@@ -75,7 +75,6 @@ AncientTomb_EventScript_Registeel::
 
 AncientTomb_EventScript_DefeatedRegisteel::
 	setflag FLAG_DAILY_BATTLED_REGISTEEL
-	setvar VAR_0x8004, SPECIES_REGISTEEL
 	goto Common_EventScript_LegendaryFlewAway
 	end
 

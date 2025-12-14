@@ -20,7 +20,6 @@ Route120_EventScript_CloseAncientTomb::
 
 Route120_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
-@	call Common_EventScript_SetupRivalOnBikeGfxId
 	call GabbyAndTy_EventScript_UpdateLocation
 	call Route120_EventScript_SetWeather
 	end
@@ -399,6 +398,7 @@ Route120_EventScript_RegisterRobert::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route120_Text_RobertRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ROBERT_1
 	release
 	end
 
@@ -429,6 +429,7 @@ Route120_EventScript_RegisterJeffrey::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route120_Text_JeffreyRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JEFFREY_1
 	release
 	end
 

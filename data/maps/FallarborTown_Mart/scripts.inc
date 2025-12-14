@@ -42,7 +42,7 @@ FallarborTown_Mart_EventScript_Eevee::
 FallarborTown_Mart_Text_DecidingEeveeEvolve:
 	.string "I'm having a hard time deciding if I\n"
 	.string "should make my Eevee evolve or not.\p"
-	.string "I only have to use this MOON STONE,\n"
+	.string "I only have to use an Evolution Stone,\n"
 	.string "but it's so hard to decide…\p"
 	.string "If I make it evolve, it will become\n"
 	.string "much stronger.\p"

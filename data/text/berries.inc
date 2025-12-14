@@ -177,7 +177,7 @@ Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis:
 
 Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation:
 	.string "While Berry plants are growing,\n"
-	.string "water them with the Wailmer Pail.\p"
+	.string "water them with the WAILMER PAIL.\p"
 	.string "Oh, another thing.\p"
 	.string "If you don't pick Berries for a while,\n"
 	.string "they'll drop off onto the ground.\l"
@@ -192,24 +192,25 @@ Route104_PrettyPetalFlowerShop_Text_ImGrowingFlowers:
 	.string "It's for you!$"
 
 Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries:
-	.string "That Absorb Bulb comes from a special\n"
-	.string "kind of flower my sister grows.\p"
-	.string "You can't plant it and grow more like\n"
-	.string "you can with Berries, but I hear some\l"
-	.string "Pokémon carry them in the wild.$"
+	.string "You can plant a Berry and grow it big,\n"
+	.string "or you can make a Pokémon hold it.\p"
+	.string "But now they have a machine that mixes\n"
+	.string "up different Berries and makes candies\l"
+	.string "for Pokémon.\p"
+	.string "I want some candy, too.$"
 
 SootopolisCity_Text_NameIsKiriHaveOneOfThese:
 	.string "Hi, what's your name?\p"
 	.string "… … …  … … …  … … …\n"
-	.string "Ashley. That's nice!\p"
-	.string "My name is Kiri.\p"
+	.string "Okay. That's nice!\p"
+	.string "My name is KIRI.\p"
 	.string "My mommy and daddy named me that so\n"
 	.string "I would grow healthy and warmhearted.\l"
 	.string "That's what they wished.\p"
 	.string "You can have one of these.$"
 
 SootopolisCity_Text_GiveYouThisBerryToo:
-	.string "Kiri will give you this Berry, too!\n"
+	.string "KIRI will give you this Berry, too!\n"
 	.string "I really like it lots!$"
 
 SootopolisCity_Text_WhatKindOfWishInYourName:
@@ -223,7 +224,7 @@ SootopolisCity_Text_LikeSeasonBornIn:
 	.string "summer, do you like the summer?$"
 
 SootopolisCity_Text_ThenILoveAutumn:
-	.string "Then Kiri was born in the autumn,\n"
+	.string "Then KIRI was born in the autumn,\n"
 	.string "so I love the autumn!\p"
 	.string "Which season do you like?$"
 

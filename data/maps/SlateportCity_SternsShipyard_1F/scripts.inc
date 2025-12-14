@@ -3,7 +3,7 @@ SlateportCity_SternsShipyard_1F_MapScripts::
 
 SlateportCity_SternsShipyard_1F_EventScript_Dock::
 	lockall
-	goto_if_set FLAG_VISITED_LILYCOVE_CITY, SlateportCity_SternsShipyard_1F_EventScript_FerryReady
+	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_SternsShipyard_1F_EventScript_FerryReady
 	goto_if_set FLAG_BADGE07_GET, SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined
 	goto_if_set FLAG_DELIVERED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran
 	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_GoFindStern
@@ -76,7 +76,7 @@ SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern:
 	.string "Capt. Stern commissioned me to\n"
 	.string "design a ferry.\p"
 	.string "Oh! That there…\n"
-	.string "Are they Devon Goods?\p"
+	.string "Are they DevCo Goods?\p"
 	.string "But, hmm…\n"
 	.string "This won't do…\p"
 	.string "Capt. Stern went off somewhere.\n"

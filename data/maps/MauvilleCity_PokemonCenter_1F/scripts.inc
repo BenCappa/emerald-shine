@@ -26,7 +26,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_Woman1::
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_Woman2::
-	msgbox MauvilleCity_PokemonCenter_1F_Text_MyDataUpdatedFromRecordCorner, MSGBOX_NPC
+	msgbox MauvilleCity_PokemonCenter_1F_Text_LoseMyMoneyToWonderTrades, MSGBOX_NPC
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_Youngster::
@@ -39,16 +39,15 @@ MauvilleCity_PokemonCenter_1F_Text_ManOverThereSaysWeirdThings:
 	.string "He's funny in a weird way.\n"
 	.string "I doubt I'll forget about him!$"
 
-MauvilleCity_PokemonCenter_1F_Text_MyDataUpdatedFromRecordCorner:
-	.string "When I accessed the RECORD CORNER,\n"
-	.string "the data for what's hot in DEWFORD\l"
-	.string "got updated.\p"
-	.string "Now that bit of data is the same\n"
-	.string "as my friend's!$"
+MauvilleCity_PokemonCenter_1F_Text_LoseMyMoneyToWonderTrades:
+	.string "Everyone here loses all their money\n"
+	.string "to excessive gambling.\p"
+	.string "I, on the other hand, lose my money\n"
+	.string "to excessive Wonder Trades.$"
 
 MauvilleCity_PokemonCenter_1F_Text_RecordCornerSoundsFun:
-	.string "A RECORD CORNER opened upstairs in\n"
-	.string "the POKéMON CENTER.\p"
+	.string "Wonder Trades are available upstairs\n"
+	.string "here in the Pokémon Center.\p"
 	.string "I don't know what it's about, but it\n"
 	.string "sounds fun. I'll go check it out!$"
 

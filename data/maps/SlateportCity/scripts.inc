@@ -800,6 +800,13 @@ SlateportCity_Movement_ScottExitAfterBattleTent:
 	walk_right
 	step_end
 
+SlateportCity_EventScript_BerryCrushRankingsSign::
+	lockall
+	special ShowBerryCrushRankings
+	waitstate
+	releaseall
+	end
+
 SlateportCity_Text_EnergyGuruSellWhatYouNeed:
 	.string "I'm the Energy Guru! I'll go for it and\n"
 	.string "sell you what you need!$"
@@ -826,8 +833,8 @@ SlateportCity_Text_GoForItLittleHarder:
 	.string "something nice.$"
 
 SlateportCity_Text_EffortRibbonLooksGoodOnIt:
-	.string "Oh! Your {STR_VAR_1}, that EFFORT\n"
-	.string "RIBBON looks good on it!$"
+	.string "Oh! Your {STR_VAR_1}, that Effort\n"
+	.string "Ribbon looks good on it!$"
 
 SlateportCity_Text_WonderIfLighthouseStartlesPokemon:
 	.string "The light of the lighthouse reaches\n"
@@ -906,13 +913,13 @@ SlateportCity_Text_AquaHasPolicy:
 	.string "the operation site.$"
 
 SlateportCity_Text_BossIsBrilliant:
-	.string "Our Boss is brilliant.\p"
+	.string "Our boss is brilliant.\p"
 	.string "What would he want to do with\n"
 	.string "a Museum now?$"
 
 SlateportCity_Text_WhatsNewSchemeIWonder:
 	.string "What's the new scheme, I wonder?\p"
-	.string "Our Boss is scary when he's mad, so\n"
+	.string "Our boss is scary when he's mad, so\n"
 	.string "I'd better not screw things up…$"
 
 SlateportCity_Text_ShouldTakeItAll:
@@ -1106,7 +1113,7 @@ SlateportCity_Text_SternsShipyardFerryComplete:
 	.string "Harbor.”$"
 
 SlateportCity_Text_PokemonFanClubSign:
-	.string "Pokémon FAN CLUB\n"
+	.string "POKéMON FAN CLUB\n"
 	.string "“Calling all fans of Pokémon!”$"
 
 SlateportCity_Text_OceanicMuseumSign:

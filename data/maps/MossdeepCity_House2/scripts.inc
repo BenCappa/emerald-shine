@@ -17,21 +17,21 @@ MossdeepCity_House2_EventScript_Pelipper::
 	msgbox MossdeepCity_House2_Text_Pelipper, MSGBOX_DEFAULT
 	waitmoncry
 	closemessage
-	setflag FLAG_WINGULL_DELIVERED_MAIL
-	clearflag FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL
+	setflag FLAG_PELIPPER_DELIVERED_MAIL
+	clearflag FLAG_HIDE_FORTREE_CITY_HOUSE_4_PELIPPER
 	call_if_eq VAR_FACING, DIR_NORTH, MossdeepCity_House2_EventScript_PelipperExitNorth
 	call_if_eq VAR_FACING, DIR_WEST, MossdeepCity_House2_EventScript_PelipperExitWest
-	removeobject LOCALID_MOSSDEEP_HOUSE_WINGULL
+	removeobject LOCALID_MOSSDEEP_HOUSE_PELIPPER
 	release
 	end
 
 MossdeepCity_House2_EventScript_PelipperExitNorth::
-	applymovement LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_PelipperExitNorth
+	applymovement LOCALID_MOSSDEEP_HOUSE_PELIPPER, MossdeepCity_House2_Movement_PelipperExitNorth
 	waitmovement 0
 	return
 
 MossdeepCity_House2_EventScript_PelipperExitWest::
-	applymovement LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_PelipperExitEast
+	applymovement LOCALID_MOSSDEEP_HOUSE_PELIPPER, MossdeepCity_House2_Movement_PelipperExitEast
 	waitmovement 0
 	return
 
@@ -52,13 +52,13 @@ MossdeepCity_House2_Movement_PelipperExitEast:
 	step_end
 
 MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree:
-	.string "My little sister exchanges letters with\n"
+	.string "My little sister exchanges Mail with\n"
 	.string "her boyfriend in Fortree.\p"
 	.string "I don't envy her one bit at all.$"
 
 MossdeepCity_House2_Text_PokemonCarriesMailBackAndForth:
 	.string "Even though I can't see my friend in\n"
-	.string "Fortree, my Pelipper carries letters\l"
+	.string "Fortree, my Pokémon carries Mail\l"
 	.string "back and forth for us.\p"
 	.string "I'm not lonesome, even though we're\n"
 	.string "apart.$"

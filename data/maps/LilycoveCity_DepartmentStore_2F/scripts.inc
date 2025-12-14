@@ -55,6 +55,10 @@ LilycoveCity_DepartmentStore_2F_Text_CookGreeting:
 LilycoveCity_DepartmentStore_2F_Text_CookGoodbye:
 	.string "À plus tard!$"
 
+LilycoveCity_DepartmentStore_2F_Text_LearnToUseItemsProperly:
+	.string "Learn to use items properly.\n"
+	.string "That's basic, really.$"
+
 LilycoveCity_DepartmentStore_2F_Text_GoodGiftForHusband:
 	.string "My husband is waiting at home.\n"
 	.string "What would make a good gift for him?$"

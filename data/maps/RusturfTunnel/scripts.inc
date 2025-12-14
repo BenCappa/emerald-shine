@@ -423,11 +423,11 @@ RusturfTunnel_Text_ComeAndGetSome:
 	.string "Come and get some, then!$"
 
 RusturfTunnel_Text_Peeko:
-	.string "Peeko: Pii pihyoh!$"
+	.string "Peeko: Skrii skrihyoh!$"
 
 RusturfTunnel_Text_GruntIntro:
 	.string "Grah, keelhaul it all!\p"
-	.string "That hostage POKéMON turned out to\n"
+	.string "That hostage Pokémon turned out to\n"
 	.string "be worthless!\p"
 	.string "And to think I made a getaway…\n"
 	.string "In this tunnel to nowhere!\p"
@@ -440,10 +440,10 @@ RusturfTunnel_Text_GruntDefeat:
 
 RusturfTunnel_Text_GruntTakePackage:
 	.string "This is plain not right…\p"
-	.string "The Boss told me this would be a\n"
+	.string "The boss told me this would be a\n"
 	.string "slick-and-easy job to pull.\p"
 	.string "All I had to do was steal some package\n"
-	.string "from Devon.\p"
+	.string "from DevCo.\p"
 	.string "Tch!\n"
 	.string "You want it back that badly, take it!$"
 
@@ -481,7 +481,7 @@ RusturfTunnel_Text_WhyCantTheyKeepDigging:
 
 RusturfTunnel_Text_ToGetToVerdanturf:
 	.string "To get from Rustboro to Verdanturf,\n"
-	.string "you need to go to DEWFORD, then pass\l"
+	.string "you need to go to Dewford, then pass\l"
 	.string "through Slateport and Mauville…$"
 
 RusturfTunnel_Text_YouShatteredBoulderTakeHM:
@@ -497,7 +497,7 @@ RusturfTunnel_Text_ExplainStrength:
 	.string "large boulders.$"
 
 RusturfTunnel_Text_WandaReunion:
-	.string "Wanda!\n"
+	.string "WANDA!\n"
 	.string "Now I can see you anytime!\p"
 	.string "Wanda: That's… wonderful.\p"
 	.string "Please, come rest at my home.$"

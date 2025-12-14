@@ -44,7 +44,7 @@ LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers::
 	return
 
 LavaridgeTown_Gym_1F_EventScript_Iliyah::
-	trainerbattle_single TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_IliyahIntro, LavaridgeTown_Gym_1F_Text_IliyahDefeat, LavaridgeTown_Gym_1F_EventScript_IliyahDefeated, NO_MUSIC
+	trainerbattle_single TRAINER_ILIYAH_1, LavaridgeTown_Gym_1F_Text_IliyahIntro, LavaridgeTown_Gym_1F_Text_IliyahDefeat, LavaridgeTown_Gym_1F_EventScript_IliyahDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_IliyahRematch
 	goto_if_unset FLAG_RECEIVED_TM_HEAT_WAVE, LavaridgeTown_Gym_1F_EventScript_GiveHeatWave2
@@ -70,7 +70,12 @@ LavaridgeTown_Gym_1F_EventScript_IliyahDefeated::
 	call LavaridgeTown_Gym_1F_EventScript_GiveHeatWave
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_FLANNERY_MATCH_CALL
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox LavaridgeTown_Gym_1F_Text_RegisteredIliyah, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_ENABLE_ILIYAH_MATCH_CALL
 	release
 	end
 
@@ -90,7 +95,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveHeatWave::
 	return
 
 LavaridgeTown_Gym_1F_EventScript_IliyahRematch::
-	trainerbattle_rematch_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_IliyahPreRematch, LavaridgeTown_Gym_1F_Text_IliyahRematchDefeat, LavaridgeTown_Gym_1F_Text_IliyahRematchNeedTwoMons
+	trainerbattle_rematch_double TRAINER_ILIYAH_1, LavaridgeTown_Gym_1F_Text_IliyahPreRematch, LavaridgeTown_Gym_1F_Text_IliyahRematchDefeat, LavaridgeTown_Gym_1F_Text_IliyahRematchNeedTwoMons
 	msgbox LavaridgeTown_Gym_1F_Text_IliyahPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -241,9 +246,9 @@ LavaridgeTown_Gym_1F_Text_GeraldDefeat:
 
 LavaridgeTown_Gym_1F_Text_GeraldPostBattle:
 	.string "The temperature of magma is\n"
-	.string "around 1000 degrees Celsius.\p"
-	.string "Your Pokémon beat me, so they should\n"
-	.string "easily survive in magma.$"
+	.string "1000 degrees.\p"
+	.string "Your Pokémon beat me, so they have\n"
+	.string "what it takes to face the magma.$"
 
 LavaridgeTown_Gym_1F_Text_DanielleIntro:
 	.string "Um…\n"
@@ -277,9 +282,9 @@ LavaridgeTown_Gym_B1F_Text_JeffDefeat:
 	.string "Something didn't go right.$"
 
 LavaridgeTown_Gym_B1F_Text_JeffPostBattle:
-	.string "Well, so what? I say so what?\n"
+	.string "Well, so what? Battles ain't everything!\n"
 	.string "I can walk on hot coals barefoot!\p"
-	.string "…Don't even think about trying it!$"
+	.string "…Don't even think about trying that!$"
 
 LavaridgeTown_Gym_B1F_Text_EliIntro:
 	.string "As much as I love mountains,\n"
@@ -291,7 +296,7 @@ LavaridgeTown_Gym_B1F_Text_EliDefeat:
 
 LavaridgeTown_Gym_B1F_Text_EliPostBattle:
 	.string "I stay here because I became a fan\n"
-	.string "of Iliyah's power.$"
+	.string "of Iliyah's training.$"
 
 LavaridgeTown_Gym_1F_Text_IliyahIntro:
 	.string "May: Hi, Ash… No, wait.\p"
@@ -312,7 +317,7 @@ LavaridgeTown_Gym_1F_Text_IliyahDefeat:
 	.string "My temper got the better of me…\p"
 	.string "Everyone's been nagging me, telling me\n"
 	.string "how they think I should run my Gym!\p"
-	.string "It's annoying the hell out of me!"
+	.string "It's annoying the hell out of me!\p"
 	.string "I have to do things my way. If I don't,\n"
 	.string "my Pokémon will never reach their full\l"
 	.string "potential.\p"
@@ -325,7 +330,7 @@ LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
 	.string "If you have a Heat Badge, all Pokémon\n"
-	.string "can level up to Level 42.\p"
+	.string "can level up to Level 40.\p"
 	.string "And, it lets Pokémon use the HM move\n"
 	.string "Strength outside of battle.\p"
 	.string "Here, let me give you something.\n"
@@ -336,7 +341,12 @@ LavaridgeTown_Gym_1F_Text_ExplainHeatWave:
 	.string "That move lets a Pokémon scorch all\n"
 	.string "their opponents at the same time.\p"
 	.string "Be like me and use it to really bring\n"
-	.string "the heat during a Double Battle.$"
+	.string "the heat during a Double Battle.\p"
+	.string "… … … … … …$"
+
+LavaridgeTown_Gym_1F_Text_RegisteredIliyah:
+	.string "Registered Gym Leader Iliyah\n"
+	.string "in the PokéNav.$"
 
 LavaridgeTown_Gym_1F_Text_IliyahPostBattle:
 	.string "I had to find Pokémon that could\n"

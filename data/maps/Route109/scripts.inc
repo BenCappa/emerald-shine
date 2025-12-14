@@ -406,6 +406,7 @@ Route109_EventScript_RickyRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route109_Text_RickyRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_RICKY_1
 	release
 	end
 
@@ -426,6 +427,7 @@ Route109_EventScript_LolaRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route109_Text_LolaRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_LOLA_1
 	release
 	end
 
@@ -478,11 +480,11 @@ DewfordTown_Text_BrineyLandedInSlateportDeliverGoods:
 	.string "Mr. Briney: Ahoy!\n"
 	.string "We've made land in Slateport!\p"
 	.string "I suppose you're going to visit Capt.\n"
-	.string "Stern and deliver the Devon Goods?$"
+	.string "Stern and deliver the DevCo Goods?$"
 
 Route109_Text_BrineySailToDewfordQuestion:
 	.string "Mr. Briney: I thought you're supposed\n"
-	.string "to deliver the Devon Goods.\p"
+	.string "to deliver the DevCo Goods.\p"
 	.string "Would you like to sail back to\n"
 	.string "Dewford, then?$"
 
@@ -493,7 +495,7 @@ Route109_Text_BrineyDewfordItIs:
 
 Route109_Text_BrineyDeliverDevonGoods:
 	.string "Mr. Briney: Then you go on and deliver\n"
-	.string "the Devon Goods. I'll be waiting.$"
+	.string "the DevCo Goods. I'll be waiting.$"
 
 DewfordTown_Text_BrineyLandedInSlateport:
 	.string "Mr. Briney: Ahoy! We've made land in\n"
@@ -558,7 +560,6 @@ Route109_Text_SeashoreHouseSign:
 
 Route109_Text_TrainerTipsSign:
 	.string "TRAINER TIPS\p"
-	.string "Pokémon at the same level may not\n"
-	.string "always have identical stats.\p"
-	.string "Pokémon raised by Trainers are said\n"
-	.string "to grow stronger than wild Pokémon.$"
+	.string "Rumor has it that using a Rod to catch\n"
+	.string "the same Pokémon over and over again\l"
+	.string "boosts the odds of finding a Shiny one!$"

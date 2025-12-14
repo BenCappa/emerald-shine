@@ -15,6 +15,7 @@
 #include "mail.h"
 #include "constants/pokemon.h"
 #include "party_menu.h"
+#include "rtc.h"
 #include "constants/weather.h"
 #include "battle.h" // A workaround to include the expansion's constants/form_change_types.h without breaking Pret/Pokeemerald compatibility.
 #include "string_util.h"
@@ -1172,6 +1173,7 @@ static u16 GetUnownForm(void)
 static u16 GetWonderTradeEvolutionTargetSpecies(struct Pokemon *mon)
 {
     int i = 0;
+    u8 rand = Random();
     u16 partnerSpecies = GetMonData(mon, MON_DATA_SPECIES);
     u16 targetSpecies = partnerSpecies;
     u32 partnerPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
@@ -1182,349 +1184,173 @@ static u16 GetWonderTradeEvolutionTargetSpecies(struct Pokemon *mon)
 
     switch (evolutions[0].method)
     {
-    case EVO_FRIENDSHIP:
-        switch (partnerSpecies)
-        {
-        case SPECIES_PICHU:
-        case SPECIES_CLEFFA:
-        case SPECIES_IGGLYBUFF:
-        case SPECIES_AZURILL:
-            if (partnerLevel >= 16)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_TOGEPI:
-        case SPECIES_WOOBAT:
-            if (partnerLevel >= 22)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_BUNEARY:
-        case SPECIES_MEOWTH_ALOLA:
-            if (partnerLevel >= 28)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_GOLBAT:
-        case SPECIES_CHANSEY:
-        case SPECIES_MUNCHLAX:
-        case SPECIES_SWADLOON:
-            if (partnerLevel >= 37)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_TYPE_NULL:
-            if (partnerLevel >= 48)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        }
-        break;
-    case EVO_FRIENDSHIP_DAY:
-        switch (partnerSpecies)
-        {
-        case SPECIES_BUDEW:
-            if (partnerLevel >= 16)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_RIOLU:
-            if (partnerLevel >= 25)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        }
-        break;
-    case EVO_FRIENDSHIP_NIGHT:
-        if (partnerLevel >= 27)
-            targetSpecies = evolutions[0].targetSpecies;
-        break;
     case EVO_LEVEL:
         if (partnerLevel >= evolutions[0].param)
         {
-            switch (partnerSpecies)
+            switch (evolutions[0].params[0].condition)
             {
-            case SPECIES_SLOWPOKE:
-            case SPECIES_CUBONE:
-            case SPECIES_KOFFING:
-            case SPECIES_QUILAVA:
-            case SPECIES_KIRLIA:
-            case SPECIES_SNORUNT:
-            case SPECIES_DEWOTT:
-            case SPECIES_RUFFLET:
-            case SPECIES_GOOMY:
-            case SPECIES_BERGMITE:
-            case SPECIES_DARTRIX:
-                if ((Random() % 2) == 0)
+            case IF_GENDER:
+                if (GetMonGender(mon) == evolutions[0].params[0].arg1)
+                    targetSpecies = evolutions[0].targetSpecies;
+                else if (evolutions[1].method != EVOLUTIONS_END)
+                    targetSpecies = evolutions[1].targetSpecies;
+                break;
+            case IF_TIME:
+                if (GetTimeOfDay() == evolutions[0].params[0].arg1 || rand % 2 == 0)
+                    targetSpecies = evolutions[0].targetSpecies;
+                break;
+            case IF_NOT_TIME:
+                switch (partnerSpecies)
+                {
+                case SPECIES_ROCKRUFF:
+                case SPECIES_COSMOEM:
+                    if (GetTimeOfDay() != evolutions[0].params[0].arg1)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    else
+                        targetSpecies = evolutions[1].targetSpecies;
+                    break;
+                
+                default:
+                    if (GetTimeOfDay() != evolutions[0].params[0].arg1 || rand % 2 == 0)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                }
+                break;
+            case IF_MIN_FRIENDSHIP:
+                if (rand >= evolutions[0].params[0].arg1)
+                {
+                    switch (partnerSpecies)
+                    {
+                    case SPECIES_BUDEW:
+                    case SPECIES_RIOLU:
+                        if (GetTimeOfDay() != evolutions[0].params[1].arg1 || rand % 2 == 0)
+                            targetSpecies = evolutions[0].targetSpecies;
+                        break;
+                    case SPECIES_CHINGLING:
+                    case SPECIES_SNOM:
+                        if (GetTimeOfDay() == evolutions[0].params[1].arg1 || rand % 2 == 0)
+                            targetSpecies = evolutions[0].targetSpecies;
+                        break;
+                    
+                    default:
+                        targetSpecies = evolutions[0].targetSpecies;
+                        break;
+                    }
+                }
+                break;
+            case IF_ATK_GT_DEF:
+            case IF_ATK_EQ_DEF:
+            case IF_ATK_LT_DEF:
+                if (GetMonData(mon, MON_DATA_ATK) < GetMonData(mon, MON_DATA_DEF))
+                    targetSpecies = evolutions[0].targetSpecies;
+                else if (GetMonData(mon, MON_DATA_ATK) > GetMonData(mon, MON_DATA_DEF))
+                    targetSpecies = evolutions[1].targetSpecies;
+                else
+                    targetSpecies = evolutions[2].targetSpecies;
+                break;
+            case IF_HOLD_ITEM:
+                targetSpecies = evolutions[rand % 2].targetSpecies;
+                break;
+            case IF_PID_UPPER_MODULO_10_GT:
+            case IF_PID_UPPER_MODULO_10_EQ:
+            case IF_PID_UPPER_MODULO_10_LT:
+                if ((upperPersonality % 10) <= 4)
                     targetSpecies = evolutions[0].targetSpecies;
                 else
                     targetSpecies = evolutions[1].targetSpecies;
                 break;
-            default:
-                targetSpecies = evolutions[0].targetSpecies;
-                break;
-            }
-        }
-        break;
-    case EVO_TRADE:
-    case EVO_TRADE_ITEM:
-        if (partnerLevel >= 35)
-            targetSpecies = evolutions[0].targetSpecies;
-        break;
-    case EVO_ITEM:
-        switch (partnerSpecies)
-        {
-        case SPECIES_SUNKERN:
-        case SPECIES_SKITTY:
-        case SPECIES_SANDSHREW_ALOLA:
-            if (partnerLevel >= 22)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_CLEFAIRY:
-        case SPECIES_JIGGLYPUFF:
-        case SPECIES_MUNNA:
-        case SPECIES_COTTONEE:
-        case SPECIES_MINCCINO:
-        case SPECIES_HELIOPTILE:
-        case SPECIES_VOLTORB_HISUI:
-        case SPECIES_ROCKRUFF_OWN_TEMPO:
-        case SPECIES_CAPSAKID:
-            if (partnerLevel >= 30)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_PANSAGE:
-        case SPECIES_PANSEAR:
-        case SPECIES_PANPOUR:
-        case SPECIES_SINISTEA_PHONY:
-        case SPECIES_DARUMAKA_GALAR:
-        case SPECIES_SINISTEA_ANTIQUE:
-        case SPECIES_TADBULB:
-        case SPECIES_POLTCHAGEIST_COUNTERFEIT:
-        case SPECIES_POLTCHAGEIST_ARTISAN:
-            if (partnerLevel >= 35)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_WEEPINBELL:
-        case SPECIES_SHELLDER:
-        case SPECIES_STARYU:
-        case SPECIES_TOGETIC:
-        case SPECIES_MURKROW:
-        case SPECIES_MISDREAVUS:
-        case SPECIES_LOMBRE:
-        case SPECIES_NUZLEAF:
-        case SPECIES_ROSELIA:
-            if (partnerLevel >= 37)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_NIDORINA:
-        case SPECIES_NIDORINO:
-        case SPECIES_VULPIX:
-        case SPECIES_GROWLITHE:
-        case SPECIES_ONIX:
-        case SPECIES_EELEKTRIK:
-        case SPECIES_LAMPENT:
-        case SPECIES_FLOETTE:
-        case SPECIES_DOUBLADE:
-        case SPECIES_DURALUDON:
-        case SPECIES_VULPIX_ALOLA:
-        case SPECIES_GROWLITHE_HISUI:
-        case SPECIES_CETODDLE:
-            if (partnerLevel >= 48)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_PIKACHU:
-        case SPECIES_PETILIL:
-        case SPECIES_ROCKRUFF:
-            if (partnerLevel >= 26)
-                targetSpecies = evolutions[(Random() % 2)].targetSpecies;
-            break;
-        case SPECIES_GLOOM:
-        case SPECIES_POLIWHIRL:
-        case SPECIES_EXEGGCUTE:
-        case SPECIES_SCYTHER:
-        case SPECIES_SLOWPOKE_GALAR:
-        case SPECIES_CHARCADET:
-            if (partnerLevel >= 37)
-                targetSpecies = evolutions[(Random() % 2)].targetSpecies;
-            break;
-        case SPECIES_EEVEE:
-            if (partnerLevel >= 25)
-                targetSpecies = evolutions[(Random() % 8)].targetSpecies;
-            break;
-        case SPECIES_APPLIN:
-            if (partnerLevel >= 30)
-                targetSpecies = evolutions[(Random() % 3)].targetSpecies;
-            break;
-        }
-        break;
-    case EVO_LEVEL_ATK_LT_DEF:
-        if (partnerLevel >= evolutions[0].param)
-        {
-            if (GetMonData(mon, MON_DATA_ATK) < GetMonData(mon, MON_DATA_DEF))
-                targetSpecies = evolutions[0].targetSpecies;
-            else if (GetMonData(mon, MON_DATA_ATK) > GetMonData(mon, MON_DATA_DEF))
-                targetSpecies = evolutions[1].targetSpecies;
-            else
-                targetSpecies = evolutions[2].targetSpecies;
-        }
-        break;
-    case EVO_LEVEL_SILCOON:
-        if (partnerLevel >= evolutions[0].param)
-        {
-            if ((upperPersonality % 10) <= 4)
-                targetSpecies = evolutions[0].targetSpecies;
-            else
-                targetSpecies = evolutions[1].targetSpecies;
-        }
-        break;
-    case EVO_LEVEL_NINJASK:
-        if (partnerLevel >= evolutions[0].param)
-            targetSpecies = evolutions[(Random() % 2)].targetSpecies;
-        break;
-    case EVO_BEAUTY:
-        if (partnerLevel >= 20)
-            targetSpecies = evolutions[0].targetSpecies;
-        break;
-    case EVO_LEVEL_FEMALE:
-        if (partnerLevel >= evolutions[0].param)
-        {
-            switch (partnerSpecies)
-            {
-            case SPECIES_BURMY_PLANT:
-            case SPECIES_BURMY_SANDY:
-            case SPECIES_BURMY_TRASH:
-                if (GetMonGender(mon) == MON_FEMALE)
-                    targetSpecies = evolutions[0].targetSpecies;
-                else
-                    targetSpecies = evolutions[1].targetSpecies;
-                break;
-            default:
-                if (GetMonGender(mon) == MON_FEMALE)
+            case IF_MIN_BEAUTY:
+            case IF_MIN_COOLNESS:
+            case IF_MIN_SMARTNESS:
+            case IF_MIN_TOUGHNESS:
+            case IF_MIN_CUTENESS:
+                if (rand >= evolutions[0].params[0].arg1)
                     targetSpecies = evolutions[0].targetSpecies;
                 break;
-            }
-        }
-        break;
-    case EVO_LEVEL_MALE:
-        if (partnerLevel >= evolutions[0].param)
-        {
-            if (GetMonGender(mon) == MON_MALE)
-                targetSpecies = evolutions[0].targetSpecies;
-            else
-                targetSpecies = evolutions[1].targetSpecies;
-        }
-        break;
-    case EVO_LEVEL_NIGHT:
-        if (partnerLevel >= evolutions[0].param)
-            targetSpecies = evolutions[0].targetSpecies;
-        break;
-    case EVO_LEVEL_DAY:
-        if (partnerLevel >= evolutions[0].param)
-        {
-            switch (partnerSpecies)
-            {
-            case SPECIES_COSMOEM:
-                targetSpecies = evolutions[(Random() % 2)].targetSpecies;
-                break;
-            default:
-                targetSpecies = evolutions[0].targetSpecies;
-                break;
-            }
-        }
-        break;
-    case EVO_ITEM_HOLD_DAY:
-        switch (partnerSpecies)
-        {
-        case SPECIES_HAPPINY:
-            if (partnerLevel >= 16)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_SNEASEL_HISUI:
-            if (partnerLevel >= 37)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_MILCERY:
-            if (partnerLevel >= 25)
-                targetSpecies = evolutions[(Random() % 14)].targetSpecies;
-            break;
-        }
-        break;
-    case EVO_ITEM_HOLD_NIGHT:
-        if (partnerLevel >= 37)
-            targetSpecies = evolutions[0].targetSpecies;
-        break;
-    case EVO_MOVE:
-        switch (partnerSpecies)
-        {
-        case SPECIES_LICKITUNG:
-        case SPECIES_TANGELA:
-        case SPECIES_YANMA:
-        case SPECIES_PILOSWINE:
-        case SPECIES_POIPOLE:
-            if (partnerLevel >= 33 || MonKnowsMove(mon, evolutions[0].param))
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_MIME_JR:
-            if (partnerLevel >= 18 || MonKnowsMove(mon, evolutions[0].param))
-            {
-                if ((Random() % 2) == 0)
-                    targetSpecies = evolutions[0].targetSpecies;
-                else
-                    targetSpecies = evolutions[1].targetSpecies;
-            }
-            break;
-        case SPECIES_BONSLY:
-            if (partnerLevel >= 17 || MonKnowsMove(mon, evolutions[0].param))
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_AIPOM:
-        case SPECIES_GIRAFARIG:
-            if (partnerLevel >= 32 || MonKnowsMove(mon, evolutions[0].param))
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_QWILFISH_HISUI:
-            if (partnerLevel >= 28 || MonKnowsMove(mon, evolutions[0].param))
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_STEENEE:
-            if (partnerLevel >= 29 || MonKnowsMove(mon, evolutions[0].param))
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_CLOBBOPUS:
-            if (partnerLevel >= 35 || MonKnowsMove(mon, evolutions[0].param))
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        }
-        break;
-    case EVO_MAPSEC:
-        switch (partnerSpecies)
-        {
-        case SPECIES_MAGNETON:
-        case SPECIES_NOSEPASS:
-            if (partnerLevel >= 48)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        case SPECIES_CHARJABUG:
-            if (partnerLevel >= 37)
-                targetSpecies = evolutions[0].targetSpecies;
-            break;
-        }
-        break;
-    case EVO_LEVEL_RAIN:
-        if (partnerLevel >= evolutions[0].param)
-            targetSpecies = evolutions[0].targetSpecies;
-        break;
-    case EVO_SPECIFIC_MON_IN_PARTY:
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (playerPartySpecies == evolutions[0].param ||
-                (evolutions[1].method != EVOLUTIONS_END && playerPartySpecies == evolutions[1].param))
-            {
-                targetSpecies = evolutions[0].targetSpecies;
-                break;
-            }
-        }
-        break;
-    case EVO_LEVEL_DARK_TYPE_MON_IN_PARTY:
-            if (partnerLevel >= evolutions[0].param)
-            
-            {
+            case IF_SPECIES_IN_PARTY:
                 for (i = 0; i < PARTY_SIZE; i++)
                 {
-                    u16 currSpecies = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+                    if (playerPartySpecies == evolutions[0].params[0].arg1 ||
+                       (evolutions[1].method != EVOLUTIONS_END && playerPartySpecies == evolutions[1].params[0].arg1))
+                    {
+                        targetSpecies = evolutions[0].targetSpecies;
+                        break;
+                    }
+                }
+                break;
+            case IF_IN_MAP:
+            case IF_IN_MAPSEC:
+                switch (partnerSpecies)
+                {
+                case SPECIES_NOSEPASS:
+                case SPECIES_CHARJABUG:
+                    if (partnerLevel >= 37)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                
+                default:
+                    if (partnerLevel >= 48)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                }
+                break;
+            case IF_KNOWS_MOVE:
+                switch (partnerSpecies)
+                {
+                case SPECIES_BONSLY:
+                    if (partnerLevel >= 17)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                case SPECIES_MIME_JR:
+                    if (partnerLevel >= 18)
+                        targetSpecies = evolutions[rand % 2].targetSpecies;
+                    break;
+                case SPECIES_QWILFISH_HISUI:
+                    if (partnerLevel >= 28)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                case SPECIES_STEENEE:
+                    if (partnerLevel >= 29)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                case SPECIES_AIPOM:
+                case SPECIES_GIRAFARIG:
+                    if (partnerLevel >= 32)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                case SPECIES_DUNSPARCE:
+                    if (partnerLevel >= 32)
+                    {
+                        if ((partnerPersonality % 100) != 0)
+                            targetSpecies = evolutions[0].targetSpecies;
+                        else
+                            targetSpecies = evolutions[1].targetSpecies;
+                    }
+                    break;
+                case SPECIES_LICKITUNG:
+                case SPECIES_TANGELA:
+                case SPECIES_YANMA:
+                case SPECIES_PILOSWINE:
+                case SPECIES_POIPOLE:
+                    if (partnerLevel >= 33)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                case SPECIES_CLOBBOPUS:
+                    if (partnerLevel >= 35)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                
+                default:
+                    if (MonKnowsMove(mon, evolutions[0].params[0].arg1))
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                }
+                break;
+            case IF_TYPE_IN_PARTY:
+                u16 currSpecies = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+                
+                for (i = 0; i < PARTY_SIZE; i++)
+                {
                     if (gSpeciesInfo[currSpecies].types[0] == TYPE_DARK ||
                         gSpeciesInfo[currSpecies].types[1] == TYPE_DARK)
                     {
@@ -1532,62 +1358,213 @@ static u16 GetWonderTradeEvolutionTargetSpecies(struct Pokemon *mon)
                         break;
                     }
                 }
+                break;
+            case IF_WEATHER:
+                if (rand % 5 == 0)
+                    targetSpecies = evolutions[0].targetSpecies;
+                break;
+            case IF_AMPED_NATURE:
+                switch (GetNature(mon))
+                {
+                case NATURE_HARDY:
+                case NATURE_BRAVE:
+                case NATURE_ADAMANT:
+                case NATURE_NAUGHTY:
+                case NATURE_DOCILE:
+                case NATURE_IMPISH:
+                case NATURE_LAX:
+                case NATURE_HASTY:
+                case NATURE_JOLLY:
+                case NATURE_NAIVE:
+                case NATURE_RASH:
+                case NATURE_SASSY:
+                case NATURE_QUIRKY:
+                    targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                default:
+                    targetSpecies = evolutions[1].targetSpecies;
+                    break;
+                }
+                break;
+            case IF_RECOIL_DAMAGE_GE:
+                if (GetMonData(mon, MON_DATA_HP) > (evolutions[0].params[0].arg1 / 3))
+                {                    
+                    if (GetMonGender(mon) == evolutions[0].params[1].arg1)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    else
+                        targetSpecies = evolutions[1].targetSpecies;
+                }
+                break;
+            case IF_USED_MOVE_X_TIMES:
+                switch (partnerSpecies)
+                {
+                case SPECIES_PRIMEAPE:
+                    if (partnerLevel >= 35)
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                case SPECIES_STANTLER:
+                    if (partnerLevel >= 21)
+                        targetSpecies = evolutions[0].targetSpecies;
+                
+                default:
+                    if (MonKnowsMove(mon, evolutions[0].param))
+                        targetSpecies = evolutions[0].targetSpecies;
+                    break;
+                }
+                break;
+            case IF_MIN_OVERWORLD_STEPS:
+                if (partnerLevel >= 37)
+                    targetSpecies = evolutions[0].targetSpecies;
+                break;
+            case IF_MONEY_COUNT:
+                if (rand % 255 == 0)
+                    targetSpecies = evolutions[0].targetSpecies;
+                break;
+            
+            default:
+                if (evolutions[1].method != EVOLUTIONS_END)
+                {
+                    switch (partnerSpecies)
+                    {
+                    case SPECIES_KIRLIA:
+                    case SPECIES_SNORUNT:
+                        if (GetMonGender(mon) == evolutions[1].params[0].arg1)
+                            targetSpecies = evolutions[1].targetSpecies;
+                        else
+                            targetSpecies = evolutions[0].targetSpecies;
+                        break;
+                    case SPECIES_NINCADA:
+                        if (rand % 2 == 0)
+                            targetSpecies = SPECIES_NINJASK;
+                        else
+                            targetSpecies = SPECIES_SHEDINJA;
+                        break;
+                    
+                    default:
+                        targetSpecies = evolutions[rand % 2].targetSpecies;
+                        break;
+                    }
+                }
+                else
+                    targetSpecies = evolutions[0].targetSpecies;
+                break;
             }
             break;
-    case EVO_TRADE_SPECIFIC_MON:
-    case EVO_SPECIFIC_MAP:
-    case EVO_CRITICAL_HITS:
-        if (partnerLevel >= 30)
-            targetSpecies = evolutions[0].targetSpecies;
+        }
         break;
-    case EVO_LEVEL_NATURE_AMPED:
-        if (partnerLevel >= evolutions[0].param)
+    case EVO_TRADE:
+        switch (partnerSpecies)
         {
-            switch (GetNature(mon))
+        case SPECIES_PORYGON:
+            if (partnerLevel >= 25)
+                targetSpecies = evolutions[0].targetSpecies;
+            break;
+        case SPECIES_ONIX:
+        case SPECIES_RHYDON:
+        case SPECIES_SEADRA:
+        case SPECIES_ELECTABUZZ:
+        case SPECIES_MAGMAR:
+        case SPECIES_PORYGON2:
+        case SPECIES_DUSCLOPS:
+            if (partnerLevel >= 50)
+                targetSpecies = evolutions[0].targetSpecies;
+            break;
+        case SPECIES_SCYTHER:
+        case SPECIES_CLAMPERL:
+            if (partnerLevel >= 40)
             {
-            case NATURE_HARDY:
-            case NATURE_BRAVE:
-            case NATURE_ADAMANT:
-            case NATURE_NAUGHTY:
-            case NATURE_DOCILE:
-            case NATURE_IMPISH:
-            case NATURE_LAX:
-            case NATURE_HASTY:
-            case NATURE_JOLLY:
-            case NATURE_NAIVE:
-            case NATURE_RASH:
-            case NATURE_SASSY:
-            case NATURE_QUIRKY:
-                targetSpecies = evolutions[0].targetSpecies;
-                break;
-            default:
-                targetSpecies = evolutions[1].targetSpecies;
-                break;
+                if (rand % 2 == 0)
+                    targetSpecies = evolutions[1].targetSpecies;
+                else
+                    targetSpecies = evolutions[2].targetSpecies;
             }
-        }
-        break;
-    case EVO_SCRIPT_TRIGGER_DMG:
-        if (GetMonData(mon, MON_DATA_HP) > evolutions[0].param)
-            targetSpecies = evolutions[0].targetSpecies;
-        break;
-    case EVO_DARK_SCROLL:
-        if (partnerLevel >= 35)
-            targetSpecies = evolutions[(Random() % 2)].targetSpecies;
-        break;
-    case EVO_ITEM_NIGHT:
-        if (partnerLevel >= 48)
-            targetSpecies = evolutions[(Random() % 2)].targetSpecies;
-        break;
-    case EVO_MOVE_TWO_SEGMENT:
-        if (partnerLevel >= 32 || MonKnowsMove(mon, evolutions[0].param))
-        {
-            if ((partnerPersonality % 100) != 0)
+            break;
+        
+        default:
+            if (partnerLevel >= 35)
                 targetSpecies = evolutions[0].targetSpecies;
-            else
-                targetSpecies = evolutions[1].targetSpecies;
+            break;
         }
         break;
-    case EVO_LEVEL_FAMILY_OF_FOUR:
+    case EVO_ITEM:
+        switch (partnerSpecies)
+        {
+        case SPECIES_SANDSHREW_ALOLA:
+        case SPECIES_SUNKERN:
+        case SPECIES_SKITTY:
+            if (partnerLevel >= 22)
+                targetSpecies = evolutions[0].targetSpecies;
+            break;
+        case SPECIES_VOLTORB_HISUI:
+            if (partnerLevel >= 30)
+                targetSpecies = evolutions[0].targetSpecies;
+            break;
+        case SPECIES_NIDORINA:
+        case SPECIES_NIDORINO:
+        case SPECIES_VULPIX:
+        case SPECIES_VULPIX_ALOLA:
+        case SPECIES_SHELLDER:
+        case SPECIES_STARYU:
+        case SPECIES_ROSELIA:
+        case SPECIES_DOUBLADE:
+        case SPECIES_CETITAN:
+            if (partnerLevel >= 40)
+                targetSpecies = evolutions[0].targetSpecies;
+            break;
+        case SPECIES_GROWLITHE:
+        case SPECIES_GROWLITHE_HISUI:
+        case SPECIES_TOGETIC:
+        case SPECIES_EELEKTRIK:
+        case SPECIES_CHANDELURE:
+        case SPECIES_FLOETTE:
+        case SPECIES_DURALUDON:
+            if (partnerLevel >= 50)
+                targetSpecies = evolutions[0].targetSpecies;
+            break;
+        case SPECIES_PIKACHU:
+        case SPECIES_GLOOM:
+        case SPECIES_POLIWHIRL:
+        case SPECIES_SLOWPOKE_GALAR:
+        case SPECIES_EXEGGUTOR:
+        case SPECIES_PETILIL:
+        case SPECIES_CHARCADET:
+            if (partnerLevel >= 37)
+                targetSpecies = evolutions[rand % 2].targetSpecies;
+            break;
+        case SPECIES_URSARING:
+            if (partnerLevel >= 50)
+                targetSpecies = evolutions[rand % 2].targetSpecies;
+            break;
+        case SPECIES_APPLIN:
+            if (partnerLevel >= 30)
+                targetSpecies = evolutions[rand % 3].targetSpecies;
+            break;
+        case SPECIES_EEVEE:
+            if (partnerLevel >= 25)
+                targetSpecies = evolutions[rand % 8].targetSpecies;
+            break;
+        
+        default:
+            if (partnerLevel >= 35)
+                targetSpecies = evolutions[0].targetSpecies;
+            break;
+        }
+        break;
+    case EVO_SCRIPT_TRIGGER:
+        switch (partnerSpecies)
+        {
+        case SPECIES_KUBFU:            
+            if (partnerLevel >= 50)
+                targetSpecies = evolutions[rand % 2].targetSpecies;
+            break;
+        
+        default:
+            if (GetMonData(mon, MON_DATA_HP) > evolutions[0].params[0].arg1)
+                targetSpecies = evolutions[0].targetSpecies;
+            break;
+        }
+        break;
+    case EVO_LEVEL_BATTLE_ONLY:
         if (partnerLevel >= evolutions[0].param)
         {
             if ((partnerPersonality % 100) != 0)
@@ -1596,35 +1573,19 @@ static u16 GetWonderTradeEvolutionTargetSpecies(struct Pokemon *mon)
                 targetSpecies = evolutions[1].targetSpecies;
         }
         break;
-    case EVO_USE_MOVE_TWENTY_TIMES:
-        if (partnerLevel >= 35 || MonKnowsMove(mon, evolutions[0].param))
+    case EVO_BATTLE_END:
+        if (rand % 8 == 0)
             targetSpecies = evolutions[0].targetSpecies;
         break;
-    case EVO_RECOIL_DAMAGE_MALE:
-        if (partnerLevel >= 36)
-        {
-            if (GetMonGender(mon) == MON_MALE)
-                targetSpecies = evolutions[0].targetSpecies;
-            else
-                targetSpecies = evolutions[0].targetSpecies;
-        }
+    case EVO_SPIN:
+        if (partnerLevel >= 35)
+            targetSpecies = evolutions[rand % 63].targetSpecies;
         break;
-    case EVO_ITEM_COUNT_999:
-        if (partnerLevel >= 49)
-            targetSpecies = evolutions[0].targetSpecies;
-        break;
-    case EVO_DEFEAT_THREE_WITH_ITEM:
-        if ((Random() % 3) == 0)
-            targetSpecies = evolutions[0].targetSpecies;
-        break;
-    case EVO_OVERWORLD_STEPS:
-        if (partnerLevel >= 37)
-            targetSpecies = evolutions[0].targetSpecies;
-        break;
+
     default:
         break;
     }
-
+    
     return targetSpecies;
 }
 

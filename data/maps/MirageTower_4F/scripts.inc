@@ -60,20 +60,19 @@ MirageTower_4F_EventScript_CollapseMirageTower::
 	end
 
 MirageTower_4F_Text_TakeSkullFossil:
-	.string "You found the Skull FOSSIL.\p"
-	.string "If this FOSSIL is taken, the ground\n"
+	.string "You found the Skull Fossil.\p"
+	.string "If this Fossil is taken, the ground\n"
 	.string "around it will likely crumble away…\p"
-	.string "Take the Skull FOSSIL anyway?$"
+	.string "Take the Skull Fossil anyway?$"
 
 MirageTower_4F_Text_LeftSkullFossilAlone:
-	.string "{PLAYER} left the Skull FOSSIL alone.$"
+	.string "{PLAYER} left the Skull Fossil alone.$"
 
 MirageTower_4F_Text_TakeSailFossil:
-	.string "You found the Sail FOSSIL.\p"
-	.string "If this FOSSIL is taken, the ground\n"
+	.string "You found the Sail Fossil.\p"
+	.string "If this Fossil is taken, the ground\n"
 	.string "around it will likely crumble away…\p"
-	.string "Take the Sail FOSSIL anyway?$"
+	.string "Take the Sail Fossil anyway?$"
 
 MirageTower_4F_Text_LeaveSailFossilAlone:
-	.string "{PLAYER} left the Sail FOSSIL alone.$"
-
+	.string "{PLAYER} left the Sail Fossil alone.$"

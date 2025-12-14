@@ -1,7 +1,7 @@
 FallarborTown_CozmosHouse_MapScripts::
 	.byte 0
 
-FallarborTown_CozmosHouse_EventScript_ProfCozmo::
+FallarborTown_CozmosHouse_EventScript_ProfGilchrist::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_AUDINITE, FallarborTown_CozmosHouse_EventScript_GaveMeteorite
@@ -45,7 +45,7 @@ FallarborTown_CozmosHouse_EventScript_GaveMeteorite::
 	release
 	end
 
-FallarborTown_CozmosHouse_EventScript_CozmosWife::
+FallarborTown_CozmosHouse_EventScript_CozmosAssistant::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_AUDINITE, FallarborTown_CozmosHouse_EventScript_CozmoIsHappy

@@ -36,8 +36,8 @@ SootopolisCity_House1_Text_DevelopedThisTM:
 
 SootopolisCity_House1_Text_ExplainBrickBreak:
 	.string "TM68 contains Brick Break! It's a move\n"
-	.string "so horrible that I can't describe it.$"
+	.string "that shatters the opponents defenses!$"
 
 SootopolisCity_House1_Text_Grapploct:
-	.string "Grapploct: Pluu puhyaah.$"
+	.string "Grapploct: Pluu puhyaah!$"
 

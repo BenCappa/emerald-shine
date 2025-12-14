@@ -156,7 +156,7 @@ LittlerootTown_EventScript_GoInsideWithMom::
 	waitmovement 0
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
 	setvar VAR_LITTLEROOT_INTRO_STATE, 3
-	hideobjectat LOCALID_PLAYER, 0
+	hideplayer
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
@@ -939,10 +939,11 @@ LittlerootTown_Text_SwitchShoesWithPokenav:
 
 LittlerootTown_Text_ExplainPokenav:
 	.string "Gram: It's a POKéMON NAVIGATOR,\n"
-	.string "or POKéNAV for short.\p"
+	.string "or PokéNav for short.\p"
 	.string "It's an indispensable tool for any\n"
-	.string "TRAINER on an adventure.\p"
-	.string "It has a map of the HOENN region.$"
+	.string "Trainer on an adventure.\p"
+	.string "It has a map of the Hoenn region,\n"
+	.string "So you better not get lost.$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "… … … … … … … …\n"

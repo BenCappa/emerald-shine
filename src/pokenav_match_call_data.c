@@ -34,13 +34,13 @@ typedef struct MatchCallTextDataStruct {
 
 struct MatchCallStructCommon {
     u8 type;
-    u8 mapSec;
+    mapsec_u8_t mapSec;
     u16 flag;
 };
 
 struct MatchCallStructNPC {
     u8 type;
-    u8 mapSec;
+    mapsec_u8_t mapSec;
     u16 flag;
     const u8 *desc;
     const u8 *name;
@@ -50,7 +50,7 @@ struct MatchCallStructNPC {
 // Shared by MC_TYPE_TRAINER and MC_TYPE_LEADER
 struct MatchCallStructTrainer {
     u8 type;
-    u8 mapSec;
+    mapsec_u8_t mapSec;
     u16 flag;
     u16 rematchTableIdx;
     const u8 *desc;
@@ -60,12 +60,12 @@ struct MatchCallStructTrainer {
 
 struct MatchCallLocationOverride {
     u16 flag;
-    u8 mapSec;
+    mapsec_u8_t mapSec;
 };
 
 struct MatchCallWally {
     u8 type;
-    u8 mapSec;
+    mapsec_u8_t mapSec;
     u16 flag;
     u16 rematchTableIdx;
     const u8 *desc;
@@ -75,7 +75,7 @@ struct MatchCallWally {
 
 struct MatchCallBirch {
     u8 type;
-    u8 mapSec;
+    mapsec_u8_t mapSec;
     u16 flag;
     const u8 *desc;
     const u8 *name;
@@ -117,11 +117,11 @@ static bool32 MatchCall_GetEnabled_Wally(match_call_t);
 static bool32 MatchCall_GetEnabled_Birch(match_call_t);
 static bool32 MatchCall_GetEnabled_Rival(match_call_t);
 
-static u8 MatchCall_GetMapSec_NPC(match_call_t);
-static u8 MatchCall_GetMapSec_Trainer(match_call_t);
-static u8 MatchCall_GetMapSec_Wally(match_call_t);
-static u8 MatchCall_GetMapSec_Birch(match_call_t);
-static u8 MatchCall_GetMapSec_Rival(match_call_t);
+static mapsec_u8_t MatchCall_GetMapSec_NPC(match_call_t);
+static mapsec_u8_t MatchCall_GetMapSec_Trainer(match_call_t);
+static mapsec_u8_t MatchCall_GetMapSec_Wally(match_call_t);
+static mapsec_u8_t MatchCall_GetMapSec_Birch(match_call_t);
+static mapsec_u8_t MatchCall_GetMapSec_Rival(match_call_t);
 
 static bool32 MatchCall_IsRematchable_NPC(match_call_t);
 static bool32 MatchCall_IsRematchable_Trainer(match_call_t);
@@ -184,28 +184,24 @@ static const struct MatchCallStructNPC sMrStoneMatchCallHeader =
     .textData = sMrStoneTextScripts
 };
 
-static const match_call_text_data_t sNormanTextScripts[] = {
-    { MatchCall_Text_Norman1, FLAG_ENABLE_NORMAN_MATCH_CALL, 0xFFFF },
-    { MatchCall_Text_Norman2, FLAG_DEFEATED_DEWFORD_GYM,     0xFFFF },
-    { MatchCall_Text_Norman3, FLAG_DEFEATED_LAVARIDGE_GYM,   0xFFFF },
-    { MatchCall_Text_Norman4, FLAG_DEFEATED_PETALBURG_GYM,   0xFFFF },
-    { MatchCall_Text_Norman5, FLAG_RECEIVED_RED_OR_BLUE_ORB, 0xFFFF },
-    { MatchCall_Text_Norman6, 0xFFFE,                        0xFFFF },
-    { MatchCall_Text_Norman7, FLAG_SYS_GAME_CLEAR,           0xFFFF },
-    { MatchCall_Text_Norman8, FLAG_SYS_GAME_CLEAR,           0xFFFF },
-    { MatchCall_Text_Norman9, FLAG_SYS_GAME_CLEAR,           0xFFFF },
-    { NULL,                   0xFFFF,                        0xFFFF }
+static const match_call_text_data_t sMichealTextScripts[] = {
+    { MatchCall_Text_Micheal1, FLAG_ENABLE_MICHEAL_MATCH_CALL, 0xFFFF },
+    { MatchCall_Text_Micheal2, FLAG_DEFEATED_LAVARIDGE_GYM,   0xFFFF },
+    { MatchCall_Text_Micheal3, FLAG_DEFEATED_PETALBURG_GYM,   0xFFFF },
+    { MatchCall_Text_Micheal4, 0xFFFF,                        0xFFFF },
+    { MatchCall_Text_Micheal5, FLAG_SYS_GAME_CLEAR,           0xFFFF },
+    { NULL,                    0xFFFF,                        0xFFFF }
 };
 
-static const struct MatchCallStructTrainer sNormanMatchCallHeader =
+static const struct MatchCallStructTrainer sMichealMatchCallHeader =
 {
     .type = MC_TYPE_LEADER,
     .mapSec = MAPSEC_PETALBURG_CITY,
-    .flag = FLAG_ENABLE_NORMAN_MATCH_CALL,
-    .rematchTableIdx = REMATCH_NORMAN,
-    .desc = COMPOUND_STRING("RELIABLE ONE"),
-    .name = COMPOUND_STRING("DAD"),
-    .textData = sNormanTextScripts
+    .flag = FLAG_ENABLE_MICHEAL_MATCH_CALL,
+    .rematchTableIdx = REMATCH_MICHEAL,
+    .desc = COMPOUND_STRING("PUNCH DRUNK"),
+    .name = NULL,
+    .textData = sMichealTextScripts
 };
 
 static const struct MatchCallBirch sProfBirchMatchCallHeader =
@@ -214,14 +210,18 @@ static const struct MatchCallBirch sProfBirchMatchCallHeader =
     .mapSec = 0,
     .flag = FLAG_ENABLE_PROF_BIRCH_MATCH_CALL,
     .desc = COMPOUND_STRING("{PKMN} PROF."),
-    .name = COMPOUND_STRING("PROF. BIRCH")
+    .name = COMPOUND_STRING("GUMP")
 };
 
 static const match_call_text_data_t sMomTextScripts[] = {
-    { MatchCall_Text_Mom1, 0xFFFF,                      0xFFFF },
-    { MatchCall_Text_Mom2, FLAG_DEFEATED_PETALBURG_GYM, 0xFFFF },
-    { MatchCall_Text_Mom3, FLAG_SYS_GAME_CLEAR,         0xFFFF },
-    { NULL,                0xFFFF,                      0xFFFF }
+    { MatchCall_Text_Mom1, FLAG_ENABLE_MOM_MATCH_CALL,    0xFFFF },
+    { MatchCall_Text_Mom2, FLAG_DEFEATED_PETALBURG_GYM,   0xFFFF },
+    { MatchCall_Text_Mom3, FLAG_RECEIVED_RED_OR_BLUE_ORB, 0xFFFF },
+    { MatchCall_Text_Mom4, 0xFFFF,                        0xFFFF },
+    { MatchCall_Text_Mom5, FLAG_SYS_GAME_CLEAR,           0xFFFF },
+    { MatchCall_Text_Mom6, 0xFFFF,                        0xFFFF },
+    { MatchCall_Text_Mom7, 0xFFFF,                        0xFFFF },
+    { NULL,                0xFFFF,                        0xFFFF }
 };
 
 static const struct MatchCallStructNPC sMomMatchCallHeader =
@@ -250,7 +250,7 @@ static const struct MatchCallStructNPC sStevenMatchCallHeader =
     .type = MC_TYPE_NPC,
     .mapSec = MAPSEC_NONE,
     .flag = FLAG_REGISTERED_STEVEN_POKENAV,
-    .desc = COMPOUND_STRING("HARD AS ROCK"),
+    .desc = COMPOUND_STRING("SMOOTH STONE"),
     .name = COMPOUND_STRING("STEVEN"),
     .textData = sStevenTextScripts
 };
@@ -366,42 +366,42 @@ static const struct MatchCallStructNPC sScottMatchCallHeader =
     .textData = sScottTextScripts
 };
 
-static const match_call_text_data_t sRoxanneTextScripts[] = {
-    { MatchCall_Text_Roxanne1, 0xFFFE,              0xFFFF },
-    { MatchCall_Text_Roxanne2, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Roxanne3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Roxanne4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+static const match_call_text_data_t sOrianaTextScripts[] = {
+    { MatchCall_Text_Oriana1, 0xFFFE,              0xFFFF },
+    { MatchCall_Text_Oriana2, 0xFFFF,              0xFFFF },
+    { MatchCall_Text_Oriana3, 0xFFFF,              0xFFFF },
+    { MatchCall_Text_Oriana4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
     { NULL,                    0xFFFF,              0xFFFF }
 };
 
-static const struct MatchCallStructTrainer sRoxanneMatchCallHeader =
+static const struct MatchCallStructTrainer sOrianaMatchCallHeader =
 {
     .type = MC_TYPE_LEADER,
     .mapSec = MAPSEC_RUSTBORO_CITY,
-    .flag = FLAG_ENABLE_ROXANNE_MATCH_CALL,
-    .rematchTableIdx = REMATCH_ROXANNE,
-    .desc = COMPOUND_STRING("ROCKIN' WHIZ"),
+    .flag = FLAG_ENABLE_ORIANA_MATCH_CALL,
+    .rematchTableIdx = REMATCH_ORIANA,
+    .desc = COMPOUND_STRING("HONOR ROLL"),
     .name = NULL,
-    .textData = sRoxanneTextScripts
+    .textData = sOrianaTextScripts
 };
 
-static const match_call_text_data_t sBrawlyTextScripts[] = {
-    { MatchCall_Text_Brawly1, 0xFFFE,              0xFFFF },
-    { MatchCall_Text_Brawly2, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Brawly3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Brawly4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+static const match_call_text_data_t sNilesTextScripts[] = {
+    { MatchCall_Text_Niles1, 0xFFFE,              0xFFFF },
+    { MatchCall_Text_Niles2, 0xFFFF,              0xFFFF },
+    { MatchCall_Text_Niles3, 0xFFFF,              0xFFFF },
+    { MatchCall_Text_Niles4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
     { NULL,                   0xFFFF,              0xFFFF }
 };
 
-static const struct MatchCallStructTrainer sBrawlyMatchCallHeader =
+static const struct MatchCallStructTrainer sNilesMatchCallHeader =
 {
     .type = MC_TYPE_LEADER,
     .mapSec = MAPSEC_DEWFORD_TOWN,
-    .flag = FLAG_ENABLE_BRAWLY_MATCH_CALL,
-    .rematchTableIdx = REMATCH_BRAWLY,
-    .desc = COMPOUND_STRING("THE BIG HIT"),
+    .flag = FLAG_ENABLE_NILES_MATCH_CALL,
+    .rematchTableIdx = REMATCH_NILES,
+    .desc = COMPOUND_STRING("HARD AS ROCK"),
     .name = NULL,
-    .textData = sBrawlyTextScripts
+    .textData = sNilesTextScripts
 };
 
 static const match_call_text_data_t sWattsonTextScripts[] = {
@@ -423,23 +423,23 @@ static const struct MatchCallStructTrainer sWattsonMatchCallHeader =
     .textData = sWattsonTextScripts
 };
 
-static const match_call_text_data_t sFlanneryTextScripts[] = {
-    { MatchCall_Text_Flannery1, 0xFFFE,              0xFFFF },
-    { MatchCall_Text_Flannery2, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Flannery3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Flannery4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+static const match_call_text_data_t sIliyahTextScripts[] = {
+    { MatchCall_Text_Iliyah1, 0xFFFE,              0xFFFF },
+    { MatchCall_Text_Iliyah2, 0xFFFF,              0xFFFF },
+    { MatchCall_Text_Iliyah3, 0xFFFF,              0xFFFF },
+    { MatchCall_Text_Iliyah4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
     { NULL,                     0xFFFF,              0xFFFF }
 };
 
-static const struct MatchCallStructTrainer sFlanneryMatchCallHeader =
+static const struct MatchCallStructTrainer sIliyahMatchCallHeader =
 {
     .type = MC_TYPE_LEADER,
     .mapSec = MAPSEC_LAVARIDGE_TOWN,
-    .flag = FLAG_ENABLE_FLANNERY_MATCH_CALL,
-    .rematchTableIdx = REMATCH_FLANNERY,
+    .flag = FLAG_ENABLE_ILIYAH_MATCH_CALL,
+    .rematchTableIdx = REMATCH_ILIYAH,
     .desc = COMPOUND_STRING("PASSION BURN"),
     .name = NULL,
-    .textData = sFlanneryTextScripts
+    .textData = sIliyahTextScripts
 };
 
 static const match_call_text_data_t sWinonaTextScripts[] = {
@@ -480,23 +480,23 @@ static const struct MatchCallStructTrainer sTateLizaMatchCallHeader =
     .textData = sTateLizaTextScripts
 };
 
-static const match_call_text_data_t sJuanTextScripts[] = {
-    { MatchCall_Text_Juan1, 0xFFFE,              0xFFFF },
-    { MatchCall_Text_Juan2, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Juan3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Juan4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+static const match_call_text_data_t sRheannonTextScripts[] = {
+    { MatchCall_Text_Rheannon1, 0xFFFE,              0xFFFF },
+    { MatchCall_Text_Rheannon2, 0xFFFF,              0xFFFF },
+    { MatchCall_Text_Rheannon3, 0xFFFF,              0xFFFF },
+    { MatchCall_Text_Rheannon4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
     { NULL,                 0xFFFF,              0xFFFF }
 };
 
-static const struct MatchCallStructTrainer sJuanMatchCallHeader =
+static const struct MatchCallStructTrainer sRheannonMatchCallHeader =
 {
     .type = MC_TYPE_LEADER,
     .mapSec = MAPSEC_SOOTOPOLIS_CITY,
-    .flag = FLAG_ENABLE_JUAN_MATCH_CALL,
-    .rematchTableIdx = REMATCH_JUAN,
-    .desc = COMPOUND_STRING("DANDY CHARM"),
+    .flag = FLAG_ENABLE_RHEANNON_MATCH_CALL,
+    .rematchTableIdx = REMATCH_RHEANNON,
+    .desc = COMPOUND_STRING("BRINY CHARM"),
     .name = NULL,
-    .textData = sJuanTextScripts
+    .textData = sRheannonTextScripts
 };
 
 static const u8 gText_EliteFourMatchCallDesc[] = _("ELITE FOUR");
@@ -517,20 +517,20 @@ static const struct MatchCallStructTrainer sSidneyMatchCallHeader =
     .textData = sSidneyTextScripts
 };
 
-static const match_call_text_data_t sPhoebeTextScripts[] = {
-    { MatchCall_Text_Phoebe, 0xFFFF, 0xFFFF },
+static const match_call_text_data_t sJuanTextScripts[] = {
+    { MatchCall_Text_Juan, 0xFFFF, 0xFFFF },
     { NULL,                  0xFFFF, 0xFFFF }
 };
 
-static const struct MatchCallStructTrainer sPhoebeMatchCallHeader =
+static const struct MatchCallStructTrainer sJuanMatchCallHeader =
 {
     .type = MC_TYPE_LEADER,
     .mapSec = MAPSEC_EVER_GRANDE_CITY,
-    .flag = FLAG_REGISTERED_PHOEBE,
-    .rematchTableIdx = REMATCH_PHOEBE,
+    .flag = FLAG_REGISTERED_JUAN,
+    .rematchTableIdx = REMATCH_JUAN,
     .desc = gText_EliteFourMatchCallDesc,
     .name = NULL,
-    .textData = sPhoebeTextScripts
+    .textData = sJuanTextScripts
 };
 
 static const match_call_text_data_t sGlaciaTextScripts[] = {
@@ -587,19 +587,19 @@ static const match_call_t sMatchCallHeaders[] = {
     [MC_HEADER_BRENDAN]    = {.rival  = &sBrendanMatchCallHeader},
     [MC_HEADER_MAY]        = {.rival  = &sMayMatchCallHeader},
     [MC_HEADER_WALLY]      = {.wally  = &sWallyMatchCallHeader},
-    [MC_HEADER_NORMAN]     = {.leader = &sNormanMatchCallHeader},
+    [MC_HEADER_MICHEAL]    = {.leader = &sMichealMatchCallHeader},
     [MC_HEADER_MOM]        = {.npc    = &sMomMatchCallHeader},
     [MC_HEADER_STEVEN]     = {.npc    = &sStevenMatchCallHeader},
     [MC_HEADER_SCOTT]      = {.npc    = &sScottMatchCallHeader},
-    [MC_HEADER_ROXANNE]    = {.leader = &sRoxanneMatchCallHeader},
-    [MC_HEADER_BRAWLY]     = {.leader = &sBrawlyMatchCallHeader},
+    [MC_HEADER_ORIANA]     = {.leader = &sOrianaMatchCallHeader},
+    [MC_HEADER_NILES]      = {.leader = &sNilesMatchCallHeader},
     [MC_HEADER_WATTSON]    = {.leader = &sWattsonMatchCallHeader},
-    [MC_HEADER_FLANNERY]   = {.leader = &sFlanneryMatchCallHeader},
+    [MC_HEADER_ILIYAH]     = {.leader = &sIliyahMatchCallHeader},
     [MC_HEADER_WINONA]     = {.leader = &sWinonaMatchCallHeader},
     [MC_HEADER_TATE_LIZA]  = {.leader = &sTateLizaMatchCallHeader},
-    [MC_HEADER_JUAN]       = {.leader = &sJuanMatchCallHeader},
+    [MC_HEADER_RHEANNON]   = {.leader = &sRheannonMatchCallHeader},
     [MC_HEADER_SIDNEY]     = {.leader = &sSidneyMatchCallHeader},
-    [MC_HEADER_PHOEBE]     = {.leader = &sPhoebeMatchCallHeader},
+    [MC_HEADER_JUAN]       = {.leader = &sJuanMatchCallHeader},
     [MC_HEADER_GLACIA]     = {.leader = &sGlaciaMatchCallHeader},
     [MC_HEADER_DRAKE]      = {.leader = &sDrakeMatchCallHeader},
     [MC_HEADER_WALLACE]    = {.leader = &sWallaceMatchCallHeader}
@@ -613,7 +613,7 @@ static bool32 (*const sMatchCallGetEnabledFuncs[])(match_call_t) = {
     MatchCall_GetEnabled_Birch
 };
 
-static u8 (*const sMatchCallGetMapSecFuncs[])(match_call_t) = {
+static mapsec_u8_t (*const sMatchCallGetMapSecFuncs[])(match_call_t) = {
     MatchCall_GetMapSec_NPC,
     MatchCall_GetMapSec_Trainer,
     MatchCall_GetMapSec_Wally,
@@ -796,7 +796,7 @@ static bool32 MatchCall_GetEnabled_Birch(match_call_t matchCall)
     return FlagGet(matchCall.birch->flag);
 }
 
-u8 MatchCall_GetMapSec(u32 idx)
+mapsec_u8_t MatchCall_GetMapSec(u32 idx)
 {
     match_call_t matchCall;
     u32 i;
@@ -808,17 +808,17 @@ u8 MatchCall_GetMapSec(u32 idx)
     return sMatchCallGetMapSecFuncs[i](matchCall);
 }
 
-static u8 MatchCall_GetMapSec_NPC(match_call_t matchCall)
+static mapsec_u8_t MatchCall_GetMapSec_NPC(match_call_t matchCall)
 {
     return matchCall.npc->mapSec;
 }
 
-static u8 MatchCall_GetMapSec_Trainer(match_call_t matchCall)
+static mapsec_u8_t MatchCall_GetMapSec_Trainer(match_call_t matchCall)
 {
     return matchCall.trainer->mapSec;
 }
 
-static u8 MatchCall_GetMapSec_Wally(match_call_t matchCall)
+static mapsec_u8_t MatchCall_GetMapSec_Wally(match_call_t matchCall)
 {
     s32 i;
 
@@ -830,12 +830,12 @@ static u8 MatchCall_GetMapSec_Wally(match_call_t matchCall)
     return matchCall.wally->locationData[i].mapSec;
 }
 
-static u8 MatchCall_GetMapSec_Rival(match_call_t matchCall)
+static mapsec_u8_t MatchCall_GetMapSec_Rival(match_call_t matchCall)
 {
     return MAPSEC_NONE;
 }
 
-static u8 MatchCall_GetMapSec_Birch(match_call_t matchCall)
+static mapsec_u8_t MatchCall_GetMapSec_Birch(match_call_t matchCall)
 {
     return MAPSEC_NONE;
 }

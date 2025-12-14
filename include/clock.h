@@ -5,5 +5,7 @@
 
 void InitTimeBasedEvents(void);
 void DoTimeBasedEvents(void);
+void FormChangeTimeUpdate();
+void FormChangeSeasonUpdate();
 
 #endif // GUARD_CLOCK_H

@@ -7,7 +7,7 @@ DewfordTown_Gym_OnTransition:
 	end
 
 DewfordTown_Gym_EventScript_SetFlashLevel::
-	goto_if_defeated TRAINER_BRAWLY_1, DewfordTown_Gym_EventScript_SetLightsOn
+	goto_if_defeated TRAINER_NILES_1, DewfordTown_Gym_EventScript_SetLightsOn
 	call DewfordTown_Gym_EventScript_CountTrainersDefeated
 	copyvar VAR_0x8001, VAR_0x8000
 	goto_if_eq VAR_0x8000, 0, DewfordTown_Gym_EventScript_SetFlashLevel7
@@ -133,7 +133,7 @@ DewfordTown_Gym_EventScript_StopCountingTrainers::
 	return
 
 DewfordTown_Gym_EventScript_Niles::
-	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_NilesIntro, DewfordTown_Gym_Text_NilesDefeat, DewfordTown_Gym_EventScript_NilesDefeated, NO_MUSIC
+	trainerbattle_single TRAINER_NILES_1, DewfordTown_Gym_Text_NilesIntro, DewfordTown_Gym_Text_NilesDefeat, DewfordTown_Gym_EventScript_NilesDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_NilesRematch
 	goto_if_unset FLAG_RECEIVED_TM_STEALTH_ROCK, DewfordTown_Gym_EventScript_GiveStealthRock2
@@ -156,9 +156,14 @@ DewfordTown_Gym_EventScript_NilesDefeated::
 	call DewfordTown_Gym_EventScript_GiveStealthRock
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_BRAWLY_MATCH_CALL
-	setvar VAR_ROXANNE_CALL_STEP_COUNTER, 0
-	setflag FLAG_ENABLE_ROXANNE_FIRST_CALL
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox DewfordTown_Gym_Text_RegisteredNiles, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_ENABLE_NILES_MATCH_CALL
+	setvar VAR_ORIANA_CALL_STEP_COUNTER, 0
+	setflag FLAG_ENABLE_ORIANA_FIRST_CALL
 	release
 	end
 
@@ -178,7 +183,7 @@ DewfordTown_Gym_EventScript_GiveStealthRock2:
 	end
 
 DewfordTown_Gym_EventScript_NilesRematch::
-	trainerbattle_rematch_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_NilesPreRematch, DewfordTown_Gym_Text_NilesRematchDefeat, DewfordTown_Gym_Text_NilesRematchNeedTwoMons
+	trainerbattle_rematch_double TRAINER_NILES_1, DewfordTown_Gym_Text_NilesPreRematch, DewfordTown_Gym_Text_NilesRematchDefeat, DewfordTown_Gym_Text_NilesRematchNeedTwoMons
 	msgbox DewfordTown_Gym_Text_NilesPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -293,7 +298,6 @@ DewfordTown_Gym_Text_GymGuideAdvice:
 	.string "gimmicks with the more badges you earn.\p"
 	.string "Niles could have anything up his sleeve\n"
 	.string "so be prepared.\p"
-	.string "Hey, okay, go for it!$"
 
 DewfordTown_Gym_Text_GymGuidePostVictory:
 	.string "Whoah! It's gotten bright in here!\p"
@@ -311,7 +315,7 @@ DewfordTown_Gym_Text_TakaoPostBattle:
 	.string "Your technique is commendable!$"
 
 DewfordTown_Gym_Text_JocelynIntro:
-	.string "There's no need for Niles to be\n"
+	.string "There's no need for Niles to get\n"
 	.string "involved!\p"
 	.string "I'll crush you here!$"
 
@@ -320,11 +324,11 @@ DewfordTown_Gym_Text_JocelynDefeat:
 	.string "How could I lose so easily?$"
 
 DewfordTown_Gym_Text_JocelynPostBattle:
-	.string "I'm not going to waste this loss.\n"
-	.string "I'll use it to motivate me to train!\p"
-	.string "One day I'll become a Gym Leader…\p"
-	.string "No, I'll become the Pokémon League\n"
-	.string "Champion!$"
+	.string "I'm starting to think Niles only let me\n"
+	.string "train here because I have the same\l"
+	.string "name as his mom…\p"
+	.string "No, I'll keep training hard and prove\n"
+	.string "my worth!$"
 
 DewfordTown_Gym_Text_LauraIntro:
 	.string "Don't you dare brush me off!\n"
@@ -335,8 +339,10 @@ DewfordTown_Gym_Text_LauraDefeat:
 	.string "I lost!$"
 
 DewfordTown_Gym_Text_LauraPostBattle:
-	.string "I like to battle in the dark so\n"
-	.string "no one can see my face…$"
+	.string "I battle in the dark to sharpen my\n"
+	.string "senses.\p"
+	.string "But because it's so dark, I can never\n"
+	.string "if I'm doing a good job…$"
 
 DewfordTown_Gym_Text_LilithIntro:
 	.string "Ufufu…\n"
@@ -359,7 +365,7 @@ DewfordTown_Gym_Text_BrendenDefeat:
 	.string "It's not like me to lose this way!$"
 
 DewfordTown_Gym_Text_BrendenPostBattle:
-	.string "Oh, aye! You're worthy of seeing\n"
+	.string "Oh, aye! You're worthy of facing\n"
 	.string "our Gym Leader.$"
 
 DewfordTown_Gym_Text_CristianIntro:
@@ -380,7 +386,7 @@ DewfordTown_Gym_Text_NilesIntro:
 	.string "Why make my Gym a pitch-black cave?\p"
 	.string "It's simple, I think it's funny when\n"
 	.string "people get lost and confused.\p"
-	.string "That and rocks and caves and stuff…"
+	.string "That and rocks and caves and stuff…\p"
 	.string "Anyways, you wanted to challenge me?\n"
 	.string "Let's get started!$"
 
@@ -406,7 +412,12 @@ DewfordTown_Gym_Text_ExplainStealthRock:
 	.string "That TM82 contains Stealth Rock.\p"
 	.string "Set it up right away to chip away at\n"
 	.string "your opponents health every time they\l"
-	.string "enter the battlefield.$"
+	.string "enter the battlefield.\p"
+	.string "… … … … … …$"
+
+DewfordTown_Gym_Text_RegisteredNiles:
+	.string "Registered Gym Leader Niles\n"
+	.string "in the PokéNav.$"
 
 DewfordTown_Gym_Text_NilesPostBattle:
 	.string "Keep training so I can show you my\n"

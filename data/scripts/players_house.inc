@@ -303,7 +303,7 @@ PlayersHouse_1F_EventScript_Mom::
 	faceplayer
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_MAY, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
-	goto_if_set FLAG_BADGE05_GET, PlayersHouse_1F_EventScript_TryGiveAmuletCoin
+	goto_if_set FLAG_HAS_MATCH_CALL, PlayersHouse_1F_EventScript_TryRegisterMom
 	goto_if_set FLAG_RESCUED_BIRCH, PlayersHouse_1F_EventScript_MomHealsParty
 	goto_if_eq VAR_TEMP_1, 1, PlayersHouse_1F_EventScript_SeeYouHoney
 	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, PlayersHouse_1F_EventScript_DidYouMeetProfBirch
@@ -315,6 +315,24 @@ PlayersHouse_1F_EventScript_DontPushYourselfTooHard::
 	msgbox PlayersHouse_1F_Text_DontPushYourselfTooHard, MSGBOX_DEFAULT
 	release
 	end
+
+PlayersHouse_1F_EventScript_TryRegisterMom::
+	goto_if_set FLAG_ENABLE_MOM_MATCH_CALL, PlayersHouse_1F_EventScript_CheckGiveAmuletCoin
+	msgbox PlayersHouse_1F_Text_IsThatAPokenav, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox PlayersHouse_1F_Text_RegisteredMom, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_ENABLE_MOM_MATCH_CALL
+	release
+	end
+
+PlayersHouse_1F_EventScript_CheckGiveAmuletCoin::
+	goto_if_set FLAG_BADGE05_GET, PlayersHouse_1F_EventScript_TryGiveAmuletCoin
+	goto PlayersHouse_1F_EventScript_MomHealsParty
 
 PlayersHouse_1F_EventScript_TryGiveAmuletCoin::
 	goto_if_set FLAG_RECEIVED_AMULET_COIN, PlayersHouse_1F_EventScript_MomHealsParty
@@ -845,7 +863,7 @@ PlayersHouse_1F_Text_MomRainBadge:
 	.string "Glacia specializes in Ice-types,\l"
 	.string "and Drake in Dragon-types.\p"
 	.string "Of course, there is also the Champion:\n"
-	.string "Wallace. He's a Water-type specialist.\p"
+	.string "Their team is well-rounded, so prepare.\p"
 	.string "I can't help you much more than that.\p"
 	.string "Trust yourself and use everything that\n"
 	.string "you've learned up to this point.$"

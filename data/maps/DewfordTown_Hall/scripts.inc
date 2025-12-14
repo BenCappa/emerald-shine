@@ -267,7 +267,7 @@ DewfordTown_Hall_Text_GettingBoredOfTrend:
 	.string "I should look for the next big thing.$"
 
 DewfordTown_Hall_Text_TeachingMonAboutTrend:
-	.string "I'm teaching my POKéMON about\n"
+	.string "I'm teaching my Pokémon about\n"
 	.string "“{STR_VAR_1},”\l"
 	.string "but it's not going well.\p"
 	.string "It's a bit too much, I think.$"
@@ -306,7 +306,7 @@ DewfordTown_Hall_Text_CollectTrendMerchandise:
 	.string "“{STR_VAR_1}”\l"
 	.string "licensed merchandise.\p"
 	.string "I have official\n"
-	.string "“{STR_VAR_1}” DOLLS…\p"
+	.string "“{STR_VAR_1}” Dolls…\p"
 	.string "Official “{STR_VAR_1}”\n"
 	.string "brand clothing…\p"
 	.string "And officially licensed\n"

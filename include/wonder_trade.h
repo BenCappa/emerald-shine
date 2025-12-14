@@ -4,4 +4,3 @@
 void CreateWonderTradePokemon(void);
 
 #endif //GUARD_WONDER_TRADE_H
-

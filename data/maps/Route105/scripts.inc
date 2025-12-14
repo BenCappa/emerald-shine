@@ -42,7 +42,7 @@ Route105_EventScript_Dominik::
 
 Route105_EventScript_Beverly::
 	trainerbattle_single TRAINER_BEVERLY, Route105_Text_BeverlyIntro, Route105_Text_BeverlyDefeated
-	msgbox Route105_Text_BeverlyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route105_Text_PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Imani::
@@ -67,6 +67,7 @@ Route105_EventScript_AndresRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route105_Text_AndresRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ANDRES_1
 	release
 	end
 
@@ -74,3 +75,22 @@ Route105_EventScript_AndresRematch::
 	trainerbattle_rematch TRAINER_ANDRES_1, Route105_Text_AndresRematchIntro, Route105_Text_AndresRematchDefeated
 	msgbox Route105_Text_AndresRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
+
+Route104_Text_MikePokenavCall:
+	.string "… … … … … …\n"
+	.string "… … … … … Beep!\p"
+	.string "Mike: Hey, {PLAYER}?\p"
+	.string "… … … … … …\n"
+	.string "Where are you now?\l"
+	.string "It sounds windy wherever you are.\p"
+	.string "I heard Gram gave you a PokéNav,\n"
+	.string "so I decided to give you a call.\p"
+	.string "It sounds like you're doing fine,\n"
+	.string "so I'll let you go.\p"
+	.string "Talk to ya later.\p"
+	.string "… … … … … …\n"
+	.string "… … … … … Click!$"
+
+Route104_Text_RegisteredMikeInPokenav:
+	.string "Registered Gym Leader Micheal\n"
+	.string "in the PokéNav.$"

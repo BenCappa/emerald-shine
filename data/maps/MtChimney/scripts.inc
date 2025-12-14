@@ -47,13 +47,13 @@ MtChimney_EventScript_Maxie::
 	msgbox MtChimney_Text_MaxieYouHaventSeenLastOfMagma, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	fadescreen FADE_TO_BLACK
+	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject LOCALID_MT_CHIMNEY_MAXIE
 	removeobject LOCALID_MT_CHIMNEY_MAGMA_GRUNT_1
 	removeobject LOCALID_MT_CHIMNEY_TABITHA
 	removeobject LOCALID_MT_CHIMNEY_MAGMA_GRUNT_2
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
-	fadescreen FADE_FROM_BLACK
+	fadescreenswapbuffers FADE_FROM_BLACK
 	setobjectxyperm LOCALID_MT_CHIMNEY_ARCHIE, 10, 12
 	addobject LOCALID_MT_CHIMNEY_ARCHIE
 	call_if_eq VAR_FACING, DIR_EAST, MtChimney_EventScript_ArchieApproachPlayerEast
@@ -67,7 +67,7 @@ MtChimney_EventScript_Maxie::
 	removeobject LOCALID_MT_CHIMNEY_ARCHIE
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA
 	setflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
-	clearflag FLAG_HIDE_FALLARBOR_HOUSE_PROF_COZMO
+	clearflag FLAG_HIDE_FALLARBOR_HOUSE_PROF_GILCHRIST
 	setflag FLAG_HIDE_METEOR_FALLS_1F_1R_COZMO
 	clearflag FLAG_HIDE_MT_CHIMNEY_LAVA_COOKIE_LADY
 	releaseall
@@ -113,7 +113,7 @@ MtChimney_EventScript_LavaCookieLady::
 
 MtChimney_EventScript_BagIsFull::
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
-	@hidemoneybox
+	hidemoneybox
 	release
 	end
 .else
@@ -491,6 +491,7 @@ MtChimney_EventScript_DefeatedShelby::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MtChimney_Text_ShelbyRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_SHELBY_1
 	release
 	end
 
@@ -531,6 +532,7 @@ MtChimney_EventScript_SawyerDefeated::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox MtChimney_Text_SawyerRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_SAWYER_1
 	release
 	end
 
@@ -559,19 +561,20 @@ MtChimney_Text_MaxieIntro:
 	.string "It must be you he meant.\p"
 	.string "Humph! So you're thinking of\n"
 	.string "interfering with us, Team Magma?\p"
-	.string "Now you listen.\n"
-	.string "Long ago, living things used the\l"
-	.string "land to live and grow.\p"
-	.string "That is why land is all important!\n"
-	.string "It is the cradle of all!\p"
+	.string "Now listen carefully.\n"
+	.string "Global elites are melting our ice caps\n"
+	.string "which is causing the sea levels to rise\l"
+	.string "which further drives their fabricated\l"
+	.string "housing crisis that exploits us poor.\p"
 	.string "That is why Team Magma is dedicated\n"
 	.string "to the expansion of the land mass.\p"
-	.string "It is for further advancement of\n"
-	.string "humankind and Pokémon!\p"
+	.string "With an abundance of land, we rob the\n"
+	.string "elite of their power and can provide for\l"
+	.string "an exponentially growing population.\p"
 	.string "And for that, we need the power of\n"
 	.string "what sleeps within this mountain…\p"
 	.string "Oh! There was no need for you to\n"
-	.string "learn that much.\p"
+	.string "learn that last detail.\p"
 	.string "But, no matter!\n"
 	.string "I'll teach you the consequences of\l"
 	.string "meddling in our grand design!$"
@@ -581,7 +584,7 @@ MtChimney_Text_MaxieDefeat:
 	.string "I, Maxie, was caught off guard?!$"
 
 MtChimney_Text_MaxieYouHaventSeenLastOfMagma:
-	.string "Maxie: But, enough.\n"
+	.string "Maxie: Alright, enough.\n"
 	.string "I will back off this time.\p"
 	.string "But don't think that this is the last\n"
 	.string "you've seen of Team Magma.\p"
@@ -594,7 +597,7 @@ MtChimney_Text_TabithaIntro:
 	.string "So you've come all the way here!\p"
 	.string "But you're too late!\n"
 	.string "I've already delivered the Meteorite\l"
-	.string "from Meteor Falls to the Boss!$"
+	.string "from Meteor Falls to the boss!$"
 
 MtChimney_Text_TabithaDefeat:
 	.string "Hehehe…\p"
@@ -618,7 +621,7 @@ MtChimney_Text_Grunt2Defeat:
 	.string "What do you mean I lost?$"
 
 MtChimney_Text_Grunt2PostBattle:
-	.string "Our Boss says, “It will make everyone\n"
+	.string "Our boss says, “It will make everyone\n"
 	.string "happy.”\p"
 	.string "But why does everyone keep getting\n"
 	.string "in our way?$"
@@ -661,7 +664,7 @@ MtChimney_Text_KeepMakingMoreLand:
 	.string "We're going to keep making more land!$"
 
 MtChimney_Text_Bufoh:
-	.string "Namumah!$"
+	.string "Bufoh!$"
 
 MtChimney_Text_ArchieGoStopTeamMagma:
 	.string "Archie: Grr, {PLAYER}!\n"
@@ -707,7 +710,7 @@ MtChimney_Text_MagmasNameSimilar:
 	.string "a confusing name!$"
 
 MtChimney_Text_Bushaa:
-	.string "Jiggoww!$"
+	.string "Bushaa!$"
 
 MtChimney_Text_LavaCookiesJust200:
 	.string "Lava Cookies are Mt. Chimney's local\n"
@@ -807,7 +810,7 @@ MtChimney_Text_SheilaPostBattle:
 	.string "Mt. Chimney. It would be a shame if\l"
 	.string "I only do a little sightseeing…\p"
 	.string "I want to get in some battles and buy\n"
-	.string "COOKIES as souvenirs.$"
+	.string "cookies as souvenirs.$"
 
 MtChimney_Text_ShirleyIntro:
 	.string "Since I bathed in the hot springs,\n"
@@ -831,12 +834,12 @@ MtChimney_Text_SawyerDefeat:
 	.string "Oh, you're a real firebrand, too!$"
 
 MtChimney_Text_SawyerPostBattle:
-	.string "I think I need a dip in the Lavaridge\n"
+	.string "I think I need a dip in Lavaridge\n"
 	.string "Hot Spring with the locals!$"
 
 MtChimney_Text_SawyerRegister:
 	.string "I like firebrands like you.\n"
-	.string "Keep that flame burning!$"
+	.string "Let me register you in my PokéNav.$"
 
 MtChimney_Text_SawyerRematchIntro:
 	.string "I'm happily surrounded by hot people\n"
@@ -849,4 +852,3 @@ MtChimney_Text_SawyerRematchDefeat:
 MtChimney_Text_SawyerPostRematch:
 	.string "Actually, it really is hot here.\n"
 	.string "I'm overdressed for these parts.$"
-

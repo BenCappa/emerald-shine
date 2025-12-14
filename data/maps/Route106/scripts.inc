@@ -27,6 +27,7 @@ Route106_EventScript_ElliotRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route106_Text_ElliotRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ELLIOT_1
 	release
 	end
 
@@ -42,6 +43,10 @@ Route106_EventScript_Ned::
 
 Route106_Text_TrainerTips:
 	.string "TRAINER TIPS\p"
-	.string "Advice on catching Pokémon with a Rod:\n"
-	.string "Press the A Button if you get a bite.$"
+	.string "Plenty of things effect whether or not\n"
+	.string "you get a bite on the Rod:\p"
+	.string "The quality of Rod, how far away from\n"
+	.string "people you are, and certain abilities.\p"
+	.string "The friendship of a Pokémon following\n"
+	.string "you also effects your chances.$"
 

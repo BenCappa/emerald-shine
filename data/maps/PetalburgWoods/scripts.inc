@@ -266,7 +266,7 @@ PetalburgWoods_EventScript_Sign1::
 	end
 
 PetalburgWoods_EventScript_Sign2::
-	msgbox PetalburgWoods_Text_TrainerTipsPP, MSGBOX_SIGN
+	msgbox PetalburgWoods_Text_TrainerTipsLevelCaps, MSGBOX_SIGN
 	end
 
 PetalburgWoods_EventScript_Lyle::
@@ -275,17 +275,38 @@ PetalburgWoods_EventScript_Lyle::
 	end
 
 PetalburgWoods_EventScript_James::
-	trainerbattle_single TRAINER_JAMES_1, PetalburgWoods_Text_InstantlyPopularWithBugPokemon, PetalburgWoods_Text_CantBePopularIfILose, PetalburgWoods_EventScript_RegisterJames
+	trainerbattle_single TRAINER_JAMES_1, PetalburgWoods_Text_InstantlyPopularWithBugPokemon, PetalburgWoods_Text_CantBePopularIfILose, PetalburgWoods_EventScript_TryRegisterJames
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, PetalburgWoods_EventScript_JamesRematch
+	setvar VAR_0x8004, TRAINER_JAMES_1
+	specialvar VAR_RESULT, IsTrainerRegistered
+	goto_if_eq VAR_RESULT, FALSE, PetalburgWoods_EventScript_TryRegisterJames2
 	msgbox PetalburgWoods_Text_PeopleRespectYou, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgWoods_EventScript_RegisterJames::
+PetalburgWoods_EventScript_TryRegisterJames::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox PetalburgWoods_Text_IWantRematch, MSGBOX_DEFAULT
+	goto_if_set FLAG_HAS_MATCH_CALL, PetalburgWoods_EventScript_RegisterJames
+	release
+	end
+
+PetalburgWoods_EventScript_RegisterJames::
+	msgbox PetalburgWoods_Text_IWantRematch1, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JAMES_1
+	release
+	end
+
+PetalburgWoods_EventScript_TryRegisterJames2::
+	goto_if_set FLAG_HAS_MATCH_CALL, PetalburgWoods_EventScript_RegisterJames2
+	msgbox PetalburgWoods_Text_PeopleRespectYou, MSGBOX_DEFAULT
+	release
+	end
+
+PetalburgWoods_EventScript_RegisterJames2::
+	msgbox PetalburgWoods_Text_IWantRematch2, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JAMES_1
 	release
 	end
 
@@ -383,9 +404,15 @@ PetalburgWoods_Text_PeopleRespectYou:
 	.string "If you have a big Bug Pokémon,\n"
 	.string "people respect you for it.$"
 
-PetalburgWoods_Text_IWantRematch:
+PetalburgWoods_Text_IWantRematch1:
 	.string "I want a rematch when my Bug\n"
-	.string "Pokémon grow up!$"
+	.string "Pokémon grow up!\p"
+	.string "I'm registering you in my PokéNav!$"
+
+PetalburgWoods_Text_IWantRematch2:
+	.string "I want a rematch when my Bug \n"
+	.string "Pokémon grow up!\p"
+	.string "I'm registering you in my PokéNav!$"
 
 PetalburgWoods_Text_MyPokemonHaveGrown:
 	.string "My Bug Pokémon have grown.\n"
@@ -436,7 +463,7 @@ PetalburgWoods_Text_TrainerTipsExperience:
 	.string "but hopefully no one reading this sign\l"
 	.string "has a problem with it.$"
 
-PetalburgWoods_Text_TrainerTipsPP:
+PetalburgWoods_Text_TrainerTipsLevelCaps:
 	.string "TRAINER TIPS\p"
 	.string "You may or may not have noticed it by\n"
 	.string "now but your Pokémon can only level\l"
@@ -444,4 +471,3 @@ PetalburgWoods_Text_TrainerTipsPP:
 	.string "This is called a Level Cap and it's\n"
 	.string "dependent on how strong of a trainer\l"
 	.string "you've proven yourself to be.$"
-

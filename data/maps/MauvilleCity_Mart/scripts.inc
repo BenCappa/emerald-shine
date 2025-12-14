@@ -22,24 +22,24 @@ MauvilleCity_Mart_EventScript_BattleClerk::
 	end
 
 MauvilleCity_Mart_EventScript_ExpertM::
-	msgbox MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats, MSGBOX_NPC
+	msgbox MauvilleCity_Mart_Text_PartyFullOfPickupPokemon, MSGBOX_NPC
 	end
 
 MauvilleCity_Mart_EventScript_Man::
 	msgbox MauvilleCity_Mart_Text_DecisionsDetermineBattle, MSGBOX_NPC
 	end
 
-MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats:
-	.string "There are items that temporarily\n"
-	.string "elevate the stats of POKéMON.\p"
-	.string "The ones I know you use in battle\n"
-	.string "are X ATTACK and X DEFEND…\p"
-	.string "I do believe that there are others\n"
-	.string "like them.$"
+MauvilleCity_Mart_Text_PartyFullOfPickupPokemon:
+	.string "I have a party full of Pokémon all\n"
+	.string "with the Pickup Ability.\p"
+	.string "Winning a battle gives each of them a\n"
+	.string "10% chance to pick a random item up.\p"
+	.string "They aren't high enough level to pick\n"
+	.string "up anything too valuable though…$"
 
 MauvilleCity_Mart_Text_DecisionsDetermineBattle:
-	.string "Use a certain move, or use an item\n"
-	.string "instead…\p"
-	.string "The TRAINER's decisions determine how\n"
+	.string "Use an attacking move to deal damage,\n"
+	.string "or use a status move to set up…\p"
+	.string "The Trainer's decisions determine how\n"
 	.string "battles turn out, I think.$"
 

@@ -127,7 +127,6 @@ FarawayIsland_Interior_EventScript_Mew::
 	special DestroyMewEmergingGrassSprite
 	delay 40
 	waitmoncry
-	@ seteventmon SPECIES_MEW, 30
 	createmon 1, 0, SPECIES_MEW, 30, move1=MOVE_POUND, move2=MOVE_REFLECT_TYPE, move3=MOVE_ANCIENT_POWER, move4=MOVE_METRONOME
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle

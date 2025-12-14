@@ -418,9 +418,9 @@ static const u16 sExeggutorFormSpeciesIdTable[] = {
 static const u16 sMarowakFormSpeciesIdTable[] = {
 #if P_ALOLAN_FORMS
     SPECIES_MAROWAK_ALOLA,
-    SPECIES_MAROWAK,
     SPECIES_MAROWAK_ALOLA_TOTEM,
 #endif
+    SPECIES_MAROWAK,
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_CUBONE
@@ -1510,18 +1510,18 @@ static const u16 sAegislashFormSpeciesIdTable[] = {
 
 #if P_FAMILY_GOOMY
 static const u16 sSliggooFormSpeciesIdTable[] = {
+    SPECIES_SLIGGOO,
 #if P_HISUIAN_FORMS
     SPECIES_SLIGGOO_HISUI,
 #endif
-    SPECIES_SLIGGOO,
     FORM_SPECIES_END,
 };
 
 static const u16 sGoodraFormSpeciesIdTable[] = {
+    SPECIES_GOODRA,
 #if P_HISUIAN_FORMS
     SPECIES_GOODRA_HISUI,
 #endif
-    SPECIES_GOODRA,
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_GOOMY

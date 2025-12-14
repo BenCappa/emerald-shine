@@ -35,7 +35,6 @@ TerraCave_End_EventScript_Groudon::
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_TERRA_CAVE_GROUDON
-	@ setwildbattle SPECIES_GROUDON, 60, ITEM_RED_ORB
 	createmon 1, 0, SPECIES_GROUDON, 60, ITEM_RED_ORB, move1=MOVE_LAVA_PLUME, move2=MOVE_REST, move3=MOVE_FISSURE, move4=MOVE_PRECIPICE_BLADES
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	setflag FLAG_NO_RUNNING

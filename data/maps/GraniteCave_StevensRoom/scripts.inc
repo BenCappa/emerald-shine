@@ -26,10 +26,6 @@ GraniteCave_StevensRoom_EventScript_Steven::
 	msgbox GraniteCave_StevensRoom_Text_RegisteredSteven, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
-	delay 30
-	setflag FLAG_REGISTERED_STEVEN_POKENAV
-	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
-	closemessage
 	applymovement LOCALID_GRANITE_CAVE_CECE, GraniteCave_StevensRoom_Movement_CeceMoveToLeft
 	applymovement LOCALID_GRANITE_CAVE_KIT, GraniteCave_StevensRoom_Movement_KitMoveToRight
 	call_if_eq VAR_FACING, DIR_NORTH, GraniteCave_StevensRoom_EventScript_StevenExitNorth
@@ -151,8 +147,8 @@ GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
 	.string "… … … … … …$"
 
 GraniteCave_StevensRoom_Text_RegisteredSteven:
-	.string "Registered STEVEN\n"
-	.string "in the POKéNAV.$"
+	.string "Registered Steven\n"
+	.string "in the PokéNav.$"
 
 GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
 	.string "Now, I've got to hurry along.$"
@@ -168,4 +164,3 @@ GraniteCave_StevensRoom_Text_Cece:
 GraniteCave_StevensRoom_Text_Kit:
 	.string "???: I'm honestly just here because I'll\n"
 	.string "do whatever my sister is doing.$"
-

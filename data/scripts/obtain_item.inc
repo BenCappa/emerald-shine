@@ -22,9 +22,9 @@ EventScript_BufferPocketNameAndTryFanfare::
 	case POCKET_MEDICINE,     EventScript_BufferMedicinePocket
 	case POCKET_POKE_BALLS,   EventScript_BufferPokeballsPocket
 	case POCKET_BATTLE_ITEMS, EventScript_BufferBattleItemsPocket
+	case POCKET_TM_HM,        EventScript_BufferTMHMsPocket
 	case POCKET_BERRIES,      EventScript_BufferBerriesPocket
 	case POCKET_TREASURES,    EventScript_BufferTreasuresPocket
-	case POCKET_TM_HM,        EventScript_BufferTMHMsPocket
 	case POCKET_MEGA_STONES,  EventScript_BufferMegaStonesPocket
 	case POCKET_KEY_ITEMS,    EventScript_BufferKeyItemsPocket
 	end
@@ -157,8 +157,8 @@ EventScript_PickUpItem::
 	waitfanfare
 	waitmessage
 	bufferitemnameplural STR_VAR_2, VAR_0x8004, VAR_0x8005
-	pyramid_inchallenge
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PutBattlePyramidItemInBag
+	pyramid_getlocation
+	goto_if_eq VAR_RESULT, PYRAMID_LOCATION_FLOOR, EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdescription
 	return

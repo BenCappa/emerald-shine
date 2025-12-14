@@ -54,7 +54,7 @@ Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil::
 	end
 
 Route114_FossilManiacsTunnel_Text_LookInDesertForFossils:
-	.string "I'm the Fossil MANIAC…\n"
+	.string "I'm the Fossil Maniac…\n"
 	.string "I'm a nice guy who loves Fossils…\p"
 	.string "Do you want a Fossil?\p"
 	.string "But the Fossils around these parts all\n"
@@ -69,7 +69,7 @@ Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils:
 	.string "That's so nice… It's so dreamy…\p"
 	.string "What are you going to do with that\n"
 	.string "Fossil?\p"
-	.string "From what I've heard, DEVON is doing\n"
+	.string "From what I've heard, DevCo is doing\n"
 	.string "research on reviving Pokémon from\l"
 	.string "Fossils…\p"
 	.string "I love my Fossils, so I would never\n"

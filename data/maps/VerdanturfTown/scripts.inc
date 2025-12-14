@@ -62,15 +62,14 @@ VerdanturfTown_EventScript_RusturfTunnelSign::
 	end
 
 VerdanturfTown_Text_ManTryingToDigTunnel:
-	.string "My papa told me.\p"
-	.string "He says this tunnel is full of\n"
-	.string "timid POKéMON.\p"
-	.string "They get all scared of loud noise and\n"
-	.string "make a big uproar.\p"
-	.string "So they had to stop the big tunnel\n"
-	.string "project.\p"
-	.string "But there's one man. He's trying to dig\n"
-	.string "the tunnel by himself!$"
+	.string "My papa told me DevCo was trying to\n"
+	.string "do a big tunnel project here once.\p"
+	.string "He told me that the tunnel is home to\n"
+	.string "a lot of Pokémon that don't much like\l"
+	.string "all the digging machines so they had\l"
+	.string "to abandon the whole project.\p"
+	.string "But there's one man still trying to dig\n"
+	.string "the tunnel all by himself!$"
 
 VerdanturfTown_Text_ManDugTunnelForLove:
 	.string "There was a man who dug a tunnel for\n"
@@ -85,25 +84,25 @@ VerdanturfTown_Text_AirCleanHere:
 	.string "frail and sickly people.$"
 
 VerdanturfTown_Text_MakeBattleTentDebut:
-	.string "My POKéMON and I, we've been riding\n"
+	.string "My Pokémon and I, we've been riding\n"
 	.string "a hot winning streak.\p"
-	.string "So I decided to make my BATTLE TENT\n"
+	.string "So I decided to make my Battle Tent\n"
 	.string "debut in this town.$"
 
 VerdanturfTown_Text_GuyTryingToBustThroughCave:
 	.string "Did you see the cave next to the\n"
-	.string "POKéMON MART?\p"
+	.string "Pokémon Mart?\p"
 	.string "There's a guy in there who's trying to\n"
 	.string "bust up boulders so he can bust out\l"
 	.string "through to the other side.\p"
 	.string "It'd be great if we could go through…\n"
-	.string "It'll make it easy to visit RUSTBORO.$"
+	.string "It'll make it easy to visit Rustboro.$"
 
 VerdanturfTown_Text_EasyToGetToRustboroNow:
-	.string "That cave next to the POKéMON MART\n"
+	.string "That cave next to the Pokémon Mart\n"
 	.string "is now a tunnel to the other side.\p"
 	.string "It's great--it's easy to go shop for\n"
-	.string "new DEVON products in RUSTBORO now.$"
+	.string "new DevCo products in Rustboro now.$"
 
 VerdanturfTown_Text_TownSign:
 	.string "VERDANTURF TOWN\p"
@@ -119,7 +118,7 @@ VerdanturfTown_Text_BattleTentSign:
 
 VerdanturfTown_Text_RusturfTunnelSign:
 	.string "RUSTURF TUNNEL\n"
-	.string "“Linking RUSTBORO and VERDANTURF\p"
+	.string "“Linking Rustboro and Verdanturf\p"
 	.string "“The tunnel project has been\n"
 	.string "canceled.”$"
 

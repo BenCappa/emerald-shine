@@ -396,8 +396,8 @@ MossdeepCity_SpaceCenter_1F_Text_Grunt4Defeat:
 MossdeepCity_SpaceCenter_1F_Text_Grunt4PostBattle:
 	.string "What are we going to do with\n"
 	.string "the rocket fuel?\p"
-	.string "How would I know?\n"
-	.string "Ask our leader upstairs!$"
+	.string "Beats me, I mean it's not like\n"
+	.string "we're called Team Rocket!$"
 
 MossdeepCity_SpaceCenter_1F_Text_Grunt2Intro:
 	.string "Our leader said no one, but no one,\n"
@@ -421,4 +421,5 @@ MossdeepCity_SpaceCenter_1F_Text_MagmaIntentToStealNotice:
 	.string "“Please don't try to stop us.\n"
 	.string "We will take the fuel no matter what.\p"
 	.string "“Let there be more land!\n"
-	.string "                                          TEAM MAGMA”$"
+	.string "XOXO\l"
+	.string "                                        -TEAM MAGMA”$"

@@ -156,16 +156,16 @@ static const u16 sPrizeListAuspiciousArmor[] = {ITEM_AUSPICIOUS_ARMOR, ITEM_PP_U
 static const u16 sPrizeListMaliciousArmor[]  = {ITEM_MALICIOUS_ARMOR,  ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
 static const u16 sPrizeListBeastBall[]       = {ITEM_BEAST_BALL,       ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
 
-static const u16 sPrizeListRareCandy2[]   = {ITEM_RARE_CANDY,    ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
-static const u16 sPrizeListLuxuryBall2[]  = {ITEM_LUXURY_BALL,   ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
-static const u16 sPrizeListMaxRevive2[]   = {ITEM_MAX_REVIVE,    ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
-static const u16 sPrizeListMaxEther2[]    = {ITEM_ETHER,         ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
-static const u16 sPrizeListElixir2[]      = {ITEM_ELIXIR,        ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
-static const u16 sPrizeListMaxMushrooms[] = {ITEM_MAX_MUSHROOMS, ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
-static const u16 sPrizeListAbilityPatch[] = {ITEM_ABILITY_PATCH, ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
-static const u16 sPrizeListSkullFossil[]  = {ITEM_SKULL_FOSSIL,  ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
-static const u16 sPrizeListSailFossil[]   = {ITEM_SAIL_FOSSIL,   ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
-static const u16 sPrizeListMasterBall[]   = {ITEM_MASTER_BALL,   ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
+static const u16 sPrizeListRareCandy2[]      = {ITEM_RARE_CANDY,       ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
+static const u16 sPrizeListLuxuryBall2[]     = {ITEM_LUXURY_BALL,      ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
+static const u16 sPrizeListMaxRevive2[]      = {ITEM_MAX_REVIVE,       ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
+static const u16 sPrizeListMaxEther2[]       = {ITEM_ETHER,            ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
+static const u16 sPrizeListElixir2[]         = {ITEM_ELIXIR,           ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
+static const u16 sPrizeListMaxMushrooms[]    = {ITEM_MAX_MUSHROOMS,    ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
+static const u16 sPrizeListAbilityPatch[]    = {ITEM_ABILITY_PATCH,    ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
+static const u16 sPrizeListSkullFossil[]     = {ITEM_SKULL_FOSSIL,     ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
+static const u16 sPrizeListSailFossil[]      = {ITEM_SAIL_FOSSIL,      ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
+static const u16 sPrizeListMasterBall[]      = {ITEM_MASTER_BALL,      ITEM_PP_UP, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_REPEL, ITEM_GREAT_BALL};
 
 static const u16 *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
 {
@@ -309,7 +309,7 @@ static u8 GetFloorId(void)
     return gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
 }
 
-u8 GetTrainerHillOpponentClass(u16 trainerId)
+enum TrainerClassID GetTrainerHillOpponentClass(u16 trainerId)
 {
     u8 id = trainerId - 1;
 
@@ -707,17 +707,17 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
     return TRUE;
 }
 
-static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 floorWidth) // floorWidth is always 16
+static u16 GetMapDataForFloor(u8 floorId, u32 x, u32 y, u32 floorWidth) // floorWidth is always 16
 {
     bool8 impassable;
-    u16 metatile;
+    u16 metatileId;
     u16 elevation;
 
     impassable = (sHillData->floors[floorId].map.collisionData[y] >> (15 - x) & 1);
-    metatile = sHillData->floors[floorId].map.metatileData[floorWidth * y + x] + NUM_METATILES_IN_PRIMARY;
-    elevation = 3 << MAPGRID_ELEVATION_SHIFT;
+    metatileId = sHillData->floors[floorId].map.metatileData[floorWidth * y + x] + NUM_METATILES_IN_PRIMARY;
+    elevation = PACK_ELEVATION(3);
 
-    return ((impassable << MAPGRID_COLLISION_SHIFT) & MAPGRID_COLLISION_MASK) | elevation | (metatile & MAPGRID_METATILE_ID_MASK);
+    return PACK_COLLISION(impassable) | elevation | PACK_METATILE(metatileId);
 }
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
@@ -762,7 +762,7 @@ void GenerateTrainerHillFloorLayout(u16 *mapArg)
     for (y = 0; y < HILL_FLOOR_HEIGHT_MAIN; y++)
     {
         for (x = 0; x < HILL_FLOOR_WIDTH; x++)
-            dst[x] = GetMetatileForFloor(mapId, x, y, HILL_FLOOR_WIDTH);
+            dst[x] = GetMapDataForFloor(mapId, x, y, HILL_FLOOR_WIDTH);
         dst += 31;
     }
 
@@ -935,7 +935,7 @@ void FillHillTrainersParties(void)
 // This function is unused, but my best guess is
 // it was supposed to return AI scripts for trainer
 // hill trainers.
-u32 GetTrainerHillAIFlags(void)
+u64 GetTrainerHillAIFlags(void)
 {
     return (AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
 }

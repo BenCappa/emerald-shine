@@ -161,13 +161,7 @@
       "flag": "FLAG_ITEM_SAFARI_ZONE_NORTH_STRANGE_SOUVENIR"
     }
   ],
-  "warp_events": [
-
-  ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
 }

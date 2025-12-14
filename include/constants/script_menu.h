@@ -150,26 +150,25 @@
 #define STDSTRING_SMART2           12
 #define STDSTRING_TOUGH2           13
 #define STDSTRING_ITEMS            14
-#define STDSTRING_KEYITEMS         15
+#define STDSTRING_MEDICINE         15
 #define STDSTRING_POKEBALLS        16
-#define STDSTRING_TMHMS            17
+#define STDSTRING_BATTLEITEMS      17
 #define STDSTRING_BERRIES          18
-#define STDSTRING_SINGLE           19
-#define STDSTRING_DOUBLE           20
-#define STDSTRING_MULTI            21
-#define STDSTRING_MULTI_LINK       22
-#define STDSTRING_BATTLE_TOWER     23
-#define STDSTRING_BATTLE_DOME      24
-#define STDSTRING_BATTLE_FACTORY   25
-#define STDSTRING_BATTLE_PALACE    26
-#define STDSTRING_BATTLE_ARENA     27
-#define STDSTRING_BATTLE_PIKE      28
-#define STDSTRING_BATTLE_PYRAMID   29
-
-#define STDSTRING_MEDICINE         30
-#define STDSTRING_BATTLEITEMS      31
-#define STDSTRING_TREASURES        32
-#define STDSTRING_MEGASTONES       33
+#define STDSTRING_KEYITEMS         19
+#define STDSTRING_MEGASTONES       20
+#define STDSTRING_TMHMS            21
+#define STDSTRING_TREASURES        22
+#define STDSTRING_SINGLE           23
+#define STDSTRING_DOUBLE           24
+#define STDSTRING_MULTI            25
+#define STDSTRING_MULTI_LINK       26
+#define STDSTRING_BATTLE_TOWER     27
+#define STDSTRING_BATTLE_DOME      28
+#define STDSTRING_BATTLE_FACTORY   29
+#define STDSTRING_BATTLE_PALACE    30
+#define STDSTRING_BATTLE_ARENA     31
+#define STDSTRING_BATTLE_PIKE      32
+#define STDSTRING_BATTLE_PYRAMID   33
 
 // Dynamic Multichoice Callbacks
 

@@ -3919,6 +3919,7 @@ static const u16 sDeerlingEggMoveLearnset[] = {
     MOVE_SLEEP_TALK,
     MOVE_SYNTHESIS,
     MOVE_WORRY_SEED,
+    MOVE_WEATHER_BALL,
     MOVE_UNAVAILABLE,
 };
 #endif //P_FAMILY_DEERLING

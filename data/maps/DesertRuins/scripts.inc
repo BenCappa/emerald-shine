@@ -75,6 +75,10 @@ DesertRuins_EventScript_Regirock::
 
 AncientTomb_EventScript_DefeatedRegirock::
 	setflag FLAG_DAILY_BATTLED_REGIROCK
+	goto Common_EventScript_RemoveStaticPokemon
+	end
+
+DesertRuins_EventScript_RanFromRegirock::
 	setvar VAR_0x8004, SPECIES_REGIROCK
 	goto Common_EventScript_LegendaryFlewAway
 	end

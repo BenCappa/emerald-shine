@@ -80,7 +80,7 @@ SootopolisCity_Gym_1F_Movement_FallThroughIce:
 	step_end
 
 SootopolisCity_Gym_1F_EventScript_Rheannon::
-	trainerbattle_single TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_RheannonIntro, SootopolisCity_Gym_1F_Text_RheannonDefeat, SootopolisCity_Gym_1F_EventScript_RheannonDefeated, NO_MUSIC
+	trainerbattle_single TRAINER_RHEANNON_1, SootopolisCity_Gym_1F_Text_RheannonIntro, SootopolisCity_Gym_1F_Text_RheannonDefeat, SootopolisCity_Gym_1F_EventScript_RheannonDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, SootopolisCity_Gym_1F_EventScript_RheannonRematch
 	goto_if_unset FLAG_RECEIVED_TM_SCALD, SootopolisCity_Gym_1F_EventScript_GiveScald2
@@ -97,8 +97,8 @@ SootopolisCity_Gym_1F_EventScript_RheannonDefeated::
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	setflag FLAG_BADGE08_GET
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
-	setflag FLAG_HIDE_SOOTOPOLIS_CITY_KIT
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_KIT
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 6
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
 	setvar VAR_0x8008, 8
@@ -106,7 +106,12 @@ SootopolisCity_Gym_1F_EventScript_RheannonDefeated::
 	call SootopolisCity_Gym_1F_EventScript_GiveScald
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_JUAN_MATCH_CALL
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox SootopolisCity_Gym_1F_Text_RegisteredRheannon, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_ENABLE_RHEANNON_MATCH_CALL
 	release
 	end
 
@@ -131,7 +136,7 @@ SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge::
 	end
 
 SootopolisCity_Gym_1F_EventScript_RheannonRematch::
-	trainerbattle_rematch_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_RheannonPreRematch, SootopolisCity_Gym_1F_Text_RheannonRematchDefeat, SootopolisCity_Gym_1F_Text_RheannonRematchNeedTwoMons
+	trainerbattle_rematch_double TRAINER_RHEANNON_1, SootopolisCity_Gym_1F_Text_RheannonPreRematch, SootopolisCity_Gym_1F_Text_RheannonRematchDefeat, SootopolisCity_Gym_1F_Text_RheannonRematchNeedTwoMons
 	msgbox SootopolisCity_Gym_1F_Text_RheannonPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -176,18 +181,20 @@ SootopolisCity_Gym_1F_Text_GymGuideAdvice:
 	.string "Sootopolis's Gym Leader Rheannon is\n"
 	.string "a master of Water-type Pokémon.\p"
 	.string "And, to get to her, an icy floor\n"
-	.string "will hamper your progress…\p"
-	.string "Listen, I'm sorry, but that's all the\n"
-	.string "advice that I have for you.\p"
-	.string "The rest of the way, you have to\n"
-	.string "go for it yourself!$"
+	.string "will hamper your progress.\p"
+	.string "If you fall under, you'll have to deal\n"
+	.string "with her harem of sapphic followers…\p"
+	.string "This is your last Gym challenge so\n"
+	.string "give it your best!$"
 
 SootopolisCity_Gym_1F_Text_GymGuidePostVictory:
 	.string "Yow! You've beaten Rheannon, who\n"
 	.string "was supposedly the best in all Hoenn!\p"
 	.string "Okay! Check out your Trainer Card.\p"
 	.string "If you've gotten all the Badges, you're\n"
-	.string "set for the Pokémon League challenge!$"
+	.string "set for the Pokémon League challenge!\p"
+	.string "Thank you for letting me help you on\n"
+	.string "this journey. It's been a pleasure!$"
 
 SootopolisCity_Gym_1F_Text_RheannonIntro:
 	.string "Rhen: You finally made it.\p"
@@ -230,7 +237,12 @@ SootopolisCity_Gym_1F_Text_ExplainScald:
 	.string "The Technical Machine I gave you\n"
 	.string "contains a nifty move called Scald.\p"
 	.string "In use, it will occasionally burn\n"
-	.string "the target with a boiling splash.$"
+	.string "the target with a boiling splash.\p"
+	.string "… … … … … …$"
+
+SootopolisCity_Gym_1F_Text_RegisteredRheannon:
+	.string "Registered Gym Leader Rheannon\n"
+	.string "in the PokéNav.$"
 
 SootopolisCity_Gym_1F_Text_RheannonPostBattle:
 	.string "The Trainers who have gathered all\n"
@@ -281,3 +293,4 @@ SootopolisCity_Gym_1F_Text_RheannonRematchNeedTwoMons:
 	.string "You only have one Pokémon with you.\p"
 	.string "When you're really ready return with\n"
 	.string "two, preferably more, Pokémon, please.$"
+

@@ -46,15 +46,15 @@ PetalburgCity_Gym_EventScript_MoveWallyToEntrance::
 	return
 
 PetalburgCity_Gym_EventScript_MoveMichealToEntrance::
-	setobjectxyperm LOCALID_PETALBURG_GYM_NORMAN, 4, 107
+	setobjectxyperm LOCALID_PETALBURG_GYM_MICHEAL, 4, 107
 	return
 
 PetalburgCity_Gym_EventScript_CheckMichealForRematch::
-	setorcopyvar VAR_TRAINER_BATTLE_OPPONENT_A, TRAINER_NORMAN_1
+	setorcopyvar VAR_TRAINER_BATTLE_OPPONENT_A, TRAINER_MICHEAL_1
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_DontMoveMichealToFront
 	goto_if_eq VAR_PETALBURG_GYM_STATE, 8, PetalburgCity_Gym_EventScript_DontMoveMichealToFront
-	setobjectxyperm LOCALID_PETALBURG_GYM_NORMAN, 4, 107
+	setobjectxyperm LOCALID_PETALBURG_GYM_MICHEAL, 4, 107
 	return
 
 PetalburgCity_Gym_EventScript_DontMoveMichealToFront::
@@ -192,7 +192,7 @@ PetalburgCity_Gym_EventScript_BeginWallyTutorial::
 	end
 
 PetalburgCity_Gym_EventScript_WallyArriveSouth::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PETALBURG_GYM_WALLY, PetalburgCity_Gym_Movement_WallyArrive
 	waitmovement 0
 	return
@@ -200,20 +200,20 @@ PetalburgCity_Gym_EventScript_WallyArriveSouth::
 PetalburgCity_Gym_EventScript_WallyArriveNorth::
 	applymovement LOCALID_PETALBURG_GYM_WALLY, PetalburgCity_Gym_Movement_WallyArriveNorth
 	waitmovement 0
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_WallyArriveWestEast::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PETALBURG_GYM_WALLY, PetalburgCity_Gym_Movement_WallyArrive
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_ExitGymWithWallySouth::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PETALBURG_GYM_WALLY, PetalburgCity_Gym_Movement_WallyExitSouthWest
 	applymovement LOCALID_PLAYER, PetalburgCity_Gym_Movement_PlayerExitWithWallySouth
 	waitmovement 0
@@ -238,45 +238,45 @@ PetalburgCity_Gym_EventScript_ExitGymWithWallyEast::
 	return
 
 PetalburgCity_Gym_EventScript_MichealAddressPlayerSouth::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_MichealAddressPlayerNorth::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_MichealAddressPlayerWest::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_MichealAddressPlayerEast::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_MichealAddressWallySouth::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_MichealAddressWallyNorth::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_MichealAddressWallyWest::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_MichealAddressWallyEast::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -315,7 +315,7 @@ PetalburgCity_Gym_EventScript_MichealFaceDoorSouth::
 
 @ For all other MichealFaceDoorX, Micheal is already facing the door from MichealAddressWallyX
 PetalburgCity_Gym_EventScript_MichealFaceDoorNorth::
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -340,7 +340,7 @@ PetalburgCity_Gym_EventScript_GiveSwordsDance2::
 	end
 
 PetalburgCity_Gym_EventScript_MichealRematch::
-	trainerbattle_rematch_double TRAINER_NORMAN_1, PetalburgCity_Gym_Text_MichealPreRematch, PetalburgCity_Gym_Text_MichealRematchDefeat, PetalburgCity_Gym_Text_MichealRematchNeedTwoMons
+	trainerbattle_rematch_double TRAINER_MICHEAL_1, PetalburgCity_Gym_Text_MichealPreRematch, PetalburgCity_Gym_Text_MichealRematchDefeat, PetalburgCity_Gym_Text_MichealRematchNeedTwoMons
 	msgbox PetalburgCity_Gym_Text_MichealPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -369,7 +369,7 @@ PetalburgCity_Gym_EventScript_GiveEnigmaBerry::
 
 PetalburgCity_Gym_EventScript_MichealBattle::
 	msgbox PetalburgCity_Gym_Text_MichealIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_NORMAN_1, PetalburgCity_Gym_Text_MichealDefeat
+	trainerbattle_no_intro TRAINER_MICHEAL_1, PetalburgCity_Gym_Text_MichealDefeat
 	message PetalburgCity_Gym_Text_ReceivedKnuckleBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
@@ -471,7 +471,7 @@ PetalburgCity_Gym_EventScript_WallysDadApproachPlayerNorth::
 	applymovement LOCALID_PETALBURG_GYM_WALLYS_DAD, PetalburgCity_Gym_Movement_WallysDadApproachPlayerNorth
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
@@ -479,7 +479,7 @@ PetalburgCity_Gym_EventScript_WallysDadApproachPlayerEast::
 	applymovement LOCALID_PETALBURG_GYM_WALLYS_DAD, PetalburgCity_Gym_Movement_WallysDadApproachPlayerEast
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
@@ -487,13 +487,13 @@ PetalburgCity_Gym_EventScript_WallysDadApproachPlayerWest::
 	applymovement LOCALID_PETALBURG_GYM_WALLYS_DAD, PetalburgCity_Gym_Movement_WallysDadApproachPlayerWest
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_ExitGymWithWallysDadNorth::
 	applymovement LOCALID_PETALBURG_GYM_WALLYS_DAD, PetalburgCity_Gym_Movement_WallysDadExitNorth
-	applymovement LOCALID_PETALBURG_GYM_NORMAN, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PETALBURG_GYM_MICHEAL, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PLAYER, PetalburgCity_Gym_Movement_PlayerExitWithWallysDadNorth
 	waitmovement 0
 	return
@@ -1180,14 +1180,14 @@ PetalburgCity_Gym_Text_DadPlayerGoWithWally:
 PetalburgCity_Gym_Text_IllLoanYouMyZigzagoon:
 	.string "Here, Wally, I can at least loan you\n"
 	.string "a Pokémon.\p"
-	.string "Wally received a ZIGZAGOON!$"
+	.string "Wally received a Zigzagoon!$"
 
 PetalburgCity_Gym_Text_WallyThankYouAndDadGivesPokeBall:
 	.string "Wally: Oh, wow!\n"
 	.string "A Pokémon!\p"
-	.string "Mike: Hm. I'll give you a POKé BALL, too.\n"
+	.string "Mike: Hm. I'll give you a Poké Ball, too.\n"
 	.string "Good luck!\p"
-	.string "Wally received a POKé BALL!$"
+	.string "Wally received a Poké Ball!$"
 
 PetalburgCity_Gym_Text_WallyOhWowThankYou:
 	.string "Wally: Oh, wow!\n"
@@ -1587,6 +1587,6 @@ PetalburgCity_Gym_Text_MichealRematchNeedTwoMons:
 	.string "Do you only have one Pokémon that's in\n"
 	.string "fighting condition?\p"
 	.string "I know you think you're hot stuff but\n"
-	.string "I'm not battling you until you come\n"
+	.string "I'm not battling you until you come\l"
 	.string "back with at least two Pokémon.$"
 

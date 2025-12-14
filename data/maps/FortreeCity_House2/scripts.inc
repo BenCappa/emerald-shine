@@ -92,3 +92,4 @@ FortreeCity_House2_Text_ExplainAmnesia:
 FortreeCity_House2_Text_YouGuessedWrong:
 	.string "You guessed wrong, but don't fret.\n"
 	.string "Remember the pattern and try again.$"
+

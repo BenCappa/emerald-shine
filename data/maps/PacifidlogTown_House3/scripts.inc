@@ -5,7 +5,7 @@ PacifidlogTown_House3_EventScript_Trader::
 	lock
 	faceplayer
 	goto_if_set FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED, PacifidlogTown_House3_EventScript_TradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_HORSEA
+	setvar VAR_0x8008, INGAME_TRADE_DRATINI
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
@@ -111,3 +111,4 @@ PacifidlogTown_House3_Text_YouSeeTruePotential:
 	.string "You obviously see the true potential\n"
 	.string "that Dragon Pokémon can achieve.\p"
 	.string "Please, take this$"
+

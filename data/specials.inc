@@ -137,10 +137,10 @@ gSpecials::
 	def_special IsDecorationCategoryFull
 	def_special TraderShowDecorationMenu
 	def_special TraderDoDecorationTrade
-	def_special GetSeedotSizeRecordInfo
-	def_special CompareSeedotSize
-	def_special GetLotadSizeRecordInfo
-	def_special CompareLotadSize
+	def_special GetSilcoonSizeRecordInfo
+	def_special CompareSilcoonSize
+	def_special GetCascoonSizeRecordInfo
+	def_special CompareCascoonSize
 	def_special TryPutNameRaterShowOnTheAir
 	def_special BufferMonNickname
 	def_special IsMonOTIDNotPlayers
@@ -190,6 +190,7 @@ gSpecials::
 	def_special UpdateTrainerFanClubGameClear
 	def_special Script_TryGainNewFanFromCounter
 	def_special RockSmashWildEncounter
+	def_special HeadbuttWildEncounter
 	def_special GabbyAndTyGetBattleNum
 	def_special GabbyAndTyAfterInterview
 	def_special GabbyAndTyBeforeInterview
@@ -541,7 +542,6 @@ gSpecials::
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
-	def_special HeadbuttWildEncounter
 	def_special TrySpecialOverworldEvo
 	def_special GetNumberSprayStrength
 	def_special GetSprayId
@@ -564,4 +564,5 @@ gSpecials::
 	def_special UseBlankMessageToCancelPokemonPic
 	def_special EnterCode
 	def_special GetCodeFeedback
+	def_special SetHiddenNature
 	def_special CreateWonderTradePokemon

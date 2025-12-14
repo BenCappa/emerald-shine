@@ -30,18 +30,18 @@ LittlerootTown_MaysHouse_1F_OnTransition:
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs::
-	setobjectxyperm LOCALID_PLAYERS_HOUSE_1F_GRAM, 2, 4
-	setobjectmovementtype LOCALID_PLAYERS_HOUSE_1F_GRAM, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_PLAYERS_HOUSE_1F_MOM, 2, 4
+	setobjectmovementtype LOCALID_PLAYERS_HOUSE_1F_MOM, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV::
-	setobjectxyperm LOCALID_PLAYERS_HOUSE_1F_GRAM, 6, 5
-	setobjectmovementtype LOCALID_PLAYERS_HOUSE_1F_GRAM, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_PLAYERS_HOUSE_1F_MOM, 6, 5
+	setobjectmovementtype LOCALID_PLAYERS_HOUSE_1F_MOM, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor::
-	setobjectxyperm LOCALID_PLAYERS_HOUSE_1F_GRAM, 1, 8
-	setobjectmovementtype LOCALID_PLAYERS_HOUSE_1F_GRAM, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_PLAYERS_HOUSE_1F_MOM, 1, 8
+	setobjectmovementtype LOCALID_PLAYERS_HOUSE_1F_MOM, MOVEMENT_TYPE_FACE_UP
 	return
 
 @ Many of the below scripts have no gender check because they assume youre in the correct house
@@ -58,7 +58,7 @@ LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock::
 	msgbox PlayersHouse_1F_Text_GoSetTheClock, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs
-	applymovement LOCALID_PLAYERS_HOUSE_1F_GRAM, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs
+	applymovement LOCALID_PLAYERS_HOUSE_1F_MOM, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs
 	waitmovement 0
 	warp MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 1, 1
 	waitstate
@@ -71,7 +71,7 @@ LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs:
 
 LittlerootTown_MaysHouse_1F_EventScript_EnterHouseMovingIn::
 	lockall
-	setvar VAR_0x8004, LOCALID_PLAYERS_HOUSE_1F_GRAM
+	setvar VAR_0x8004, LOCALID_PLAYERS_HOUSE_1F_MOM
 	setvar VAR_0x8005, FEMALE
 	goto PlayersHouse_1F_EventScript_EnterHouseMovingIn
 	end
@@ -79,19 +79,19 @@ LittlerootTown_MaysHouse_1F_EventScript_EnterHouseMovingIn::
 LittlerootTown_MaysHouse_1F_EventScript_PetalburgGymReport::
 	lockall
 	setvar VAR_0x8004, FEMALE
-	setvar VAR_0x8005, LOCALID_PLAYERS_HOUSE_1F_GRAM
+	setvar VAR_0x8005, LOCALID_PLAYERS_HOUSE_1F_MOM
 	goto PlayersHouse_1F_EventScript_PetalburgGymReportFemale
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor::
 	lockall
 	playse SE_PIN
-	applymovement LOCALID_RIVALS_HOUSE_1F_SISTER, Common_Movement_ExclamationMark
+	applymovement LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RIVALS_HOUSE_1F_SISTER, Common_Movement_Delay48
+	applymovement LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	applymovement LOCALID_RIVALS_HOUSE_1F_SISTER, LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach
+	applymovement LOCALID_RIVALS_HOUSE_1F_MOM, LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach
 	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox RivalsHouse_1F_Text_OhYoureTheNewNeighbor, MSGBOX_DEFAULT
@@ -145,7 +145,7 @@ RivalsHouse_1F_EventScript_RivalSibling::
 
 LittlerootTown_MaysHouse_1F_EventScript_GoSeeRoom::
 	lockall
-	setvar VAR_0x8004, LOCALID_PLAYERS_HOUSE_1F_GRAM
+	setvar VAR_0x8004, LOCALID_PLAYERS_HOUSE_1F_MOM
 	setvar VAR_0x8005, FEMALE
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
@@ -317,41 +317,43 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 	step_end
 
 RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
-	.string "Um, excuse me. Who are you?\p"
+	.string "Oh, hello. And you are?\p"
 	.string "… … … … … … … … …\n"
 	.string "… … … … … … … … …\p"
 	.string "Oh, you're {PLAYER}{KUN}, our new next-door\n"
 	.string "neighbor! Hi!\p"
-	.string "I'm Jillian, Prof. Mike's daughter.\n"
-	.string "The child he actually loves.\p"
-	.string "Actually, you should absolutely talk\n"
-	.string "to my brother. He's about your age and\l"
-	.string "in desperate need of friends.\p"
-	.string "He's probably upstairs, doing something\n"
-	.string "on his computer.$"
+	.string "We have a {STR_VAR_1} about the same\n"
+	.string "age as you.\p"
+	.string "Our {STR_VAR_1} was excited about making\n"
+	.string "a new friend.\p"
+	.string "Our {STR_VAR_1} is upstairs, I think.$"
 
 RivalsHouse_1F_Text_LikeChildLikeFather:
-	.string "Ben's always on his computer. If he's not\n"
-	.string "on it now, it's only a matter of time.$"
+	.string "Like child, like father.\p"
+	.string "My husband is as wild about POKéMON\n"
+	.string "as our child.\p"
+	.string "If he's not at his LAB, he's likely\n"
+	.string "scrabbling about in grassy places.$"
 
 RivalsHouse_1F_Text_TooBusyToNoticeVisit:
-	.string "Ugh, {RIVAL}!\p"
-	.string "I'm sorry he's too obsessed with\n"
-	.string "Pokémon to give you the attention\l"
-	.string "you deserve, {PLAYER}{KUN}.$"
+	.string "That {RIVAL}!\p"
+	.string "I guess our child is too busy with\n"
+	.string "POKéMON to notice that you came\l"
+	.string "to visit, {PLAYER}{KUN}.$"
 
 RivalsHouse_1F_Text_WentOutToRoute103:
-	.string "Oh, {RIVAL} wanted me to tell you\n"
-	.string "that he went to Route 103.\p"
-	.string "I don't know why people keep asking\n"
-	.string "to remember things for them.\l"
-	.string "My memory is literally awful.$"
+	.string "Oh, {RIVAL} went out to ROUTE 103\n"
+	.string "just a little while ago.\p"
+	.string "Like father, like child.\n"
+	.string "{RIVAL} can't stay quietly at home.$"
 
 RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
-	.string "I literally have no clue what my\n"
-	.string "dad and brother do all day.\p"
-	.string "All I know is that it's nerdy\n"
-	.string "and boring as hell.$"
+	.string "I think it's wonderful for people to\n"
+	.string "travel with POKéMON.\p"
+	.string "But you should go home every so often\n"
+	.string "to let your mother know you're okay.\p"
+	.string "She might not say it, but I'm sure she\n"
+	.string "worries about you, {PLAYER}{KUN}.$"
 
 RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "Huh?\n"
@@ -378,27 +380,24 @@ RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "{PLAYER}{KUN}, I'll catch you later!$"
 
 RivalsHouse_1F_Text_BrendanWhoAreYou:
-	.string "Hey! Don't touch that!\n"
+	.string "Hey!\n"
 	.string "You…\p"
 	.string "Who are you?\p"
-	.string "Oh, you're {PLAYER}?\n"
+	.string "Oh, you're {PLAYER}, aren't you?\n"
 	.string "Moved in next door, right?\p"
-	.string "My name's Ben.\n"
+	.string "I didn't know that you're a girl.\p"
+	.string "Dad, PROF. BIRCH, said that our new\n"
+	.string "next-door neighbor is a GYM LEADER's\l"
+	.string "kid, so I assumed you'd be a guy.\p"
+	.string "My name's BRENDAN.\n"
 	.string "So, hi, neighbor!\p"
-	.string "I heard that you're related to a\n"
-	.string "bunch of the new Gym Leaders.\p"
-	.string "So where's your Pokémon?\p"
-	.string "… … … … … … … …\p"
-	.string "What do you mean you don't you have\n"
-	.string "a Pokémon?\p"
+	.string "Huh? Hey, {PLAYER}, don't you have\n"
+	.string "a POKéMON?\p"
 	.string "Do you want me to go catch you one?\p"
-	.string "Wait I know! My dad can give you one!\p"
-	.string "I'm gonna research which local Pokémon\n"
-	.string "would be a good starter and then we\l"
-	.string "can ask to borrow one of my dad's.\p"
-	.string "He wouldn't normally give his Pokémon\n"
-	.string "to just anyone but I'll convince him.\p"
-	.string "I'll meet up with you later, okay?$"
+	.string "Aw, darn, I forgot…\p"
+	.string "I'm supposed to go help my dad catch\n"
+	.string "some wild POKéMON.\p"
+	.string "Some other time, okay?$"
 
 RivalsHouse_1F_Text_DoYouHavePokemon:
 	.string "Hi, neighbor!\p"

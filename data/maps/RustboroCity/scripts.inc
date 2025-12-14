@@ -6,6 +6,9 @@ RustboroCity_MapScripts::
 RustboroCity_OnTransition:
 	setflag FLAG_VISITED_RUSTBORO_CITY
 	call Common_EventScript_SetupRivalGfxId
+	call_if_eq VAR_RUSTBORO_CITY_STATE, 6, RustboroCity_EventScript_HideMapNamePopup
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	goto_if_eq VAR_RUSTBORO_CITY_STATE, 6, RustboroCity_EventScript_PositionScientistForExit
 	end
 
 RustboroCity_EventScript_PositionScientistForExit::
@@ -17,6 +20,10 @@ RustboroCity_EventScript_PositionScientistLeftExit::
 	setobjectxyperm LOCALID_RUSTBORO_SCIENTIST, 11, 15
 	end
 
+RustboroCity_EventScript_HideMapNamePopup::
+	setflag FLAG_HIDE_MAP_NAME_POPUP
+	return
+
 RustboroCity_OnFrame:
 	map_script_2 VAR_RUSTBORO_CITY_STATE, 6, RustboroCity_EventScript_ScientistAddMatchCall
 	.2byte 0
@@ -24,14 +31,103 @@ RustboroCity_OnFrame:
 RustboroCity_EventScript_ScientistAddMatchCall::
 	lockall
 	setvar VAR_ROUTE104_STATE, 1
-	setflag FLAG_RECEIVED_VS_SEEKER
+	applymovement LOCALID_PLAYER, RustboroCity_Movement_PlayerWalkDown
+	waitmovement 0
+	playse SE_EXIT
+	delay 10
+	addobject LOCALID_RUSTBORO_SCIENTIST
+	applymovement LOCALID_RUSTBORO_SCIENTIST, RustboroCity_Movement_ScientistApproachPlayer
+	waitmovement 0
+	playse SE_PIN
+	applymovement LOCALID_RUSTBORO_SCIENTIST, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_RUSTBORO_SCIENTIST, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	waitmovement 0
+	applymovement LOCALID_RUSTBORO_SCIENTIST, RustboroCity_Movement_ScientistWalkInPlaceDown
+	waitmovement 0
+	msgbox RustboroCity_Text_DevelopedNewPokenavFeature, MSGBOX_DEFAULT
+	closemessage
+	setflag FLAG_HAS_MATCH_CALL
+	applymovement LOCALID_RUSTBORO_SCIENTIST, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	playse SE_CLICK
+	delay 10
+	playse SE_CLICK
+	delay 10
+	playse SE_CLICK
+	delay 10
+	playse SE_CLICK
+	delay 20
+	applymovement LOCALID_RUSTBORO_SCIENTIST, Common_Movement_WalkInPlaceFasterDown
+	waitmovement 0
+	msgbox RustboroCity_Text_AddedMatchCallPleaseCallMrStone, MSGBOX_DEFAULT
+	closemessage
+	delay 20
+	goto RustboroCity_EventScript_MatchCallTutorial
+
+RustboroCity_EventScript_PleaseSelectPokenav::
+	msgbox RustboroCity_Text_PleaseSelectPokenav, MSGBOX_DEFAULT
+	closemessage
+	delay 10
 	goto RustboroCity_EventScript_MatchCallTutorial
 
 RustboroCity_EventScript_MatchCallTutorial::
+	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
+	special ScriptMenu_CreateStartMenuForPokenavTutorial
+	waitstate
+	switch VAR_RESULT
+	case 0, RustboroCity_EventScript_PleaseSelectPokenav
+	case 1, RustboroCity_EventScript_PleaseSelectPokenav
+	case 2, RustboroCity_EventScript_PleaseSelectPokenav
+	case 4, RustboroCity_EventScript_PleaseSelectPokenav
+	case 5, RustboroCity_EventScript_PleaseSelectPokenav
+	case 6, RustboroCity_EventScript_PleaseSelectPokenav
+	case 7, RustboroCity_EventScript_PleaseSelectPokenav
+	case MULTI_B_PRESSED, RustboroCity_EventScript_PleaseSelectPokenav
+	special OpenPokenavForTutorial
+	waitstate
+	delay 20
+	msgbox RustboroCity_Text_IdBetterGetBackToWork, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_RUSTBORO_SCIENTIST, RustboroCity_Movement_ScientistLeave
+	waitmovement 0
+	playse SE_EXIT
+	removeobject LOCALID_RUSTBORO_SCIENTIST
 	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
 	setvar VAR_RUSTBORO_CITY_STATE, 7
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	releaseall
 	end
+
+RustboroCity_Movement_ScientistWalkInPlaceDown:
+	walk_in_place_down
+	step_end
+
+RustboroCity_Movement_PlayerWalkDown:
+	walk_down
+	step_end
+
+RustboroCity_Movement_ScientistApproachPlayer:
+	walk_down
+	delay_16
+	step_end
+
+@ Unused
+RustboroCity_Movement_ScientistWalkAroundPlayer:
+	delay_16
+	walk_left
+	walk_down
+	walk_down
+	walk_right
+	walk_in_place_faster_up
+	delay_16
+	step_end
+
+RustboroCity_Movement_ScientistLeave:
+	walk_up
+	step_end
 
 RustboroCity_EventScript_FatMan::
 	lock
@@ -726,7 +822,7 @@ RustboroCity_EventScript_RivalTrigger7::
 RustboroCity_EventScript_RivalEncounter::
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, RustboroCity_EventScript_MayEncounter
-	goto_if_eq VAR_RESULT, FEMALE, RustboroCity_EventScript_BrendanEncounter
+	goto_if_eq VAR_RESULT, FEMALE, RustboroCity_EventScript_BenEncounter
 	end
 
 RustboroCity_EventScript_MayEncounter::
@@ -797,56 +893,65 @@ RustboroCity_EventScript_BattleMayPiplup::
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
-RustboroCity_EventScript_BrendanEncounter::
-	goto_if_set FLAG_DEFEATED_RIVAL_RUSTBORO, RustboroCity_EventScript_BrendanBrineyHint
-	goto_if_set FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_BrendanAskToBattle
+RustboroCity_EventScript_BenEncounter::
+	goto_if_set FLAG_DEFEATED_RIVAL_RUSTBORO, RustboroCity_EventScript_BenBrineyHint
+	goto_if_set FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_BenAskToBattle
 	setflag FLAG_MET_RIVAL_RUSTBORO
+	msgbox RustboroCity_Text_BenHiLetsRegister, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox RustboroCity_Text_RegisteredBen, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
-	msgbox RustboroCity_Text_BrendanPassedBrineyWantToBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
-	msgbox RustboroCity_Text_BrendanNoConfidenceInPokemon, MSGBOX_DEFAULT
+	msgbox RustboroCity_Text_BenPassedBrineyWantToBattle, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBen
+	msgbox RustboroCity_Text_BenNoConfidenceInPokemon, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
 
-RustboroCity_EventScript_BrendanAskToBattle::
-	msgbox RustboroCity_Text_BrendanWantToBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
-	msgbox RustboroCity_Text_BrendanNoConfidenceInPokemon, MSGBOX_DEFAULT
+RustboroCity_EventScript_BenAskToBattle::
+	msgbox RustboroCity_Text_BenWantToBattle, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBen
+	msgbox RustboroCity_Text_BenNoConfidenceInPokemon, MSGBOX_DEFAULT
 	releaseall
 	end
 
-RustboroCity_EventScript_BattleBrendan::
-	msgbox RustboroCity_Text_BrendanIWontGoEasy, MSGBOX_DEFAULT
+RustboroCity_EventScript_BattleBen::
+	msgbox RustboroCity_Text_BenIWontGoEasy, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
-	case 0, RustboroCity_EventScript_BattleBrendanBulbasaur
-	case 1, RustboroCity_EventScript_BattleBrendanFennekin
-	case 2, RustboroCity_EventScript_BattleBrendanPiplup
+	case 0, RustboroCity_EventScript_BattleBenBulbasaur
+	case 1, RustboroCity_EventScript_BattleBenFennekin
+	case 2, RustboroCity_EventScript_BattleBenPiplup
 	end
 
-RustboroCity_EventScript_BrendanBrineyHint::
-	msgbox RustboroCity_Text_BrendanMrBrineyHint, MSGBOX_DEFAULT
+RustboroCity_EventScript_BenBrineyHint::
+	msgbox RustboroCity_Text_BenMrBrineyHint, MSGBOX_DEFAULT
 	call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
 
-RustboroCity_EventScript_BattleBrendanBulbasaur::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_BULBASAUR, RustboroCity_Text_BrendanDefeat
+RustboroCity_EventScript_BattleBenBulbasaur::
+	trainerbattle_no_intro TRAINER_BEN_RUSTBORO_BULBASAUR, RustboroCity_Text_BenDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
-	goto RustboroCity_EventScript_BrendanBrineyHint
+	goto RustboroCity_EventScript_BenBrineyHint
 	end
 
-RustboroCity_EventScript_BattleBrendanFennekin::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_FENNEKIN, RustboroCity_Text_BrendanDefeat
+RustboroCity_EventScript_BattleBenFennekin::
+	trainerbattle_no_intro TRAINER_BEN_RUSTBORO_FENNEKIN, RustboroCity_Text_BenDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
-	goto RustboroCity_EventScript_BrendanBrineyHint
+	goto RustboroCity_EventScript_BenBrineyHint
 	end
 
-RustboroCity_EventScript_BattleBrendanPiplup::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_PIPLUP, RustboroCity_Text_BrendanDefeat
+RustboroCity_EventScript_BattleBenPiplup::
+	trainerbattle_no_intro TRAINER_BEN_RUSTBORO_PIPLUP, RustboroCity_Text_BenDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
-	goto RustboroCity_EventScript_BrendanBrineyHint
+	goto RustboroCity_EventScript_BenBrineyHint
 	end
 
 RustboroCity_Movement_RivalApproachPlayer0:
@@ -910,8 +1015,8 @@ RustboroCity_EventScript_Boy1::
 	end
 
 RustboroCity_Text_WeShortenItToDevon:
-	.string "The DEVON CORPORATION…\n"
-	.string "We all just shorten it to DEVON.\p"
+	.string "The Devon Corporation…\n"
+	.string "We all just shorten it to DevCo.\p"
 	.string "That company makes all sorts of\n"
 	.string "convenient products.$"
 
@@ -921,68 +1026,68 @@ RustboroCity_Text_SneakyLookingManWentAroundCorner:
 	.string "looking guy went around the corner.$"
 
 RustboroCity_Text_HaveYouChallengedGym:
-	.string "Have you taken the POKéMON GYM\n"
+	.string "Have you taken the Pokémon Gym\n"
 	.string "challenge?\p"
-	.string "When you get that shiny GYM BADGE\n"
-	.string "in hand, I guess TRAINERS begin to\l"
+	.string "When you get that shiny Gym Badge\n"
+	.string "in hand, I guess Trainers begin to\l"
 	.string "realize what is required of them.$"
 
 RustboroCity_Text_HeyThatsRustborosGymBadge:
-	.string "Hey, that's RUSTBORO's GYM BADGE!\p"
-	.string "Out of all the POKéMON GYM BADGES,\n"
-	.string "RUSTBORO's is the coolest, I'd say.$"
+	.string "Hey, that's Rustboro's Gym Badge!\p"
+	.string "Out of all the Pokémon Gym Badges,\n"
+	.string "Rustboro's is the coolest, I'd say.$"
 
 RustboroCity_Text_YoureNewAroundHere:
 	.string "Oh? Who might you be?\n"
 	.string "You're a new face around these parts.\p"
 	.string "Have you just transferred into the\n"
-	.string "POKéMON TRAINER'S SCHOOL?$"
+	.string "Pokémon Trainer's School?$"
 
 RustboroCity_Text_GymLeaderIsntEasyWithFire:
-	.string "I challenged the GYM LEADER, but…\p"
+	.string "I challenged the Gym Leader, but…\p"
 	.string "It's not going to be easy winning with\n"
 	.string "my team as is…\p"
-	.string "Who knew Baby POKéMON could pack\n"
+	.string "Who knew Baby Pokémon could pack\n"
 	.string "such a punch…$"
 
 RustboroCity_Text_MrBrineyWalksInTheTunnel:
-	.string "The old sailor MR. BRINEY lives in\n"
+	.string "The old sailor Mr. Briney lives in\n"
 	.string "a cottage by the sea.\p"
 	.string "He goes for walks in the tunnel every\n"
 	.string "so often.$"
 
 RustboroCity_Text_MrBrineyLovesPeeko:
-	.string "The old sailor MR. BRINEY lives in\n"
+	.string "The old sailor Mr. Briney lives in\n"
 	.string "a cottage by the sea.\p"
 	.string "He said he was going shopping in\n"
-	.string "SLATEPORT for his pet, PEEKO.\p"
+	.string "Slateport for his pet, Peeko.\p"
 	.string "That old sea dog, he must really love\n"
-	.string "that PEEKO.$"
+	.string "that Peeko.$"
 
 RustboroCity_Text_WowYouHavePokemon:
-	.string "Wow, you have POKéMON with you, too.\p"
+	.string "Wow, you have Pokémon with you, too.\p"
 	.string "When I get bigger, I'm going to go\n"
-	.string "places with POKéMON, too.$"
+	.string "places with Pokémon, too.$"
 
 RustboroCity_Text_CatchRarePokemonIfIGoToSchool:
-	.string "POKéMON TRAINER'S SCHOOL!\p"
+	.string "Pokémon Trainer's School!\p"
 	.string "If I go to this school, will I be able\n"
-	.string "to catch rare POKéMON easily?$"
+	.string "to catch rare Pokémon easily?$"
 
 RustboroCity_Text_PokemonCanChangeLookFromExp:
-	.string "If a POKéMON gains experience in\n"
+	.string "If a Pokémon gains experience in\n"
 	.string "battles, it can sometimes change in\l"
 	.string "the way it looks.$"
 
 RustboroCity_Text_PokemonChangeShape:
-	.string "A POKéMON changes shape?\n"
+	.string "A Pokémon changes shape?\n"
 	.string "If one did that, I would be shocked!$"
 
 RustboroCity_Text_TradePokemonGrowFast:
-	.string "A POKéMON you get in a trade from\n"
+	.string "A Pokémon you get in a trade from\n"
 	.string "someone grows fast.\p"
-	.string "But if you don't have certain GYM\n"
-	.string "BADGES, it may not obey you…$"
+	.string "But if you don't have certain Gym\n"
+	.string "Badges, it may not obey you…$"
 
 RustboroCity_Text_OutOfTheWay:
 	.string "Get out!\n"
@@ -990,14 +1095,14 @@ RustboroCity_Text_OutOfTheWay:
 
 RustboroCity_Text_WaitDontTakeMyGoods:
 	.string "Wait! Pleeeaaase!\p"
-	.string "Don't take my GOODS!$"
+	.string "Don't take my Goods!$"
 
 RustboroCity_Text_HelpMeIWasRobbed:
 	.string "Oh, it's you!\p"
-	.string "You're that fantastic TRAINER who\n"
-	.string "helped me in PETALBURG WOODS!\p"
-	.string "Help me! I was robbed by TEAM AQUA!\n"
-	.string "I have to get the DEVON GOODS back!\p"
+	.string "You're that fantastic Trainer who\n"
+	.string "helped me in Petalburg!\p"
+	.string "Help me! I was robbed by Team Aqua!\n"
+	.string "I have to get the DevCo Goods back!\p"
 	.string "If I don't…\n"
 	.string "I'm going to be in serious trouble.$"
 
@@ -1007,16 +1112,16 @@ RustboroCity_Text_ShadyCharacterTookOffTowardsTunnel:
 
 RustboroCity_Text_YouGotItThankYou:
 	.string "Oh! How did it go?\n"
-	.string "The DEVON GOODS?\p"
+	.string "The DevCo Goods?\p"
 	.string "You did!\n"
 	.string "You got them back!\p"
-	.string "You really are a great TRAINER!\p"
+	.string "You really are a great Trainer!\p"
 	.string "I know! As my thanks, I'll give you\n"
-	.string "a GREAT BALL!$"
+	.string "a Great Ball!$"
 
 RustboroCity_Text_YoureLoadedWithItems:
 	.string "You're loaded with items.\n"
-	.string "I can't give you this GREAT BALL.$"
+	.string "I can't give you this Great Ball.$"
 
 RustboroCity_Text_PleaseComeWithMe:
 	.string "Excuse me, please!\n"
@@ -1024,22 +1129,22 @@ RustboroCity_Text_PleaseComeWithMe:
 
 RustboroCity_Text_MayHiLetsRegister:
 	.string "MAY: Oh, hi, {PLAYER}{KUN}!\p"
-	.string "You had a MATCH CALL feature put\n"
-	.string "on your POKéNAV!\p"
+	.string "You had a Match Call feature put\n"
+	.string "on your PokéNav!\p"
 	.string "Let's register each other so we can\n"
 	.string "contact one another anytime!\p"
 	.string "… … … … … …$"
 
 RustboroCity_Text_RegisteredMay:
 	.string "Registered MAY\n"
-	.string "in the POKéNAV.$"
+	.string "in the PokéNav.$"
 
 RustboroCity_Text_MayPassedBrineyWantToBattle:
 	.string "MAY: Oh, by the way, I passed\n"
-	.string "MR. BRINEY in PETALBURG WOODS.\p"
+	.string "Mr. Briney in PETALBURG WOODS.\p"
 	.string "I guess he's on his way home to his\n"
 	.string "cottage by the sea.\p"
-	.string "How's your POKéDEX coming along,\n"
+	.string "How's your Pokédex coming along,\n"
 	.string "{PLAYER}{KUN}? Mine's looking pretty decent!\p"
 	.string "So…\n"
 	.string "How about a little battle?$"
@@ -1047,15 +1152,15 @@ RustboroCity_Text_MayPassedBrineyWantToBattle:
 RustboroCity_Text_MayOhHaventRaisedPokemonEnough:
 	.string "MAY: Oh, what's the matter?\p"
 	.string "Haven't you caught or raised your\n"
-	.string "POKéMON very much?\p"
-	.string "That's not very good for a TRAINER!$"
+	.string "Pokémon very much?\p"
+	.string "That's not very good for a Trainer!$"
 
 RustboroCity_Text_MayWantToBattle:
 	.string "MAY: So, what do you think?\n"
 	.string "How about a little battle here?$"
 
 RustboroCity_Text_MayImNotGoingToLose:
-	.string "MAY: You just became a TRAINER,\n"
+	.string "MAY: You just became a Trainer,\n"
 	.string "{PLAYER}{KUN}. I'm not going to lose!$"
 
 RustboroCity_Text_MayDefeat:
@@ -1063,45 +1168,59 @@ RustboroCity_Text_MayDefeat:
 	.string "You're better than I expected!$"
 
 RustboroCity_Text_MayMrBrineyHint:
-	.string "MAY: Oh, by the way, MR. BRINEY, who\n"
+	.string "MAY: Oh, by the way, Mr. Briney, who\n"
 	.string "I just passed…\p"
 	.string "{PLAYER}{KUN}, you just moved here so you\n"
-	.string "might not know this, but MR. BRINEY\l"
+	.string "might not know this, but Mr. Briney\l"
 	.string "was once a revered seafarer.$"
 
-RustboroCity_Text_BrendanPassedBrineyWantToBattle:
-	.string "Ben: Hey, {PLAYER}, I walked by\n"
-	.string "MR. BRINEY in PETALBURG WOODS.\p"
+RustboroCity_Text_BenHiLetsRegister:
+	.string "Ben: Oh, hey, {PLAYER}!\p"
+	.string "You had a Match Call feature put\n"
+	.string "on your PokéNav! Cool!\p"
+	.string "Let's register each other so we can\n"
+	.string "get in touch anytime!\p"
+	.string "You know… in the way normal, platonic\n"
+	.string "friends would…\p"
+	.string "… … … … … …$"
+
+RustboroCity_Text_RegisteredBen:
+	.string "Registered Ben\n"
+	.string "in the PokéNav.$"
+
+RustboroCity_Text_BenPassedBrineyWantToBattle:
+	.string "Ben: By the way, {PLAYER}, I walked\n"
+	.string "by Mr. Briney in Petalburg Woods.\p"
 	.string "I bet he was on his way home to his\n"
 	.string "cottage by the sea.\p"
-	.string "So tell me, how's your POKéDEX?\n"
+	.string "{PLAYER}, how's your Pokédex?\n"
 	.string "Have you filled in any pages yet?\p"
 	.string "Mine rules.\p"
-	.string "Want to have a battle to see if\n"
-	.string "you've gotten any better?$"
+	.string "Want to have a battle to test how\n"
+	.string "far you've progressed?$"
 
-RustboroCity_Text_BrendanNoConfidenceInPokemon:
+RustboroCity_Text_BenNoConfidenceInPokemon:
 	.string "Ben: What's the matter? Don't have\n"
-	.string "any confidence in your POKéMON?$"
+	.string "any confidence in your Pokémon?$"
 
-RustboroCity_Text_BrendanWantToBattle:
+RustboroCity_Text_BenWantToBattle:
 	.string "Ben: What's up?\n"
 	.string "Want to have a battle with me?$"
 
-RustboroCity_Text_BrendanIWontGoEasy:
+RustboroCity_Text_BenIWontGoEasy:
 	.string "Ben: I know you just became\n"
-	.string "a TRAINER, but I won't go easy!$"
+	.string "a Trainer, but I won't go easy!$"
 
-RustboroCity_Text_BrendanDefeat:
+RustboroCity_Text_BenDefeat:
 	.string "Hmm…\n"
 	.string "You're pretty good.$"
 
-RustboroCity_Text_BrendanMrBrineyHint:
+RustboroCity_Text_BenMrBrineyHint:
 	.string "Ben: By the way, you know\n"
-	.string "MR. BRINEY? The guy I just passed?\p"
+	.string "Mr. Briney? The guy I just passed?\p"
 	.string "I bet you didn't know this, since you\n"
 	.string "just moved here, {PLAYER}, but\l"
-	.string "MR. BRINEY was once a great sailor.$"
+	.string "Mr. Briney was once a great sailor.$"
 
 RustboroCity_Text_TunnelNearingCompletion:
 	.string "“Timesaving tunnel nearing\n"
@@ -1112,17 +1231,17 @@ RustboroCity_Text_TunnelNearingCompletion:
 
 RustboroCity_Text_DevonCorpSign:
 	.string "DEVON CORPORATION\p"
-	.string "“For all your living needs, we make\n"
-	.string "it all.”$"
+	.string "“For all your living needs,\n"
+	.string "DevCo makes it all.”$"
 
 RustboroCity_Text_GymSign:
-	.string "RUSTBORO CITY POKéMON GYM\n"
-	.string "LEADER: Oriana\p"
-	.string "“The honor-roll baby sitter!”$"
+	.string "RUSTBORO CITY POKéMON Gym\n"
+	.string "LEADER: ORIANA\p"
+	.string "“The honor roll baby-sitter!”$"
 
 RustboroCity_Text_DevonCorpBranchOfficeSign:
 	.string "DEVON CORP. BRANCH OFFICE\p"
-	.string "“Access limited to DEVON employees\n"
+	.string "“Access limited to DevCo employees\n"
 	.string "and authorized personnel.”$"
 
 RustboroCity_Text_CitySign:
@@ -1133,17 +1252,42 @@ RustboroCity_Text_CitySign:
 RustboroCity_Text_TrainersSchoolSign:
 	.string "POKéMON TRAINER'S SCHOOL\p"
 	.string "“We'll teach you anything about\n"
-	.string "POKéMON!”$"
+	.string "Pokémon!”$"
 
 RustboroCity_Text_CuttersHouse:
 	.string "CUTTER'S HOUSE$"
 
+RustboroCity_Text_DevelopedNewPokenavFeature:
+	.string "I've been developing an added feature\n"
+	.string "for the PokéNav…\p"
+	.string "And it turned out great!\p"
+	.string "{PLAYER}, may I see your PokéNav?$"
+
+RustboroCity_Text_AddedMatchCallPleaseCallMrStone:
+	.string "There you go, {PLAYER}!\p"
+	.string "I added a new feature named\n"
+	.string "Match Call to your PokéNav.\p"
+	.string "Using the Match Call feature,\n"
+	.string "you can chat with people who have\l"
+	.string "been registered in your PokéNav.\p"
+	.string "{PLAYER}, our President Stone should\n"
+	.string "be registered in your PokéNav.\p"
+	.string "Test it out.\n"
+	.string "Please give our President a call.$"
+
+RustboroCity_Text_PleaseSelectPokenav:
+	.string "Please select the PokéNav.$"
+
+RustboroCity_Text_IdBetterGetBackToWork:
+	.string "Okay, I'd better get back to work.\n"
+	.string "Please take care, {PLAYER}!$"
+
 RustboroCity_Text_YouCanHave2On2Battle:
 	.string "Did you know this?\p"
 	.string "You can have a 2-on-2 battle even\n"
-	.string "if you're not with another TRAINER.\p"
-	.string "If you catch the eyes of two TRAINERS\n"
-	.string "when you have two or more POKéMON,\l"
+	.string "if you're not with another Trainer.\p"
+	.string "If you catch the eyes of two Trainers\n"
+	.string "when you have two or more Pokémon,\l"
 	.string "they'll both challenge you.\p"
 	.string "Don't you think it'd be cool if you\n"
-	.string "could beat two TRAINERS by yourself?$"
+	.string "could beat two Trainers by yourself?$"

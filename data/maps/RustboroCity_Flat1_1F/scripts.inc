@@ -10,9 +10,13 @@ RustboroCity_Flat1_1F_EventScript_Woman::
 	end
 
 RustboroCity_Flat1_1F_Text_EveryPokemonHasAbility:
-	.string "Every POKéMON has a special ability\n"
-	.string "that it can use.$"
+	.string "Every Pokémon has a special Ability\n"
+	.string "that provides a passive effect in\l"
+	.string "battles and the overworld.$"
 
 RustboroCity_Flat1_1F_Text_PokemonStrange:
-	.string "POKéMON are such strange creatures.$"
+	.string "A Hidden Ability is an Ability that\n"
+	.string "a Pokémon doesn't normally have.\p"
+	.string "I hear DevCo is making an app that's\n"
+	.string "good at finding Pokémon with them.$"
 

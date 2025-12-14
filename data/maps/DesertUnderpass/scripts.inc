@@ -30,9 +30,9 @@ DesertUnderpass_EventScript_GiveSkullFossil::
 
 @ Unused
 DesertUnderpass_Text_FoundSkullFossil::
-	.string "{PLAYER} found the Skull FOSSIL.$"
+	.string "{PLAYER} found the Skull Fossil.$"
 
 @ Unused
 DesertUnderpass_Text_FoundSailFossil::
-	.string "{PLAYER} found the Sail FOSSIL.$"
+	.string "{PLAYER} found the Sail Fossil.$"
 

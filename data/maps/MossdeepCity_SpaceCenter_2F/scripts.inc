@@ -321,8 +321,23 @@ MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest::
 	turnobject LOCALID_SPACE_CENTER_2F_STEVEN, DIR_EAST
 	return
 
+MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall::
+	lockall
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall
+	call_if_eq VAR_RESULT, FEMALE, MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall
+	closemessage
+	clearflag FLAG_DEFEATED_MAGMA_SPACE_CENTER
+	releaseall
+	end
+
 MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall::
 	pokenavcall MatchCall_Text_MayRayquazaCall
+	waitmessage
+	return
+
+MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall::
+	pokenavcall MatchCall_Text_BrendanRayquazaCall
 	waitmessage
 	return
 
@@ -349,8 +364,8 @@ MossdeepCity_SpaceCenter_2F_Text_MagmaCantGetAwayWithThis:
 	.string "with such an outrage!$"
 
 MossdeepCity_SpaceCenter_2F_Text_WishOrdinaryPeopleCouldGoIntoSpace:
-	.string "I wish ordinary people could go into\n"
-	.string "space one day…$"
+	.string "I wish ordinary people--even women--\n"
+	.string "could go into space one day…$"
 
 MossdeepCity_SpaceCenter_2F_Text_DoesMagmaWantToGoToSpace:
 	.string "Team Magma…\n"
@@ -426,7 +441,7 @@ MossdeepCity_SpaceCenter_2F_Text_MaxieUseFuelToEruptVolcano:
 	.string "for that slag heap of a mountain!\p"
 	.string "So we'll use the fuel's power to make\n"
 	.string "the volcano erupt!\p"
-	.string "It will be savage!$"
+	.string "It will be empyrean!$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle:
 	.string "Steven: {PLAYER}{KUN}!\n"
@@ -450,7 +465,7 @@ MossdeepCity_SpaceCenter_2F_Text_MaxieWeFailedIsAquaAlsoMisguided:
 	.string "erupt…\p"
 	.string "We failed to control Groudon after\n"
 	.string "we had awoken it…\p"
-	.string "Is our goal to expand the land\n"
+	.string "Our cause is just but are our methods\n"
 	.string "misguided?\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"

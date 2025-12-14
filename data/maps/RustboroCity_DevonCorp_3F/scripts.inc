@@ -49,9 +49,12 @@ RustboroCity_DevonCorp_3F_EventScript_MeetPresident::
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor, MSGBOX_DEFAULT
 	giveitem ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis, MSGBOX_DEFAULT
-	giveitem ITEM_VS_SEEKER
+	playfanfare MUS_OBTAIN_ITEM
+	message RustboroCity_DevonCorp_3F_Text_ReceivedDexnav
+	waitfanfare
+	setflag DN_FLAG_DEXNAV_GET
 	setflag FLAG_HIDE_RUSTBORO_CITY_POKEMON_SCHOOL_SCOTT
-	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneExplainVsSeekerRestUp, MSGBOX_DEFAULT
+	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneExplainDexnavRestUp, MSGBOX_DEFAULT
 	closemessage
 	call Common_EventScript_OutOfCenterPartyHeal
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneGoWithCautionAndCare, MSGBOX_DEFAULT
@@ -211,13 +214,23 @@ RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis:
 	.string "I am a great President.\p"
 	.string "So, I'd never be so cheap as to ask\n"
 	.string "a favor for nothing in return.\p"
-	.string "That's why I want you to have this!$"
+	.string "That's why I want you install this!$"
 
-RustboroCity_DevonCorp_3F_Text_MrStoneExplainVsSeekerRestUp:
-	.string "Mr. Stone: Use that device and you'll\n"
-    .string "find Trainers looking for a rematch.\p"
-    .string "You have to charge its battery to\n"
-    .string "use it, though.\p"
+RustboroCity_DevonCorp_3F_Text_ReceivedDexnav:
+	.string "{PLAYER} installed the DexNav.$"
+
+RustboroCity_DevonCorp_3F_Text_MrStoneExplainDexnavRestUp:
+	.string "Mr. Stone: The DexNav is an application\n"
+	.string "that allows Pokédex users to scan\l"
+	.string "the current area for specific Pokémon!\p"
+	.string "It's an indispensable tool for any\n"
+	.string "Trainer building their Pokémon team.\p"
+	.string "Once the DexNav finds the desired\n"
+	.string "Pokémon, hold the A Button to sneak up\l"
+	.string "on them before they run away.\p"
+	.string "My researches also say that Pokémon\n"
+	.string "with special features are more likely\l"
+	.string "to appear the more of them you battle.\p"
 	.string "By the way, I've heard that sinister\n"
 	.string "criminals--Magma and Aqua, I believe--\l"
 	.string "have been making trouble far and wide.\p"

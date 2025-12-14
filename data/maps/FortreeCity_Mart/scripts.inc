@@ -22,7 +22,7 @@ FortreeCity_Mart_EventScript_BattleClerk::
 	end
 
 FortreeCity_Mart_EventScript_Woman::
-	msgbox FortreeCity_Mart_Text_SuperRepelBetter, MSGBOX_NPC
+	msgbox FortreeCity_Mart_Text_LuresAreTheBest, MSGBOX_NPC
 	end
 
 FortreeCity_Mart_EventScript_Girl::
@@ -33,11 +33,11 @@ FortreeCity_Mart_EventScript_Boy::
 	msgbox FortreeCity_Mart_Text_RareCandyMakesMonGrow, MSGBOX_NPC
 	end
 
-FortreeCity_Mart_Text_SuperRepelBetter:
-	.string "SUPER REPEL lasts a long time,\n"
-	.string "and it gets the job done.\p"
-	.string "It's much better than an ordinary\n"
-	.string "REPEL.$"
+FortreeCity_Mart_Text_LuresAreTheBest:
+	.string "Lures are the best if you're trying\n"
+	.string "to fill out your Pokédex.\p"
+	.string "I hear they even make Shiny Pokémon\n"
+	.string "more likely to show up too!$"
 
 FortreeCity_Mart_Text_StockUpOnItems:
 	.string "I always stock up on more items than\n"
@@ -46,6 +46,6 @@ FortreeCity_Mart_Text_StockUpOnItems:
 	.string "Better to be safe than sorry!$"
 
 FortreeCity_Mart_Text_RareCandyMakesMonGrow:
-	.string "A RARE CANDY makes a POKéMON grow\n"
-	.string "immediately by one level.$"
+	.string "A Rare Candy can level up a Pokémon\n"
+	.string "even past the current Level Cap.$"
 

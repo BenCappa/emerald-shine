@@ -1,5 +1,3 @@
-.set LOCALID_SHAYMIN, 5
-
 Route130_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route130_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, Route130_MirageIsland_OnResume

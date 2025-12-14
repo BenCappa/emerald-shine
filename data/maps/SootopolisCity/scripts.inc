@@ -116,9 +116,9 @@ SootopolisCity_EventScript_SetOutsideGymObjPos::
 	setobjectxyperm LOCALID_SOOTOPOLIS_KIT, 29, 33
 	setobjectxyperm LOCALID_SOOTOPOLIS_MAXIE, 33, 35
 	setobjectxyperm LOCALID_SOOTOPOLIS_ARCHIE, 34, 35
-	call_if_eq VAR_SOOTOPOLIS_WALLACE_STATE, 0, SootopolisCity_EventScript_SetStevenMiddle
-	call_if_eq VAR_SOOTOPOLIS_WALLACE_STATE, 1, SootopolisCity_EventScript_SetStevenRight
-	call_if_eq VAR_SOOTOPOLIS_WALLACE_STATE, 2, SootopolisCity_EventScript_SetStevenLeft
+	call_if_eq VAR_SOOTOPOLIS_STEVEN_STATE, 0, SootopolisCity_EventScript_SetStevenMiddle
+	call_if_eq VAR_SOOTOPOLIS_STEVEN_STATE, 1, SootopolisCity_EventScript_SetStevenRight
+	call_if_eq VAR_SOOTOPOLIS_STEVEN_STATE, 2, SootopolisCity_EventScript_SetStevenLeft
 	return
 
 SootopolisCity_EventScript_SetStevenMiddle::
@@ -1305,14 +1305,14 @@ SootopolisCity_EventScript_StevenMoveFromGym::
 	applymovement LOCALID_SOOTOPOLIS_STEVEN, SootopolisCity_Movement_StevenMoveFromGym
 	waitmovement 0
 	copyobjectxytoperm LOCALID_SOOTOPOLIS_STEVEN
-	setvar VAR_SOOTOPOLIS_WALLACE_STATE, 1
+	setvar VAR_SOOTOPOLIS_STEVEN_STATE, 1
 	return
 
 SootopolisCity_EventScript_StevenMoveFromGymWest::
 	applymovement LOCALID_SOOTOPOLIS_STEVEN, SootopolisCity_Movement_StevenMoveFromGymWest
 	waitmovement 0
 	copyobjectxytoperm LOCALID_SOOTOPOLIS_STEVEN
-	setvar VAR_SOOTOPOLIS_WALLACE_STATE, 2
+	setvar VAR_SOOTOPOLIS_STEVEN_STATE, 2
 	return
 
 SootopolisCity_EventScript_GoToSkyPillar::
@@ -1389,7 +1389,7 @@ SootopolisCity_Movement_DestroyTask::
 
 SootopolisCity_Text_GymSign:
 	.string "SOOTOPOLIS CITY POKéMON GYM\n"
-	.string "LEADER: Rheannon\p"
+	.string "LEADER: RHEANNON\p"
 	.string "“The Gym Leader with the beauty\n"
 	.string "of pure water!”$"
 
@@ -1451,8 +1451,8 @@ SootopolisCity_Text_ThatWasWicked:
 	.string "That was wicked!$"
 
 SootopolisCity_Text_GoRedAndBlueMon:
-	.string "Go for it, red Pokémon!\n"
-	.string "Don't back off, blue Pokémon!$"
+	.string "The red Pokémon is coming out on top!\n"
+	.string "No, wait! The blue Pokémon is gonna win!$"
 
 SootopolisCity_Text_DoYouKnowMonNames:
 	.string "… … … … … …\p"
@@ -1484,8 +1484,8 @@ SootopolisCity_Text_SawLegendWithOwnEyes:
 	.string "witness to something this huge!$"
 
 SootopolisCity_Text_BigPokemonFighting:
-	.string "A big Pokémon is fighting with\n"
-	.string "another big Pokémon!\p"
+	.string "Those big Pokémon are fighting!\n"
+	.string "They're going to hurt each other!\p"
 	.string "Please, someone make them stop!$"
 
 SootopolisCity_Text_PrettyMonCameFromSky:
@@ -1501,10 +1501,10 @@ SootopolisCity_Text_SootopolisDidntGetWrecked:
 
 SootopolisCity_Text_NoOrdinaryTourist:
 	.string "Hm!\n"
-	.string "You've come all the way to Sootopolis?\l"
+	.string "You swam all the way to Sootopolis?\l"
 	.string "You're no ordinary tourist.\p"
-	.string "But I suppose that doesn't make you\n"
-	.string "an extraordinary tourist, either.$"
+	.string "But I suppose that would be how most\n"
+	.string "tourists get here actually.$"
 
 SootopolisCity_Text_CityRegainedCalm:
 	.string "The city has regained its calm…$"
@@ -1617,17 +1617,16 @@ SootopolisCity_Text_TryingMeaninglessToPokemon:
 
 SootopolisCity_Text_InvolvedWithCrisisComeWithMe:
 	.string "Kit: Those Pokémon fighting…\n"
-	.string "Groudon… And Kyogre…\p"
+	.string "Groudon… and Kyogre…\p"
 	.string "The two super-ancient Pokémon\n"
-	.string "were awakened from a long sleep…\p"
+	.string "were woken up from a long sleep…\p"
 	.string "And now they are smashing each other\n"
 	.string "with their uncontrollable energy…\p"
-	.string "You being here now I'll take to mean\n"
-	.string "that you're prepared to become\l"
-	.string "involved in this crisis.\p"
+	.string "Since you're here now, that means\n"
+	.string "you're ready to get involved, right?\p"
 	.string "Well, then, Steven needs to meet\n"
 	.string "with you.\p"
-	.string "Come with me, please.$"
+	.string "Follow me, please.$"
 
 SootopolisCity_Text_DoesThisMakeYourFearPokemon:
 	.string "Kit: I need to tell you something.\p"
@@ -1640,13 +1639,13 @@ SootopolisCity_Text_DoesThisMakeYourFearPokemon:
 
 SootopolisCity_Text_HereWereAreHelpSteven:
 	.string "Kit: Okay, here we are!\p"
-	.string "Inside here you'll find Steven.\p"
+	.string "You'll find Steven inside here.\p"
 	.string "He seems to think you have what's\n"
 	.string "needed to help him…$"
 
 SootopolisCity_Text_KnowWhatsNeededToHelpHim:
-	.string "Kit: He seems to think you have what's\n"
-	.string "needed to help him…$"
+	.string "Kit: Watching you be brave helps\n"
+	.string "me be brave…$"
 
 SootopolisCity_Text_NeverBeenToSkyPillar:
 	.string "Kit: The Sky Pillar…\p"
@@ -1675,7 +1674,7 @@ SootopolisCity_Text_HaventYouScaledSkyPillar:
 SootopolisCity_Text_AquaMagmaDidntMeanHarm:
 	.string "Steven: {PLAYER}{KUN}…\p"
 	.string "The leaders of Team Magma and Aqua,\n"
-	.string "I don't think they meant harm.\p"
+	.string "I don't think they meant to be bad.\p"
 	.string "It wouldn't hurt to hear what they\n"
 	.string "have to say for themselves.$"
 

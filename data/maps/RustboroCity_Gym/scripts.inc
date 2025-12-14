@@ -2,7 +2,7 @@ RustboroCity_Gym_MapScripts::
 	.byte 0
 
 RustboroCity_Gym_EventScript_Oriana::
-	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_OrianaIntro, RustboroCity_Gym_Text_OrianaDefeat, RustboroCity_Gym_EventScript_OrianaDefeated, NO_MUSIC
+	trainerbattle_single TRAINER_ORIANA_1, RustboroCity_Gym_Text_OrianaIntro, RustboroCity_Gym_Text_OrianaDefeat, RustboroCity_Gym_EventScript_OrianaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_OrianaRematch
 	goto_if_unset FLAG_RECEIVED_TM_FALSE_SWIPE, RustboroCity_Gym_EventScript_GiveFalseSwipe
@@ -34,7 +34,7 @@ RustboroCity_Gym_EventScript_GiveFalseSwipe::
 	end
 
 RustboroCity_Gym_EventScript_OrianaRematch::
-	trainerbattle_rematch_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_OrianaPreRematch, RustboroCity_Gym_Text_OrianaRematchDefeat, RustboroCity_Gym_Text_OrianaRematchNeedTwoMons
+	trainerbattle_rematch_double TRAINER_ORIANA_1, RustboroCity_Gym_Text_OrianaPreRematch, RustboroCity_Gym_Text_OrianaRematchDefeat, RustboroCity_Gym_Text_OrianaRematchNeedTwoMons
 	msgbox RustboroCity_Gym_Text_OrianaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -48,9 +48,9 @@ RustboroCity_Gym_EventScript_Tommy::
 	msgbox RustboroCity_Gym_Text_TommyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RustboroCity_Gym_EventScript_Marc::
-	trainerbattle_single TRAINER_MARC, RustboroCity_Gym_Text_MarcIntro, RustboroCity_Gym_Text_MarcDefeat
-	msgbox RustboroCity_Gym_Text_MarcPostBattle, MSGBOX_AUTOCLOSE
+RustboroCity_Gym_EventScript_Marsha::
+	trainerbattle_single TRAINER_MARSHA, RustboroCity_Gym_Text_MarshaIntro, RustboroCity_Gym_Text_MarshaDefeat
+	msgbox RustboroCity_Gym_Text_MarshaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_GymGuide::
@@ -89,8 +89,18 @@ RustboroCity_Gym_EventScript_GymStatue::
 	end
 
 RustboroCity_Gym_EventScript_RegisterOriana::
-	setflag FLAG_ENABLE_ROXANNE_MATCH_CALL
-	clearflag FLAG_ENABLE_ROXANNE_FIRST_CALL
+	lockall
+	pokenavcall RustboroCity_Gym_Text_OrianaRegisterCall
+	waitmessage
+	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox RustboroCity_Gym_Text_RegisteredOriana, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_ENABLE_ORIANA_MATCH_CALL
+	clearflag FLAG_ENABLE_ORIANA_FIRST_CALL
+	releaseall
 	end
 
 RustboroCity_Gym_Text_GymGuideAdvice:
@@ -152,17 +162,17 @@ RustboroCity_Gym_Text_TommyPostBattle:
 	.string "several times.\p"
 	.string "You'd better be on your guard!$"
 
-RustboroCity_Gym_Text_MarcIntro:
+RustboroCity_Gym_Text_MarshaIntro:
 	.string "We might be new to our adventure,\n"
 	.string "but so what?\p"
 	.string "My Baby Pokémon need room to\n"
 	.string "rampage!$"
 
-RustboroCity_Gym_Text_MarcDefeat:
+RustboroCity_Gym_Text_MarshaDefeat:
 	.string "Oh, man oh man!\n"
 	.string "Our challenger is one feisty customer!$"
 
-RustboroCity_Gym_Text_MarcPostBattle:
+RustboroCity_Gym_Text_MarshaPostBattle:
 	.string "I have to hand it to our Leader.\p"
 	.string "It took smarts and sense for her to\n"
 	.string "make a Gym out of Baby Pokémon.$"
@@ -172,9 +182,9 @@ RustboroCity_Gym_Text_OrianaIntro:
 	.string "Were you surprised to hear that I was\n"
 	.string "already a Gym Leader?\p"
 	.string "You see, I joined the Trainer School and\n"
-	.string "became their top student right away."
+	.string "became their top student right away.\p"
 	.string "I mean, the city was practically\n"
-	.string "begging me to take over the gym."
+	.string "begging me to take over the gym.\p"
 	.string "Wanna see why?$"
 
 RustboroCity_Gym_Text_OrianaDefeat:
@@ -229,10 +239,31 @@ RustboroCity_Gym_Text_GymStatueCertified:
 	.string "ORIANA'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
+RustboroCity_Gym_Text_OrianaRegisterCall:
+	.string "… … … … … …\n"
+	.string "… … … … … Beep!\p"
+	.string "Oreo: Oh, hello, {PLAYER}?\n"
+	.string "It's your sister, Oriana.\p"
+	.string "I heard from Niles that you're\n"
+	.string "moving up through the ranks of\l"
+	.string "trainers quicker than expected.\p"
+	.string "To be clear, quicker than what THEY\n"
+	.string "expected I should say.\p"
+	.string "I promise, I will shape up my Gym\n"
+	.string "so that you can challenge us again.\p"
+	.string "I hope you'll be looking forward to\n"
+	.string "that occasion as much as me!\p"
+	.string "… … … … … …\n"
+	.string "… … … … … Click!$"
+
+RustboroCity_Gym_Text_RegisteredOriana:
+	.string "Registered Gym Leader Oriana\n"
+	.string "in the PokéNav.$"
+
 RustboroCity_Gym_Text_OrianaPreRematch:
-	.string "Oreo: I'm so glad to see you again.\p"
-	.string "I'm sure we've both experienced many\n"
-	.string "battles since we last met.\p"
+	.string "Oreo: I'm so glad to see you again!\p"
+	.string "I'm sure we've both had plenty of\n"
+	.string "battles since we last met up.\p"
 	.string "I would like to see how much better\n"
 	.string "we've become. Let's battle!$"
 
@@ -247,8 +278,8 @@ RustboroCity_Gym_Text_OrianaPostRematch:
 	.string "all that much more!$"
 
 RustboroCity_Gym_Text_OrianaRematchNeedTwoMons:
-	.string "Oreo: I'm so glad to see you again.\n"
-	.string "I'm sure we've both experienced many\n"
+	.string "Oreo: I'm so glad to see you again!\p"
+	.string "I'm sure we've both had plenty of\n"
 	.string "battles since we last met.\p"
 	.string "I would like to see how much better\n"
 	.string "we've become…\p"

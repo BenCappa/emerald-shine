@@ -11,8 +11,8 @@ BirthIsland_Exterior_OnReturnToField:
 BirthIsland_Exterior_OnTransition:
 	setflag FLAG_MAP_SCRIPT_CHECKED_CELEBI
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	setvar VAR_CELEBI_ROCK_STEP_COUNT, 0
-	setvar VAR_CELEBI_ROCK_LEVEL, 0
+	setvar VAR_DEOXYS_ROCK_STEP_COUNT, 0
+	setvar VAR_DEOXYS_ROCK_LEVEL, 0
 	call_if_set FLAG_CAUGHT_CELEBI, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
 	call_if_unset FLAG_CAUGHT_CELEBI, BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle
 	end
@@ -81,7 +81,6 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_BIRTH_ISLAND_EXTERIOR_CELEBI
-	@ seteventmon SPECIES_CELEBI, 30
 	createmon 1, 0, SPECIES_CELEBI, 30, move1=MOVE_CONFUSION, move2=MOVE_HEAL_BELL, move3=MOVE_ANCIENT_POWER, move4=MOVE_MAGICAL_LEAF
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle

@@ -57,12 +57,12 @@ Route114_EventScript_ReceivedSnarl::
 	release
 	end
 
-Route114_EventScript_Houndour::
+Route114_EventScript_Snubbull::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_HOUNDOUR, CRY_MODE_ENCOUNTER
-	msgbox Route114_Text_Houndour, MSGBOX_DEFAULT
+	playmoncry SPECIES_SNUBBULL, CRY_MODE_ENCOUNTER
+	msgbox Route114_Text_Snubbull, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -111,6 +111,7 @@ Route114_EventScript_RegisterSteve::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route114_Text_SteveRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_STEVE_1
 	release
 	end
 
@@ -131,6 +132,7 @@ Route114_EventScript_RegisterBernie::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route114_Text_BernieRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_BERNIE_1
 	release
 	end
 
@@ -186,7 +188,7 @@ Route114_Text_ExplainSnarl:
 	.string "Lowering our opponents' Sp. Atk simply\n"
 	.string "hasn't been worth it!$"
 
-Route114_Text_Houndour:
+Route114_Text_Snubbull:
 	.string "Grr! Grrrowr!$"
 
 Route114_Text_MeteorFallsSign:
@@ -199,3 +201,4 @@ Route114_Text_FossilManiacsHouseSign:
 
 Route114_Text_LanettesHouse:
 	.string "LANETTE'S HOUSE$"
+

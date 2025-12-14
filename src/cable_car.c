@@ -131,11 +131,11 @@ static const struct BgTemplate sBgTemplates[4] = {
     },
 };
 
-static const u16 sGround_Tilemap[] = INCBIN_U16("graphics/cable_car/ground.bin.lz");
-static const u16 sTrees_Tilemap[] = INCBIN_U16("graphics/cable_car/trees.bin.lz");
-static const u16 sBgMountains_Tilemap[] = INCBIN_U16("graphics/cable_car/bg_mountains.bin.lz");
+static const u16 sGround_Tilemap[] = INCBIN_U16("graphics/cable_car/ground.bin.smolTM");
+static const u16 sTrees_Tilemap[] = INCBIN_U16("graphics/cable_car/trees.bin.smolTM");
+static const u16 sBgMountains_Tilemap[] = INCBIN_U16("graphics/cable_car/bg_mountains.bin.smolTM");
 static const u16 sPylonTop_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_top.bin");
-static const u16 sPylonPole_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_pole.bin.lz");
+static const u16 sPylonPole_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_pole.bin.smolTM");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
     { gCableCar_Gfx,      0x800, TAG_CABLE_CAR },
@@ -795,11 +795,17 @@ static void CreateCableCarSprites(void)
         [FEMALE] = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
     };
     u16 rval = Random();
-    u16 hikerGraphicsIds[4] = {
+    u16 hikerGraphicsIds[10] = {
         OBJ_EVENT_GFX_HIKER,
         OBJ_EVENT_GFX_CAMPER,
         OBJ_EVENT_GFX_PICNICKER,
-        OBJ_EVENT_GFX_ZIGZAGOON_1
+        OBJ_EVENT_GFX_SPECIES(CUBONE),
+        OBJ_EVENT_GFX_SPECIES(TINKATINK),
+        OBJ_EVENT_GFX_SPECIES(CHARCADET),
+        OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
+        OBJ_EVENT_GFX_LINK_RS_MAY,
+        OBJ_EVENT_GFX_LINK_RS_BRENDAN,
+        OBJ_EVENT_GFX_PROF_BIRCH
     };
     s16 hikerCoords[2][2] = {
         {   0,  80 }, // Going up
@@ -877,8 +883,8 @@ static void CreateCableCarSprites(void)
         gSprites[spriteId].y2 = 8;
     }
 
-    // 1/64 chance for an NPC to appear hiking on the ground below the Cable Car
-    if ((rval % 64) == 0)
+    // 50/50 (was 1/64) chance for an NPC to appear hiking on the ground below the Cable Car
+    if ((rval % 2) == 0)
     {
         // BUGFIX: The - 1 in the below ARRAY_COUNT means the Zigzagoon is never used
 #ifdef BUGFIX

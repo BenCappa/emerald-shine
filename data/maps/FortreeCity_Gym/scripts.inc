@@ -38,6 +38,11 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	call FortreeCity_Gym_EventScript_GiveAcrobatics
 	closemessage
 	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox FortreeCity_Gym_Text_RegisteredWinona, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
 	setflag FLAG_ENABLE_WINONA_MATCH_CALL
 	setvar VAR_SCOTT_FORTREE_CALL_STEP_COUNTER, 0
 	setflag FLAG_SCOTT_CALL_FORTREE_GYM
@@ -189,15 +194,18 @@ FortreeCity_Gym_Text_FlintPostBattle:
 	.string "Blush…$"
 
 FortreeCity_Gym_Text_AshleyIntro:
-	.string "Winona taught me personally!\n"
-	.string "You can't beat me easily!$"
+	.string "Wait, your name is also Ashley?\n"
+	.string "Let's see who's the stronger one!$"
 
 FortreeCity_Gym_Text_AshleyDefeat:
-	.string "I was beaten…$"
+	.string "You're the superior Ashley…$"
 
 FortreeCity_Gym_Text_AshleyPostBattle:
-	.string "Thanks to Winona, the people of\n"
-	.string "Fortree can live without fear.$"
+	.string "I guess Ashley is a common name.\p"
+	.string "Good thing your last name isn't also\n"
+	.string "Williams.\p"
+	.string "… … … … … …\n"
+	.string "… … … right?$"
 
 FortreeCity_Gym_Text_HumbertoIntro:
 	.string "When Winona takes to battle, her face\n"
@@ -261,11 +269,16 @@ FortreeCity_Gym_Text_ExplainAcrobatics:
 	.string "TM05 contains Acrobatics.\p"
 	.string "Free yourself from the weight of items\n"
 	.string "and this move shall bring out your\l"
-	.string "Pokémon's unhindered strength.$"
+	.string "Pokémon's unhindered strength.\p"
+	.string "… … … … … …$"
+
+FortreeCity_Gym_Text_RegisteredWinona:
+	.string "Registered Gym Leader Winona\n"
+	.string "in the PokéNav.$"
 
 FortreeCity_Gym_Text_WinonaPostBattle:
 	.string "Though I fell to you, I will remain\n"
-	.string "devoted to my Bird Pokémon.$"
+	.string "devoted to Bird Pokémon.$"
 
 FortreeCity_Gym_Text_GymStatue:
 	.string "FORTREE CITY POKéMON GYM$"

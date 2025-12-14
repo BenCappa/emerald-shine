@@ -82,6 +82,7 @@ Route121_EventScript_RegisterWalter::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route121_Text_WalterRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_WALTER_1
 	release
 	end
 
@@ -117,6 +118,7 @@ Route121_EventScript_RegisterJessica::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route121_Text_JessicaRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JESSICA_1
 	release
 	end
 
@@ -157,6 +159,7 @@ Route121_EventScript_RegisterCristin::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route121_Text_CristinRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_CRISTIN_1
 	release
 	end
 
@@ -167,12 +170,12 @@ Route121_EventScript_RematchCristin::
 
 Route121_Text_OkayMoveOutToMtPyre:
 	.string "Okay!\n"
-	.string "We're to move out to MT. PYRE!$"
+	.string "We're to move out to Mt. Pyre!$"
 
 Route121_Text_AheadLoomsMtPyre:
-	.string "Ahead looms MT. PYRE…\p"
+	.string "Ahead looms Mt. Pyre…\p"
 	.string "It is a natural monument to the spirits \n"
-	.string "of departed POKéMON…$"
+	.string "of departed Pokémon…$"
 
 Route121_Text_MtPyrePierSign:
 	.string "MT. PYRE PIER\p"
@@ -180,6 +183,6 @@ Route121_Text_MtPyrePierSign:
 	.string "The words are barely legible…$"
 
 Route121_Text_SafariZoneSign:
-	.string "“Filled with rare POKéMON!”\n"
+	.string "“Filled with rare Pokémon!”\n"
 	.string "SAFARI ZONE$"
 

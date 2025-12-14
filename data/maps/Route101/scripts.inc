@@ -274,7 +274,7 @@ Route101_Text_YouSavedMe:
 	.string "Gump: Whew…\p"
 	.string "That was the most I've run in years!\p"
 	.string "I was doing fieldwork in the tall grass\n"
-	.string "when that funny-looking Zigzagoon\n"
+	.string "when that funny-looking Zigzagoon\l"
 	.string "started biting the hell out of me!\p"
 	.string "Thanks for saving me!\p"
 	.string "Oh?\p"

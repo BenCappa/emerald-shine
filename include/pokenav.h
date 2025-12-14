@@ -17,7 +17,7 @@ struct PokenavMonListItem
 struct PokenavMatchCallEntry
 {
     bool8 isSpecialTrainer;
-    u8 mapSec;
+    mapsec_u8_t mapSec;
     u16 headerId;
 };
 
@@ -192,19 +192,19 @@ enum
     MC_HEADER_BRENDAN,
     MC_HEADER_MAY,
     MC_HEADER_WALLY,
-    MC_HEADER_NORMAN,
+    MC_HEADER_MICHEAL,
     MC_HEADER_MOM,
     MC_HEADER_STEVEN,
     MC_HEADER_SCOTT,
-    MC_HEADER_ROXANNE,
-    MC_HEADER_BRAWLY,
+    MC_HEADER_ORIANA,
+    MC_HEADER_NILES,
     MC_HEADER_WATTSON,
-    MC_HEADER_FLANNERY,
+    MC_HEADER_ILIYAH,
     MC_HEADER_WINONA,
     MC_HEADER_TATE_LIZA,
-    MC_HEADER_JUAN,
+    MC_HEADER_RHEANNON,
     MC_HEADER_SIDNEY,
-    MC_HEADER_PHOEBE,
+    MC_HEADER_JUAN,
     MC_HEADER_GLACIA,
     MC_HEADER_DRAKE,
     MC_HEADER_WALLACE,
@@ -413,7 +413,7 @@ void FreeMatchCallSubstruct1(void);
 int IsMatchCallListInitFinished(void);
 int GetNumberRegistered(void);
 struct PokenavMatchCallEntry *GetMatchCallList(void);
-u16 GetMatchCallMapSec(int index);
+mapsec_u16_t GetMatchCallMapSec(int index);
 bool32 ShouldDrawRematchPokeballIcon(int index);
 void ClearRematchPokeballIcon(u16 windowId, u32 tileOffset);
 int GetMatchCallTrainerPic(int index);
@@ -422,7 +422,7 @@ const u8 *GetMatchCallMessageText(int index, bool8 *newRematchRequest);
 u16 GetMatchCallOptionCursorPos(void);
 u16 GetMatchCallOptionId(int optionId);
 void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8 *str);
-u8 GetMatchTableMapSectionId(int rematchIndex);
+mapsec_u8_t GetMatchTableMapSectionId(int rematchIndex);
 int GetIndexDeltaOfNextCheckPageDown(int index);
 int GetIndexDeltaOfNextCheckPageUp(int index);
 bool32 IsRematchEntryRegistered(int rematchIndex);

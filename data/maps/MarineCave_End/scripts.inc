@@ -35,7 +35,6 @@ MarineCave_End_EventScript_Kyogre::
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_MARINE_CAVE_KYOGRE
-	@ setwildbattle SPECIES_KYOGRE, 60, ITEM_BLUE_ORB
 	createmon 1, 0, SPECIES_KYOGRE, 60, ITEM_BLUE_ORB, move1=MOVE_BODY_SLAM, move2=MOVE_AQUA_RING, move3=MOVE_SHEER_COLD, move4=MOVE_ORIGIN_PULSE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	setflag FLAG_NO_RUNNING

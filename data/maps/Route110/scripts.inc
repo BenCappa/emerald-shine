@@ -182,6 +182,7 @@ Route110_EventScript_EdwinRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_EdwinRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_EDWIN_1
 	release
 	end
 
@@ -217,6 +218,7 @@ Route110_EventScript_BenjaminRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_BenjaminRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_BENJAMIN_1
 	release
 	end
 
@@ -242,6 +244,7 @@ Route110_EventScript_AbigailRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_AbigailRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ABIGAIL_1
 	release
 	end
 
@@ -262,6 +265,7 @@ Route110_EventScript_IsabelRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_IsabelRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ISABEL_1
 	release
 	end
 
@@ -390,23 +394,23 @@ Route110_EventScript_BenBattle::
 	end
 
 Route110_EventScript_BenBattleBulbasaur::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_BULBASAUR, Route110_Text_BenDefeated
+	trainerbattle_no_intro TRAINER_BEN_ROUTE_110_BULBASAUR, Route110_Text_BenDefeated
 	goto Route110_EventScript_BenDefeated
 	end
 
 Route110_EventScript_BenBattleFennekin::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_FENNEKIN, Route110_Text_BenDefeated
+	trainerbattle_no_intro TRAINER_BEN_ROUTE_110_FENNEKIN, Route110_Text_BenDefeated
 	goto Route110_EventScript_BenDefeated
 	end
 
 Route110_EventScript_BenBattlePiplup::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_PIPLUP, Route110_Text_BenDefeated
+	trainerbattle_no_intro TRAINER_BEN_ROUTE_110_PIPLUP, Route110_Text_BenDefeated
 	goto Route110_EventScript_BenDefeated
 	end
 
 Route110_EventScript_BenDefeated::
 	msgbox Route110_Text_BenTakeThis, MSGBOX_DEFAULT
-	givemon SPECIES_LUVDISC, 20, ITEM_HEART_SCALE, ITEM_LOVE_BALL, abilityNum=2, gender=FEMALE, isShiny=TRUE
+	givemon SPECIES_LUVDISC, 20, ITEM_HEART_SCALE, ITEM_LOVE_BALL, abilityNum=2, gender=FEMALE, shinyMode=SHINY_MODE_ALWAYS
 	showmonpic SPECIES_LUVDISC, 10, 3, TRUE
 	bufferspeciesname STR_VAR_1, SPECIES_LUVDISC
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_LUVDISC
@@ -618,6 +622,15 @@ Route110_EventScript_CeceScene::
 	msgbox Route110_Text_BePrepared, MSGBOX_DEFAULT
 	giveitem ITEM_DOWSING_MACHINE
 	msgbox Route110_Text_ExplainDowsingMachine, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox Route110_Text_RegisteredBirchInPokenav, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_ENABLE_PROF_BIRCH_MATCH_CALL
+	msgbox Route110_Text_ThatsAllForNow, MSGBOX_DEFAULT
 	closemessage
 	call_if_eq VAR_0x8008, 1, Route110_EventScript_CeceExit1
 	call_if_eq VAR_0x8008, 2, Route110_EventScript_CeceExit2
@@ -995,15 +1008,16 @@ Route110_Text_MauvilleCitySign:
 
 Route110_Text_TrainerTipsPrlzSleep:
 	.string "TRAINER TIPS\p"
-	.string "The foe can be made helpless by\n"
-	.string "paralyzing it or causing it to sleep.\p"
-	.string "It is an important technique for\n"
-	.string "Pokémon battles.$"
+	.string "Take a careful look at your Pokémon's\n"
+	.string "Summary Screen.\p"
+	.string "In there you can change their nickname\n"
+	.string "or what moves they have learned!$"
 
 Route110_Text_TrainerTipsRegisterItems:
 	.string "TRAINER TIPS\p"
-	.string "The items in the Bag can be reorganized\n"
-	.string "by pressing Select.$"
+	.string "An item registered in the Bag can be\n"
+	.string "quickly accessed in the overworld by\l"
+	.string "pressing the Select button.$"
 
 Route110_Text_TrickHouseSign:
 	.string "“Three steps {RIGHT_ARROW} and two steps {UP_ARROW}\n"
@@ -1036,7 +1050,18 @@ Route110_Text_ExplainDowsingMachine:
 	.string "???: That's a Dowsing Machine.\p"
 	.string "It'll point you in the direction of\n"
 	.string "items hidden nearby.\p"
+	.string "Oh, I also heard you had the Match Call\n"
+	.string "system installed on your PokéNav.\p"
+	.string "We should probably register Gump\n"
+	.string "so he can rate your Pokédex anytime.$"
+
+Route110_Text_RegisteredBirchInPokenav:
+	.string "Registered Gump\n"
+	.string "in the PokéNav.$"
+
+Route110_Text_ThatsAllForNow:
 	.string "That's all for now.\p"
 	.string "I've gotta go but I'm sure we'll\n"
 	.string "meet up again soon, {PLAYER}{KUN}!\p"
 	.string "Buh-bye!$"
+

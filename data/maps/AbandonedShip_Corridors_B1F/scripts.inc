@@ -54,8 +54,8 @@ AbandonedShip_Corridors_B1F_EventScript_Duncan::
 	end
 
 AbandonedShip_Corridors_B1F_Text_DuncanIntro:
-	.string "When we go out to sea, we SAILORS\n"
-	.string "always bring our POKéMON.\l"
+	.string "When we go out to sea, we sailors\n"
+	.string "always bring our Pokémon.\l"
 	.string "How about a quick battle?$"
 
 AbandonedShip_Corridors_B1F_Text_DuncanDefeat:
@@ -64,8 +64,8 @@ AbandonedShip_Corridors_B1F_Text_DuncanDefeat:
 AbandonedShip_Corridors_B1F_Text_DuncanPostBattle:
 	.string "The ship's bottom has sunk into the\n"
 	.string "depths.\p"
-	.string "If a POKéMON knew how to go underwater,\n"
-	.string "we might make some progress…$"
+	.string "We need Pokémon who know how to Dive\n"
+	.string "in order to make some progress…$"
 
 AbandonedShip_Corridors_B1F_Text_YayItsAShip:
 	.string "Yay!\n"
@@ -77,8 +77,8 @@ AbandonedShip_Corridors_B1F_Text_DoorIsLocked:
 
 AbandonedShip_Corridors_B1F_Text_InsertedStorageKey:
 	.string "{PLAYER} inserted and turned the\n"
-	.string "STORAGE KEY.\p"
-	.string "The inserted KEY stuck fast,\n"
+	.string "Storage Key.\p"
+	.string "The inserted Key got stuck,\n"
 	.string "but the door opened.$"
 
 AbandonedShip_Text_TheDoorIsOpen:

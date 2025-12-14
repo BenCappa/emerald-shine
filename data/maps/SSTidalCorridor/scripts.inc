@@ -185,7 +185,6 @@ SSTidalCorridor_EventScript_TrainerNotDefeated::
 
 SSTidalCorridor_EventScript_ScottScene::
 	lockall
-	clearflag FLAG_HIDE_SS_TIDAL_CORRIDOR_SCOTT
 	applymovement LOCALID_SS_TIDAL_SCOTT, SSTidalCorridor_Movement_ScottApproachPlayer
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight

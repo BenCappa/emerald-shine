@@ -69,8 +69,8 @@
 #define VAR_FRONTIER_GAMBLER_AMOUNT_BET                  0x4032
 #define VAR_FRONTIER_GAMBLER_STATE                       0x4033
 
-#define VAR_CELEBI_ROCK_STEP_COUNT                       0x4034
-#define VAR_CELEBI_ROCK_LEVEL                            0x4035
+#define VAR_DEOXYS_ROCK_STEP_COUNT                       0x4034
+#define VAR_DEOXYS_ROCK_LEVEL                            0x4035
 #define VAR_PC_BOX_TO_SEND_MON                           0x4036
 #define VAR_ABNORMAL_WEATHER_LOCATION                    0x4037
 #define VAR_ABNORMAL_WEATHER_STEP_COUNTER                0x4038
@@ -88,15 +88,15 @@
 #define VAR_TRICK_HOUSE_LEVEL                            0x4044
 #define VAR_POKELOT_PRIZE_ITEM                           0x4045
 #define VAR_NATIONAL_DEX                                 0x4046
-#define VAR_SEEDOT_SIZE_RECORD                           0x4047
+#define VAR_SILCOON_SIZE_RECORD                          0x4047
 #define VAR_ASH_GATHER_COUNT                             0x4048
 #define VAR_BIRCH_STATE                                  0x4049
 #define VAR_CRUISE_STEP_COUNT                            0x404A
 #define VAR_POKELOT_RND1                                 0x404B
 #define VAR_POKELOT_RND2                                 0x404C
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
-#define VAR_REPEL_LURE                                   0x404E // Previously unused Var
-#define VAR_LOTAD_SIZE_RECORD                            0x404F
+#define VAR_STARTING_STATUS                              0x404E
+#define VAR_CASCOON_SIZE_RECORD                          0x404F
 #define VAR_LITTLEROOT_TOWN_STATE                        0x4050
 #define VAR_OLDALE_TOWN_STATE                            0x4051
 #define VAR_DEWFORD_TOWN_STATE                           0x4052 // Unused Var
@@ -148,15 +148,15 @@
 #define VAR_ROUTE133_STATE                               0x4080 // Unused Var
 #define VAR_ROUTE134_STATE                               0x4081 // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
-#define VAR_UNUSED_0x4083                                0x4083 // Unused Var
+#define VAR_REPEL_LURE                                   0x4083
 #define VAR_BIRCH_LAB_STATE                              0x4084
-#define VAR_PETALBURG_GYM_STATE                          0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
+#define VAR_PETALBURG_GYM_STATE                          0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Micheal, 8: Rematch Micheal
 #define VAR_CONTEST_HALL_STATE                           0x4086
 #define VAR_CABLE_CLUB_STATE                             0x4087
 #define VAR_CONTEST_TYPE                                 0x4088
 #define VAR_SECRET_BASE_INITIALIZED                      0x4089
 #define VAR_CONTEST_PRIZE_PICKUP                         0x408A
-#define VAR_UNUSED_0x408B                                0x408B // Unused Var
+#define VAR_WALLY_MEGA_RING_STATE                        0x408B
 #define VAR_LITTLEROOT_HOUSES_STATE_BRENDAN              0x408C
 #define VAR_LITTLEROOT_RIVAL_STATE                       0x408D
 #define VAR_BOARD_BRINEY_BOAT_STATE                      0x408E
@@ -204,7 +204,7 @@
 #define VAR_UNUSED_0x40B8                                0x40B8 // Unused Var
 #define VAR_MT_PYRE_STATE                                0x40B9
 #define VAR_NEW_MAUVILLE_STATE                           0x40BA
-#define VAR_WALLY_MEGA_RING_STATE                        0x40BB // Previously unused Var
+#define VAR_UNUSED_0x40BB                                0x40BB // Unused Var
 #define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON                0x40BC
 #define VAR_JAGGED_PASS_ASH_WEATHER                      0x40BD
 #define VAR_GLASS_WORKSHOP_STATE                         0x40BE
@@ -233,11 +233,11 @@
 #define VAR_ROAMER_POKEMON                               0x40D5 // 0 = Latias/Glastrier, 1 = Latios/Spectrier
 #define VAR_TRAINER_HILL_IS_ACTIVE                       0x40D6
 #define VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE                 0x40D7
-#define VAR_SOOTOPOLIS_WALLACE_STATE                     0x40D8
+#define VAR_SOOTOPOLIS_STEVEN_STATE                      0x40D8
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_REGISTER_BIRCH_STATE                         0x40DA
-#define VAR_UNUSED_0x40DB                                0x40DB // Unused Var
-#define VAR_UNUSED_0x40DC                                0x40DC // Unused Var
+#define VAR_DN_SPECIES                                   0x40DB
+#define VAR_DN_STEP_COUNTER                              0x40DC
 #define VAR_GIFT_PICHU_SLOT                              0x40DD
 #define VAR_GIFT_UNUSED_1                                0x40DE // Var is written to, but never read
 #define VAR_GIFT_UNUSED_2                                0x40DF // Var is written to, but never read
@@ -261,11 +261,11 @@
 #define VAR_DAILY_BP                                     0x40F1
 #define VAR_WALLY_CALL_STEP_COUNTER                      0x40F2
 #define VAR_SCOTT_FORTREE_CALL_STEP_COUNTER              0x40F3
-#define VAR_ROXANNE_CALL_STEP_COUNTER                    0x40F4
+#define VAR_ORIANA_CALL_STEP_COUNTER                    0x40F4
 #define VAR_SCOTT_BF_CALL_STEP_COUNTER                   0x40F5
 #define VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER             0x40F6
-#define VAR_STARTING_STATUS                              0x40F7 // Previously unused Var
-#define VAR_MOVE_RELEARNER_STATE                         0x40F8 // Unused Var
+#define VAR_UNUSED_0x40F7                                0x40F7 // Unused Var
+#define VAR_UNUSED_0x40F8                                0x40F8 // Unused Var
 #define VAR_UNUSED_0x40F9                                0x40F9 // Unused Var
 #define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
 #define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
@@ -325,15 +325,15 @@
 #define VAR_TEMP_TRANSFERRED_SPECIES  VAR_TEMP_1
 
 #if TESTING
-#define TESTING_VARS_START             0x9000
-#define TESTING_VAR_DIFFICULTY         (TESTING_VARS_START + 0x0)
-#define TESTING_VAR_UNUSED_1           (TESTING_VARS_START + 0x1)
-#define TESTING_VAR_UNUSED_2           (TESTING_VARS_START + 0x2)
-#define TESTING_VAR_UNUSED_3           (TESTING_VARS_START + 0x3)
-#define TESTING_VAR_UNUSED_4           (TESTING_VARS_START + 0x4)
-#define TESTING_VAR_UNUSED_5           (TESTING_VARS_START + 0x5)
-#define TESTING_VAR_UNUSED_6           (TESTING_VARS_START + 0x6)
-#define TESTING_VAR_UNUSED_7           (TESTING_VARS_START + 0x7)
+#define TESTING_VARS_START                  0x9000
+#define TESTING_VAR_DIFFICULTY              (TESTING_VARS_START + 0x0)
+#define TESTING_VAR_STARTING_STATUS         (TESTING_VARS_START + 0x1)
+#define TESTING_VAR_STARTING_STATUS_TIMER   (TESTING_VARS_START + 0x2)
+#define TESTING_VAR_UNUSED_3                (TESTING_VARS_START + 0x3)
+#define TESTING_VAR_UNUSED_4                (TESTING_VARS_START + 0x4)
+#define TESTING_VAR_UNUSED_5                (TESTING_VARS_START + 0x5)
+#define TESTING_VAR_UNUSED_6                (TESTING_VARS_START + 0x6)
+#define TESTING_VAR_UNUSED_7                (TESTING_VARS_START + 0x7)
 #endif // TESTING
 
 #endif // GUARD_CONSTANTS_VARS_H

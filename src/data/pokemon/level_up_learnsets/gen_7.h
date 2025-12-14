@@ -8085,7 +8085,7 @@ static const struct LevelUpMove sSkittyLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 7, MOVE_SING),
     LEVEL_UP_MOVE(10, MOVE_ATTRACT),
     LEVEL_UP_MOVE(13, MOVE_DISARMING_VOICE),
-    LEVEL_UP_MOVE(16, MOVE_FURY_SWIPES),
+    LEVEL_UP_MOVE(16, MOVE_DOUBLE_SLAP),
     LEVEL_UP_MOVE(19, MOVE_COPYCAT),
     LEVEL_UP_MOVE(22, MOVE_FEINT_ATTACK),
     LEVEL_UP_MOVE(25, MOVE_CHARM),
@@ -8103,7 +8103,7 @@ static const struct LevelUpMove sDelcattyLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_FAKE_OUT),
     LEVEL_UP_MOVE( 1, MOVE_SING),
     LEVEL_UP_MOVE( 1, MOVE_ATTRACT),
-    LEVEL_UP_MOVE( 1, MOVE_FURY_SWIPES),
+    LEVEL_UP_MOVE( 1, MOVE_DOUBLE_SLAP),
     LEVEL_UP_END
 };
 #endif //P_FAMILY_SKITTY
@@ -15560,7 +15560,7 @@ static const struct LevelUpMove sChesnaughtLevelUpLearnset[] = {
 static const struct LevelUpMove sFennekinLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
     LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
-    LEVEL_UP_MOVE( 7, MOVE_EMBER),
+    LEVEL_UP_MOVE( 5, MOVE_EMBER),
     LEVEL_UP_MOVE(11, MOVE_HOWL),
     LEVEL_UP_MOVE(14, MOVE_FLAME_CHARGE),
     LEVEL_UP_MOVE(17, MOVE_PSYBEAM),

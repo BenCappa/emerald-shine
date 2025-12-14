@@ -87,7 +87,7 @@ Route104_EventScript_PlayBrendanMusic::
 Route104_EventScript_RivalEncounter::
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, Route104_EventScript_MayEncounter
-	goto_if_eq VAR_RESULT, FEMALE, Route104_EventScript_BrendanEncounter
+	goto_if_eq VAR_RESULT, FEMALE, Route104_EventScript_BenEncounter
 	end
 
 Route104_EventScript_MayEncounter::
@@ -176,63 +176,71 @@ Route104_EventScript_BattleMayPiplup::
 	goto Route104_EventScript_MayDefeated
 	end
 
-Route104_EventScript_BrendanEncounter::
-	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE_104, Route104_EventScript_BrendanDefeated
-	goto_if_set FLAG_REGISTER_RIVAL_POKENAV, Route104_EventScript_BrendanAskToBattle
+Route104_EventScript_BenEncounter::
+	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE_104, Route104_EventScript_BenDefeated
+	goto_if_set FLAG_REGISTER_RIVAL_POKENAV, Route104_EventScript_BenAskToBattle
 	setflag FLAG_REGISTER_RIVAL_POKENAV
+	msgbox Route104_Text_BenWeShouldRegister, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox Route104_Text_RegisteredBen, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	applymovement LOCALID_PLAYER, Route104_Movement_PlayerFaceRival
 	applymovement LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalWalkSlowLeft
-	msgbox Route104_Text_BrendanHowsYourPokedex, MSGBOX_DEFAULT
+	msgbox Route104_Text_BenHowsYourPokedex, MSGBOX_DEFAULT
 	closemessage
 	waitmovement 0
 	applymovement LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalApproachPlayer
 	waitmovement 0
 	copyobjectxytoperm LOCALID_ROUTE104_RIVAL
-	msgbox Route104_Text_BrendanDoingGreatLetsBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleBrendan
-	msgbox Route104_Text_BrendanNoConfidence, MSGBOX_DEFAULT
+	msgbox Route104_Text_BenDoingGreatLetsBattle, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleBen
+	msgbox Route104_Text_BenNoConfidence, MSGBOX_DEFAULT
 	call Route104_EventScript_RestoreMusic
 	releaseall
 	end
 
-Route104_EventScript_BrendanAskToBattle::
-	msgbox Route104_Text_BrendanLetsBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleBrendan
-	msgbox Route104_Text_BrendanNoConfidence, MSGBOX_DEFAULT
+Route104_EventScript_BenAskToBattle::
+	msgbox Route104_Text_BenLetsBattle, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleBen
+	msgbox Route104_Text_BenNoConfidence, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route104_EventScript_BattleBrendan::
-	msgbox Route104_Text_BrendanIntro, MSGBOX_DEFAULT
+Route104_EventScript_BattleBen::
+	msgbox Route104_Text_BenIntro, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
-	case 0, Route104_EventScript_BattleBrendanBulbasaur
-	case 1, Route104_EventScript_BattleBrendanFennekin
-	case 2, Route104_EventScript_BattleBrendanPiplup
+	case 0, Route104_EventScript_BattleBenBulbasaur
+	case 1, Route104_EventScript_BattleBenFennekin
+	case 2, Route104_EventScript_BattleBenPiplup
 	end
 
-Route104_EventScript_BrendanDefeated::
-	msgbox Route104_Text_BrendanPostBattle, MSGBOX_DEFAULT
+Route104_EventScript_BenDefeated::
+	msgbox Route104_Text_BenPostBattle, MSGBOX_DEFAULT
 	call_if_eq VAR_0x8008, 0, Route104_EventScript_RestoreMusic
 	releaseall
 	end
 
-Route104_EventScript_BattleBrendanBulbasaur::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_BULBASAUR, Route104_Text_BrendanDefeat
+Route104_EventScript_BattleBenBulbasaur::
+	trainerbattle_no_intro TRAINER_BEN_RUSTBORO_BULBASAUR, Route104_Text_BenDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
-	goto Route104_EventScript_BrendanDefeated
+	goto Route104_EventScript_BenDefeated
 	end
 
-Route104_EventScript_BattleBrendanFennekin::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_FENNEKIN, Route104_Text_BrendanDefeat
+Route104_EventScript_BattleBenFennekin::
+	trainerbattle_no_intro TRAINER_BEN_RUSTBORO_FENNEKIN, Route104_Text_BenDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
-	goto Route104_EventScript_BrendanDefeated
+	goto Route104_EventScript_BenDefeated
 	end
 
-Route104_EventScript_BattleBrendanPiplup::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_PIPLUP, Route104_Text_BrendanDefeat
+Route104_EventScript_BattleBenPiplup::
+	trainerbattle_no_intro TRAINER_BEN_RUSTBORO_PIPLUP, Route104_Text_BenDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
-	goto Route104_EventScript_BrendanDefeated
+	goto Route104_EventScript_BenDefeated
 	end
 
 Route104_Movement_PlayerBackUp:
@@ -344,11 +352,34 @@ Route104_EventScript_SailToDewford::
 	waitmovement 0
 	hideobjectat LOCALID_PLAYER, MAP_ROUTE104
 	call Common_EventScript_PlayBrineysBoatMusic
+	goto_if_set FLAG_ENABLE_MICHEAL_MATCH_CALL, Route104_EventScript_SailToDewfordNoCall
+	goto_if_unset FLAG_ENABLE_MICHEAL_MATCH_CALL, Route104_EventScript_SailToDewfordMikeCalls
+	end
+
+Route104_EventScript_SailToDewfordNoCall::
 	applymovement LOCALID_ROUTE104_BOAT, Route104_Movement_SailToDewford
 	applymovement LOCALID_PLAYER, Route104_Movement_SailToDewford
 	waitmovement 0
 	goto Route104_EventScript_ArriveInDewford
-	end
+
+Route104_EventScript_SailToDewfordMikeCalls::
+	applymovement LOCALID_ROUTE104_BOAT, Route104_Movement_SailToDewfordBeforeMikeCalls
+	applymovement LOCALID_PLAYER, Route104_Movement_SailToDewfordBeforeMikeCalls
+	waitmovement 0
+	pokenavcall Route104_Text_MikePokenavCall
+	waitmessage
+	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox Route104_Text_RegisteredMikeInPokenav, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_ENABLE_MICHEAL_MATCH_CALL
+	applymovement LOCALID_PLAYER, Route104_Movement_SailToDewfordAfterMikeCalls
+	applymovement LOCALID_ROUTE104_BOAT, Route104_Movement_SailToDewfordAfterMikeCalls, MAP_ROUTE104
+	waitmovement LOCALID_ROUTE104_BOAT, MAP_ROUTE104
+	waitmovement 0
+	goto Route104_EventScript_ArriveInDewford
 
 Route104_EventScript_ArriveInDewford::
 	delay 50
@@ -387,6 +418,206 @@ Route104_EventScript_LandedInDewford::
 	msgbox DewfordTown_Text_BrineyLandedInDewford, MSGBOX_DEFAULT
 	releaseall
 	end
+
+Route104_Movement_SailToDewfordBeforeMikeCalls:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	step_end
+
+Route104_Movement_SailToDewfordAfterMikeCalls:
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_faster_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_down
+	walk_down
+	step_end
 
 Route104_Movement_SailToDewford:
 	walk_down
@@ -622,17 +853,38 @@ Route104_EventScript_Billy::
 	end
 
 Route104_EventScript_Haley::
-	trainerbattle_single TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, Route104_EventScript_RegisterHaley
+	trainerbattle_single TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, Route104_EventScript_TryRegisterHaleyAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchHaley
+	setvar VAR_0x8004, TRAINER_HALEY_1
+	specialvar VAR_RESULT, IsTrainerRegistered
+	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_TryRegisterHaley
+	msgbox Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route104_EventScript_TryRegisterHaleyAfterBattle::
+	special PlayerFaceTrainerAfterBattle
+	waitmovement 0
+	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterHaleyAfterBattle
+	release
+	end
+
+Route104_EventScript_RegisterHaleyAfterBattle::
+	msgbox Route104_Text_HaleyRegister2, MSGBOX_DEFAULT
+	register_matchcall TRAINER_HALEY_1
+	release
+	end
+
+Route104_EventScript_TryRegisterHaley::
+	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterHaley
 	msgbox Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 Route104_EventScript_RegisterHaley::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route104_Text_HaleyRegister, MSGBOX_DEFAULT
+	msgbox Route104_Text_HaleyRegister1, MSGBOX_DEFAULT
+	register_matchcall TRAINER_HALEY_1
 	release
 	end
 
@@ -642,17 +894,38 @@ Route104_EventScript_RematchHaley::
 	end
 
 Route104_EventScript_Winston::
-	trainerbattle_single TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, Route104_EventScript_RegisterWinston
+	trainerbattle_single TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, Route104_EventScript_TryRegisterWinstonAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchWinston
+	setvar VAR_0x8004, TRAINER_WINSTON_1
+	specialvar VAR_RESULT, IsTrainerRegistered
+	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_TryRegisterWinston
+	msgbox Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route104_EventScript_TryRegisterWinstonAfterBattle::
+	special PlayerFaceTrainerAfterBattle
+	waitmovement 0
+	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterWinstonAfterBattle
+	release
+	end
+
+Route104_EventScript_RegisterWinstonAfterBattle::
+	msgbox Route104_Text_WinstonRegister2, MSGBOX_DEFAULT
+	register_matchcall TRAINER_WINSTON_1
+	release
+	end
+
+Route104_EventScript_TryRegisterWinston::
+	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterWinston
 	msgbox Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 Route104_EventScript_RegisterWinston::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route104_Text_WinstonRegister, MSGBOX_DEFAULT
+	msgbox Route104_Text_WinstonRegister1, MSGBOX_DEFAULT
+	register_matchcall TRAINER_WINSTON_1
 	release
 	end
 
@@ -662,17 +935,38 @@ Route104_EventScript_RematchWinston::
 	end
 
 Route104_EventScript_Cindy::
-	trainerbattle_single TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, Route104_EventScript_RegisterCindy
+	trainerbattle_single TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, Route104_EventScript_TryRegisterCindyAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchCindy
+	setvar VAR_0x8004, TRAINER_CINDY_1
+	specialvar VAR_RESULT, IsTrainerRegistered
+	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_TryRegisterCindy
+	msgbox Route104_Text_CindyPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route104_EventScript_TryRegisterCindyAfterBattle::
+	special PlayerFaceTrainerAfterBattle
+	waitmovement 0
+	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterCindyAfterBattle
+	release
+	end
+
+Route104_EventScript_RegisterCindyAfterBattle::
+	msgbox Route104_Text_CindyRegister2, MSGBOX_DEFAULT
+	register_matchcall TRAINER_CINDY_1
+	release
+	end
+
+Route104_EventScript_TryRegisterCindy::
+	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterCindy
 	msgbox Route104_Text_CindyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 Route104_EventScript_RegisterCindy::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route104_Text_CindyRegister, MSGBOX_DEFAULT
+	msgbox Route104_Text_CindyRegister1, MSGBOX_DEFAULT
+	register_matchcall TRAINER_CINDY_1
 	release
 	end
 
@@ -784,7 +1078,7 @@ Route104_Text_TrainerTipsDoubleBattles:
 
 Route104_Text_MayWeShouldRegister:
 	.string "MAY: Oh, hi, {PLAYER}{KUN}!\p"
-	.string "Devon upgraded your PokéNav with\n"
+	.string "DevCo upgraded your PokéNav with\n"
 	.string "the Match Call system, huh?\p"
 	.string "We should register each other so we\n"
 	.string "can get in contact anytime.$"
@@ -824,36 +1118,48 @@ Route104_Text_MayPostBattle:
 	.string "MAY: I can tell you've gotten pretty\n"
 	.string "good with the way you handle Pokémon.\p"
 	.string "But instead of only making them\n"
-	.string "battle, you should be like Mr. Briney.\p"
+	.string "battle, you should be like MR. BRINEY.\p"
 	.string "It's important to become friends with\n"
 	.string "Pokémon, too.$"
 
-Route104_Text_BrendanHowsYourPokedex:
+Route104_Text_BenWeShouldRegister:
+	.string "Ben: Oh, hey, {PLAYER}!\p"
+	.string "Cool, you had the Match Call system\n"
+	.string "installed on your PokéNav!\p"
+	.string "Let's register each other in our\n"
+	.string "PokéNavs so we can keep in touch.\p"
+	.string "Like platonic friends do…$"
+
+Route104_Text_RegisteredBen:
+	.string "{PLAYER} registered Ben\n"
+	.string "in the PokéNav.$"
+
+Route104_Text_BenHowsYourPokedex:
 	.string "Ben: {PLAYER}, how's your Pokédex?\n"
 	.string "Have you filled in any pages yet?$"
 
-Route104_Text_BrendanDoingGreatLetsBattle:
+Route104_Text_BenDoingGreatLetsBattle:
 	.string "Me, I'm doing great!\p"
 	.string "Want to check out how good I am with\n"
 	.string "a battle?$"
 
-Route104_Text_BrendanNoConfidence:
+Route104_Text_BenNoConfidence:
 	.string "Ben: What's the matter? Don't have\n"
 	.string "any confidence in your Pokémon?$"
 
-Route104_Text_BrendanLetsBattle:
+Route104_Text_BenLetsBattle:
 	.string "Ben: What's up?\n"
 	.string "Want to have a battle with me?$"
 
-Route104_Text_BrendanIntro:
+Route104_Text_BenIntro:
 	.string "Ben: I know you just became\n"
 	.string "a Trainer, but I won't go easy!$"
 
-Route104_Text_BrendanDefeat:
+Route104_Text_BenDefeat:
 	.string "Hmm…\n"
 	.string "You're pretty good.$"
 
-Route104_Text_BrendanPostBattle:
+Route104_Text_BenPostBattle:
 	.string "Ben: You've gotten pretty decent\n"
 	.string "at handling Pokémon.\p"
 	.string "But, you know, you shouldn't just be\n"

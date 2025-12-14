@@ -642,12 +642,12 @@ static const u8 sGbaAffineMapCable[] = INCBIN_U8("graphics/trade/gba_affine_map_
 static const u8 sGbaAffineMapWireless[] = INCBIN_U8("graphics/trade/gba_affine_map_wireless.bin");
 static const u16 sGbaMapWireless[] = INCBIN_U16("graphics/trade/gba_map_wireless.bin");
 static const u16 sGbaMapCable[] = INCBIN_U16("graphics/trade/gba_map_cable.bin");
-static const u32 sWirelessCloseup_Map[] = INCBIN_U32("graphics/trade/crossing_highlight_wireless.bin.lz");
+static const u32 sWirelessCloseup_Map[] = INCBIN_U32("graphics/trade/crossing_highlight_wireless.bin.smolTM");
 static const u16 sWirelessSignalSend_Pal[] = INCBIN_U16("graphics/trade/wireless_signal_send.gbapal");
 static const u16 sWirelessSignalRecv_Pal[] = INCBIN_U16("graphics/trade/wireless_signal_receive.gbapal");
 static const u16 sWirelessSignalNone_Pal[] = INCBIN_U16("graphics/trade/wireless_signal_none.gbapal");
-static const u32 sWirelessSignal_Gfx[] = INCBIN_U32("graphics/trade/wireless_signal.4bpp.lz");
-static const u32 sWirelessSignal_Tilemap[] = INCBIN_U32("graphics/trade/wireless_signal.bin.lz");
+static const u32 sWirelessSignal_Gfx[] = INCBIN_U32("graphics/trade/wireless_signal.4bpp.smol");
+static const u32 sWirelessSignal_Tilemap[] = INCBIN_U32("graphics/trade/wireless_signal.bin.smolTM");
 
 static const struct OamData sOamData_Pokeball =
 {
@@ -984,7 +984,7 @@ static const union AffineAnimCmd *const sAffineAnims_CrossingMonPics[] =
 
 static const struct InGameTrade sIngameTrades[] =
 {
-    [INGAME_TRADE_SEEDOT] =
+    [INGAME_TRADE_PICHU] =
     {
         .nickname = _("Spike"),
         .species = SPECIES_PICHU_SPIKY_EARED,
@@ -1001,7 +1001,7 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_MINCCINO
     },
-    [INGAME_TRADE_PLUSLE] =
+    [INGAME_TRADE_COMBEE] =
     {
         .nickname = _("Mia"),
         .species = SPECIES_COMBEE,
@@ -1018,7 +1018,7 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_MOTHIM
     },
-    [INGAME_TRADE_HORSEA] =
+    [INGAME_TRADE_DRATINI] =
     {
         .nickname = _("Marvel"),
         .species = SPECIES_DRATINI,
@@ -1053,41 +1053,6 @@ static const struct InGameTrade sIngameTrades[] =
         .requestedSpecies = SPECIES_MEOWTH_ALOLA
     }
 };
-
-/*static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
-{
-    {
-        EC_WORD_BE,
-        EC_WORD_NICE,
-        EC_WORD_TO,
-        EC_POKEMON(PLUSLE),
-        EC_WORD_EXCL,
-        EC_POKEMON(VOLBEAT),
-        EC_WORD_WILL,
-        EC_WORD_BE,
-        EC_WORD_FANTASTIC
-    }, {
-        EC_WORD_I,
-        EC_WORD_WILL,
-        EC_WORD_MAKE,
-        EC_POKEMON(BAGON),
-        EC_WORD_TOUGH,
-        EC_WORD_PLEASE,
-        EC_WORD_TRAIN,
-        EC_POKEMON(HORSEA),
-        EC_WORD_WELL
-    }, {
-        EC_WORD_THANK_YOU,
-        EC_WORD_FOR,
-        EC_POKEMON(SKITTY),
-        EC_POKEMON_NATIONAL(MEOWTH),
-        EC_WORD_CRIES,
-        EC_WORD_IN,
-        EC_WORD_A,
-        EC_WORD_CUTE,
-        EC_WORD_WAY
-    }
-};*/
 
 static const struct WindowTemplate sTradeSequenceWindowTemplates[] =
 {

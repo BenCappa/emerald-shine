@@ -8,7 +8,6 @@ ASSUMPTIONS
     ASSUME(MoveMakesContact(MOVE_SCRATCH) == TRUE);
 }
 
-
 SINGLE_BATTLE_TEST("Tangling Hair drops opposing mon's speed if ability user got hit by a contact move")
 {
     u32 move;
@@ -66,5 +65,35 @@ SINGLE_BATTLE_TEST("Tangling Hair Speed stat drop triggers defiant and keeps ori
         MESSAGE("The opposing Pawniard's Attack sharply rose!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         MESSAGE("The opposing Pawniard was hurt by Dugtrio's Rocky Helmet!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Tangling Hair does not activate on confusion damage")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
+        PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_CONFUSE_RAY); MOVE(player, MOVE_CELEBRATE, WITH_RNG(RNG_CONFUSION, TRUE)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFUSE_RAY, opponent);
+        NONE_OF {
+            ABILITY_POPUP(player, ABILITY_TANGLING_HAIR);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Tangling Hair does not trigger on Clear Body")
+{
+    GIVEN {
+        PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); }
+        OPPONENT(SPECIES_BELDUM) { Ability(ABILITY_CLEAR_BODY); };
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        NOT ABILITY_POPUP(player, ABILITY_TANGLING_HAIR);
     }
 }

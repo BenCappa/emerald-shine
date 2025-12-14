@@ -314,7 +314,7 @@ Route124_DivingTreasureHuntersHouse_Text_YoullTradeShardForStone:
 
 Route124_DivingTreasureHuntersHouse_Text_ItsADeal:
 	.string "It's a done deal!\n"
-	.string "Use that wisely!$"
+	.string "Use it wisely!$"
 
 Route124_DivingTreasureHuntersHouse_Text_TradeSomethingElse:
 	.string "Do you want to trade something else?$"

@@ -23,7 +23,7 @@ DewfordTown_House2_EventScript_ExplainLuckyEgg::
 	end
 
 DewfordTown_House2_EventScript_Boy::
-	msgbox DewfordTown_House2_Text_BrawlySoCool, MSGBOX_NPC
+	msgbox DewfordTown_House2_Text_NilesSoCool, MSGBOX_NPC
 	end
 
 DewfordTown_House2_Text_WantYouToHaveLuckyEgg:
@@ -47,7 +47,7 @@ DewfordTown_House2_Text_ExplainLuckyEgg:
 	.string "Whenever a Pokémon holds one they'll\n"
 	.string "gain extra Experience Points!$"
 
-DewfordTown_House2_Text_BrawlySoCool:
+DewfordTown_House2_Text_NilesSoCool:
 	.string "Wow, you bothered to cross the sea\n"
 	.string "to visit Dewford?\p"
 	.string "Did you maybe come here because you\n"

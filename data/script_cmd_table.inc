@@ -146,7 +146,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_GIVEMON                       ScrCmd_nop1,                        requests_effects=1  @ 0x79
 	script_cmd_table_entry SCR_OP_GIVEEGG                       ScrCmd_giveegg,                     requests_effects=1  @ 0x7a
 	script_cmd_table_entry SCR_OP_SETMONMOVE                    ScrCmd_setmonmove,                  requests_effects=1  @ 0x7b
-	script_cmd_table_entry SCR_OP_CHECKPARTYMOVE                ScrCmd_checkpartymove,              requests_effects=1  @ 0x7c
+	script_cmd_table_entry SCR_OP_CHECKFIELDMOVE                ScrCmd_checkfieldmove,              requests_effects=1  @ 0x7c
 	script_cmd_table_entry SCR_OP_BUFFERSPECIESNAME             ScrCmd_bufferspeciesname,           requests_effects=1  @ 0x7d
 	script_cmd_table_entry SCR_OP_BUFFERLEADMONSPECIESNAME      ScrCmd_bufferleadmonspeciesname,    requests_effects=1  @ 0x7e
 	script_cmd_table_entry SCR_OP_BUFFERPARTYMONNICK            ScrCmd_bufferpartymonnick,          requests_effects=1  @ 0x7f
@@ -157,8 +157,8 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_BUFFERSTDSTRING               ScrCmd_bufferstdstring,             requests_effects=1  @ 0x84
 	script_cmd_table_entry SCR_OP_BUFFERSTRING                  ScrCmd_bufferstring,                requests_effects=1  @ 0x85
 	script_cmd_table_entry SCR_OP_POKEMART                      ScrCmd_pokemart,                    requests_effects=1  @ 0x86
-	script_cmd_table_entry SCR_OP_POKEMARTDECORATION            ScrCmd_pokemartdecoration,          requests_effects=1  @ 0x87
-	script_cmd_table_entry SCR_OP_POKEMARTBATTLE	            ScrCmd_pokemartbattle,         	 	requests_effects=1  @ 0x88
+	script_cmd_table_entry SCR_OP_POKEMARTBATTLE	            ScrCmd_pokemartbattle,          	requests_effects=1  @ 0x87
+	script_cmd_table_entry SCR_OP_POKEMARTDECORATION            ScrCmd_pokemartdecoration,          requests_effects=1  @ 0x88
 	script_cmd_table_entry SCR_OP_PLAYSLOTMACHINE               ScrCmd_playslotmachine,             requests_effects=1  @ 0x89
 	script_cmd_table_entry SCR_OP_SETBERRYTREE                  ScrCmd_setberrytree,                requests_effects=1  @ 0x8a
 	script_cmd_table_entry SCR_OP_CHOOSECONTESTMON              ScrCmd_choosecontestmon,            requests_effects=1  @ 0x8b
@@ -251,6 +251,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_BUFFERITEMNAMEPLURAL          ScrCmd_bufferitemnameplural,        requests_effects=1  @ 0xe2
 	script_cmd_table_entry SCR_OP_DYNMULTICHOICE                ScrCmd_dynmultichoice,              requests_effects=1  @ 0xe3
 	script_cmd_table_entry SCR_OP_DYNMULTIPUSH                  ScrCmd_dynmultipush,                requests_effects=1  @ 0xe4
+	script_cmd_table_entry SCR_OP_HIDEFOLLOWER                  ScrCmd_hidefollower,                requests_effects=1  @ 0xe5
 
 	.if ALLOCATE_SCRIPT_CMD_TABLE
 gScriptCmdTableEnd::

@@ -12,7 +12,7 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_3",
@@ -41,6 +41,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS"
     },
     {
+      "local_id": "LOCALID_FAT_MAN",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 7,
       "y": 7,
@@ -115,10 +116,6 @@
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

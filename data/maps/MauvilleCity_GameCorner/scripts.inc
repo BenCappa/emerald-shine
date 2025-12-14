@@ -61,6 +61,15 @@ MauvilleCity_GameCorner_EventScript_ChooseMoney::
 	goto MauvilleCity_GameCorner_EventScript_CancelBuyCoins
 	end
 
+@ Unused
+MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault500::
+	multichoicedefault 15, 0, MULTI_GAME_CORNER_COINS, 1, FALSE
+	switch VAR_RESULT
+	case 0, MauvilleCity_GameCorner_EventScript_Buy50Coins
+	case 1, MauvilleCity_GameCorner_EventScript_Buy500Coins
+	goto MauvilleCity_GameCorner_EventScript_CancelBuyCoins
+	end
+
 MauvilleCity_GameCorner_EventScript_Buy50Coins::
 	checkcoins VAR_TEMP_1
 	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1 - 50), MauvilleCity_GameCorner_EventScript_NoRoomForCoins

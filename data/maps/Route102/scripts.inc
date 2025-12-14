@@ -17,24 +17,45 @@ Route102_EventScript_Boy::
 	msgbox Route102_Text_CatchWholeBunchOfPokemon, MSGBOX_NPC
 	end
 
-Route102_EventScript_Calvin::
-	trainerbattle_single TRAINER_CALVIN_1, Route102_Text_CalvinIntro, Route102_Text_CalvinDefeated, Route102_EventScript_CalvinRegister
+Route102_EventScript_Joey::
+	trainerbattle_single TRAINER_JOEY_1, Route102_Text_JoeyIntro, Route102_Text_JoeyDefeated, Route102_EventScript_JoeyRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route102_EventScript_CalvinRematch
-	msgbox Route102_Text_CalvinPostBattle, MSGBOX_DEFAULT
+	goto_if_eq VAR_RESULT, TRUE, Route102_EventScript_JoeyRematch
+	setvar VAR_0x8004, TRAINER_JOEY_1
+	specialvar VAR_RESULT, IsTrainerRegistered
+	goto_if_eq VAR_RESULT, FALSE, Route102_EventScript_JoeyTryRegister
+	msgbox Route102_Text_JoeyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route102_EventScript_CalvinRegister::
+Route102_EventScript_JoeyRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route102_Text_CalvinRegister, MSGBOX_DEFAULT
+	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_JoeyRegisterMatchCall
 	release
 	end
 
-Route102_EventScript_CalvinRematch::
-	trainerbattle_rematch TRAINER_CALVIN_1, Route102_Text_CalvinRematchIntro, Route102_Text_CalvinRematchDefeated
-	msgbox Route102_Text_CalvinRematchPostBattle, MSGBOX_AUTOCLOSE
+Route102_EventScript_JoeyRegisterMatchCall::
+	msgbox Route102_Text_JoeyRegisterShort, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JOEY_1
+	release
+	end
+
+Route102_EventScript_JoeyTryRegister::
+	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_JoeyRegister
+	msgbox Route102_Text_JoeyPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route102_EventScript_JoeyRegister::
+	msgbox Route102_Text_JoeyRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JOEY_1
+	release
+	end
+
+Route102_EventScript_JoeyRematch::
+	trainerbattle_rematch TRAINER_JOEY_1, Route102_Text_JoeyRematchIntro, Route102_Text_JoeyRematchDefeated
+	msgbox Route102_Text_JoeyRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route102_EventScript_Rick::
@@ -62,7 +83,8 @@ Route102_Text_WatchMeCatchPokemon:
 
 Route102_Text_WallyIDidIt:
 	.string "Wally: I did it… It's my…\n"
-	.string "My very own Pokémon!$"
+	.string "My Pokémon!\p"
+	.string "It looks really rare too!$"
 
 Route102_Text_LetsGoBack:
 	.string "{PLAYER}, thank you!\n"

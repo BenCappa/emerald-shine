@@ -2047,15 +2047,9 @@ static u8 GetNumStagesWateredByBerryTreeId(u8 id)
     return BerryTreeGetNumStagesWatered(GetBerryTreeInfo(id));
 }
 
-// Berries can be watered at 4 stages of growth. This function is likely meant
-// to divide the berry yield range equally into quartiles. If you watered the
-// tree n times, your yield is a random number in the nth quartile.
-//
-// However, this function actually skews towards higher berry yields, because
-// it rounds `extraYield` to the nearest whole number.
-//
-// See resulting yields: https://gist.github.com/hondew/2a099dbe54aa91414decdbfaa524327d,
-// and bug fix: https://gist.github.com/hondew/0f0164e5b9dadfd72d24f30f2c049a0b.
+// Berries can be watered at 4 stages of growth. The distribution is largely
+// even but slightly prefers middle berry yields, since it uniformly draws from
+// a subset of the total yield range.
 static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
 {
     u32 randMin;
@@ -2444,27 +2438,70 @@ static void SetTreeMutations(u8 id, u8 berry)
 
 static u16 GetBerryPestSpecies(u8 berryId)
 {
+    u32 rand = Random() % 100;
 #if OW_BERRY_PESTS == TRUE
     const struct Berry *berry = GetBerryInfo(berryId);
     switch(berry->color)
     {
         case BERRY_COLOR_RED:
-            return P_FAMILY_LEDYBA ? SPECIES_LEDYBA : SPECIES_NONE;
+            if (rand < 50)
+                return SPECIES_WURMPLE; // 50% chance
+            else if (rand < 95)
+                return SPECIES_PARAS; // 45% chance
+            else
+                return SPECIES_YANMA; // 5% chance
             break;
         case BERRY_COLOR_BLUE:
-            return P_FAMILY_VOLBEAT_ILLUMISE ? SPECIES_VOLBEAT : SPECIES_NONE;
+            if (rand < 30)
+                return SPECIES_SURSKIT; // 30% chance
+            else if (rand < 50)
+                return SPECIES_SNOM; // 20% chance
+            else if (rand < 65)
+                return SPECIES_SWABLU; // 15% chance
+            else if (rand < 80)
+                return SPECIES_DUCKLETT; // 15% chance
+            else if (rand < 95)
+                return SPECIES_ROOKIDEE; // 15% chance
+            else
+                return SPECIES_HERACROSS; // 5% chance
             break;
         case BERRY_COLOR_PURPLE:
-            return P_FAMILY_VOLBEAT_ILLUMISE ? SPECIES_ILLUMISE : SPECIES_NONE;
+            if (rand < 33)
+                return SPECIES_MORELULL; // 33% chance
+            else if (rand < 66)
+                return SPECIES_BOUNSWEET; // 33% chance
+            else if (rand < 99)
+                return SPECIES_ODDISH; // 33% chance
+            else
+                return SPECIES_MUNCHLAX; // 1% chance
             break;
         case BERRY_COLOR_GREEN:
-            return P_FAMILY_BURMY ? SPECIES_BURMY_PLANT : SPECIES_NONE;
+            if (rand < 40)
+                return SPECIES_BURMY_PLANT; // 40% chance
+            else if (rand < 70)
+                return SPECIES_SEWADDLE; // 30% chance
+            else
+                return SPECIES_DEWPIDER; // 30% chance
             break;
         case BERRY_COLOR_YELLOW:
-            return P_FAMILY_COMBEE ? SPECIES_COMBEE : SPECIES_NONE;
+            if (rand < 30)
+                return SPECIES_BURMY_SANDY; // 30% chance
+            else if (rand < 60)
+                return SPECIES_COMBEE; // 30% chance
+            else if (rand < 80)
+                return SPECIES_JOLTIK; // 20% chance
+            else if (rand < 90)
+                return SPECIES_PICHU; // 10% chance
+            else
+                return SPECIES_PAWMI; // 10% chance
             break;
         case BERRY_COLOR_PINK:
-            return P_FAMILY_SCATTERBUG ? SPECIES_SPEWPA : SPECIES_NONE;
+            if (rand < 50)
+                return SPECIES_BURMY_TRASH; // 50% chance
+            else if (rand < 95)
+                return SPECIES_CUTIEFLY; // 45% chance
+            else
+                return SPECIES_CLEFFA; // 5% chance
             break;
     }
 #endif

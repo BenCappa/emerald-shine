@@ -1081,7 +1081,7 @@
       "y": 70,
       "elevation": 0,
       "item": "ITEM_STARDUST",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_STARDUST_2"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_STARDUST"
     },
     {
       "type": "secret_base",
@@ -1118,7 +1118,7 @@
       "y": 55,
       "elevation": 0,
       "item": "ITEM_STARDUST",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_STARDUST"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_STARDUST_2"
     },
     {
       "type": "hidden_item",

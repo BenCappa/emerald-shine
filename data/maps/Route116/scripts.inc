@@ -226,9 +226,9 @@ Route116_Movement_GlassesManExitEast:
 	walk_left
 	step_end
 
-Route116_EventScript_Joey::
-	trainerbattle_single TRAINER_JOEY, Route116_Text_JoeyIntro, Route116_Text_JoeyDefeat
-	msgbox Route116_Text_JoeyPostBattle, MSGBOX_AUTOCLOSE
+Route116_EventScript_Calvin::
+	trainerbattle_single TRAINER_CALVIN, Route116_Text_CalvinIntro, Route116_Text_CalvinDefeat
+	msgbox Route116_Text_CalvinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Jose::
@@ -237,17 +237,38 @@ Route116_EventScript_Jose::
 	end
 
 Route116_EventScript_Jerry::
-	trainerbattle_single TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, Route116_EventScript_RegisterJerry
+	trainerbattle_single TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, Route116_EventScript_TryRegisterJerryAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_RematchJerry
+	setvar VAR_0x8004, TRAINER_JERRY_1
+	specialvar VAR_RESULT, IsTrainerRegistered
+	goto_if_eq VAR_RESULT, FALSE, Route116_EventScript_TryRegisterJerry
+	msgbox Route116_Text_JerryPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route116_EventScript_TryRegisterJerryAfterBattle::
+	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterJerryAfterBattle
+	release
+	end
+
+Route116_EventScript_RegisterJerryAfterBattle::
+	special PlayerFaceTrainerAfterBattle
+	waitmovement 0
+	msgbox Route116_Text_JerryRegister2, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JERRY_1
+	release
+	end
+
+Route116_EventScript_TryRegisterJerry::
+	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterJerry
 	msgbox Route116_Text_JerryPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 Route116_EventScript_RegisterJerry::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route116_Text_JerryRegister, MSGBOX_DEFAULT
+	msgbox Route116_Text_JerryRegister1, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JERRY_1
 	release
 	end
 
@@ -267,17 +288,38 @@ Route116_EventScript_Janice::
 	end
 
 Route116_EventScript_Karen::
-	trainerbattle_single TRAINER_KAREN_1, Route116_Text_KarenIntro, Route116_Text_KarenDefeat, Route116_EventScript_RegisterKaren
+	trainerbattle_single TRAINER_KAREN_1, Route116_Text_KarenIntro, Route116_Text_KarenDefeat, Route116_EventScript_TryRegisterKarenAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_RematchKaren
+	setvar VAR_0x8004, TRAINER_KAREN_1
+	specialvar VAR_RESULT, IsTrainerRegistered
+	goto_if_eq VAR_RESULT, FALSE, Route116_EventScript_TryRegisterKaren
+	msgbox Route116_Text_KarenPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route116_EventScript_TryRegisterKarenAfterBattle::
+	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterKarenAfterBattle
+	release
+	end
+
+Route116_EventScript_RegisterKarenAfterBattle::
+	special PlayerFaceTrainerAfterBattle
+	waitmovement 0
+	msgbox Route116_Text_KarenRegister2, MSGBOX_DEFAULT
+	register_matchcall TRAINER_KAREN_1
+	release
+	end
+
+Route116_EventScript_TryRegisterKaren::
+	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterKaren
 	msgbox Route116_Text_KarenPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 Route116_EventScript_RegisterKaren::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route116_Text_KarenRegister, MSGBOX_DEFAULT
+	msgbox Route116_Text_KarenRegister1, MSGBOX_DEFAULT
+	register_matchcall TRAINER_KAREN_1
 	release
 	end
 
@@ -357,7 +399,8 @@ Route116_Text_ThankYouTokenOfAppreciation:
 	.string "is our gift to our wonderful Trainer!$"
 
 Route116_Text_NewBallAvailableAtMart:
-	.string "I hope you like our new Poké Ball.\p"
+	.string "Our new Poké Ball will be available\n"
+	.string "to buy once you have enough badges.\p"
 	.string "Please do try it out!\n"
 	.string "Thank you and bye-bye!$"
 
@@ -419,9 +462,10 @@ Route116_Text_TrainerTipsBToStopEvolution:
 
 Route116_Text_TrainerTipsBagHasPockets:
 	.string "TRAINER TIPS\p"
-	.string "Your Bag has several Pockets.\p"
-	.string "Items you obtain are automatically\n"
-	.string "placed in the appropriate Pockets.\p"
-	.string "No Trainer can afford to be without\n"
-	.string "a Bag of their own.$"
+	.string "The Pokédex has everything you need\n"
+	.string "to know about a Pokémon you've caught\l"
+	.string "from Egg Moves to Evolutions!\p"
+	.string "In fact, the information in the Pokédex\n"
+	.string "is more accurate than anything you\l"
+	.string "might find online.$"
 

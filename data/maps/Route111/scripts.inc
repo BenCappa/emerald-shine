@@ -460,6 +460,7 @@ Route111_EventScript_RegisterDusty::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route111_Text_DustyRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_DUSTY_1
 	release
 	end
 
@@ -495,6 +496,7 @@ Route111_EventScript_RegisterWilton::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route111_Text_WiltonRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_WILTON_1
 	release
 	end
 
@@ -515,6 +517,7 @@ Route111_EventScript_RegisterBrooke::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route111_Text_BrookeRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_BROOKE_1
 	release
 	end
 
@@ -581,11 +584,11 @@ Route111_Text_VictorDefeat:
 
 Route111_Text_VictorPostBattle:
 	.string "Hey, all!\n"
-	.string "I've found a pretty strong Trainer!$"
+	.string "I've found a pretty strong TRAINER!$"
 
 Route111_Text_VictoriaIntro:
 	.string "Oh, my goodness! Aren't you young?\p"
-	.string "You must be quite the Trainer to beat\n"
+	.string "You must be quite the TRAINER to beat\n"
 	.string "my husband, though.\p"
 	.string "It's my turn to battle now!$"
 
@@ -594,7 +597,7 @@ Route111_Text_VictoriaDefeat:
 	.string "I can't get over how strong you are!$"
 
 Route111_Text_VictoriaPostBattle:
-	.string "There's a strong Trainer here!\n"
+	.string "There's a strong TRAINER here!\n"
 	.string "This one's really strong!$"
 
 Route111_Text_ViviIntro:
@@ -627,9 +630,9 @@ Route111_Text_ToughToKeepWinningUpTheRanks:
 	.string "If you don't raise your Pokémon some\n"
 	.string "more, it could be tough to keep winning\l"
 	.string "up through the ranks.\p"
-	.string "I've heard the Pokémon League's\n"
-	.string "Elite Four are far stronger than\l"
-	.string "any Gym Leader.$"
+	.string "I've heard the Pokémon LEAGUE's\n"
+	.string "ELITE FOUR are far stronger than\l"
+	.string "any GYM LEADER.$"
 
 Route111_Text_WinstrateFamilyDestroyedMe:
 	.string "I challenged the WINSTRATE family,\n"
@@ -658,11 +661,11 @@ Route111_Text_OldLadysRestStopSign:
 
 Route111_Text_TrainerTipsSpAtkSpDef:
 	.string "TRAINER TIPS\p"
-	.string "One of the indicators of a Pokémon's\n"
-	.string "powerfulness is Sp. Atk. It stands for\l"
-	.string "“Special Attack.”\p"
-	.string "Likewise, Sp. Def stands for “Special\n"
-	.string "Defense.”$"
+	.string "An individual Pokémon's stats are\n"
+	.string "determined by three factors:\l"
+	.string "their base stats, level, and nature.\p"
+	.string "Stats raised or lowered by nature are\n"
+	.string "red or blue in the summary screen.$"
 
 Route111_Text_ShouldBeMirageTowerAroundHere:
 	.string "There should be a tower made of sand\n"

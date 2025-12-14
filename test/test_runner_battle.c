@@ -181,6 +181,7 @@ static void BattleTest_SetUp(void *data)
         STATE->battlersCount = 4;
         break;
     }
+    STATE->hasTornDownBattle = FALSE;
 }
 
 static void PrintTestName(void)
@@ -284,15 +285,16 @@ static void BattleTest_Run(void *data)
         break;
     }
 
-    for (i = 0; i < STATE->battlersCount; i++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         DATA.recordedBattle.playersName[i][0] = CHAR_1 + i;
         DATA.recordedBattle.playersName[i][1] = EOS;
         DATA.recordedBattle.playersLanguage[i] = GAME_LANGUAGE;
         DATA.recordedBattle.playersBattlers[i] = i;
-
-        DATA.currentMonIndexes[i] = (i & BIT_FLANK) == B_FLANK_LEFT ? 0 : 1;
     }
+
+    for (i = 0; i < STATE->battlersCount; i++)
+        DATA.currentMonIndexes[i] = i / 2;
 
     STATE->runRandomly = TRUE;
     STATE->runGiven = TRUE;
@@ -442,7 +444,7 @@ u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
     if (sum == 0)
         Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomWeightedArray called with zero sum");
 
-    if (gCurrentTurnActionNumber < gBattlersCount)
+    if (gCurrentTurnActionNumber < gBattlersCount || tag == RNG_SHELL_SIDE_ARM)
     {
         u32 battlerId = gBattlerByTurnOrder[gCurrentTurnActionNumber];
         turn = &DATA.battleRecordTurns[gBattleResults.battleTurnCounter][battlerId];
@@ -771,7 +773,7 @@ static u32 CountAiExpectMoves(struct ExpectedAIAction *expectedAction, u32 battl
         if ((1u << i) & expectedAction->moveSlots)
         {
             if (printLog)
-                PrintAiMoveLog(battlerId, i, gBattleMons[battlerId].moves[i], gBattleStruct->aiFinalScore[battlerId][expectedAction->target][i]);
+                PrintAiMoveLog(battlerId, i, gBattleMons[battlerId].moves[i], gAiBattleData->finalScore[battlerId][expectedAction->target][i]);
             countExpected++;
         }
     }
@@ -830,7 +832,7 @@ void TestRunner_Battle_CheckChosenMove(u32 battlerId, u32 moveId, u32 target)
         if (!expectedAction->notMove && !movePasses)
         {
             u32 moveSlot = GetMoveSlot(gBattleMons[battlerId].moves, moveId);
-            PrintAiMoveLog(battlerId, moveSlot, moveId, gBattleStruct->aiFinalScore[battlerId][expectedAction->target][moveSlot]);
+            PrintAiMoveLog(battlerId, moveSlot, moveId, gAiBattleData->finalScore[battlerId][expectedAction->target][moveSlot]);
             if (countExpected > 1)
                 Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), ":L%s:%d: Unmatched EXPECT_MOVES %S, got %S", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId));
             else
@@ -904,7 +906,7 @@ static const char *const sCmpToStringTable[] =
 static void CheckIfMaxScoreEqualExpectMove(u32 battlerId, s32 target, struct ExpectedAIAction *aiAction, const char *filename)
 {
     u32 i;
-    s32 *scores = gBattleStruct->aiFinalScore[battlerId][target];
+    s32 *scores = gAiBattleData->finalScore[battlerId][target];
     s32 bestScore = 0, bestScoreId = 0;
     u16 *moves = gBattleMons[battlerId].moves;
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1006,7 +1008,7 @@ void TestRunner_Battle_CheckAiMoveScores(u32 battlerId)
         {
             u32 moveId1 = gBattleMons[battlerId].moves[scoreCtx->moveSlot1];
             s32 target = scoreCtx->target;
-            s32 *scores = gBattleStruct->aiFinalScore[battlerId][target];
+            s32 *scores = gAiBattleData->finalScore[battlerId][target];
 
             if (scoreCtx->toValue)
             {
@@ -1339,6 +1341,11 @@ void TestRunner_Battle_AfterLastTurn(void)
 
 static void TearDownBattle(void)
 {
+    // Zero out the parties, data in them could potentially carry over
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
+
     FreeMonSpritesGfx();
     FreeBattleSpritesData();
     FreeBattleResources();
@@ -1419,8 +1426,11 @@ static void BattleTest_TearDown(void *data)
     // aborted unexpectedly.
     ClearFlagAfterTest();
     TestFreeConfigData();
-    if (STATE->tearDownBattle)
+    if (!STATE->hasTornDownBattle)
+    {
         TearDownBattle();
+        STATE->hasTornDownBattle = TRUE;
+    }
 }
 
 static bool32 BattleTest_CheckProgress(void *data)
@@ -1448,7 +1458,6 @@ static bool32 BattleTest_HandleExitWithResult(void *data, enum TestResult result
     }
     else
     {
-        STATE->tearDownBattle = TRUE;
         return FALSE;
     }
 }
@@ -1485,7 +1494,7 @@ void RNGSeed_(u32 sourceLine, rng_value_t seed)
     DATA.recordedBattle.rngSeed = seed;
 }
 
-void AIFlags_(u32 sourceLine, u32 flags)
+void AIFlags_(u32 sourceLine, u64 flags)
 {
     INVALID_IF(!IsAITest(), "AI_FLAGS is usable only in AI_SINGLE_BATTLE_TEST & AI_DOUBLE_BATTLE_TEST");
     DATA.recordedBattle.AI_scripts = flags;
@@ -1556,9 +1565,21 @@ void OpenPokemon(u32 sourceLine, u32 side, u32 species)
     (*partySize)++;
 
     CreateMon(DATA.currentMon, species, 100, 0, TRUE, 0, OT_ID_PRESET, 0);
-    data = MOVE_NONE;
+    // Reset move IDs, but force PP to be non-zero. This is a safeguard against test species that only learn 1 move having test moves with 0 PP
     for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        data = MOVE_NONE;
         SetMonData(DATA.currentMon, MON_DATA_MOVE1 + i, &data);
+        data = 0x7F; // Max PP possible
+        SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &data);
+    }
+    data = 0;
+    if (B_FRIENDSHIP_BOOST)
+    {
+        // This way, we avoid the boost affecting tests unless explicitly stated.
+        SetMonData(DATA.currentMon, MON_DATA_FRIENDSHIP, &data);
+        CalculateMonStats(DATA.currentMon);
+    }
 }
 
 // (sNaturePersonalities[i] % NUM_NATURES) == i
@@ -1661,7 +1682,9 @@ void Level_(u32 sourceLine, u32 level)
     INVALID_IF(level == 0 || level > MAX_LEVEL, "Illegal level: %d", level);
     SetMonData(DATA.currentMon, MON_DATA_LEVEL, &level);
     SetMonData(DATA.currentMon, MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][level]);
+    gMain.inBattle = TRUE;
     CalculateMonStats(DATA.currentMon);
+    gMain.inBattle = FALSE;
 }
 
 void MaxHP_(u32 sourceLine, u32 maxHP)
@@ -1669,6 +1692,8 @@ void MaxHP_(u32 sourceLine, u32 maxHP)
     INVALID_IF(!DATA.currentMon, "MaxHP outside of PLAYER/OPPONENT");
     INVALID_IF(maxHP == 0, "Illegal max HP: %d", maxHP);
     SetMonData(DATA.currentMon, MON_DATA_MAX_HP, &maxHP);
+    bool32 hyperTrainingFlag = TRUE;
+    SetMonData(DATA.currentMon, MON_DATA_HYPER_TRAINED_HP, &hyperTrainingFlag);
 }
 
 void HP_(u32 sourceLine, u32 hp)
@@ -1684,6 +1709,8 @@ void Attack_(u32 sourceLine, u32 attack)
     INVALID_IF(!DATA.currentMon, "Attack outside of PLAYER/OPPONENT");
     INVALID_IF(attack == 0, "Illegal attack: %d", attack);
     SetMonData(DATA.currentMon, MON_DATA_ATK, &attack);
+    bool32 hyperTrainingFlag = TRUE;
+    SetMonData(DATA.currentMon, MON_DATA_HYPER_TRAINED_ATK, &hyperTrainingFlag);
 }
 
 void Defense_(u32 sourceLine, u32 defense)
@@ -1691,6 +1718,8 @@ void Defense_(u32 sourceLine, u32 defense)
     INVALID_IF(!DATA.currentMon, "Defense outside of PLAYER/OPPONENT");
     INVALID_IF(defense == 0, "Illegal defense: %d", defense);
     SetMonData(DATA.currentMon, MON_DATA_DEF, &defense);
+    bool32 hyperTrainingFlag = TRUE;
+    SetMonData(DATA.currentMon, MON_DATA_HYPER_TRAINED_DEF, &hyperTrainingFlag);
 }
 
 void SpAttack_(u32 sourceLine, u32 spAttack)
@@ -1698,6 +1727,8 @@ void SpAttack_(u32 sourceLine, u32 spAttack)
     INVALID_IF(!DATA.currentMon, "SpAttack outside of PLAYER/OPPONENT");
     INVALID_IF(spAttack == 0, "Illegal special attack: %d", spAttack);
     SetMonData(DATA.currentMon, MON_DATA_SPATK, &spAttack);
+    bool32 hyperTrainingFlag = TRUE;
+    SetMonData(DATA.currentMon, MON_DATA_HYPER_TRAINED_SPATK, &hyperTrainingFlag);
 }
 
 void SpDefense_(u32 sourceLine, u32 spDefense)
@@ -1705,6 +1736,8 @@ void SpDefense_(u32 sourceLine, u32 spDefense)
     INVALID_IF(!DATA.currentMon, "SpDefense outside of PLAYER/OPPONENT");
     INVALID_IF(spDefense == 0, "Illegal special defense: %d", spDefense);
     SetMonData(DATA.currentMon, MON_DATA_SPDEF, &spDefense);
+    bool32 hyperTrainingFlag = TRUE;
+    SetMonData(DATA.currentMon, MON_DATA_HYPER_TRAINED_SPDEF, &hyperTrainingFlag);
 }
 
 void Speed_(u32 sourceLine, u32 speed)
@@ -1712,6 +1745,8 @@ void Speed_(u32 sourceLine, u32 speed)
     INVALID_IF(!DATA.currentMon, "Speed outside of PLAYER/OPPONENT");
     INVALID_IF(speed == 0, "Illegal speed: %d", speed);
     SetMonData(DATA.currentMon, MON_DATA_SPEED, &speed);
+    bool32 hyperTrainingFlag = TRUE;
+    SetMonData(DATA.currentMon, MON_DATA_HYPER_TRAINED_SPEED, &hyperTrainingFlag);
     DATA.hasExplicitSpeeds = TRUE;
     DATA.explicitSpeeds[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
 }
@@ -2005,9 +2040,9 @@ void CloseTurn(u32 sourceLine)
     {
         if (!(DATA.actionBattlers & (1 << i)))
         {
-             if (IsAITest() && (i & BIT_SIDE) == B_SIDE_OPPONENT) // If Move was not specified, allow any move used.
+            if (IsAITest() && (i & BIT_SIDE) == B_SIDE_OPPONENT) // If Move was not specified, allow any move used.
                 SetAiActionToPass(sourceLine, i);
-             else
+            else
                 Move(sourceLine, &gBattleMons[i], (struct MoveContext) { move: MOVE_CELEBRATE, explicitMove: TRUE });
         }
     }
@@ -2097,6 +2132,7 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
                 SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &pp);
                 *moveSlot = i;
                 *moveId = ctx->move;
+                INVALID_IF(GetMovePP(ctx->move) == 0, "%S has 0 PP!", GetMoveName(ctx->move));
                 break;
             }
         }
@@ -2116,7 +2152,7 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
     if (ctx->explicitGimmick && ctx->gimmick != GIMMICK_NONE)
     {
         u32 item = GetMonData(mon, MON_DATA_HELD_ITEM);
-        u32 holdEffect = GetItemHoldEffect(item);
+        enum ItemHoldEffect holdEffect = GetItemHoldEffect(item);
         u32 species = GetMonData(mon, MON_DATA_SPECIES);
         u32 side = battlerId & BIT_SIDE;
 
@@ -2201,6 +2237,17 @@ void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
         DATA.battleRecordTurns[DATA.turns][battlerId].secondaryEffect = 1 + ctx.secondaryEffect;
     if (ctx.explicitRNG)
         DATA.battleRecordTurns[DATA.turns][battlerId].rng = ctx.rng;
+
+    u32 shellSideArmCount = 0;
+    for (u32 i = 0; i < STATE->battlersCount; i++)
+    {
+        if (DATA.battleRecordTurns[DATA.turns][i].rng.tag == RNG_SHELL_SIDE_ARM)
+        {
+            shellSideArmCount++;
+            if (shellSideArmCount > 1)
+                Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":L Tried to use fixed RNG for multiple Shell Side Arm moves in the same turn");
+        }
+    }
 
     if (!(DATA.actionBattlers & (1 << battlerId)))
     {
@@ -2488,6 +2535,9 @@ void UseItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemContext c
     {
         i = 0;
     }
+
+    if (ctx.explicitRNG)
+        DATA.battleRecordTurns[DATA.turns][battlerId].rng = ctx.rng;
     PushBattlerAction(sourceLine, battlerId, RECORDED_ACTION_TYPE, B_ACTION_USE_ITEM);
     PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, (ctx.itemId >> 8) & 0xFF);
     PushBattlerAction(sourceLine, battlerId, RECORDED_ITEM_ID, ctx.itemId & 0xFF);

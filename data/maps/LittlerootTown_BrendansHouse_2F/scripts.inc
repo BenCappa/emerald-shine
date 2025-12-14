@@ -134,11 +134,11 @@ LittlerootTown_BrendansHouse_2F_Movement_BrendanEnters:
 	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerNorth:
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
 	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCNorth:
@@ -163,9 +163,9 @@ LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanNorth:
 	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerSouth:
-	walk_left
-	walk_left
-	walk_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCSouth:
@@ -186,9 +186,9 @@ LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanSouth:
 	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerWest:
-	walk_left
-	walk_left
-	walk_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_down
 	walk_in_place_faster_left
 	step_end
 
@@ -213,11 +213,11 @@ LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanWest:
 	step_end
 
 LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerEast:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	walk_in_place_faster_down
 	step_end
 
@@ -301,5 +301,5 @@ Common_Text_LookCloserAtMap:
 
 PlayersHouse_2F_Text_ItsAGameCube:
 	.string "It's a Nintendo GameCube.\p"
-	.string "A game of Dr. Mario is waiting\n\n"
+	.string "A game of Dr. Mario is waiting\n"
 	.string "to be played.$"

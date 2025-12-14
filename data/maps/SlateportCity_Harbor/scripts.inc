@@ -226,7 +226,7 @@ SlateportCity_Harbor_EventScript_BoardFerry::
 	call_if_eq VAR_FACING, DIR_NORTH, SlateportCity_Harbor_EventScript_BoardFerryNorth
 	call_if_eq VAR_FACING, DIR_EAST, SlateportCity_Harbor_EventScript_BoardFerryEast
 	delay 30
-	hideobjectat LOCALID_PLAYER, 0
+	hideplayer
 	setvar VAR_0x8004, LOCALID_SLATEPORT_HARBOR_SS_TIDAL
 	call Common_EventScript_FerryDepart
 	return
@@ -405,7 +405,7 @@ SlateportCity_Harbor_Text_SubTooSmallForMe:
 SlateportCity_Harbor_Text_SameThugsTriedToRobAtMuseum:
 	.string "Capt. Stern: Those thugs…\p"
 	.string "They're the same lot who tried to rob\n"
-	.string "the Devon Goods at the Museum.$"
+	.string "the DevCo Goods at the Museum.$"
 
 SlateportCity_Harbor_Text_ArchieYouAgainHideoutInLilycove:
 	.string "Archie: Oh?\n"

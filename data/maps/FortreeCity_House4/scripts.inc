@@ -12,7 +12,6 @@ FortreeCity_House4_EventScript_Woman::
 	release
 	end
 
-
 FortreeCity_House4_EventScript_ICantBeAPrincess::
 	msgbox FortreeCity_House4_Text_ICantBeAPrincess, MSGBOX_DEFAULT
 	release
@@ -21,15 +20,15 @@ FortreeCity_House4_EventScript_ICantBeAPrincess::
 FortreeCity_House4_EventScript_Boy::
 	lockall
 	goto_if_set FLAG_RECEIVED_MENTAL_HERB, FortreeCity_House4_EventScript_ReceivedMentalHerb
-	goto_if_set FLAG_WINGULL_DELIVERED_MAIL, FortreeCity_House4_EventScript_PelipperReturned
-	goto_if_set FLAG_WINGULL_SENT_ON_ERRAND, FortreeCity_House4_EventScript_PelipperOnErrand
+	goto_if_set FLAG_PELIPPER_DELIVERED_MAIL, FortreeCity_House4_EventScript_PelipperReturned
+	goto_if_set FLAG_PELIPPER_SENT_ON_ERRAND, FortreeCity_House4_EventScript_PelipperOnErrand
 	msgbox FortreeCity_House4_Text_GoBirdPokemon, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_WINGULL_SENT_ON_ERRAND
-	clearflag FLAG_HIDE_MOSSDEEP_CITY_HOUSE_2_WINGULL
-	applymovement LOCALID_FORTREE_HOUSE_WINGULL, FortreeCity_House4_Movement_PelipperExit
+	setflag FLAG_PELIPPER_SENT_ON_ERRAND
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_HOUSE_2_PELIPPER
+	applymovement LOCALID_FORTREE_HOUSE_PELIPPER, FortreeCity_House4_Movement_PelipperExit
 	waitmovement 0
-	removeobject LOCALID_FORTREE_HOUSE_WINGULL
+	removeobject LOCALID_FORTREE_HOUSE_PELIPPER
 	releaseall
 	end
 
@@ -69,7 +68,7 @@ FortreeCity_House4_EventScript_Pelipper::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
+	playmoncry SPECIES_PELIPPER, CRY_MODE_NORMAL
 	msgbox FortreeCity_House4_Text_Pelipper, MSGBOX_DEFAULT
 	waitmoncry
 	release

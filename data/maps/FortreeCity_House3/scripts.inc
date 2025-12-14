@@ -39,4 +39,3 @@ FortreeCity_House3_Text_CheckOnTheTM:
 	.string "Can you check on the TM behind me?\p"
 	.string "I heard something move but I can't\n"
 	.string "look since I'm watching the door.$"
-

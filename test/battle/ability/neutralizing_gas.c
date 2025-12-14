@@ -256,7 +256,8 @@ SINGLE_BATTLE_TEST("Neutralizing Gas prevents Trace from copying it")
 SINGLE_BATTLE_TEST("Neutralizing Gas prevents Contrary inverting stat boosts")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_REST) == EFFECT_REST);
+        ASSUME(GetMoveEffect(MOVE_SWORDS_DANCE) == EFFECT_ATTACK_UP_2);
+        ASSUME(GetMoveEffect(MOVE_LEER) == EFFECT_DEFENSE_DOWN);
         PLAYER(SPECIES_INKAY) { Ability(ABILITY_CONTRARY); }
         OPPONENT(SPECIES_WEEZING) { Ability(ABILITY_NEUTRALIZING_GAS); }
     } WHEN {
@@ -269,5 +270,86 @@ SINGLE_BATTLE_TEST("Neutralizing Gas prevents Contrary inverting stat boosts")
     } THEN {
         EXPECT_GT(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
         EXPECT_LT(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Neutralizing Gas exiting the field does not activate abilities that were not suppressed by it again")
+{
+    u32 species, ability;
+    // These are the only abilities that could immediately activate again
+    PARAMETRIZE { species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
+    PARAMETRIZE { species = SPECIES_CALYREX_SHADOW; ability = ABILITY_AS_ONE_SHADOW_RIDER; }
+    PARAMETRIZE { species = SPECIES_CALYREX_ICE; ability = ABILITY_AS_ONE_ICE_RIDER; }
+
+    GIVEN {
+        ASSUME(gAbilitiesInfo[ability].cantBeSuppressed);
+        PLAYER(species) { Ability(ability); }
+        OPPONENT(SPECIES_WEEZING) { Ability(ABILITY_NEUTRALIZING_GAS); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { SWITCH(opponent, 1); }
+    } SCENE {
+        ABILITY_POPUP(player, ability);
+        MESSAGE("The effects of the neutralizing gas wore off!");
+        NOT ABILITY_POPUP(player, ability);
+    }
+}
+
+SINGLE_BATTLE_TEST("Neutralizing Gas exiting the field does not activate Imposter even if it did not activate before")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_DITTO) { Ability(ABILITY_IMPOSTER); }
+        OPPONENT(SPECIES_WEEZING) { Ability(ABILITY_NEUTRALIZING_GAS); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { SWITCH(player, 1); SWITCH(opponent, 1); }
+    } SCENE {
+        NOT ABILITY_POPUP(player, ABILITY_IMPOSTER);
+        MESSAGE("The effects of the neutralizing gas wore off!");
+        NOT ABILITY_POPUP(player, ABILITY_IMPOSTER);
+    }
+}
+
+SINGLE_BATTLE_TEST("Neutralizing Gas exiting the field does not activate Air Lock/Cloud Nine but their effects are kept")
+{
+    u32 species, ability;
+
+    PARAMETRIZE { species = SPECIES_GOLDUCK; ability = ABILITY_CLOUD_NINE; }
+    PARAMETRIZE { species = SPECIES_RAYQUAZA; ability = ABILITY_AIR_LOCK; }
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_RAIN_DANCE) == EFFECT_RAIN_DANCE);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(species) { Ability(ability); }
+        OPPONENT(SPECIES_WEEZING) { Ability(ABILITY_NEUTRALIZING_GAS); }
+        OPPONENT(SPECIES_LUDICOLO) { Ability(ABILITY_RAIN_DISH); }
+    } WHEN {
+        TURN { SWITCH(player, 1); SWITCH(opponent, 1); }
+        TURN { MOVE(player, MOVE_RAIN_DANCE); }
+    } SCENE {
+        NOT ABILITY_POPUP(player, ABILITY_AIR_LOCK);
+        MESSAGE("The effects of the neutralizing gas wore off!");
+        NOT ABILITY_POPUP(player, ABILITY_AIR_LOCK);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAIN_DANCE, player);
+        NOT ABILITY_POPUP(opponent, ABILITY_RAIN_DISH);
+    }
+}
+
+SINGLE_BATTLE_TEST("Neutralizing Gas only displays exiting message for the last user leaving the field")
+{
+    GIVEN {
+        PLAYER(SPECIES_WEEZING) { Ability(ABILITY_NEUTRALIZING_GAS); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WEEZING) { Ability(ABILITY_NEUTRALIZING_GAS); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { SWITCH(player, 1); SWITCH(opponent, 1); }
+    } SCENE {
+        ABILITY_POPUP(player, ABILITY_NEUTRALIZING_GAS);
+        ABILITY_POPUP(opponent, ABILITY_NEUTRALIZING_GAS);
+        SEND_IN_MESSAGE("Wobbuffet");
+        MESSAGE("The effects of the neutralizing gas wore off!");
+        NOT MESSAGE("The effects of the neutralizing gas wore off!");
     }
 }

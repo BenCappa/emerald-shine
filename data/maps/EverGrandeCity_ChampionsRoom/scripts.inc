@@ -365,4 +365,3 @@ EverGrandeCity_ChampionsRoom_Text_GumpCongratulations:
 	.string "Gump: Alright. Anyways…\n"
 	.string "congratulations!\p"
 	.string "Now, go proudly into the final room!$"
-

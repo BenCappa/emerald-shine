@@ -85,6 +85,11 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	call MossdeepCity_Gym_EventScript_GivePsychicFangs
 	closemessage
 	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox MossdeepCity_Gym_Text_RegisteredTateAndLiza, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
 	setflag FLAG_ENABLE_TATE_AND_LIZA_MATCH_CALL
 	release
 	end
@@ -554,8 +559,8 @@ MossdeepCity_Gym_Text_TateAndLizaIntro:
 	.string "Liza: We can each determine what…\p"
 	.string "Tate: The other is thinking…\n"
 	.string "Liza: All in our minds!\p"
-	.string "Tate: We see that you've beat…"
-	.string "Liza: Your brothers and sisters."
+	.string "Tate: We see that you've beat…\n"
+	.string "Liza: Your brothers and sisters.\p"
 	.string "Tate: But can you defeat…\n"
 	.string "Liza: A brother and sister…\p"
 	.string "Tate: Who fight together?!\n"
@@ -587,6 +592,11 @@ MossdeepCity_Gym_Text_ExplainPsychicFangs:
 	.string "Liza: It damages the opponent!\p"
 	.string "Tate: It's also a nickname…\n"
 	.string "Liza: That we gave ourselves!$"
+	.string "… … … … … …$"
+
+MossdeepCity_Gym_Text_RegisteredTateAndLiza:
+	.string "Registered Gym Leaders Tate & Liza\n"
+	.string "in the PokéNav.$"
 
 MossdeepCity_Gym_Text_TateAndLizaPostBattle:
 	.string "Tate: Looks like the bond between you\n"
@@ -610,7 +620,7 @@ MossdeepCity_Gym_Text_GymStatue:
 
 MossdeepCity_Gym_Text_GymStatueCertified:
 	.string "MOSSDEEP CITY POKéMON GYM\p"
-	.string "LIZA AND TATE'S CERTIFIED TRAINERS:\n"
+	.string "TATE AND LIZA'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
 MossdeepCity_Gym_Text_TateAndLizaPreRematch:

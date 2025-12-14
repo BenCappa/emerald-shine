@@ -44,7 +44,7 @@ Route119_EventScript_RivalEncounter::
 	delay 30
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, Route119_EventScript_BattleMay
-	goto_if_eq VAR_RESULT, FEMALE, Route119_EventScript_BattleBrendan
+	goto_if_eq VAR_RESULT, FEMALE, Route119_EventScript_BattleBen
 	releaseall
 	end
 
@@ -86,33 +86,33 @@ Route119_EventScript_DefeatedMay::
 	goto Route119_EventScript_RivalExitScottArrive
 	end
 
-Route119_EventScript_BattleBrendan::
-	msgbox Route119_Text_BrendanIntro, MSGBOX_DEFAULT
+Route119_EventScript_BattleBen::
+	msgbox Route119_Text_BenIntro, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
-	case 0, Route119_EventScript_BattleBrendanBulbasaur
-	case 1, Route119_EventScript_BattleBrendanFennekin
-	case 2, Route119_EventScript_BattleBrendanPiplup
+	case 0, Route119_EventScript_BattleBenBulbasaur
+	case 1, Route119_EventScript_BattleBenFennekin
+	case 2, Route119_EventScript_BattleBenPiplup
 	end
 
-Route119_EventScript_BattleBrendanBulbasaur::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_119_BULBASAUR, Route119_Text_BrendanDefeat
-	goto Route119_EventScript_DefeatedBrendan
+Route119_EventScript_BattleBenBulbasaur::
+	trainerbattle_no_intro TRAINER_BEN_ROUTE_119_BULBASAUR, Route119_Text_BenDefeat
+	goto Route119_EventScript_DefeatedBen
 	end
 
-Route119_EventScript_BattleBrendanFennekin::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_119_FENNEKIN, Route119_Text_BrendanDefeat
-	goto Route119_EventScript_DefeatedBrendan
+Route119_EventScript_BattleBenFennekin::
+	trainerbattle_no_intro TRAINER_BEN_ROUTE_119_FENNEKIN, Route119_Text_BenDefeat
+	goto Route119_EventScript_DefeatedBen
 	end
 
-Route119_EventScript_BattleBrendanPiplup::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_119_PIPLUP, Route119_Text_BrendanDefeat
-	goto Route119_EventScript_DefeatedBrendan
+Route119_EventScript_BattleBenPiplup::
+	trainerbattle_no_intro TRAINER_BEN_ROUTE_119_PIPLUP, Route119_Text_BenDefeat
+	goto Route119_EventScript_DefeatedBen
 	end
 
-Route119_EventScript_DefeatedBrendan::
-	msgbox Route119_Text_BrendanIllGiveYouThis, MSGBOX_DEFAULT
+Route119_EventScript_DefeatedBen::
+	msgbox Route119_Text_BenIllGiveYouThis, MSGBOX_DEFAULT
 	call Route119_EventScript_GiveFlyHM
-	msgbox Route119_Text_BrendanExplainFly, MSGBOX_DEFAULT
+	msgbox Route119_Text_BenExplainFly, MSGBOX_DEFAULT
 	goto Route119_EventScript_RivalExitScottArrive
 	end
 
@@ -348,6 +348,7 @@ Route119_EventScript_RegisterJackson::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route119_Text_JacksonRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JACKSON_1
 	release
 	end
 
@@ -368,6 +369,7 @@ Route119_EventScript_RegisterCatherine::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route119_Text_CatherineRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_CATHERINE_1
 	release
 	end
 
@@ -454,8 +456,12 @@ Route119_EventScript_TrainerTipsDecoration::
 	end
 
 Route119_EventScript_ScottWonAtFortreeGymCall::
+	lockall
+	pokenavcall Route119_Text_ScottYouWonAtFortreeGym
+	waitmessage
 	clearflag FLAG_SCOTT_CALL_FORTREE_GYM
 	addvar VAR_SCOTT_STATE, 1
+	releaseall
 	end
 
 Route119_Text_MayIntro:
@@ -478,43 +484,52 @@ Route119_Text_MayPresentForYou:
 	.string "And, here! I have a present for you.$"
 
 Route119_Text_MayExplainFly:
-	.string "MAY: Use Fly, and your Pokémon will\n"
+	.string "MAY: Use FLY, and your Pokémon will\n"
 	.string "instantly carry you to any town you've\l"
 	.string "already visited.\p"
-	.string "But, to use Fly, you have to get\n"
+	.string "But, to use FLY, you have to get\n"
 	.string "the GYM BADGE from FORTREE CITY.\l"
 	.string "That's important, so don't forget.\p"
-	.string "You should Fly home and visit\n"
+	.string "You should FLY home and visit\n"
 	.string "LITTLEROOT for a change.\p"
 	.string "I bet your mom's worried about you,\n"
 	.string "{PLAYER}{KUN}.\p"
 	.string "Well, let's meet again somewhere!$"
 
-Route119_Text_BrendanIntro:
-	.string "Ben: {PLAYER}! So this is where\n"
-	.string "you've been looking for Pokémon?\p"
-	.string "Let me see how good you got.\n"
-	.string "I'll test you!\p"
-	.string "Now!\n"
-	.string "It's a battle, so battle!$"
+Route119_Text_BenIntro:
+	.string "Ben: Oh sweet, {PLAYER}! I've been\n"
+	.string "looking for around for you.\p"
+	.string "I trained up a bit and want to have\n"
+	.string "another battle against you.\p"
+	.string "I'm challenging you right now!\n"
+	.string "Let's see if you can still beat me!$"
 
-Route119_Text_BrendanDefeat:
+Route119_Text_BenDefeat:
 	.string "Hmm…\n"
-	.string "You've gotten pretty darn decent.$"
+	.string "You've gotten pretty decent at this.$"
 
-Route119_Text_BrendanIllGiveYouThis:
-	.string "Ben: I'd say you're good enough\n"
-	.string "to search for Pokémon anywhere.\p"
-	.string "Here, I'll give you this.\n"
+Route119_Text_BenIllGiveYouThis:
+	.string "Ben: Good job but I do want to take\n"
+	.string "at least partial credit.\p"
+	.string "After all, you wouldn't have gotten\n"
+	.string "nearly this strong without my help.\p"
+	.string "Speaking of, I want to give you this.\n"
 	.string "Try it out.$"
 
-Route119_Text_BrendanExplainFly:
-	.string "Ben: Use Fly, and your Pokémon\n"
-	.string "instantly carries you to any town\l"
+Route119_Text_BenExplainFly:
+	.string "Ben: So Fly is probably the most\n"
+	.string "convenient HM available.\p"
+	.string "Teach it to a Pokémon and then they\n"
+	.string "can instantly carry you to any town\l"
 	.string "you've already visited.\p"
 	.string "But you need the Fortree Gym Badge\n"
 	.string "to do that.\p"
-	.string "Anyway, I have to move along.$"
+	.string "Once you can, you should Fly home\n"
+	.string "and talk to your mom.\p"
+	.string "I hear she gives out some good advice\n"
+	.string "now and then.\p"
+	.string "Anyway, I've gotta go.\p"
+	.string "Let's meet up again soon!$"
 
 Route119_Text_ScottWayToGoBeSeeingYou:
 	.string "Scott: Hahahah!\n"
@@ -529,6 +544,22 @@ Route119_Text_ScottWayToGoBeSeeingYou:
 	.string "Are you off to Fortree Gym next?\p"
 	.string "I expect that you'll do well at the Gym.\n"
 	.string "Well, I'll be seeing you!$"
+
+
+Route119_Text_ScottYouWonAtFortreeGym:
+	.string "… … … … … …\n"
+	.string "… … … … … Beep!\p"
+	.string "Scott: Hiya, {PLAYER}{KUN}, it's me!\p"
+	.string "Just as I thought, you won at\n"
+	.string "the Fortree Gym.\p"
+	.string "Your strength…\n"
+	.string "Perhaps you really are the Trainer\l"
+	.string "that I've been searching for.\p"
+	.string "Remember, you have a fan in me.\n"
+	.string "I'll be cheering from the sidelines.\l"
+	.string "Keep up the great work!\p"
+	.string "… … … … … …\n"
+	.string "… … … … … Click!$"
 
 Route119_Text_StayAwayFromWeatherInstitute:
 	.string "We're standing lookout here.\p"
@@ -552,7 +583,7 @@ Route119_Text_ThoughtFlyByCatchingBirdMons:
 Route119_Text_TallGrassSnaresBikeTires:
 	.string "Tch…\n"
 	.string "It's a no-go…\p"
-	.string "The tall grass snares Bike tires.\n"
+	.string "The tall grass snares bike tires.\n"
 	.string "There's no way you can cycle here.$"
 
 Route119_Text_CanYourMonMakeSecretBase:

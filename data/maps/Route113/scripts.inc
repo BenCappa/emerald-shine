@@ -68,6 +68,7 @@ Route113_EventScript_RegisterMadeline::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route113_Text_MadelineRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_MADELINE_1
 	release
 	end
 
@@ -88,6 +89,7 @@ Route113_EventScript_RegisterLao::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route113_Text_LaoRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_LAO_1
 	release
 	end
 
@@ -153,10 +155,11 @@ Route113_Text_RouteSignFallarbor:
 
 Route113_Text_TrainerTipsRegisterKeyItems:
 	.string "TRAINER TIPS\p"
-	.string "You may register one of the Key Items\n"
-	.string "in your Bag as Select.\p"
-	.string "Simply press Select to use\n"
-	.string "the registered item conveniently.$"
+	.string "Press the R Button during a wild battle\n"
+	.string "to throw your last used Poké Ball.\p"
+	.string "Holding the R Button, though, allows\n"
+	.string "you to choose which Poké Ball to use\l"
+	.string "before you throw it.$"
 
 Route113_Text_GlassWorkshopSign:
 	.string "GLASS WORKSHOP\n"

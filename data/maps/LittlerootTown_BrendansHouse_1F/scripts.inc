@@ -322,7 +322,7 @@ PlayersHouse_1F_Text_ItsOverWeMissedHim:
 PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
 	.string "Oh, yes. Speaking of Mikes:\n"
 	.string "The region's professor lives here too.\p"
-	.string "Prof. Mike is his name.\p"
+	.string "Prof. Mike Cappa is his name.\p"
 	.string "His family lives right next door, so you\n"
 	.string "should go over and introduce yourself.\p"
 	.string "I hear they have a son your age as well.$"
@@ -332,7 +332,7 @@ PlayersHouse_1F_Text_SeeYouHoney:
 
 PlayersHouse_1F_Text_DidYouMeetProfBirch:
 	.string "Gram: Did you introduce yourself to\n"
-	.string "Prof. Mike?$"
+	.string "Prof. Cappa?$"
 
 PlayersHouse_1F_Text_YouShouldRestABit:
 	.string "Gram: How are you doing, {PLAYER}?\n"
@@ -343,7 +343,7 @@ PlayersHouse_1F_Text_TakeCareHoney:
 	.string "Gram: Take care, honey!$"
 
 PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom:
-	.string "Gram: Oh? Did Micheal give you a BADGE?\p"
+	.string "Gram: Oh? Did Micheal give you a Badge?\p"
 	.string "Then here's something from your Mom!$"
 
 PlayersHouse_1F_Text_DontPushYourselfTooHard:
@@ -352,15 +352,15 @@ PlayersHouse_1F_Text_DontPushYourselfTooHard:
 	.string "Go for it, honey!$"
 
 PlayersHouse_1F_Text_IsThatAPokenav:
-	.string "Gram: What is that, honey? A POKéNAV?\n"
-	.string "Someone from DEVON gave it to you?\p"
-	.string "Well, honey, how about registering\n"
-	.string "your Gram?\p"
+	.string "Gram: You know what I just realized?\p"
+	.string "I completely forgot to register\n"
+	.string "myself into your PokéNav when I\l"
+	.string "gave it to you.\p"
 	.string "… … …$"
 
 PlayersHouse_1F_Text_RegisteredMom:
 	.string "Registered Gram\n"
-	.string "in the POKéNAV.$"
+	.string "in the PokéNav.$"
 
 PlayersHouse_1F_Text_Vigoroth1:
 	.string "Fugiiiiih!$"
@@ -381,10 +381,9 @@ PlayersHouse_1F_Text_TheresAMovieOnTV:
 PlayersHouse_1F_Text_RunningShoesManual:
 	.string "It's the instruction booklet for the\n"
 	.string "Running Shoes.\p"
-	.string "“Press the B Button to run while\n"
-	.string "wearing your Running Shoes.\p"
-	.string "“Lace up your Running Shoes and hit\n"
-	.string "the road running!”$"
+	.string "“Hold the B Button to run or inversely\n"
+	.string "hold the A Button to sneak and while\n"
+	.string "moving in your Running Shoes!”$"
 
 PlayersHouse_1F_Text_TicketFromBrineyCameForYou:
 	.string "Micheal: Hm?\p"
