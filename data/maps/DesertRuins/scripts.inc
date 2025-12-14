@@ -68,22 +68,18 @@ DesertRuins_EventScript_Regirock::
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AncientTomb_EventScript_DefeatedRegirock
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, AncientTomb_EventScript_CaughtRegirock
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, DesertRuins_EventScript_DefeatedRegirock
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, DesertRuins_EventScript_CaughtRegirock
 	release
 	end
 
-AncientTomb_EventScript_DefeatedRegirock::
+DesertRuins_EventScript_DefeatedRegirock::
 	setflag FLAG_DAILY_BATTLED_REGIROCK
-	goto Common_EventScript_RemoveStaticPokemon
-	end
-
-DesertRuins_EventScript_RanFromRegirock::
 	setvar VAR_0x8004, SPECIES_REGIROCK
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-AncientTomb_EventScript_CaughtRegirock::
+DesertRuins_EventScript_CaughtRegirock::
 	setflag FLAG_CAUGHT_REGIROCK
 	release
 	end

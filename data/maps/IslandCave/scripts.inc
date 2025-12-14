@@ -101,18 +101,18 @@ IslandCave_EventScript_Regice::
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AncientTomb_EventScript_DefeatedRegice
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, AncientTomb_EventScript_CaughtRegice
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IslandCave_EventScript_DefeatedRegice
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, IslandCave_EventScript_CaughtRegice
 	release
 	end
 
-AncientTomb_EventScript_DefeatedRegice::
+IslandCave_EventScript_DefeatedRegice::
 	setflag FLAG_DAILY_BATTLED_REGICE
 	setvar VAR_0x8004, SPECIES_REGICE
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-AncientTomb_EventScript_CaughtRegice::
+IslandCave_EventScript_CaughtRegice::
 	setflag FLAG_CAUGHT_REGICE
 	release
 	end
