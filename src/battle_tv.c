@@ -1,4 +1,4 @@
-2#include "global.h"
+#include "global.h"
 #include "pokemon.h"
 #include "battle.h"
 #include "battle_anim.h"

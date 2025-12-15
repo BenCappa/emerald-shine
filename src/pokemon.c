@@ -6151,7 +6151,7 @@ bool32 HasRelearnerTMMoves(struct Pokemon *mon)
         if (move == MOVE_NONE)
             continue;
 
-        if (!P_ENABLE_ALL_TM_MOVES || !CheckBagHasItem(item, 1))
+        if (!P_ENABLE_ALL_TM_MOVES && !CheckBagHasItem(item, 1))
             continue;
 
         if (!CanLearnTeachableMove(species, move))
@@ -6646,6 +6646,8 @@ void SetWildMonHeldItem(void)
                             case TYPE_FAIRY:
                                 SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &fairy[0]);
                                 break;
+                            default:
+                                break;
                             }
 
                     else
@@ -6707,6 +6709,8 @@ void SetWildMonHeldItem(void)
                                 break;
                             case TYPE_FAIRY:
                                 SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &fairy[1]);
+                                break;
+                            default:
                                 break;
                             }
                 }

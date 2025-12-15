@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:sound/voicegroups/link_contest_p2.inc
 voice_group link_contest_p2
-========
-voice_group link_contest_p1
->>>>>>>> upstream/master:sound/voicegroups/link_contest_p1.inc
 	voice_keysplit_all voicegroup_rs_drumset
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -131,4 +127,3 @@ voice_group link_contest_p1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_noise_alt 60, 0, 0, 0, 1, 7, 1
 	voice_noise_alt 60, 0, 0, 0, 1, 0, 0
-

@@ -103,7 +103,6 @@ struct MoveInfo
     bool32 ignoresTargetDefenseEvasionStages:1;
     // end of word
     bool32 damagesUnderground:1;
-    // end of word
     bool32 damagesUnderwater:1;
     bool32 damagesAirborne:1;
     bool32 damagesAirborneDoubleDamage:1;
