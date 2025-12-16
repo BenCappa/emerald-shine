@@ -7,7 +7,6 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
 	waitmovement 0
 	goto_if_set FLAG_TEMP_1, FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
 	msgbox FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor, MSGBOX_DEFAULT
-	setflag FLAG_TEMP_1
 	goto FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
 	end
 
@@ -22,7 +21,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove::
 
 FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon::
 	msgbox FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon, MSGBOX_DEFAULT
-	setmoverelearnerstate MOVE_RELEARNER_LEVEL_UP_MOVES @ Specifically supposed to teach level up moves
+	setmoverelearnerstate MOVE_RELEARNER_EGG_MOVES @ Specifically supposed to teach egg moves
 	special ChooseMonForMoveRelearner
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale

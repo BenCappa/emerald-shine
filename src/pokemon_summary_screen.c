@@ -4923,7 +4923,7 @@ void ShowRelearnPrompt(void)
     switch (gMoveRelearnerState)
     {
         case MOVE_RELEARNER_LEVEL_UP_MOVES:
-            relearnText = gText_Relearn_LevelUp;
+            relearnText = gText_Relearn;
             break;
         case MOVE_RELEARNER_EGG_MOVES:
             relearnText = gText_Relearn_Egg;
@@ -4935,7 +4935,7 @@ void ShowRelearnPrompt(void)
             relearnText = gText_Relearn_Tutor;
             break;
         default:
-            relearnText = gText_Relearn;
+            relearnText = gText_Relearn_LevelUp;
             break;
     }
 
