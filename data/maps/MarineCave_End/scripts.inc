@@ -39,7 +39,6 @@ MarineCave_End_EventScript_Kyogre::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	setflag FLAG_NO_RUNNING
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	clearflag FLAG_NO_RUNNING
 	setvar VAR_TEMP_1, 0

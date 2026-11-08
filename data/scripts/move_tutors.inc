@@ -1,13 +1,8 @@
 FortreeCity_House2_EventScript_SwaggerTutor::
 	lock
 	faceplayer
-	msgbox MoveTutor_Text_SwaggerTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_SwaggerDeclined
-	msgbox MoveTutor_Text_SwaggerWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, MOVE_SWAGGER
-	call MoveTutor_EventScript_OpenPartyMenu
-	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_SwaggerDeclined
-	goto MoveTutor_EventScript_SwaggerTaught
+	move_tutor MOVE_SWAGGER, MoveTutor_Text_SwaggerTeach, MoveTutor_Text_SwaggerWhichMon, MoveTutor_EventScript_SwaggerDeclined, MoveTutor_EventScript_SwaggerTaught
+	release
 	end
 
 MoveTutor_EventScript_SwaggerDeclined::
@@ -23,13 +18,8 @@ MoveTutor_EventScript_SwaggerTaught::
 MauvilleCity_EventScript_RolloutTutor::
 	lock
 	faceplayer
-	msgbox MoveTutor_Text_RolloutTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_RolloutDeclined
-	msgbox MoveTutor_Text_RolloutWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, MOVE_ROLLOUT
-	call MoveTutor_EventScript_OpenPartyMenu
-	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_RolloutDeclined
-	goto MoveTutor_EventScript_RolloutTaught
+	move_tutor MOVE_ROLLOUT, MoveTutor_Text_RolloutTeach, MoveTutor_Text_RolloutWhichMon, MoveTutor_EventScript_RolloutDeclined, MoveTutor_EventScript_RolloutTaught
+	release
 	end
 
 MoveTutor_EventScript_RolloutDeclined::
@@ -45,13 +35,7 @@ MoveTutor_EventScript_RolloutTaught::
 VerdanturfTown_PokemonCenter_1F_EventScript_FuryCutterTutor::
 	lock
 	faceplayer
-	msgbox MoveTutor_Text_FuryCutterTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_FuryCutterDeclined
-	msgbox MoveTutor_Text_FuryCutterWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, MOVE_FURY_CUTTER
-	call MoveTutor_EventScript_OpenPartyMenu
-	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_FuryCutterDeclined
-	goto MoveTutor_EventScript_FuryCutterTaught
+	move_tutor MOVE_FURY_CUTTER, MoveTutor_Text_FuryCutterTeach, MoveTutor_Text_FuryCutterWhichMon, MoveTutor_EventScript_FuryCutterDeclined, MoveTutor_EventScript_FuryCutterTaught
 	end
 
 MoveTutor_EventScript_FuryCutterDeclined::
@@ -67,13 +51,7 @@ MoveTutor_EventScript_FuryCutterTaught::
 LavaridgeTown_House_EventScript_MimicTutor::
 	lock
 	faceplayer
-	msgbox MoveTutor_MimicTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_MimicDeclined
-	msgbox MoveTutor_Text_MimicWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, MOVE_MIMIC
-	call MoveTutor_EventScript_OpenPartyMenu
-	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_MimicDeclined
-	goto MoveTutor_EventScript_MimicTaught
+	move_tutor MOVE_MIMIC, MoveTutor_MimicTeach, MoveTutor_Text_MimicWhichMon, MoveTutor_EventScript_MimicDeclined, MoveTutor_EventScript_MimicTaught
 	end
 
 MoveTutor_EventScript_MimicDeclined::
@@ -89,13 +67,7 @@ MoveTutor_EventScript_MimicTaught::
 FallarborTown_Mart_EventScript_MetronomeTutor::
 	lock
 	faceplayer
-	msgbox MoveTutor_Text_MetronomeTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_MetronomeDeclined
-	msgbox MoveTutor_Text_MetronomeWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, MOVE_METRONOME
-	call MoveTutor_EventScript_OpenPartyMenu
-	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_MetronomeDeclined
-	goto MoveTutor_EventScript_MetronomeTaught
+	move_tutor MOVE_METRONOME, MoveTutor_Text_MetronomeTeach, MoveTutor_Text_MetronomeWhichMon, MoveTutor_EventScript_MetronomeDeclined, MoveTutor_EventScript_MetronomeTaught
 	end
 
 MoveTutor_EventScript_MetronomeDeclined::
@@ -111,13 +83,7 @@ MoveTutor_EventScript_MetronomeTaught::
 SlateportCity_PokemonFanClub_EventScript_HeadbuttTutor::
 	lock
 	faceplayer
-	msgbox MoveTutor_Text_HeadbuttTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_HeadbuttDeclined
-	msgbox MoveTutor_Text_HeadbuttWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, MOVE_HEADBUTT
-	call MoveTutor_EventScript_OpenPartyMenu
-	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_HeadbuttDeclined
-	goto MoveTutor_EventScript_HeadbuttTaught
+	move_tutor MOVE_HEADBUTT, MoveTutor_Text_HeadbuttTeach, MoveTutor_Text_HeadbuttWhichMon, MoveTutor_EventScript_HeadbuttDeclined, MoveTutor_EventScript_HeadbuttTaught
 	end
 
 MoveTutor_EventScript_HeadbuttDeclined::
@@ -133,13 +99,7 @@ MoveTutor_EventScript_HeadbuttTaught::
 LilycoveCity_DepartmentStoreRooftop_EventScript_EncoreTutor::
 	lock
 	faceplayer
-	msgbox MoveTutor_Text_EncoreTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_EncoreDeclined
-	msgbox MoveTutor_Text_EncoreWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, MOVE_ENCORE
-	call MoveTutor_EventScript_OpenPartyMenu
-	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_EncoreDeclined
-	goto MoveTutor_EventScript_EncoreTaught
+	move_tutor MOVE_ENCORE, MoveTutor_Text_EncoreTeach, MoveTutor_Text_EncoreWhichMon, MoveTutor_EventScript_EncoreDeclined, MoveTutor_EventScript_EncoreTaught
 	end
 
 MoveTutor_EventScript_EncoreDeclined::
@@ -155,13 +115,7 @@ MoveTutor_EventScript_EncoreTaught::
 MossdeepCity_EventScript_DynamicPunchTutor::
 	lock
 	faceplayer
-	msgbox MoveTutor_Text_DynamicPunchTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_DynamicPunchDeclined
-	msgbox MoveTutor_Text_DynamicPunchWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, MOVE_DYNAMIC_PUNCH
-	call MoveTutor_EventScript_OpenPartyMenu
-	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_DynamicPunchDeclined
-	goto MoveTutor_EventScript_DynamicPunchTaught
+	move_tutor MOVE_DYNAMIC_PUNCH, MoveTutor_Text_DynamicPunchTeach, MoveTutor_Text_DynamicPunchWhichMon, MoveTutor_EventScript_DynamicPunchDeclined, MoveTutor_EventScript_DynamicPunchTaught
 	end
 
 MoveTutor_EventScript_DynamicPunchDeclined::
@@ -177,13 +131,7 @@ MoveTutor_EventScript_DynamicPunchTaught::
 SootopolisCity_PokemonCenter_1F_EventScript_DoubleEdgeTutor::
 	lock
 	faceplayer
-	msgbox MoveTutor_Text_DoubleEdgeTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_DoubleEdgeDeclined
-	msgbox MoveTutor_Text_DoubleEdgeWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, MOVE_DOUBLE_EDGE
-	call MoveTutor_EventScript_OpenPartyMenu
-	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_DoubleEdgeDeclined
-	goto MoveTutor_EventScript_DoubleEdgeTaught
+	move_tutor MOVE_DOUBLE_EDGE, MoveTutor_Text_DoubleEdgeTeach, MoveTutor_Text_DoubleEdgeWhichMon, MoveTutor_EventScript_DoubleEdgeDeclined, MoveTutor_EventScript_DoubleEdgeTaught
 	end
 
 MoveTutor_EventScript_DoubleEdgeDeclined::
@@ -199,13 +147,7 @@ MoveTutor_EventScript_DoubleEdgeTaught::
 PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTutor::
 	lock
 	faceplayer
-	msgbox MoveTutor_Text_ExplosionTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_ExplosionDeclined
-	msgbox MoveTutor_Text_ExplosionWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, MOVE_EXPLOSION
-	call MoveTutor_EventScript_OpenPartyMenu
-	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_ExplosionDeclined
-	goto MoveTutor_EventScript_ExplosionTaught
+	move_tutor MOVE_EXPLOSION, MoveTutor_Text_ExplosionTeach, MoveTutor_Text_ExplosionWhichMon, MoveTutor_EventScript_ExplosionDeclined, MoveTutor_EventScript_ExplosionTaught
 	end
 
 MoveTutor_EventScript_ExplosionDeclined::
@@ -220,7 +162,23 @@ MoveTutor_EventScript_ExplosionTaught::
 
 MoveTutor_EventScript_OpenPartyMenu::
 	special ChooseMonForMoveTutor
+	lock
+	faceplayer
+	return
+
+MoveTutor_EventScript_OpenBox::
+	chooseboxmon SELECT_PC_MON_MOVE_TUTOR
 	waitstate
 	lock
 	faceplayer
+	return
+
+MoveTutor_EventScript_CanOnlyBeLearnedOnce::
+	msgbox MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce, MSGBOX_YESNO
+	return
+
+MoveTutor_AfterChooseBoxMon::
+	waitstate
+	special CanTeachMoveBoxMon
+	waitstate
 	return

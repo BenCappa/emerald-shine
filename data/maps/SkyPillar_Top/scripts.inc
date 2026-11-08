@@ -51,7 +51,6 @@ SkyPillar_Top_EventScript_Rayquaza::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	setflag FLAG_NO_RUNNING
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	clearflag FLAG_NO_RUNNING
 	specialvar VAR_RESULT, GetBattleOutcome

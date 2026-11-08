@@ -42,7 +42,6 @@ BirthIsland_Exterior_EventScript_Triangle::
 	lock
 	faceplayer
 	special DoDeoxysRockInteraction
-	waitstate
 	switch VAR_RESULT
 	case DEOXYS_ROCK_FAILED,     BirthIsland_Exterior_EventScript_Failed
 	case DEOXYS_ROCK_PROGRESSED, BirthIsland_Exterior_EventScript_Progressed
@@ -84,7 +83,6 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	createmon 1, 0, SPECIES_CELEBI, 30, move1=MOVE_CONFUSION, move2=MOVE_HEAL_BELL, move3=MOVE_ANCIENT_POWER, move4=MOVE_MAGICAL_LEAF
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys

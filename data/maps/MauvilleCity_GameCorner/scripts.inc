@@ -78,11 +78,11 @@ MauvilleCity_GameCorner_EventScript_Buy50Coins::
 	addcoins 50
 	removemoney COINS_PRICE_50
 	updatemoneybox
-	updatecoinsbox 1, 6
+	updatecoinsbox
 	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins, MSGBOX_DEFAULT
 	hidemoneybox
-	hidecoinsbox 0, 5
+	hidecoinsbox
 	release
 	end
 
@@ -108,11 +108,11 @@ MauvilleCity_GameCorner_EventScript_Buy500Coins::
 	addcoins 500
 	removemoney COINS_PRICE_500
 	updatemoneybox
-	updatecoinsbox 1, 6
+	updatecoinsbox
 	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins, MSGBOX_DEFAULT
 	hidemoneybox
-	hidecoinsbox 0, 5
+	hidecoinsbox
 	release
 	end
 
@@ -138,21 +138,21 @@ MauvilleCity_GameCorner_EventScript_NeedCoinCase::
 MauvilleCity_GameCorner_EventScript_NotEnoughMoney::
 	msgbox MauvilleCity_GameCorner_Text_DontHaveEnoughMoney, MSGBOX_DEFAULT
 	hidemoneybox
-	hidecoinsbox 0, 5
+	hidecoinsbox
 	release
 	end
 
 MauvilleCity_GameCorner_EventScript_CancelBuyCoins::
 	msgbox MauvilleCity_GameCorner_Text_DontNeedCoinsThen, MSGBOX_DEFAULT
 	hidemoneybox
-	hidecoinsbox 0, 5
+	hidecoinsbox
 	release
 	end
 
 MauvilleCity_GameCorner_EventScript_NoRoomForCoins::
 	msgbox MauvilleCity_GameCorner_Text_CoinCaseIsFull, MSGBOX_DEFAULT
 	hidemoneybox
-	hidecoinsbox 0, 5
+	hidecoinsbox
 	release
 	end
 

@@ -77,7 +77,6 @@ SouthernIsland_Interior_EventScript_Steed::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	setflag FLAG_NO_RUNNING
 	special BattleSetup_StartLatiBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	clearflag FLAG_NO_RUNNING
 	specialvar VAR_RESULT, GetBattleOutcome
