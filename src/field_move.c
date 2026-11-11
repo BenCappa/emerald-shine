@@ -45,11 +45,6 @@ const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
 
 #define FLAG_TO_BADGE(flag) flag - FLAG_BADGE01_GET
 
-static bool32 IsFieldMoveUnlocked_Headbutt(void)
-{
-    return TRUE;
-}
-
 const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
 {
     [FIELD_MOVE_CUT] =
@@ -175,7 +170,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
     [FIELD_MOVE_HEADBUTT] =
     {
         .fieldMoveFunc = SetUpFieldMove_Headbutt,
-        .isUnlockedFunc = IsFieldMoveUnlocked_Headbutt,
+        .unlockType = ALWAYS_UNLOCKED,
         .moveID = MOVE_HEADBUTT,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
     },

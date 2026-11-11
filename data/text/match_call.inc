@@ -2288,7 +2288,7 @@ MatchCall_Text_Rheannon_PreparingPostGame::
 	.string "Love you!$"
 
 MatchCall_Text_Rheannon_RematchReady::
-	.string "Rheannon: Hoho… {PLAYER}{KUN}…\p"
+	.string "Rheannon: Hey {PLAYER}{KUN}!\p"
 	.string "The Sootopolis Gym has finally\n"
 	.string "reopened.\p"
 	.string "If you want to battle, you are\n"
@@ -2312,8 +2312,8 @@ MatchCall_Text_Sidney::
 	.string "I'll always be here!\n"
 	.string "I'll be waiting!$"
 
-MatchCall_Text_Rheannon::
-	.string "Rheannon: Hi, {PLAYER}!\p"
+MatchCall_Text_Juan::
+	.string "Juan: Ohoho, {PLAYER}!\p"
 	.string "How about coming back here again\n"
 	.string "sometime?\p"
 	.string "I'd like to see how much tighter\n"

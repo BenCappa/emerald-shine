@@ -160,6 +160,7 @@ struct InGameTrade {
     u8 conditions[CONTEST_CATEGORIES_COUNT];
     u32 personality;
     enum Item heldItem;
+    u8 mailNum;
     u8 otName[TRAINER_NAME_LENGTH + 1];
     u8 otGender;
     u8 sheen;
@@ -310,6 +311,7 @@ static void SpriteCB_BouncingPokeballDepart(struct Sprite *);
 static void SpriteCB_BouncingPokeballDepartEnd(struct Sprite *);
 static void SpriteCB_BouncingPokeballArrive(struct Sprite *);
 static void BufferInGameTradeMonName(void);
+static void GetInGameTradeMail(struct Mail *, const struct InGameTrade *);
 static void CB2_UpdateLinkTrade(void);
 static void CB2_WaitTradeComplete(void);
 static void CB2_SaveAndEndTrade(void);
@@ -3328,6 +3330,7 @@ static void BufferTradeSceneStrings(void)
 {
     u8 mpId;
     u8 name[POKEMON_NAME_BUFFER_SIZE];
+    const struct InGameTrade *ingameTrade;
 
     if (sTradeAnim->isLinkTrade)
     {
@@ -4564,8 +4567,11 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
     const struct InGameTrade *inGameTrade = &sIngameTrades[whichInGameTrade];
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
     u32 level = GetLevelFromBoxMonExp(boxmon);
+    u8 i;
 
+    struct Mail mail;
     metloc_u8_t metLocation = METLOC_IN_GAME_TRADE;
+    u8 mailNum;
     struct Pokemon *pokemon = &gParties[B_TRAINER_OPPONENT_A][0];
 
     CreateMon(pokemon, inGameTrade->species, level, inGameTrade->personality, OTID_STRUCT_PRESET(inGameTrade->otId));
@@ -4584,6 +4590,22 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
     SetMonData(pokemon, MON_DATA_SHEEN, &inGameTrade->sheen);
     SetMonData(pokemon, MON_DATA_MET_LOCATION, &metLocation);
 
+    mailNum = 0;
+    if (inGameTrade->heldItem != ITEM_NONE)
+    {
+        if (ItemIsMail(inGameTrade->heldItem))
+        {
+            GetInGameTradeMail(&mail, inGameTrade);
+            gTradeMail[0] = mail;
+            SetMonData(pokemon, MON_DATA_MAIL, &mailNum);
+            SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
+        }
+        else
+        {
+            SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
+        }
+    }
+
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         SetMonData(pokemon, MON_DATA_MOVE1 + i, &inGameTrade->moves[i]);
@@ -4592,6 +4614,24 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
     SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
 
     CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
+}
+
+static void GetInGameTradeMail(struct Mail *mail, const struct InGameTrade *trade)
+{
+    s32 i;
+
+    for (i = 0; i < MAIL_WORDS_COUNT; i++)
+        mail->words[i] = sIngameTradeMail[trade->mailNum][i];
+
+    StringCopy(mail->playerName, trade->otName);
+    PadNameString(mail->playerName, CHAR_SPACE);
+
+    mail->trainerId[0] = trade->otId >> 24;
+    mail->trainerId[1] = trade->otId >> 16;
+    mail->trainerId[2] = trade->otId >> 8;
+    mail->trainerId[3] = trade->otId;
+    mail->species = trade->species;
+    mail->itemId = trade->heldItem;
 }
 
 enum Species GetTradeSpecies(void)

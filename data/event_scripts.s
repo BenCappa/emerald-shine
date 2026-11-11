@@ -342,7 +342,7 @@ gStdScripts_End::
 	.include "data/maps/SootopolisCity_MysteryEventsHouse_1F/scripts.inc"
 	.include "data/maps/SootopolisCity_MysteryEventsHouse_B1F/scripts.inc"
 	.include "data/maps/EverGrandeCity_SidneysRoom/scripts.inc"
-	.include "data/maps/EverGrandeCity_JuansRoom/scripts.inc"
+	.include "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc"
 	.include "data/maps/EverGrandeCity_GlaciasRoom/scripts.inc"
 	.include "data/maps/EverGrandeCity_DrakesRoom/scripts.inc"
 	.include "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc"

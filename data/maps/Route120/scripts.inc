@@ -165,7 +165,6 @@ Route120_EventScript_ChoosePartyForMultiBattle::
 	special SavePlayerParty
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
-	waitstate
 	goto_if_ne VAR_RESULT, 0, Route120_EventScript_DetermineRivalMultiBattle
 	special LoadPlayerParty
 	goto Route120_EventScript_SiblingsAskReadyForBattle
@@ -184,7 +183,6 @@ Route120_EventScript_RivalMultiBattleBulbasaur::
 	case 1, Route120_EventScript_DefeatedSiblings
 	fadescreen FADE_TO_BLACK
 	special SetCB2WhiteOut
-	waitstate
 
 Route120_EventScript_RivalMultiBattleFennekin::
 	multi_2_vs_2 TRAINER_CECE, Route120_Text_CeceDefeat, TRAINER_KIT, Route120_Text_KitDefeat, PARTNER_BEN_FENNEKIN
@@ -192,7 +190,6 @@ Route120_EventScript_RivalMultiBattleFennekin::
 	case 1, Route120_EventScript_DefeatedSiblings
 	fadescreen FADE_TO_BLACK
 	special SetCB2WhiteOut
-	waitstate
 
 Route120_EventScript_RivalMultiBattlePiplup::
 	multi_2_vs_2 TRAINER_CECE, Route120_Text_CeceDefeat, TRAINER_KIT, Route120_Text_KitDefeat, PARTNER_BEN_PIPLUP
@@ -200,7 +197,6 @@ Route120_EventScript_RivalMultiBattlePiplup::
 	case 1, Route120_EventScript_DefeatedSiblings
 	fadescreen FADE_TO_BLACK
 	special SetCB2WhiteOut
-	waitstate
 
 Route120_EventScript_DefeatedSiblings::
 	msgbox Route120_Text_SiblingsDefeat, MSGBOX_DEFAULT

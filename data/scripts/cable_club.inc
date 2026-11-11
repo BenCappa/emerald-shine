@@ -1421,12 +1421,10 @@ Common_EventScript_CheckWonderTradeFee::
 	waitmessage
 	hidemoneybox
 	special ChoosePartyMon
-	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, Common_EventScript_DeniedWonderTrade
 	copyvar VAR_0x8005, VAR_0x8004
 	special CreateWonderTradePokemon
 	special DoInGameTradeScene
-	waitstate
 	msgbox CableClub_Text_HopeYouEnjoyWirelessSystem, MSGBOX_DEFAULT
 	release
 	end

@@ -2145,7 +2145,6 @@ static void Cmd_getexp(void)
 {
     CMD_ARGS(u8 battler);
 
-    enum HoldEffect holdEffect;
     s32 stringId;
     u8 *expMonId = &gBattleStruct->expGetterMonId;
     u32 currLvl;
@@ -2257,13 +2256,13 @@ static void Cmd_getexp(void)
         {
             bool32 wasSentOut = (gBattleStruct->expSentInMons & (1u << *expMonId)) != 0;
             
-            if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
+            if (GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
             {
                 gBattleScripting.getexpState = 5;
                 gBattleStruct->battlerExpReward = 0;
             }
             else if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && *expMonId >= 3)
-                  || GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) == GetCurrentLevelCap())
+                  || GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_LEVEL) == GetCurrentLevelCap())
             {
                 gBattleScripting.getexpState = 5;
                 gBattleStruct->battlerExpReward = 0;
@@ -2319,25 +2318,10 @@ static void Cmd_getexp(void)
                         stringId = STRINGID_EMPTYSTRING4;
                     }
 
-                    // get exp getter battler
-                    if (IsDoubleBattle())
-                    {
-                        if (gBattlerPartyIndexes[2] == *expMonId && !(gAbsentBattlerFlags & 4))
-                            gBattleStruct->expGetterBattlerId = 2;
-                        else if (!(gAbsentBattlerFlags & 1))
-                            gBattleStruct->expGetterBattlerId = 0;
-                        else
-                            gBattleStruct->expGetterBattlerId = 2;
-                    }
-                    else
-                    {
-                        gBattleStruct->expGetterBattlerId = 0;
-                    }
+                    u32 expGetterExp = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_EXP);
+                    u32 expCap = gExperienceTables[gSpeciesInfo[GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_SPECIES)].growthRate][GetCurrentLevelCap()];
 
-                    u32 expGetterExp = GetMonData(&gPlayerParty[*expMonId], MON_DATA_EXP);
-                    u32 expCap = gExperienceTables[gSpeciesInfo[GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES)].growthRate][GetCurrentLevelCap()];
-
-                    if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) >= GetCurrentLevelCap())
+                    if (GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_LEVEL) >= GetCurrentLevelCap())
                         gBattleStruct->battlerExpReward = 0;
 
                     if ((expGetterExp + gBattleStruct->battlerExpReward) > expCap)
@@ -2347,7 +2331,7 @@ static void Cmd_getexp(void)
                             gBattleStruct->battlerExpReward = 0;
                     }
 
-                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, *expMonId);
+                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, *expMonId);
                     // buffer 'gained' or 'gained a boosted'
                     PREPARE_STRING_BUFFER(gBattleTextBuff2, stringId);
                     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, gBattleStruct->battlerExpReward);
@@ -2358,7 +2342,7 @@ static void Cmd_getexp(void)
                     }
                     else if (!gBattleStruct->teamGotExpMsgPrinted) // Print 'the rest of your team got exp' message once, when all of the sent-in mons were given experience
                     {
-                        PrepareStringBattle(STRINGID_TEAMGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                        PrepareStringBattle(STRINGID_TEAMGAINEDEXP, 0);
                         gBattleStruct->teamGotExpMsgPrinted = TRUE;
                     }
 
@@ -2371,9 +2355,9 @@ static void Cmd_getexp(void)
     case 3: // Set stats and give exp
         if (gBattleControllerExecFlags == 0)
         {
-            gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0;
-            currLvl = GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL);
-            if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_HP) > 0 && currLvl < GetCurrentLevelCap())
+            gBattleResources->bufferB[0][0] = 0;
+            currLvl = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_LEVEL);
+            if (GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_HP) > 0 && currLvl < GetCurrentLevelCap())
             {
                 gBattleResources->beforeLvlUp->stats[STAT_HP]    = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_MAX_HP);
                 gBattleResources->beforeLvlUp->stats[STAT_ATK]   = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_ATK);
@@ -2455,7 +2439,7 @@ static void Cmd_getexp(void)
     case 6: // check if wild Pokémon has a hold item after fainting
         if (gBattleStruct->wildVictorySong && gBattleMons[gBattlerFainted].item != ITEM_NONE)
         {
-            PrepareStringBattle(STRINGID_PKMNDROPPEDITEM, gBattleStruct->expGetterBattlerId);
+            PrepareStringBattle(STRINGID_PKMNDROPPEDITEM, 0);
             gBattleScripting.getexpState = 7; // add item to bag
         }
         else
@@ -2468,12 +2452,12 @@ static void Cmd_getexp(void)
         {
             AddBagItem(gBattleMons[gBattlerFainted].item, 1);
             PREPARE_ITEM_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerFainted].item);
-            PrepareStringBattle(STRINGID_ADDEDTOBAG, gBattleStruct->expGetterBattlerId);
+            PrepareStringBattle(STRINGID_ADDEDTOBAG, 0);
             gBattleScripting.getexpState = 8;
         }
         else
         {
-            PrepareStringBattle(STRINGID_BAGISFULL, gBattleStruct->expGetterBattlerId);
+            PrepareStringBattle(STRINGID_BAGISFULL, 0);
             gBattleScripting.getexpState = 8;
         }
         break;

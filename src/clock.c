@@ -111,15 +111,7 @@ void FormChangeSeasonUpdate(void)
     s32 i;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *mon = &gPlayerParty[i];
-        u32 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_TIME_OF_YEAR, 0);
-        u32 currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
-
-        if (targetSpecies != currentSpecies)
-        {
-            SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
-            CalculateMonStats(mon);
-        }
+        TryFormChange(&gParties[B_TRAINER_PLAYER][i], FORM_CHANGE_TIME_OF_YEAR, B_TRAINER_PLAYER);
     }
 }
 

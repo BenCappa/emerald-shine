@@ -1014,9 +1014,6 @@ const u16 gItemIconPalette_Glimmoranite[] = INCGFX_U16("graphics/items/icon_pale
 const u32 gItemIcon_Empoleonite[] = INCBIN_U32("graphics/items/icons/empoleonite.4bpp.smol");
 const u16 gItemIconPalette_Empoleonite[] = INCBIN_U16("graphics/items/icon_palettes/empoleonite.gbapal");
 
-const u32 gItemIcon_Delphoxite[] = INCBIN_U32("graphics/items/icons/delphoxite.4bpp.smol");
-const u16 gItemIconPalette_Delphoxite[] = INCBIN_U16("graphics/items/icon_palettes/delphoxite.gbapal");
-
 // Gems
 
 const u32 gItemIcon_TypeGem[] = INCGFX_U32("graphics/items/icons/type_gem.png", ".4bpp.smol");

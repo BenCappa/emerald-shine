@@ -4638,9 +4638,9 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Slash
 
 === TRAINER_JUAN ===
-Name: PHOEBE
+Name: JUAN
 Class: Elite Four
-Pic: Elite Four Phoebe
+Pic: Leader Juan
 Gender: Female
 Music: Elite Four
 Items: Full Restore / Full Restore
@@ -4793,7 +4793,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_ORIANA_1 ===
 Name: ORIANA
 Class: Leader
-Pic: Leader Oriana
+Pic: Leader Roxanne
 Gender: Female
 Music: Female
 Items: Potion / Potion
@@ -4827,7 +4827,7 @@ IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 === TRAINER_NILES_1 ===
 Name: NILES
 Class: Leader
-Pic: Leader Niles
+Pic: Leader Brawly
 Gender: Male
 Music: Male
 Items: Super Potion / Super Potion
@@ -4903,7 +4903,7 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 === TRAINER_ILIYAH_1 ===
 Name: ILIYAH
 Class: Leader
-Pic: Leader Iliyah
+Pic: Leader Flannery
 Gender: Female
 Music: Female
 Items: Hyper Potion / Hyper Potion
@@ -4945,7 +4945,7 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 === TRAINER_MICHEAL_1 ===
 Name: MICHEAL
 Class: Leader
-Pic: Leader Micheal
+Pic: Leader Norman
 Gender: Male
 Music: Male
 Items: Hyper Potion / Hyper Potion
@@ -5079,7 +5079,7 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 === TRAINER_RHEANNON_1 ===
 Name: RHEANNON
 Class: Leader
-Pic: Leader Rheannon
+Pic: Elite Four Phoebe
 Gender: Male
 Music: Male
 Items: Hyper Potion / Hyper Potion
@@ -12338,7 +12338,7 @@ Toxtricity (M) @ Throat Spray
 Nature: Hasty
 Level: 78
 Ability: Punk Rock
-Ball: Luxury Ball
+Ball: Luxury
 Gigantamax: Yes
 - Boomburst
 - Overdrive
@@ -12355,7 +12355,7 @@ Mamoswine (M) @ Assault Vest
 Nature: Jolly
 Level: 77
 Ability: Thick Fat
-Ball: Heavy Ball
+Ball: Heavy
 - Earthquake
 - Icicle Crash
 - Ice Shard
@@ -12382,7 +12382,7 @@ Toxtricity (M) @ Throat Spray
 Nature: Hasty
 Level: 78
 Ability: Punk Rock
-Ball: Luxury Ball
+Ball: Luxury
 Gigantamax: Yes
 - Boomburst
 - Overdrive
@@ -12399,7 +12399,7 @@ Mamoswine (M) @ Assault Vest
 Nature: Jolly
 Level: 77
 Ability: Thick Fat
-Ball: Heavy Ball
+Ball: Heavy
 - Earthquake
 - Icicle Crash
 - Ice Shard
@@ -12426,7 +12426,7 @@ Toxtricity (M) @ Throat Spray
 Nature: Hasty
 Level: 78
 Ability: Punk Rock
-Ball: Luxury Ball
+Ball: Luxury
 Gigantamax: Yes
 - Boomburst
 - Overdrive
@@ -12443,7 +12443,7 @@ Mamoswine (M) @ Assault Vest
 Nature: Jolly
 Level: 77
 Ability: Thick Fat
-Ball: Heavy Ball
+Ball: Heavy
 - Earthquake
 - Icicle Crash
 - Ice Shard
@@ -14217,7 +14217,7 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 === TRAINER_ORIANA_2 ===
 Name: ORIANA
 Class: Leader
-Pic: Leader Oriana
+Pic: Leader Roxanne
 Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore
@@ -14259,7 +14259,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_ORIANA_3 ===
 Name: ORIANA
 Class: Leader
-Pic: Leader Oriana
+Pic: Leader Roxanne
 Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore
@@ -14309,7 +14309,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_ORIANA_4 ===
 Name: ORIANA
 Class: Leader
-Pic: Leader Oriana
+Pic: Leader Roxanne
 Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore
@@ -14359,7 +14359,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_ORIANA_5 ===
 Name: ORIANA
 Class: Leader
-Pic: Leader Oriana
+Pic: Leader Roxanne
 Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore
@@ -14417,7 +14417,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_NILES_2 ===
 Name: NILES
 Class: Leader
-Pic: Leader Niles
+Pic: Leader Brawly
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -14459,7 +14459,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_NILES_3 ===
 Name: NILES
 Class: Leader
-Pic: Leader Niles
+Pic: Leader Brawly
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -14501,7 +14501,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_NILES_4 ===
 Name: NILES
 Class: Leader
-Pic: Leader Niles
+Pic: Leader Brawly
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -14551,7 +14551,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_NILES_5 ===
 Name: NILES
 Class: Leader
-Pic: Leader Niles
+Pic: Leader Brawly
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -14809,7 +14809,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_ILIYAH_2 ===
 Name: ILIYAH
 Class: Leader
-Pic: Leader Iliyah
+Pic: Leader Flannery
 Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore
@@ -14851,7 +14851,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_ILIYAH_3 ===
 Name: ILIYAH
 Class: Leader
-Pic: Leader Iliyah
+Pic: Leader Flannery
 Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore
@@ -14901,7 +14901,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_ILIYAH_4 ===
 Name: ILIYAH
 Class: Leader
-Pic: Leader Iliyah
+Pic: Leader Flannery
 Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore
@@ -14959,7 +14959,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_ILIYAH_5 ===
 Name: ILIYAH
 Class: Leader
-Pic: Leader Iliyah
+Pic: Leader Flannery
 Gender: Female
 Music: Female
 Items: Full Restore / Full Restore / Full Restore
@@ -15017,7 +15017,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_MICHEAL_2 ===
 Name: MICHEAL
 Class: Leader
-Pic: Leader Micheal
+Pic: Leader Norman
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -15059,7 +15059,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_MICHEAL_3 ===
 Name: MICHEAL
 Class: Leader
-Pic: Leader Micheal
+Pic: Leader Norman
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -15109,7 +15109,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_MICHEAL_4 ===
 Name: MICHEAL
 Class: Leader
-Pic: Leader Micheal
+Pic: Leader Norman
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -15159,7 +15159,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_MICHEAL_5 ===
 Name: MICHEAL
 Class: Leader
-Pic: Leader Micheal
+Pic: Leader Norman
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -15665,7 +15665,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_RHEANNON_2 ===
 Name: RHEANNON
 Class: Leader
-Pic: Leader Rheannon
+Pic: Elite Four Phoebe
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -15715,7 +15715,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_RHEANNON_3 ===
 Name: RHEANNON
 Class: Leader
-Pic: Leader Rheannon
+Pic: Elite Four Phoebe
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -15765,7 +15765,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_RHEANNON_4 ===
 Name: RHEANNON
 Class: Leader
-Pic: Leader Rheannon
+Pic: Elite Four Phoebe
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore
@@ -15823,7 +15823,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 === TRAINER_RHEANNON_5 ===
 Name: RHEANNON
 Class: Leader
-Pic: Leader Rheannon
+Pic: Elite Four Phoebe
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore

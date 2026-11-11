@@ -427,8 +427,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sQuilavaLevelUpLearnset,
         .teachableLearnset = sQuilavaTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_TYPHLOSION_HISUI, CONDITIONS({IF_HOLD_ITEM, ITEM_STRANGE_SOUVENIR})},
-                                {EVO_LEVEL, 36, SPECIES_TYPHLOSION}
-                            ),
+                                {EVO_LEVEL, 36, SPECIES_TYPHLOSION}),
     },
 
     [SPECIES_TYPHLOSION] =
@@ -6057,8 +6056,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .teachableLearnset = sUrsaringTeachableLearnset,
     #if P_GEN_8_CROSS_EVOS
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_PEAT_BLOCK, SPECIES_URSALUNA_BLOODMOON, CONDITIONS({IF_TIME, TIME_NIGHT}, {IF_HOLD_ITEM, ITEM_STRANGE_SOUVENIR})},
-                                {EVO_ITEM, ITEM_PEAT_BLOCK, SPECIES_URSALUNA, CONDITIONS({IF_TIME, TIME_NIGHT})}
-                            ),
+                                {EVO_ITEM, ITEM_PEAT_BLOCK, SPECIES_URSALUNA, CONDITIONS({IF_TIME, TIME_NIGHT})}),
     #endif
     },
 

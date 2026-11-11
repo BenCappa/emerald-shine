@@ -1528,14 +1528,16 @@ void SetShoalItemFlag(u16 unused)
 void LoadWallyZigzagoon(void)
 {
     u16 monData;
-    CreateRandomMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 7);
+    CreateRandomMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_FARFETCHD, 5);
     monData = TRUE;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ABILITY_NUM, &monData);
-    monData = MOVE_TACKLE;
+    monData = MOVE_FALSE_SWIPE;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1, &monData);
-    monData = MOVE_NONE;
+    monData = MOVE_LEER;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2, &monData);
+    monData = MOVE_PECK;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3, &monData);
+    monData = MOVE_SAND_ATTACK;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4, &monData);
 }
 

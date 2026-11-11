@@ -36,7 +36,7 @@ EverGrandeCity_PhoebesRoom_EventScript_CloseDoor::
 	call PokemonLeague_EliteFour_EventScript_CloseDoor
 	return
 
-EverGrandeCity_PhoebesRoom_EventScript_Phoebe::
+EverGrandeCity_PhoebesRoom_EventScript_Juan::
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_JUAN, EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech

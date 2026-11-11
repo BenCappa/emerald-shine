@@ -163,7 +163,7 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     {
         CreateWildMon(SPECIES_ZIGZAGOON_GALAR, 2);
         i = 0;
-        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &i);
+        SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, &i);
     }
 }
 

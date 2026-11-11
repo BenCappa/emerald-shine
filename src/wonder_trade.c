@@ -40,7 +40,6 @@ static u16 GetRandomItem(void);
 struct WonderTrade {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u16 species;
-    u8 ivs[NUM_STATS];
     u8 abilityNum;
     u32 otId;
     u8 conditions[CONTEST_CATEGORIES_COUNT];
@@ -1005,7 +1004,7 @@ static u8 GetWonderTradeOT(u8 *name)
 void CreateWonderTradePokemon(void)
 {
     u16 wonderTradeSpecies = PickRandomSpecies();
-    u8 playerMonLevel = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LEVEL);
+    u8 playerMonLevel = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_LEVEL);
     u8 i;
     u8 chanceToEvolve = Random() % 3;
     u16 wonderTradeItem = ITEM_NONE;
@@ -1019,7 +1018,6 @@ void CreateWonderTradePokemon(void)
         [0] = {
             .nickname = _(""),
             .species = wonderTradeSpecies,
-            .ivs = {(Random() % 32), (Random() % 32), (Random() % 32), (Random() % 32), (Random() % 32), (Random() % 32)},
             .abilityNum = (Random() % NUM_NORMAL_ABILITY_SLOTS),
             .otId = 0, // Handled by CreateMon->CreateBoxMon.
             .conditions = {0, 0, 0, 0, 0},
@@ -1029,7 +1027,7 @@ void CreateWonderTradePokemon(void)
             .otName = _("ERROR"),
             .otGender = FEMALE, // Decided by the personality generated in CreateMon->CreateBoxMon.
             .sheen = 0,
-            .requestedSpecies = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES)
+            .requestedSpecies = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES)
         },
     };
     struct WonderTrade *wonderTrade = &sWonderTrades[0];
@@ -1038,42 +1036,36 @@ void CreateWonderTradePokemon(void)
         wonderTradeSpecies = GetUnownForm();
 
     // Creates the base of a Pokémon in the first slot of a nonexistent enemy's party.
-    CreateMon(&gEnemyParty[0], wonderTradeSpecies, playerMonLevel, USE_RANDOM_IVS, FALSE, 0, OT_ID_PRESET, ((Random() << 16) | Random()));
+    CreateMon(&gParties[B_TRAINER_OPPONENT_A][0], wonderTradeSpecies, playerMonLevel, 0, OTID_STRUCT_PRESET(0));
 
     for (i = 0; i < chanceToEvolve; i++)
     {
-        wonderTradeSpecies = GetWonderTradeEvolutionTargetSpecies(&gEnemyParty[0]);
-        SetMonData(&gEnemyParty[0], MON_DATA_SPECIES, &wonderTradeSpecies);
+        wonderTradeSpecies = GetWonderTradeEvolutionTargetSpecies(&gParties[B_TRAINER_OPPONENT_A][0]);
+        SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES, &wonderTradeSpecies);
     }
 
     // 10% chance of giving the incoming Pokémon their HA, if they have one
     if (gSpeciesInfo[wonderTradeSpecies].abilities[2] != ABILITY_NONE && (Random() % 10) == 0)
     {
         abilityNum = 2;
-        SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityNum);
+        SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM, &abilityNum);
     }
 
     wonderTradeItem = GetValidHeldItemForSpecies(wonderTradeSpecies);
 
-    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &wonderTradeItem);
-    SetMonData(&gEnemyParty[0], MON_DATA_HP_IV, &wonderTrade->ivs[0]);
-    SetMonData(&gEnemyParty[0], MON_DATA_ATK_IV, &wonderTrade->ivs[1]);
-    SetMonData(&gEnemyParty[0], MON_DATA_DEF_IV, &wonderTrade->ivs[2]);
-    SetMonData(&gEnemyParty[0], MON_DATA_SPEED_IV, &wonderTrade->ivs[3]);
-    SetMonData(&gEnemyParty[0], MON_DATA_SPATK_IV, &wonderTrade->ivs[4]);
-    SetMonData(&gEnemyParty[0], MON_DATA_SPDEF_IV, &wonderTrade->ivs[5]);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, &wonderTradeItem);
     StringCopy(monName, GetSpeciesName(wonderTradeSpecies));
-    SetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, monName);
-    SetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, otName);
-    SetMonData(&gEnemyParty[0], MON_DATA_BEAUTY, &wonderTrade->conditions[1]);
-    SetMonData(&gEnemyParty[0], MON_DATA_CUTE, &wonderTrade->conditions[2]);
-    SetMonData(&gEnemyParty[0], MON_DATA_COOL, &wonderTrade->conditions[0]);
-    SetMonData(&gEnemyParty[0], MON_DATA_SMART, &wonderTrade->conditions[3]);
-    SetMonData(&gEnemyParty[0], MON_DATA_TOUGH, &wonderTrade->conditions[4]);
-    SetMonData(&gEnemyParty[0], MON_DATA_SHEEN, &wonderTrade->sheen);
-    SetMonData(&gEnemyParty[0], MON_DATA_OT_GENDER, &genderOT);
-    SetMonData(&gEnemyParty[0], MON_DATA_MET_LOCATION, &metLocation);
-    CalculateMonStats(&gEnemyParty[0]);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_NICKNAME, monName);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_OT_NAME, otName);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_BEAUTY, &wonderTrade->conditions[1]);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_CUTE, &wonderTrade->conditions[2]);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_COOL, &wonderTrade->conditions[0]);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SMART, &wonderTrade->conditions[3]);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_TOUGH, &wonderTrade->conditions[4]);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SHEEN, &wonderTrade->sheen);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_OT_GENDER, &genderOT);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MET_LOCATION, &metLocation);
+    CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 
 static u16 GetUnownForm(void)
@@ -1179,7 +1171,7 @@ static u16 GetWonderTradeEvolutionTargetSpecies(struct Pokemon *mon)
     u32 partnerPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
     u16 upperPersonality = partnerPersonality >> 16;
     u8 partnerLevel = GetMonData(mon, MON_DATA_LEVEL);
-    u16 playerPartySpecies = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+    u16 playerPartySpecies = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES);
     const struct Evolution *evolutions = GetSpeciesEvolutions(partnerSpecies);
 
     switch (evolutions[0].method)
@@ -1347,7 +1339,7 @@ static u16 GetWonderTradeEvolutionTargetSpecies(struct Pokemon *mon)
                 }
                 break;
             case IF_TYPE_IN_PARTY:
-                u16 currSpecies = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+                u16 currSpecies = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES, NULL);
                 
                 for (i = 0; i < PARTY_SIZE; i++)
                 {
@@ -1626,10 +1618,23 @@ static u16 GetValidHeldItemForSpecies(u16 speciesId)
         case SPECIES_ABRA:
         case SPECIES_KADABRA:
         case SPECIES_ALAKAZAM:
+        case SPECIES_BELLSPROUT:
+        case SPECIES_WEEPINBELL:
+        case SPECIES_VICTREEBEL:
         case SPECIES_SLOWPOKE:
         case SPECIES_SLOWBRO:
+        case SPECIES_STARYU:
+        case SPECIES_STARMIE:
         case SPECIES_PINSIR:
         case SPECIES_AERODACTYL:
+        case SPECIES_MEWTWO:
+        case SPECIES_CHIKORITA:
+        case SPECIES_BAYLEEF:
+        case SPECIES_MEGANIUM:
+        case SPECIES_TOTODILE:
+        case SPECIES_CROCONAW:
+        case SPECIES_FERALIGATR:
+        case SPECIES_SKARMORY:
         case SPECIES_LARVITAR:
         case SPECIES_PUPITAR:
         case SPECIES_TYRANITAR:
@@ -1647,6 +1652,7 @@ static u16 GetValidHeldItemForSpecies(u16 speciesId)
         case SPECIES_MEDICHAM:
         case SPECIES_ELECTRIKE:
         case SPECIES_MANECTRIC:
+        case SPECIES_CHIMECHO:
         case SPECIES_BAGON:
         case SPECIES_SHELGON:
         case SPECIES_SALAMENCE:
@@ -1654,7 +1660,51 @@ static u16 GetValidHeldItemForSpecies(u16 speciesId)
         case SPECIES_LATIOS:
         case SPECIES_BUNEARY:
         case SPECIES_LOPUNNY:
+        case SPECIES_CHINGLING:
+        case SPECIES_HEATRAN:
+        case SPECIES_DARKRAI:
+        case SPECIES_TEPIG:
+        case SPECIES_PIGNITE:
+        case SPECIES_EMBOAR:
+        case SPECIES_DRILBUR:
+        case SPECIES_EXCADRILL:
+        case SPECIES_VENIPEDE:
+        case SPECIES_WHIRLIPEDE:
+        case SPECIES_SCOLIPEDE:
+        case SPECIES_SCRAGGY:
+        case SPECIES_SCRAFTY:
+        case SPECIES_TYNAMO:
+        case SPECIES_EELEKTRIK:
+        case SPECIES_EELEKTROSS:
+        case SPECIES_GOLETT:
+        case SPECIES_GOLURK:
+        case SPECIES_CHESPIN:
+        case SPECIES_QUILLADIN:
+        case SPECIES_CHESNAUGHT:
+        case SPECIES_FROAKIE:
+        case SPECIES_FROGADIER:
+        case SPECIES_GRENINJA:
+        case SPECIES_LITLEO:
+        case SPECIES_PYROAR:
+        case SPECIES_ESPURR:
+        case SPECIES_MEOWSTIC:
+        case SPECIES_BINACLE:
+        case SPECIES_BARBARACLE:
+        case SPECIES_HAWLUCHA:
+        case SPECIES_ZYGARDE:
         case SPECIES_DIANCIE:
+        case SPECIES_CRABRAWLER:
+        case SPECIES_CRABOMINABLE:
+        case SPECIES_WIMPOD:
+        case SPECIES_GOLISOPOD:
+        case SPECIES_MAGEARNA:
+        case SPECIES_ZERAORA:
+        case SPECIES_FALINKS:
+        case SPECIES_CAPSAKID:
+        case SPECIES_SCOVILLAIN:
+        case SPECIES_FRIGIBAX:
+        case SPECIES_ARCTIBAX:
+        case SPECIES_BAXCALIBUR:
             heldItem = GetMegaStoneForSpecies(speciesId);
             break;
         case SPECIES_GREAT_TUSK:
@@ -1872,9 +1922,18 @@ static u16 GetMegaStoneForSpecies(u16 speciesId)
     case SPECIES_ALAKAZAM:
         heldItem = ITEM_ALAKAZITE;
         break;
+    case SPECIES_BELLSPROUT:
+    case SPECIES_WEEPINBELL:
+    case SPECIES_VICTREEBEL:
+        heldItem = ITEM_VICTREEBELITE;
+        break;
     case SPECIES_SLOWPOKE:
     case SPECIES_SLOWBRO:
         heldItem = ITEM_SLOWBRONITE;
+        break;
+    case SPECIES_STARYU:
+    case SPECIES_STARMIE:
+        heldItem = ITEM_STARMINITE;
         break;
     case SPECIES_PINSIR:
         heldItem = ITEM_PINSIRITE;
@@ -1887,6 +1946,19 @@ static u16 GetMegaStoneForSpecies(u16 speciesId)
             heldItem = ITEM_MEWTWONITE_X;
         else
             heldItem = ITEM_MEWTWONITE_Y;
+        break;
+    case SPECIES_CHIKORITA:
+    case SPECIES_BAYLEEF:
+    case SPECIES_MEGANIUM:
+        heldItem = ITEM_MEGANIUMITE;
+        break;
+    case SPECIES_TOTODILE:
+    case SPECIES_CROCONAW:
+    case SPECIES_FERALIGATR:
+        heldItem = ITEM_FERALIGITE;
+        break;
+    case SPECIES_SKARMORY:
+        heldItem = ITEM_SKARMORITE;
         break;
     case SPECIES_LARVITAR:
     case SPECIES_PUPITAR:
@@ -1919,6 +1991,9 @@ static u16 GetMegaStoneForSpecies(u16 speciesId)
     case SPECIES_MANECTRIC:
         heldItem = ITEM_MANECTITE;
         break;
+    case SPECIES_CHIMECHO:
+        heldItem = ITEM_CHIMECHITE;
+        break;
     case SPECIES_BAGON:
     case SPECIES_SHELGON:
     case SPECIES_SALAMENCE:
@@ -1934,8 +2009,98 @@ static u16 GetMegaStoneForSpecies(u16 speciesId)
     case SPECIES_LOPUNNY:
         heldItem = ITEM_LOPUNNITE;
         break;
+    case SPECIES_CHINGLING:
+        heldItem = ITEM_CHIMECHITE;
+        break;
+    case SPECIES_HEATRAN:
+        heldItem = ITEM_HEATRANITE;
+        break;
+    case SPECIES_DARKRAI:
+        heldItem = ITEM_DARKRANITE;
+        break;
+    case SPECIES_TEPIG:
+    case SPECIES_PIGNITE:
+    case SPECIES_EMBOAR:
+        heldItem = ITEM_EMBOARITE;
+        break;
+    case SPECIES_DRILBUR:
+    case SPECIES_EXCADRILL:
+        heldItem = ITEM_EXCADRITE;
+        break;
+    case SPECIES_VENIPEDE:
+    case SPECIES_WHIRLIPEDE:
+    case SPECIES_SCOLIPEDE:
+        heldItem = ITEM_SCOLIPITE;
+        break;
+    case SPECIES_SCRAGGY:
+    case SPECIES_SCRAFTY:
+        heldItem = ITEM_SCRAFTINITE;
+        break;
+    case SPECIES_TYNAMO:
+    case SPECIES_EELEKTRIK:
+    case SPECIES_EELEKTROSS:
+        heldItem = ITEM_EELEKTROSSITE;
+        break;
+    case SPECIES_GOLETT:
+    case SPECIES_GOLURK:
+        heldItem = ITEM_GOLURKITE;
+        break;
+    case SPECIES_CHESPIN:
+    case SPECIES_QUILLADIN:
+    case SPECIES_CHESNAUGHT:
+        heldItem = ITEM_CHESNAUGHTITE;
+        break;
+    case SPECIES_FROAKIE:
+    case SPECIES_FROGADIER:
+    case SPECIES_GRENINJA:
+        heldItem = ITEM_GRENINJITE;
+        break;
+    case SPECIES_LITLEO:
+    case SPECIES_PYROAR:
+        heldItem = ITEM_PYROARITE;
+        break;
+    case SPECIES_ESPURR:
+    case SPECIES_MEOWSTIC:
+        heldItem = ITEM_MEOWSTICITE;
+        break;
+    case SPECIES_BINACLE:
+    case SPECIES_BARBARACLE:
+        heldItem = ITEM_BARBARACITE;
+        break;
+    case SPECIES_HAWLUCHA:
+        heldItem = ITEM_HAWLUCHANITE;
+        break;
+    case SPECIES_ZYGARDE:
+        heldItem = ITEM_ZYGARDITE;
+        break;
     case SPECIES_DIANCIE:
         heldItem = ITEM_DIANCITE;
+        break;
+    case SPECIES_CRABRAWLER:
+    case SPECIES_CRABOMINABLE:
+        heldItem = ITEM_CRABOMINITE;
+        break;
+    case SPECIES_WIMPOD:
+    case SPECIES_GOLISOPOD:
+        heldItem = ITEM_GOLISOPITE;
+        break;
+    case SPECIES_MAGEARNA:
+        heldItem = ITEM_MAGEARNITE;
+        break;
+    case SPECIES_ZERAORA:
+        heldItem = ITEM_ZERAORITE;
+        break;
+    case SPECIES_FALINKS:
+        heldItem = ITEM_FALINKSITE;
+        break;
+    case SPECIES_CAPSAKID:
+    case SPECIES_SCOVILLAIN:
+        heldItem = ITEM_SCOVILLAINITE;
+        break;
+    case SPECIES_FRIGIBAX:
+    case SPECIES_ARCTIBAX:
+    case SPECIES_BAXCALIBUR:
+        heldItem = ITEM_BAXCALIBRITE;
         break;
     default:
         heldItem = GetRandomItem();

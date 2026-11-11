@@ -10,45 +10,128 @@
 
 static const struct MassOutbreak sPokeOutbreakSpeciesList[OUTBREAK_COUNT] = {
     [OUTBREAK_ID_ROUTE102] = {
-        .species = SPECIES_SEEDOT,
-        .moves = {MOVE_BIDE, MOVE_HARDEN, MOVE_LEECH_SEED},
-        .level = 3,
-        .probability = 100,
+        .species = SPECIES_ZIGZAGOON,
+        .moves = {MOVE_EXTREME_SPEED, MOVE_TACKLE, MOVE_GROWL, MOVE_SAND_ATTACK},
+        .level = 5,
+        .probability = 90,
         .duration = 1,
         .location = MAP_ROUTE102
 
     },
-    [OUTBREAK_ID_ROUTE114] = {
-        .species = SPECIES_NUZLEAF,
-        .moves = {MOVE_HARDEN, MOVE_GROWTH, MOVE_NATURE_POWER, MOVE_LEECH_SEED},
+    [OUTBREAK_ID_ROUTE110] = {
+        .species = SPECIES_GRIMER,
+        .moves = {MOVE_ACID_SPRAY, MOVE_HARDEN, MOVE_MUD_SLAP, MOVE_DISABLE},
+        .level = 13,
+        .probability = 50,
+        .duration = 1,
+        .location = MAP_ROUTE110
+
+    },
+    [OUTBREAK_ID_ROUTE111] = {
+        .species = SPECIES_YAMASK,
+        .moves = {MOVE_MEMENTO, MOVE_DISABLE, MOVE_WILL_O_WISP, MOVE_CRAFTY_SHIELD},
+        .level = 21,
+        .probability = 50,
+        .duration = 1,
+        .location = MAP_ROUTE111
+
+    },
+    [OUTBREAK_ID_ROUTE113] = {
+        .species = SPECIES_RUFFLET,
+        .moves = {MOVE_ROOST, MOVE_LEER, MOVE_HONE_CLAWS, MOVE_WING_ATTACK},
         .level = 15,
+        .probability = 50,
+        .duration = 1,
+        .location = MAP_ROUTE113
+
+    },
+    [OUTBREAK_ID_ROUTE114] = {
+        .species = SPECIES_GROWLITHE,
+        .moves = {MOVE_RAGING_FURY, MOVE_BITE, MOVE_FLAME_WHEEL, MOVE_HELPING_HAND},
+        .level = 16,
         .probability = 50,
         .duration = 1,
         .location = MAP_ROUTE114,
     },
+    [OUTBREAK_ID_ROUTE115] = {
+        .species = SPECIES_SLOWPOKE,
+        .moves = {MOVE_BELLY_DRUM, MOVE_WATER_PULSE, MOVE_HEADBUTT, MOVE_ZEN_HEADBUTT},
+        .level = 25,
+        .probability = 50,
+        .duration = 1,
+        .location = MAP_ROUTE115,
+    },
+    [OUTBREAK_ID_ROUTE116] = {
+        .species = SPECIES_MEOWTH_GALAR,
+        .moves = {MOVE_CURSE, MOVE_FAKE_OUT, MOVE_HONE_CLAWS, MOVE_SCRATCH},
+        .level = 8,
+        .probability = 50,
+        .duration = 1,
+        .location = MAP_ROUTE116,
+    },
     [OUTBREAK_ID_ROUTE117] = {
-        .species = SPECIES_SEEDOT,
-        .moves = {MOVE_HARDEN, MOVE_GROWTH, MOVE_NATURE_POWER, MOVE_LEECH_SEED},
+        .species = SPECIES_TOGEPI,
+        .moves = {MOVE_FUTURE_SIGHT, MOVE_SWEET_KISS, MOVE_LIFE_DEW, MOVE_CHARM},
         .level = 13,
         .probability = 50,
         .duration = 1,
         .location = MAP_ROUTE117,
     },
-    [OUTBREAK_ID_ROUTE120] = {
-        .species = SPECIES_SEEDOT,
-        .moves = {MOVE_GIGA_DRAIN, MOVE_FRUSTRATION, MOVE_SOLAR_BEAM, MOVE_LEECH_SEED},
+    [OUTBREAK_ID_ROUTE119] = {
+        .species = SPECIES_FARFETCHD,
+        .moves = {MOVE_FEATHER_DANCE, MOVE_FURY_CUTTER, MOVE_AERIAL_ACE, MOVE_AIR_CUTTER},
         .level = 25,
+        .probability = 50,
+        .duration = 1,
+        .location = MAP_ROUTE119,
+    },
+    [OUTBREAK_ID_ROUTE120] = {
+        .species = SPECIES_TAUROS,
+        .moves = {MOVE_CURSE, MOVE_ASSURANCE, MOVE_HORN_ATTACK, MOVE_SCARY_FACE},
+        .level = 27,
         .probability = 50,
         .duration = 1,
         .location = MAP_ROUTE120,
     },
-    [OUTBREAK_ID_ROUTE116] = {
-        .species = SPECIES_SKITTY,
-        .moves = {MOVE_GROWL, MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_ATTRACT},
+    [OUTBREAK_ID_ROUTE123] = {
+        .species = SPECIES_NOIBAT,
+        .moves = {MOVE_SWITCHEROO, MOVE_WING_ATTACK, MOVE_BITE, MOVE_AIR_CUTTER},
+        .level = 25,
+        .probability = 90,
+        .duration = 1,
+        .location = MAP_ROUTE123,
+    },
+    [OUTBREAK_ID_RUSTURF_TUNNEL] = {
+        .species = SPECIES_MAWILE,
+        .moves = {MOVE_METAL_BURST, MOVE_GROWL, MOVE_FAIRY_WIND, MOVE_BATON_PASS},
         .level = 8,
         .probability = 50,
         .duration = 1,
-        .location = MAP_ROUTE116,
+        .location = MAP_RUSTURF_TUNNEL,
+    },
+    [OUTBREAK_ID_PETALBURG_WOODS] = {
+        .species = SPECIES_CATERPIE,
+        .moves = {MOVE_ELECTROWEB, MOVE_TACKLE, MOVE_STRING_SHOT, MOVE_BUG_BITE},
+        .level = 5,
+        .probability = 90,
+        .duration = 1,
+        .location = MAP_PETALBURG_WOODS,
+    },
+    [OUTBREAK_ID_JAGGED_PASS] = {
+        .species = SPECIES_VULLABY,
+        .moves = {MOVE_MEAN_LOOK, MOVE_FLATTER, MOVE_PLUCK, MOVE_TAILWIND},
+        .level = 21,
+        .probability = 50,
+        .duration = 1,
+        .location = MAP_JAGGED_PASS,
+    },
+    [OUTBREAK_ID_FIERY_PATH] = {
+        .species = SPECIES_SALANDIT,
+        .moves = {MOVE_FAKE_OUT, MOVE_SMOG, MOVE_EMBER, MOVE_POISON_FANG},
+        .level = 15,
+        .probability = 90,
+        .duration = 1,
+        .location = MAP_FIERY_PATH,
     }
 };
 

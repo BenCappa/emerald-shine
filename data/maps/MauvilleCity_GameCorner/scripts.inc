@@ -92,11 +92,11 @@ MauvilleCity_GameCorner_EventScript_Buy1000Money::
 	addmoney 1000
 	removecoins MONEY_PRICE_1000
 	updatemoneybox
-	updatecoinsbox 1, 6
+	updatecoinsbox
 	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins, MSGBOX_DEFAULT
 	hidemoneybox
-	hidecoinsbox 0, 5
+	hidecoinsbox
 	release
 	end
 
@@ -122,11 +122,11 @@ MauvilleCity_GameCorner_EventScript_Buy10000Money::
 	addmoney 10000
 	removecoins MONEY_PRICE_10000
 	updatemoneybox
-	updatecoinsbox 1, 6
+	updatecoinsbox
 	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins, MSGBOX_DEFAULT
 	hidemoneybox
-	hidecoinsbox 0, 5
+	hidecoinsbox
 	release
 	end
 
@@ -159,7 +159,7 @@ MauvilleCity_GameCorner_EventScript_NoRoomForCoins::
 MauvilleCity_GameCorner_EventScript_NoRoomForMoney::
 	msgbox MauvilleCity_GameCorner_Text_MoneyCaseIsFull, MSGBOX_DEFAULT
 	hidemoneybox
-	hidecoinsbox 0, 5
+	hidecoinsbox
 	release
 	end
 
@@ -234,7 +234,7 @@ MauvilleCity_GameCorner_EventScript_BuyLoadedDice::
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForHeldItem
 	removecoins LOADED_DICE_COINS
 	additem ITEM_LOADED_DICE
-	updatecoinsbox 1, 1
+	updatecoinsbox
 	playse SE_SHOP
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseHeldItemPrize
 	end
@@ -247,7 +247,7 @@ MauvilleCity_GameCorner_EventScript_BuyChoiceBand::
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForHeldItem
 	removecoins CHOICE_BAND_COINS
 	additem ITEM_CHOICE_BAND
-	updatecoinsbox 1, 1
+	updatecoinsbox
 	playse SE_SHOP
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseHeldItemPrize
 	end
@@ -260,7 +260,7 @@ MauvilleCity_GameCorner_EventScript_BuyChoiceSpecs::
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForHeldItem
 	removecoins CHOICE_SPECS_COINS
 	additem ITEM_CHOICE_SPECS
-	updatecoinsbox 1, 1
+	updatecoinsbox
 	playse SE_SHOP
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseHeldItemPrize
 	end
@@ -273,7 +273,7 @@ MauvilleCity_GameCorner_EventScript_BuyChoiceScarf::
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForHeldItem
 	removecoins CHOICE_SCARF_COINS
 	additem ITEM_CHOICE_SCARF
-	updatecoinsbox 1, 1
+	updatecoinsbox
 	playse SE_SHOP
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseHeldItemPrize
 	end
@@ -359,7 +359,7 @@ MauvilleCity_GameCorner_EventScript_BuyPPUp::
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForEvoItem
 	removecoins PP_UP_COINS
 	additem ITEM_PP_UP
-	updatecoinsbox 1, 1
+	updatecoinsbox
 	playse SE_SHOP
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseHeldItemPrize
 	end
@@ -372,7 +372,7 @@ MauvilleCity_GameCorner_EventScript_BuyLinkingCord::
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForEvoItem
 	removecoins LINKING_CORD_COINS
 	additem ITEM_LINKING_CORD
-	updatecoinsbox 1, 1
+	updatecoinsbox
 	playse SE_SHOP
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseHeldItemPrize
 	end
@@ -385,7 +385,7 @@ MauvilleCity_GameCorner_EventScript_BuyAuspiciousArmor::
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForEvoItem
 	removecoins AUSPICIOUS_ARMOR_COINS
 	additem ITEM_AUSPICIOUS_ARMOR
-	updatecoinsbox 1, 1
+	updatecoinsbox
 	playse SE_SHOP
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseHeldItemPrize
 	end
@@ -398,7 +398,7 @@ MauvilleCity_GameCorner_EventScript_BuyMaliciousArmor::
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForEvoItem
 	removecoins MALICIOUS_ARMOR_COINS
 	additem ITEM_MALICIOUS_ARMOR
-	updatecoinsbox 1, 1
+	updatecoinsbox
 	playse SE_SHOP
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseHeldItemPrize
 	end
@@ -415,7 +415,7 @@ MauvilleCity_GameCorner_EventScript_NoRoomForEvoItem::
 
 MauvilleCity_GameCorner_EventScript_Exit::
 	msgbox MauvilleCity_GameCorner_Text_ThankYouForPlaying, MSGBOX_DEFAULT
-	hidecoinsbox 0, 0
+	hidecoinsbox
 	release
 	end
 
@@ -560,18 +560,18 @@ MauvilleCity_GameCorner_EventScript_ReceivedDittoFanfare::
 
 MauvilleCity_GameCorner_EventScript_NiceTryKid::
 	msgbox MauvilleCity_GameCorner_Text_NiceTryKid, MSGBOX_DEFAULT
-	hidecoinsbox 0, 0
+	hidecoinsbox
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
 	end
 
 MauvilleCity_GameCorner_EventScript_YourLoss::
-	hidecoinsbox 0, 0
+	hidecoinsbox
 	msgbox MauvilleCity_GameCorner_Text_YourLoss, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots
 	end
 
 MauvilleCity_GameCorner_EventScript_PleasureDoingBusiness::
-	hidecoinsbox 0, 0
+	hidecoinsbox
 	msgbox MauvilleCity_GameCorner_Text_PleasureDoingBusiness, MSGBOX_DEFAULT
 	setflag FLAG_TRADED_DITTO
 	goto MauvilleCity_GameCorner_EventScript_NPCReturnToSlots

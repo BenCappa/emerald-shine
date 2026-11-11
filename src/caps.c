@@ -21,7 +21,7 @@ u32 GetCurrentLevelCap(void)
         {FLAG_DEFEATED_ELITE_4_JUAN,   73},
         {FLAG_DEFEATED_ELITE_4_GLACIA, 74},
         {FLAG_DEFEATED_ELITE_4_DRAKE,  75},
-        {FLAG_IS_CHAMPION,             79},
+        {FLAG_IS_CHAMPION,             80},
     };
 
     u32 i;

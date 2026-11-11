@@ -292,7 +292,7 @@
       "y": 43,
       "elevation": 0,
       "item": "ITEM_NAIVE_MINT",
-      "flag": "FLAG_TEMP_1"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_112_NAIVE_MINT"
     }
   ]
 }

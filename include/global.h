@@ -687,12 +687,6 @@ struct WarpData
     s16 x, y;
 };
 
-struct ItemSlot
-{
-    enum Item itemId;
-    u16 quantity;
-};
-
 struct Pokeblock
 {
     u8 color;

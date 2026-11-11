@@ -2847,7 +2847,7 @@ void DisplayPartyMenuStdMessage(u32 stringId)
         if (stringId == PARTY_MSG_CHOOSE_MON)
         {
             u8 enemyNextMonID = *(gBattleStruct->monToSwitchIntoId + B_SIDE_OPPONENT);
-            u16 species = GetMonData(&gEnemyParty[enemyNextMonID], MON_DATA_SPECIES);
+            u16 species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][enemyNextMonID], MON_DATA_SPECIES);
 
             if (sPartyMenuInternal->chooseHalf)
                 stringId = PARTY_MSG_CHOOSE_MON_AND_CONFIRM;

@@ -300,9 +300,12 @@ struct Pokemon
 
 struct MonSpritesGfxManager
 {
-    u8 numSprites;
-    u8 numFrames;
-    bool16 active;
+    u32 numSprites:4;
+    u32 numSprites2:4; // Never read
+    u32 numFrames:8;
+    u32 active:8;
+    u32 dataSize:4;
+    u32 mode:4; // MON_SPR_GFX_MODE_*
     void *spriteBuffer;
     u8 **spritePointers;
     struct SpriteTemplate *templates;

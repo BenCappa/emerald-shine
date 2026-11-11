@@ -2194,7 +2194,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sidney = {
     .images = sPicTable_Sidney,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Juan = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Phoebe = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_1,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -2209,7 +2209,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Juan = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_Juan,
+    .images = sPicTable_Phoebe,
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Glacia = {
@@ -2248,7 +2248,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Drake = {
     .images = sPicTable_Drake,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Oriana = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Roxanne = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_1,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -2263,10 +2263,10 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Oriana = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_Oriana,
+    .images = sPicTable_Roxanne,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Niles = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Brawly = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -2281,7 +2281,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Niles = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_Niles,
+    .images = sPicTable_Brawly,
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wattson = {
@@ -2302,7 +2302,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wattson = {
     .images = sPicTable_Wattson,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Iliyah = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Flannery = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_1,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -2317,10 +2317,10 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Iliyah = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_Iliyah,
+    .images = sPicTable_Flannery,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Micheal = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Norman = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_4,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -2335,7 +2335,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Micheal = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_Micheal,
+    .images = sPicTable_Norman,
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Winona = {
@@ -3964,7 +3964,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LinkMay = {
     .images = sPicTable_MayNormal,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Rheannon = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Juan = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_4,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -3979,7 +3979,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Rheannon = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_Rheannon,
+    .images = sPicTable_Juan,
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scott = {

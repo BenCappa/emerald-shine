@@ -46,7 +46,7 @@ EventScript_CancelCut::
 Text_WantToCut:
 	.string "This tree looks like it can be\n"
 	.string "cut down!\p"
-	.string "Would you like use Cut?$"
+	.string "Would you like use cut it down?$"
 
 Text_MonUsedFieldMove:
 	.string "{STR_VAR_1} used {STR_VAR_2}!$"
@@ -215,7 +215,7 @@ EventScript_CancelSmash::
 
 Text_WantToSmash:
 	.string "This rock appears to be breakable.\n"
-	.string "Would you like to use Rock Smash?$"
+	.string "Would you like to smash it?$"
 
 Text_CantSmash:
 	.string "It's a rugged rock, but a Pokémon\n"
@@ -266,11 +266,11 @@ EventScript_CancelStrength::
 Text_WantToStrength:
 	.string "It's a big boulder, but a Pokémon\n"
 	.string "may be able to push it aside.\p"
-	.string "Would you like to use Strength?$"
+	.string "Would you like to use their strength?$"
 
 Text_MonUsedStrength:
-	.string "{STR_VAR_1} used Strength!\p"
-	.string "{STR_VAR_1}'s Strength made it\n"
+	.string "{STR_VAR_1} lends you its strength!\p"
+	.string "{STR_VAR_1}'s strength makes it\n"
 	.string "possible to move boulders around!$"
 
 Text_CantStrength:
@@ -311,10 +311,10 @@ Text_CantWaterfall:
 
 Text_WantToWaterfall:
 	.string "It's a large waterfall.\n"
-	.string "Would you like to use Waterfall?$"
+	.string "Would you like to use climb it?$"
 
 Text_MonUsedWaterfall:
-	.string "{STR_VAR_1} used Waterfall.$"
+	.string "{STR_VAR_1} climbs the waterfall.$"
 
 EventScript_UseDive::
 	lockall
@@ -457,10 +457,10 @@ Text_CantDive:
 
 Text_WantToDive:
 	.string "The sea is deep here.\n"
-	.string "Would you like to use Dive?$"
+	.string "Would you like to dive under?$"
 
 Text_MonUsedDive:
-	.string "{STR_VAR_1} used Dive.$"
+	.string "{STR_VAR_1} dives underwater!$"
 
 Text_CantSurface:
 	.string "Light is filtering down from above.\n"
@@ -468,11 +468,11 @@ Text_CantSurface:
 
 Text_WantToSurface:
 	.string "Light is filtering down from above.\n"
-	.string "Would you like to use Dive?$"
+	.string "Would you like to go back up?$"
 
 Text_WantToHeadbutt:
 	.string "There's a large, formidable tree.\n"
-	.string "Would you like to use Headbutt?$"
+	.string "Would you like to headbutt it?$"
 
 Text_CantHeadbuttTree:
 	.string "There's a large, formidable tree.\n"
@@ -526,10 +526,10 @@ EventScript_EndRockClimb::
 
 Text_WantToRockClimb:
 	.string "The cliff is steep.\n"
-	.string "Would you like to use Rock Climb?$"
+	.string "Would you like to climb it?$"
 
 Text_MonUsedRockClimb:
-	.string "{STR_VAR_1} used Rock Climb!$"
+	.string "{STR_VAR_1} climbs you up the rocks!$"
 
 Text_CantRockClimb:
 	.string "The cliff is steep.\n"
