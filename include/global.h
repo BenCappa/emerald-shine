@@ -272,7 +272,7 @@ struct SaveBlock3
 #if APRICORN_TREE_COUNT > 0
     u8 apricornTrees[NUM_APRICORN_TREE_BYTES];
 #endif
-}; // sizeof: 1528 / 1624 = 96 bytes free
+}; // sizeof: 1576 / 1624 = 48 bytes free
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
 
@@ -637,7 +637,7 @@ struct SaveBlock2
     struct ItemSlot battleItems[BAG_BATTLEITEMS_COUNT];
     struct ItemSlot treasures[BAG_TREASURES_COUNT];
     struct ItemSlot megaStones[BAG_MEGASTONES_COUNT];
-}; // sizeof: 2648 / 3968 = 1320 bytes free
+}; // sizeof: 3808 / 3968 = 160 bytes free
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
@@ -1217,7 +1217,7 @@ struct SaveBlock1
     u8 rivalName[PLAYER_NAME_LENGTH + 1];
     struct DaycareMon route5DayCareMon;
 #endif
-    // sizeof: 0x3???
+    // sizeof: 14408 / 15872 = 1464 bytes free
 };
 
 extern struct SaveBlock1 *gSaveBlock1Ptr;

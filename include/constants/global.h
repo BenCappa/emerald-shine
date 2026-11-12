@@ -118,7 +118,7 @@ enum Language
 #define BAG_MEDICINE_COUNT 34 // Needs to reduce used space in SaveBlock1 to properly use.
 #define BAG_BATTLEITEMS_COUNT 32 // Needs to reduce used space in SaveBlock1 to properly use.
 #define BAG_TREASURES_COUNT 21 // Needs to reduce used space in SaveBlock1 to properly use.
-#define BAG_MEGASTONES_COUNT 49 // Needs to reduce used space in SaveBlock1 to properly use.
+#define BAG_MEGASTONES_COUNT 93 // Needs to reduce used space in SaveBlock1 to properly use.
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.
