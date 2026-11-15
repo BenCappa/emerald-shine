@@ -1255,8 +1255,6 @@ extern const u8 gText_Level[];
 extern const u8 gText_IDNumber[];
 extern const u8 gText_Name[];
 extern const u8 gText_Time[];
-extern const u8 gText_AM[];
-extern const u8 gText_PM[];
 
 // daycare
 extern const u8 gText_MaleSymbol4[];

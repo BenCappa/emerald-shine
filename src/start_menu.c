@@ -161,7 +161,7 @@ static const struct WindowTemplate sWindowTemplate_StartClock = {
     .bg = 0, 
     .tilemapLeft = 1, 
     .tilemapTop = 1, 
-    .width = 9, // If you want to shorten the dates to Sat., Sun., etc., change this to 9
+    .width = 13, // If you want to remove the day of the week, change this to 9
     .height = 2, 
     .paletteNum = 15,
     .baseBlock = 0x30
@@ -478,30 +478,33 @@ static void ShowPyramidFloorWindow(void)
     CopyWindowToVram(sBattlePyramidFloorWindowId, COPYWIN_GFX);
 }
 
-// If you want to shorten the dates to Sat., Sun., etc., change this to 70
-#define CLOCK_WINDOW_WIDTH 70
+#define CLOCK_WINDOW_WIDTH 104 // If you want to remove the day of the week, change this to 70
 
-const u8 gText_Saturday[] = _("Sat,");
-const u8 gText_Sunday[] = _("Sun,");
-const u8 gText_Monday[] = _("Mon,");
-const u8 gText_Tuesday[] = _("Tue,");
-const u8 gText_Wednesday[] = _("Wed,");
-const u8 gText_Thursday[] = _("Thu,");
-const u8 gText_Friday[] = _("Fri,");
+static const u8 *const gDayNameStringsTable[7] = {
+    COMPOUND_STRING("Sun,"),
+    COMPOUND_STRING("Mon,"),
+    COMPOUND_STRING("Tue,"),
+    COMPOUND_STRING("Wed,"),
+    COMPOUND_STRING("Thu,"),
+    COMPOUND_STRING("Fri,"),
+    COMPOUND_STRING("Sat,"),
+};
 
-const u8 *const gDayNameStringsTable[7] = {
-    gText_Saturday,
-    gText_Sunday,
-    gText_Monday,
-    gText_Tuesday,
-    gText_Wednesday,
-    gText_Thursday,
-    gText_Friday,
+static const u8 *const gPeriodNameStringsTable[2] = {
+    COMPOUND_STRING("AM"),
+    COMPOUND_STRING("PM"),
+};
+
+static const u8 *const gSeasonNameStringsTable[4] = {
+    COMPOUND_STRING("Spring"),
+    COMPOUND_STRING("Summer"),
+    COMPOUND_STRING("Autumn"),
+    COMPOUND_STRING("Winter"),
 };
 
 static void ShowTimeWindow(void)
 {
-    const u8 *suffix;
+    const u8 *season;
     u8* ptr;
     u8 convertedHours;
 
@@ -510,37 +513,25 @@ static void ShowTimeWindow(void)
     PutWindowTilemap(sStartClockWindowId);
     DrawStdWindowFrame(sStartClockWindowId, FALSE);
 
-    if (gLocalTime.hours < 12)
-    {
-        if (gLocalTime.hours == 0)
-            convertedHours = 12;
-        else
-            convertedHours = gLocalTime.hours;
-        suffix = gText_AM;
-    }
-    else if (gLocalTime.hours == 12)
-    {
-        convertedHours = 12;
-        if (suffix == gText_AM);
-            suffix = gText_PM;
-    }
-    else
-    {
-        convertedHours = gLocalTime.hours - 12;
-        suffix = gText_PM;
-    }
-
-    StringExpandPlaceholders(gStringVar4, gDayNameStringsTable[(gLocalTime.days % 7)]);
+    StringExpandPlaceholders(gStringVar4, gDayNameStringsTable[((gLocalTime.days - 1) + 6) % 7]);
     // StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime); // prints "time" word, from version before weekday was added and leaving it here in case anyone would prefer to use it
-    AddTextPrinterParameterized(sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL); 
+    AddTextPrinterParameterized(sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
+
+    convertedHours = gLocalTime.hours % 12;
+    if (convertedHours == 0)
+        convertedHours = 12;
 
     ptr = ConvertIntToDecimalStringN(gStringVar4, convertedHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     *ptr = 0xF0;
 
-    ConvertIntToDecimalStringN(ptr + 1, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized(sStartClockWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, suffix, CLOCK_WINDOW_WIDTH) - (CLOCK_WINDOW_WIDTH - GetStringRightAlignXOffset(1, gStringVar4, CLOCK_WINDOW_WIDTH) + 3), 1, 0xFF, NULL); // print time
+    season = gSeasonNameStringsTable[(GetMonth() - 1) % 4];
 
-    AddTextPrinterParameterized(sStartClockWindowId, 1, suffix, GetStringRightAlignXOffset(1, suffix, CLOCK_WINDOW_WIDTH), 1, 0xFF, NULL); // print am/pm
+    ConvertIntToDecimalStringN(ptr + 1, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+    AddTextPrinterParameterized(sStartClockWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 50), 1, 0xFF, NULL); // print time
+
+    AddTextPrinterParameterized(sStartClockWindowId, 1, gPeriodNameStringsTable[gLocalTime.hours / 12], 52, 1, 0xFF, NULL); // print am/pm
+
+    AddTextPrinterParameterized(sStartClockWindowId, 1, season, GetStringRightAlignXOffset(1, season, CLOCK_WINDOW_WIDTH), 1, 0xFF, NULL); // print season
 
     CopyWindowToVram(sStartClockWindowId, COPYWIN_GFX);
 }
