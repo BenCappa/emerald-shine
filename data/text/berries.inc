@@ -1,5 +1,5 @@
 PetalburgCity_Gym_Text_GiveEnigmaBerry:
-	.string "Micheal: Hi, {PLAYER}!\p"
+	.string "Hi, {PLAYER}!\p"
 	.string "I just received a very rare Berry.\n"
 	.string "I'd like you to have it.$"
 
@@ -177,7 +177,7 @@ Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis:
 
 Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation:
 	.string "While Berry plants are growing,\n"
-	.string "water them with the WAILMER PAIL.\p"
+	.string "water them with the Wailmer Pail.\p"
 	.string "Oh, another thing.\p"
 	.string "If you don't pick Berries for a while,\n"
 	.string "they'll drop off onto the ground.\l"
@@ -203,14 +203,14 @@ SootopolisCity_Text_NameIsKiriHaveOneOfThese:
 	.string "Hi, what's your name?\p"
 	.string "… … …  … … …  … … …\n"
 	.string "Okay. That's nice!\p"
-	.string "My name is KIRI.\p"
+	.string "My name is Kiri.\p"
 	.string "My mommy and daddy named me that so\n"
 	.string "I would grow healthy and warmhearted.\l"
 	.string "That's what they wished.\p"
 	.string "You can have one of these.$"
 
 SootopolisCity_Text_GiveYouThisBerryToo:
-	.string "KIRI will give you this Berry, too!\n"
+	.string "Kiri will give you this Berry, too!\n"
 	.string "I really like it lots!$"
 
 SootopolisCity_Text_WhatKindOfWishInYourName:
@@ -224,7 +224,7 @@ SootopolisCity_Text_LikeSeasonBornIn:
 	.string "summer, do you like the summer?$"
 
 SootopolisCity_Text_ThenILoveAutumn:
-	.string "Then KIRI was born in the autumn,\n"
+	.string "Then Kiri was born in the autumn,\n"
 	.string "so I love the autumn!\p"
 	.string "Which season do you like?$"
 

@@ -38,6 +38,7 @@ LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs::
 LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV::
 	setobjectxyperm LOCALID_PLAYERS_HOUSE_1F_GRAM, 6, 5
 	setobjectmovementtype LOCALID_PLAYERS_HOUSE_1F_GRAM, MOVEMENT_TYPE_FACE_UP
+	setobjectmovementtype LOCALID_PLAYERS_HOUSE_1F_MOM, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor::
@@ -56,6 +57,7 @@ LittlerootTown_MaysHouse_1F_OnFrame:
 
 LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock::
 	lockall
+	setspeaker SP_NAME_GRAM
 	msgbox PlayersHouse_1F_Text_GoSetTheClock, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs
@@ -81,6 +83,7 @@ LittlerootTown_MaysHouse_1F_EventScript_PetalburgGymReport::
 	lockall
 	setvar VAR_0x8004, FEMALE
 	setvar VAR_0x8005, LOCALID_PLAYERS_HOUSE_1F_GRAM
+	setvar VAR_0x8006, LOCALID_PLAYERS_HOUSE_1F_MOM
 	goto PlayersHouse_1F_EventScript_PetalburgGymReportFemale
 	end
 
@@ -113,6 +116,7 @@ LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach:
 RivalsHouse_1F_EventScript_RivalMom::
 	lock
 	faceplayer
+	setspeaker SP_NAME_JILLIAN
 	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE103, RivalsHouse_1F_EventScript_GoHomeEverySoOften
 	goto_if_set FLAG_SYS_POKEMON_GET, RivalsHouse_1F_EventScript_RivalIsOnRoute103
 	goto_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, RivalsHouse_1F_EventScript_RivalTooBusy
@@ -323,7 +327,7 @@ RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
 	.string "… … … … … … … … …\p"
 	.string "Oh, you're {PLAYER}{KUN}, our new next-door\n"
 	.string "neighbor! Hi!\p"
-	.string "I'm Jillian, Prof. Mike's daughter.\n"
+	.string "{SPEAKER NAME_JILLIAN}I'm Jillian, Prof. Mike's daughter.\n"
 	.string "The child he actually loves.\p"
 	.string "Actually, you should absolutely talk\n"
 	.string "to my brother. He's about your age and\l"
@@ -384,7 +388,7 @@ RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "Who are you?\p"
 	.string "Oh, you're {PLAYER}?\n"
 	.string "Moved in next door, right?\p"
-	.string "My name's Ben.\n"
+	.string "{SPEAKER NAME_BEN}My name's Ben.\n"
 	.string "So, hi, neighbor!\p"
 	.string "I heard that you're related to a\n"
 	.string "bunch of the new Gym Leaders.\p"

@@ -1,5 +1,20 @@
 const u8 *const gSpeakerNamesTable[SP_NAME_COUNT] =
 {
-    [SP_NAME_MOM]    = COMPOUND_STRING("MOM"),
-    [SP_NAME_PLAYER] = COMPOUND_STRING("{PLAYER}"),
+    [SP_NAME_MOM]      = COMPOUND_STRING("Mom"),
+    [SP_NAME_PLAYER]   = COMPOUND_STRING("{PLAYER}"),
+    [SP_NAME_GRAM]     = COMPOUND_STRING("Gram"),
+    [SP_NAME_ORIANA]   = COMPOUND_STRING("Oriana"),
+    [SP_NAME_NILES]    = COMPOUND_STRING("Niles"),
+    [SP_NAME_MICHEAL]  = COMPOUND_STRING("Micheal"),
+    [SP_NAME_ILIYAH]   = COMPOUND_STRING("Iliyah"),
+    [SP_NAME_RHEANNON] = COMPOUND_STRING("Rheannon"),
+    [SP_NAME_BEN]      = COMPOUND_STRING("Ben"),
+    [SP_NAME_GUMP]     = COMPOUND_STRING("Gump"),
+    [SP_NAME_JILLIAN]  = COMPOUND_STRING("Jillian"),
+    [SP_NAME_WALLY]    = COMPOUND_STRING("Wally"),
+    [SP_NAME_STEVEN]   = COMPOUND_STRING("Steven"),
+    [SP_NAME_SCOTT]    = COMPOUND_STRING("Scott"),
+    [SP_NAME_KIT]      = COMPOUND_STRING("Kit"),
+    [SP_NAME_CECE]     = COMPOUND_STRING("Cece"),
+    [SP_NAME_UNKNOWN]  = COMPOUND_STRING("???"),
 };

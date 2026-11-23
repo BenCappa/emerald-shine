@@ -144,6 +144,7 @@ LittlerootTown_EventScript_GoInsideWithMom::
 	delay 10
 	applymovement LOCALID_LITTLEROOT_GRAM, LittlerootTown_Movement_MomApproachPlayerAtTruck
 	waitmovement 0
+	setspeaker SP_NAME_GRAM
 	msgbox LittlerootTown_Text_OurNewHomeLetsGoInside, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_LITTLEROOT_GRAM, LittlerootTown_Movement_MomApproachDoor
@@ -208,6 +209,7 @@ LittlerootTown_EventScript_BeginDexUpgradeScene::
 	applymovement LOCALID_LITTLEROOT_BIRCH, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 80
+	setspeaker SP_NAME_GUMP
 	msgbox LittlerootTown_Text_BirchSomethingToShowYouAtLab, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
@@ -472,6 +474,7 @@ LittlerootTown_EventScript_GivePokenavTrigger::
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetHomeDoorCoordsMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
+	setspeaker SP_NAME_GRAM
 	msgbox LittlerootTown_Text_WaitPlayer, MSGBOX_DEFAULT
 	closemessage
 	checkplayergender
@@ -859,7 +862,7 @@ LittlerootTown_Movement_MomReturnHomeFemale5:
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_faster_up
+	walk_in_place_faster_up 
 	step_end
 
 LittlerootTown_Movement_MomExitThroughDoor:
@@ -893,12 +896,14 @@ LittlerootTown_EventScript_SetReceivedPokenav::
 
 LittlerootTown_EventScript_GivePokenav::
 	bufferleadmonspeciesname 0
+	setspeaker SP_NAME_GRAM
 	msgbox LittlerootTown_Text_TakeThisPokenav, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_Text_SwitchShoesWithPokenav
 	waitfanfare
 	setflag FLAG_SYS_POKENAV_GET
 	setflag FLAG_RECEIVED_POKENAV
+	setspeaker SP_NAME_GRAM
 	msgbox LittlerootTown_Text_ExplainPokenav, MSGBOX_DEFAULT
 	msgbox LittlerootTown_Text_ComeHomeIfAnythingHappens, MSGBOX_DEFAULT
 	closemessage
@@ -906,7 +911,7 @@ LittlerootTown_EventScript_GivePokenav::
 	return
 
 LittlerootTown_Text_OurNewHomeLetsGoInside:
-	.string "Gram: {PLAYER}, we're here, honey!\p"
+	.string "Well, {PLAYER}, we're finally here!\p"
 	.string "It must be tiring riding with our things\n"
 	.string "in the moving truck.\p"
 	.string "Well, this is Littleroot Town.\p"
@@ -918,10 +923,10 @@ LittlerootTown_Text_OurNewHomeLetsGoInside:
 	.string "Let's go inside, your mom is waiting.$"
 
 LittlerootTown_Text_WaitPlayer:
-	.string "Gram: Wait, {PLAYER}!$"
+	.string "Wait, {PLAYER}!$"
 
 LittlerootTown_Text_TakeThisPokenav:
-	.string "Gram: {PLAYER}! {PLAYER}! Did you\n"
+	.string "{PLAYER}! Did you get a chance to\n"
 	.string "introduce yourself to Prof. Mike?\p"
 	.string "He want's you to call him what?\p"
 	.string "Well that sure is odd…\p"
@@ -935,10 +940,10 @@ LittlerootTown_Text_TakeThisPokenav:
 	.string "adventure, take this PokéNav!$"
 
 LittlerootTown_Text_SwitchShoesWithPokenav:
-	.string "{PLAYER} received the PokéNav.$"
+	.string "{SPEAKER NAME_NONE}{PLAYER} received the PokéNav.$"
 
 LittlerootTown_Text_ExplainPokenav:
-	.string "Gram: It's a POKéMON NAVIGATOR,\n"
+	.string "It's a Pokémon Navigator,\n"
 	.string "or PokéNav for short.\p"
 	.string "It's an indispensable tool for any\n"
 	.string "Trainer on an adventure.\p"
@@ -1008,7 +1013,7 @@ LittlerootTown_Text_ProfBirchsHouse:
 	.string "PROF. MIKE'S HOUSE$"
 
 LittlerootTown_Text_BirchSomethingToShowYouAtLab:
-	.string "Gump: Well, well, {PLAYER}{KUN}!\n"
+	.string "Well, well, {PLAYER}{KUN}!\n"
 	.string "That was good work out there!\p"
 	.string "I knew there was something special\n"
 	.string "about you when I first saw you,\l"

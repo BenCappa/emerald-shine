@@ -1,5 +1,5 @@
 gBirchDexRatingText_AreYouCurious::
-	.string "Gump: Ah, {PLAYER}{KUN}!\p"
+	.string "Ah, {PLAYER}{KUN}!\p"
 	.string "Are you curious about how your\n"
 	.string "Pokédex is coming along?$"
 

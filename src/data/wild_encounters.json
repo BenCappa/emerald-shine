@@ -83,6 +83,14 @@
             4,
             1
           ]
+        },
+        {
+          "type": "hidden_mons",
+          "encounter_rates": [
+            45,
+            45,
+            10
+          ]
         }
       ],
       "encounters": [
@@ -151,6 +159,36 @@
                 "min_level": 3,
                 "max_level": 3,
                 "species": "SPECIES_ZIGZAGOON"
+              }
+            ]
+          },
+          "headbutt_mons": {
+            "encounter_rate": 100,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_BURMY_PLANT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_APPLIN"
+              },
+              {
+                "min_level": 7,
+                "max_level": 7,
+                "species": "SPECIES_APPLIN"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNCHLAX"
               }
             ]
           }
@@ -36614,6 +36652,40 @@
                 "min_level": 26,
                 "max_level": 26,
                 "species": "SPECIES_SMEARGLE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_LITTLEROOT_TOWN",
+          "base_label": "gLittlerootTown",
+          "headbutt_mons": {
+            "encounter_rate": 100,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_BURMY_PLANT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_BOUNSWEET"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_APPLIN"
+              },
+              {
+                "min_level": 7,
+                "max_level": 7,
+                "species": "SPECIES_APPLIN"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_MUNCHLAX"
               }
             ]
           }

@@ -276,9 +276,9 @@ PlayersHouse_2F_Text_ClockIsStopped:
 	.string "Better set it and start it!$"
 
 PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
-	.string "Gram: So, how do you like your\n"
-	.string "new room?\p"
-	.string "Good! Everything's put away neatly!\p"
+	.string "So, how do you like your new room?\p"
+	.string "Everything's put away neatly?\n"
+	.string "Good!\p"
 	.string "They finished moving everything in\n"
 	.string "downstairs, too.\p"
 	.string "Boy I tell ya, Pokémon movers are\n"
