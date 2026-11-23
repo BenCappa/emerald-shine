@@ -607,7 +607,7 @@ u32 BattleAI_ChooseMoveIndex(enum BattlerId battler)
 static void CopyBattlerDataToAIParty(u32 bPosition, enum BattleTrainer trainer)
 {
     enum BattlerId battler = GetBattlerAtPosition(bPosition);
-    struct AiPartyMon *aiMon = &gAiPartyData->mons[trainer][gBattlerPartyIndexes[battler]];
+    struct AiPartyMon *aiMon = GetRecordedPartyMonData(battler);
     struct BattlePokemon *bMon = &gBattleMons[battler];
 
     aiMon->species = bMon->species;
@@ -666,7 +666,7 @@ void Ai_InitPartyStruct(void)
                 if (isOmniscient || isItemOmniscient)
                 {
                     gAiPartyData->mons[trainer][monIndex].item = GetMonData(mon, MON_DATA_HELD_ITEM);
-                    gAiPartyData->mons[trainer][monIndex].heldEffect = GetItemHoldEffect(gAiPartyData->mons[trainer][monIndex].item);
+                    gAiPartyData->mons[trainer][monIndex].holdEffect = GetItemHoldEffect(gAiPartyData->mons[trainer][monIndex].item);
                 }
 
                 if (isOmniscient || isMoveOmniscient)
@@ -682,15 +682,15 @@ void Ai_InitPartyStruct(void)
 void Ai_UpdateSwitchInData(enum BattlerId battler)
 {
     enum BattleTrainer trainer = GetBattlerTrainer(battler);
-    struct AiPartyMon *aiMon = &gAiPartyData->mons[trainer][gBattlerPartyIndexes[battler]];
+    struct AiPartyMon *aiMon = GetRecordedPartyMonData(battler);
 
     // See if the switched-in mon has been already in battle
     if (aiMon->wasSentInBattle)
     {
         if (aiMon->ability)
             gBattleHistory->abilities[battler] = aiMon->ability;
-        if (aiMon->heldEffect)
-            gBattleHistory->itemEffects[battler] = aiMon->heldEffect;
+        if (aiMon->holdEffect)
+            gBattleHistory->itemEffects[battler] = aiMon->holdEffect;
         for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
             if (aiMon->moves[moveIndex])
@@ -710,11 +710,10 @@ void Ai_UpdateSwitchInData(enum BattlerId battler)
 
 void Ai_UpdateFaintData(enum BattlerId battler)
 {
-    struct AiPartyMon *aiMon = &gAiPartyData->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]];
     ClearBattlerMoveHistory(battler);
     ClearBattlerAbilityHistory(battler);
     ClearBattlerItemEffectHistory(battler);
-    aiMon->isFainted = TRUE;
+    GetRecordedPartyMonData(battler)->isFainted = TRUE;
 }
 
 void RecordMovesBasedOnStab(enum BattlerId battler)
@@ -2316,7 +2315,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         break;
     case EFFECT_LASER_FOCUS:
-        if (gBattleMons[battlerDef].volatiles.laserFocusTimer > 0)
+        if (gBattleMons[battlerAtk].volatiles.laserFocusTimer > 0)
             ADJUST_SCORE(-10);
         else if (aiData->abilities[battlerDef] == ABILITY_SHELL_ARMOR || aiData->abilities[battlerDef] == ABILITY_BATTLE_ARMOR)
             ADJUST_SCORE(-8);
@@ -4639,11 +4638,13 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             ADJUST_SCORE(GOOD_EFFECT);
         break;
     case EFFECT_FOCUS_ENERGY:
-    case EFFECT_LASER_FOCUS:
         if (aiData->abilities[battlerAtk] == ABILITY_SUPER_LUCK
-         || aiData->abilities[battlerAtk] == ABILITY_SNIPER
          || aiData->holdEffects[battlerAtk] == HOLD_EFFECT_SCOPE_LENS
          || HasMoveWithFlag(battlerAtk, GetMoveCriticalHitStage))
+            ADJUST_SCORE(GOOD_EFFECT);
+        //Fallthrough
+    case EFFECT_LASER_FOCUS:
+        if (aiData->abilities[battlerAtk] == ABILITY_SNIPER)
             ADJUST_SCORE(GOOD_EFFECT);
         break;
     case EFFECT_CONFUSE:

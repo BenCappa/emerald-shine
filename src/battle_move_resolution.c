@@ -953,7 +953,7 @@ static enum CancelerResult CancelerSetTargets(struct BattleCalcValues *cv)
         {
             cv->battlerDef = cv->battlerAtk;
         }
-        else if (isDoubleBattle && moveTarget == TARGET_USER_OR_ALLY && !IsBattlerAlive(cv->battlerDef))
+        else if (isDoubleBattle && moveTarget == TARGET_USER_OR_ALLY && (!IsBattlerAlive(cv->battlerDef) || !IsBattlerAlly(cv->battlerAtk, cv->battlerDef)))
         {
             cv->battlerDef = cv->battlerAtk;
         }
@@ -1019,13 +1019,15 @@ static enum CancelerResult CancelerPPDeduction(struct BattleCalcValues *cv)
         for (u32 i = 0; i < gBattlersCount; i++)
         {
             if (!IsBattlerAlly(i, cv->battlerAtk))
-                ppToDeduct += (GetBattlerAbility(i) == ABILITY_PRESSURE);
+                ppToDeduct += (cv->abilities[i] == ABILITY_PRESSURE);
         }
     }
     else if (moveTarget != TARGET_OPPONENTS_FIELD)
     {
-        if (cv->battlerAtk != cv->battlerDef && GetBattlerAbility(cv->battlerDef) == ABILITY_PRESSURE)
-             ppToDeduct++;
+        if (cv->battlerAtk != cv->battlerDef
+         && (GetConfig(B_PRESSURE_ALLIES) < GEN_5 || !IsBattlerAlly(cv->battlerAtk, cv->battlerDef))
+         && cv->abilities[cv->battlerDef] == ABILITY_PRESSURE)
+            ppToDeduct++;
     }
 
     // For item Metronome, echoed voice
@@ -4986,7 +4988,9 @@ static enum MoveEndResult MoveEndThirdMoveBlock(struct BattleCalcValues *cv)
         }
         break;
     case EFFECT_NATURAL_GIFT:
-        if (!gBattleStruct->unableToUseMove && GetItemPocket(gBattleMons[cv->battlerAtk].item) == POCKET_BERRIES)
+        if (gBattleStruct->battlerState[cv->battlerAtk].originalBattlerPartyId == PARTY_SIZE
+         && !gBattleStruct->unableToUseMove
+         && GetItemPocket(gBattleMons[cv->battlerAtk].item) == POCKET_BERRIES)
         {
             enum Item item = gBattleMons[cv->battlerAtk].item;
             gBattleMons[gBattlerAttacker].item = ITEM_NONE;
@@ -5468,6 +5472,11 @@ static void TryAcupressureStatChange(struct BattleCalcValues *cv)
             bits |= 1u << stat;
     }
 
+    struct StatChange st = {
+        .onlyChecking = TRUE,
+        .ignoreCertainFailure = TRUE,
+    };
+
     if (bits)
     {
         enum Stat statId;
@@ -5476,7 +5485,12 @@ static void TryAcupressureStatChange(struct BattleCalcValues *cv)
             statId = (Random() % (NUM_BATTLE_STATS - 1)) + 1;
         } while (!(bits & (1u << statId)));
 
-        SetStatChange(cv->battlerDef, statId, 2);
+        st.certain = cv->battlerAtk == cv->battlerDef;
+        st.stat = statId;
+        st.stage = 2;
+
+        AdjustStatStage(cv, &st);
+        SetStatChange(cv->battlerDef, st.stat, st.stage);
         gBattleStruct->moveResultFlags[cv->battlerDef] = MOVE_RESULT_ATTEMPT_STAT_CHANGE;
     }
     else

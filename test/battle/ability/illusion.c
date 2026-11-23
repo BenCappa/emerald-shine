@@ -113,3 +113,56 @@ SINGLE_BATTLE_TEST("Illusion breaks if user loses Illusion due to Worry Seed")
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ILLUSION_OFF, player);
     }
 }
+
+SINGLE_BATTLE_TEST("Illusion breaks when hit through a substitute")
+{
+    GIVEN {
+        WITH_CONFIG(B_INFILTRATOR_SUBSTITUTE, GEN_6);
+        PLAYER(SPECIES_DRAGAPULT) { Ability(ABILITY_INFILTRATOR); Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_ZOROARK) { Speed(2); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(2); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_SHED_TAIL); SEND_OUT(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SWAP_FROM_SUBSTITUTE, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ILLUSION_OFF, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SWAP_TO_SUBSTITUTE, opponent);
+        MESSAGE("The opposing Zoroark's illusion wore off!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Illusion does not break if indirect damage causes the user to faint")
+{
+    GIVEN {
+        PLAYER(SPECIES_ZOROARK) { HP(1); Status1(STATUS1_POISON); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { SEND_OUT(player, 1); }
+    } SCENE {
+        HP_BAR(player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ILLUSION_OFF, player);
+            MESSAGE("Zoroark's illusion wore off!");
+        }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Illusion: a trainer's Z-Move breaks the target's Illusion, not the attacker's")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_ZOROARK) { Ability(ABILITY_ILLUSION); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); Moves(MOVE_QUICK_ATTACK); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_QUICK_ATTACK, gimmick: GIMMICK_Z_MOVE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ILLUSION_OFF, player);
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ILLUSION_OFF, opponent);
+    } THEN {
+        EXPECT_EQ(gBattleStruct->illusion[B_BATTLER_0].state, ILLUSION_OFF);
+    }
+}
