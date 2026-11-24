@@ -36,11 +36,14 @@ PetalburgCity_EventScript_WallyTutorial::
 	applymovement LOCALID_PETALBURG_WALLY, PetalburgCity_Movement_WallyTutorialWally
 	applymovement LOCALID_PLAYER, PetalburgCity_Movement_WallyTutorialPlayer
 	waitmovement 0
+	setspeaker SP_NAME_WALLY
 	msgbox Route102_Text_WatchMeCatchPokemon, MSGBOX_DEFAULT
 	special StartWallyTutorialBattle
+	setspeaker SP_NAME_WALLY
 	msgbox Route102_Text_WallyIDidIt, MSGBOX_DEFAULT
 	applymovement LOCALID_PETALBURG_WALLY, Common_Movement_WalkInPlaceFasterLeft, MAP_PETALBURG_CITY
 	waitmovement LOCALID_PETALBURG_WALLY, MAP_PETALBURG_CITY
+	setspeaker SP_NAME_WALLY
 	msgbox Route102_Text_LetsGoBack, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
@@ -587,6 +590,7 @@ PetalburgCity_EventScript_ScottExit3::
 
 PetalburgCity_EventScript_WallyMegaRing::
 	lockall
+	setspeaker SP_NAME_WALLY
 	msgbox PetalburgCity_Text_WallyAshley, MSGBOX_DEFAULT
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
@@ -595,14 +599,17 @@ PetalburgCity_EventScript_WallyMegaRing::
 	applymovement LOCALID_PETALBURG_WALLY, PetalburgCity_Movement_WallyApproachPlayer
 	waitmovement 0
 	delay 30
+	setspeaker SP_NAME_WALLY
 	msgbox PetalburgCity_Text_IWantToRepayYou, MSGBOX_DEFAULT
 	giveitem ITEM_MEGA_RING
 	closemessage
 	applymovement LOCALID_PETALBURG_WALLY, Common_Movement_WalkInPlaceDown
 	waitmovement 0
+	setspeaker SP_NAME_WALLY
 	msgbox PetalburgCity_Text_WallyPause, MSGBOX_DEFAULT
 	applymovement LOCALID_PETALBURG_WALLY, Common_Movement_WalkInPlaceUp
 	waitmovement 0
+	setspeaker SP_NAME_WALLY
 	msgbox PetalburgCity_Text_HopeWeBattleSoon, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_PETALBURG_WALLY, PetalburgCity_Movement_WallyExit
@@ -803,10 +810,10 @@ PetalburgCity_Text_ImLookingForTalentedTrainers:
 	.string "I'm sorry to have taken your time.$"
 
 PetalburgCity_Text_WallyAshley:
-	.string "Wally: ASHLEY!$"
+	.string "ASHLEY!$"
 
 PetalburgCity_Text_IWantToRepayYou:
-	.string "Wally: I'm glad I caught you before\n"
+	.string "I'm glad I caught you before\n"
 	.string "you went in there!\p"
 	.string "I heard you're finally about to\n"
 	.string "battle your older brother.\p"
@@ -818,10 +825,10 @@ PetalburgCity_Text_IWantToRepayYou:
 	.string "Take this and kick Micheal's butt.$"
 
 PetalburgCity_Text_WallyPause:
-	.string "Wally: … … … … … … …$"
+	.string "… … … … … … …$"
 
 PetalburgCity_Text_HopeWeBattleSoon:
-	.string "Wally: The next time we battle, I'm\n"
+	.string "The next time we battle, I'm\n"
 	.string "gonna be a whole lot stronger.\p"
 	.string "I'm not ready yet but…\n"
 	.string "I will be.\p"

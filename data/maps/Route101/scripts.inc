@@ -19,6 +19,7 @@ Route101_EventScript_HideMapNamePopup::
 Route101_EventScript_StartBirchRescue::
 	lockall
 	playbgm MUS_HELP, TRUE
+	setspeaker SP_NAME_UNKNOWN
 	msgbox Route101_Text_HelpMe, MSGBOX_DEFAULT
 	closemessage
 	setobjectxy LOCALID_ROUTE101_BIRCH, 0, 15
@@ -35,6 +36,7 @@ Route101_EventScript_StartBirchRescue::
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZigzagoon
 	waitmovement 0
+	setspeaker SP_NAME_GUMP
 	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_ROUTE101_STATE, 2
@@ -228,6 +230,7 @@ Route101_EventScript_BirchsBag::
 	special ChooseStarter
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer
 	waitmovement 0
+	setspeaker SP_NAME_GUMP
 	msgbox Route101_Text_YouSavedMe, MSGBOX_DEFAULT
 	special HealPlayerParty
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
@@ -266,11 +269,11 @@ Route101_Text_PleaseHelp:
 	.string "There's a Poké Ball!$"
 
 Route101_Text_DontLeaveMe:
-	.string "Wh-Where are you going?!\n"
+	.string "{SPEAKER NAME_GUMP}Wh-Where are you going?!\n"
 	.string "Don't leave me like this!$"
 
 Route101_Text_YouSavedMe:
-	.string "Gump: Whew…\p"
+	.string "Whew…\p"
 	.string "That was the most I've run in years!\p"
 	.string "I was doing fieldwork in the tall grass\n"
 	.string "when that funny-looking Zigzagoon\l"
@@ -292,7 +295,7 @@ Route101_Text_WildPokemonInTallGrass:
 	.string "jump out if you're running.\p"
 	.string "I don't know if it's true but I'm not\n"
 	.string "taking any chances after what happened\l"
-	.string "to Prof. Mike!$"
+	.string "to Prof. Cappa!$"
 
 Route101_Text_RouteSign:
 	.string "ROUTE 101\n"

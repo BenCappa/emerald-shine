@@ -2414,7 +2414,7 @@
 #define FLAG_ITEM_FIERY_PATH_FIRE_STONE                             0
 #define FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM_HAIL                       0
 #define FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_NEVER_MELT_ICE                0
-#define FLAG_ITEM_ROUTE_103_GUARD_SPEC                              0
+#define FLAG_ITEM_ROUTE_103_BIG_ROOT                                0
 #define FLAG_ITEM_ROUTE_104_X_ACCURACY                              0
 #define FLAG_ITEM_MAUVILLE_CITY_X_SPEED                             0
 #define FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL                     0

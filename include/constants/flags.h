@@ -1173,7 +1173,7 @@
 #define FLAG_ITEM_FIERY_PATH_HEAT_ROCK                              0x457
 #define FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM_SNOWSCAPE                  0x458
 #define FLAG_UNUSED_0x459                                           0x459 // Currently unused, was FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_NEVER_MELT_ICE
-#define FLAG_ITEM_ROUTE_103_GUARD_SPEC                              0x45A
+#define FLAG_ITEM_ROUTE_103_BIG_ROOT                                0x45A
 #define FLAG_ITEM_ROUTE_104_TM_LEECH_LIFE                           0x45B
 #define FLAG_ITEM_MAUVILLE_CITY_AIR_BALLOON                         0x45C
 #define FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL                     0x45D

@@ -626,21 +626,61 @@ Level: 31
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_DAISY ===
-Name: DAISY
+Name: Daisy
 Class: Aroma Lady
 Pic: Aroma Lady
 Gender: Female
 Music: Female
-Double Battle: No
-AI: Check Bad Move
+Double Battle: Yes
+AI: Basic Trainer
 
-Shroomish
-Level: 14
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Oddish
+Level: 17
+Ability: Chlorophyll
+- Poison Powder
+- Mega Drain
+- Sweet Scent
+- Acid
 
-Roselia
-Level: 14
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Bellsprout
+Level: 17
+Ability: Chlorophyll
+- Stun Spore
+- Wrap
+- Growth
+- Vine Whip
+
+Petilil
+Level: 18
+Ability: Own Tempo
+- Sleep Powder
+- Helping Hand
+- Charm
+- Mega Drain
+
+Flabébé
+Level: 18
+Ability: Flower Veil
+- Razor Leaf
+- Safeguard
+- Fairy Wind
+- Tackle
+
+Bounsweet
+Level: 16
+Ability: Leaf Guard
+- Sweet Scent
+- Razor Leaf
+- Rapid Spin
+- Play Nice
+
+Morelull
+Level: 16
+Ability: Illuminate
+- Sleep Powder
+- Mega Drain
+- Ingrain
+- Confuse Ray
 
 === TRAINER_ROSE_1 ===
 Name: ROSE
@@ -5506,17 +5546,61 @@ Level: 16
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
 === TRAINER_MIGUEL_1 ===
-Name: MIGUEL
+Name: Miguel
 Class: Pokefan
 Pic: Pokefan M
 Gender: Male
 Music: Twins
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer / Smart Switching
 
-Skitty @ Oran Berry
-Level: 15
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Audino @ Sitrus Berry
+Level: 20
+Ability: Regenerator
+- Zen Headbutt
+- Baby Doll Eyes
+- Disarming Voice
+- Wish
+
+Igglybuff @ Sitrus Berry
+Level: 16
+Ability: Cute Charm
+- Disable
+- Disarming Voice
+- Perish Song
+- Copycat
+
+Pichu @ Sitrus Berry
+Level: 16
+Ability: Static
+- Nasty Plot
+- Nuzzle
+- Disarming Voice
+- Thunder Shock
+
+Togepi @ Sitrus Berry
+Level: 16
+Ability: Serene Grace
+- Ancient Power
+- Charm
+- Morning Sun
+- Pound
+
+Eevee @ Sitrus Berry
+Level: 16
+Ability: Adaptability
+- Baby Doll Eyes
+- Double Kick
+- Sand Attack
+- Covet
+
+Spoink @ Sitrus Berry
+Level: 18
+Ability: Thick Fat
+- Psych Up
+- Psybeam
+- Growl
+- Simple Beam
 
 === TRAINER_COLTON ===
 Name: COLTON
@@ -5576,56 +5660,232 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Heal Bell
 
 === TRAINER_MIGUEL_2 ===
-Name: MIGUEL
+Name: Miguel
 Class: Pokefan
 Pic: Pokefan M
 Gender: Male
 Music: Twins
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer / Smart Switching
 
-Skitty @ Oran Berry
-Level: 29
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Audino @ Sitrus Berry
+Level: 20
+Ability: Regenerator
+- Zen Headbutt
+- Baby Doll Eyes
+- Disarming Voice
+- Wish
+
+Igglybuff @ Sitrus Berry
+Level: 16
+Ability: Cute Charm
+- Disable
+- Disarming Voice
+- Perish Song
+- Copycat
+
+Pichu @ Sitrus Berry
+Level: 16
+Ability: Static
+- Nasty Plot
+- Nuzzle
+- Disarming Voice
+- Thunder Shock
+
+Togepi @ Sitrus Berry
+Level: 16
+Ability: Serene Grace
+- Ancient Power
+- Charm
+- Morning Sun
+- Pound
+
+Eevee @ Sitrus Berry
+Level: 16
+Ability: Adaptability
+- Baby Doll Eyes
+- Double Kick
+- Sand Attack
+- Covet
+
+Spoink @ Sitrus Berry
+Level: 18
+Ability: Thick Fat
+- Psych Up
+- Psybeam
+- Growl
+- Simple Beam
 
 === TRAINER_MIGUEL_3 ===
-Name: MIGUEL
+Name: Miguel
 Class: Pokefan
 Pic: Pokefan M
 Gender: Male
 Music: Twins
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer / Smart Switching
 
-Skitty @ Oran Berry
-Level: 32
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Audino @ Sitrus Berry
+Level: 20
+Ability: Regenerator
+- Zen Headbutt
+- Baby Doll Eyes
+- Disarming Voice
+- Wish
+
+Igglybuff @ Sitrus Berry
+Level: 16
+Ability: Cute Charm
+- Disable
+- Disarming Voice
+- Perish Song
+- Copycat
+
+Pichu @ Sitrus Berry
+Level: 16
+Ability: Static
+- Nasty Plot
+- Nuzzle
+- Disarming Voice
+- Thunder Shock
+
+Togepi @ Sitrus Berry
+Level: 16
+Ability: Serene Grace
+- Ancient Power
+- Charm
+- Morning Sun
+- Pound
+
+Eevee @ Sitrus Berry
+Level: 16
+Ability: Adaptability
+- Baby Doll Eyes
+- Double Kick
+- Sand Attack
+- Covet
+
+Spoink @ Sitrus Berry
+Level: 18
+Ability: Thick Fat
+- Psych Up
+- Psybeam
+- Growl
+- Simple Beam
 
 === TRAINER_MIGUEL_4 ===
-Name: MIGUEL
+Name: Miguel
 Class: Pokefan
 Pic: Pokefan M
 Gender: Male
 Music: Twins
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer / Smart Switching
 
-Delcatty @ Oran Berry
-Level: 35
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Audino @ Sitrus Berry
+Level: 20
+Ability: Regenerator
+- Zen Headbutt
+- Baby Doll Eyes
+- Disarming Voice
+- Wish
+
+Igglybuff @ Sitrus Berry
+Level: 16
+Ability: Cute Charm
+- Disable
+- Disarming Voice
+- Perish Song
+- Copycat
+
+Pichu @ Sitrus Berry
+Level: 16
+Ability: Static
+- Nasty Plot
+- Nuzzle
+- Disarming Voice
+- Thunder Shock
+
+Togepi @ Sitrus Berry
+Level: 16
+Ability: Serene Grace
+- Ancient Power
+- Charm
+- Morning Sun
+- Pound
+
+Eevee @ Sitrus Berry
+Level: 16
+Ability: Adaptability
+- Baby Doll Eyes
+- Double Kick
+- Sand Attack
+- Covet
+
+Spoink @ Sitrus Berry
+Level: 18
+Ability: Thick Fat
+- Psych Up
+- Psybeam
+- Growl
+- Simple Beam
 
 === TRAINER_MIGUEL_5 ===
-Name: MIGUEL
+Name: Miguel
 Class: Pokefan
 Pic: Pokefan M
 Gender: Male
 Music: Twins
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer / Smart Switching
 
-Delcatty @ Sitrus Berry
-Level: 38
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Audino @ Sitrus Berry
+Level: 20
+Ability: Regenerator
+- Zen Headbutt
+- Baby Doll Eyes
+- Disarming Voice
+- Wish
+
+Igglybuff @ Sitrus Berry
+Level: 16
+Ability: Cute Charm
+- Disable
+- Disarming Voice
+- Perish Song
+- Copycat
+
+Pichu @ Sitrus Berry
+Level: 16
+Ability: Static
+- Nasty Plot
+- Nuzzle
+- Disarming Voice
+- Thunder Shock
+
+Togepi @ Sitrus Berry
+Level: 16
+Ability: Serene Grace
+- Ancient Power
+- Charm
+- Morning Sun
+- Pound
+
+Eevee @ Sitrus Berry
+Level: 16
+Ability: Adaptability
+- Baby Doll Eyes
+- Double Kick
+- Sand Attack
+- Covet
+
+Spoink @ Sitrus Berry
+Level: 18
+Ability: Thick Fat
+- Psych Up
+- Psybeam
+- Growl
+- Simple Beam
 
 === TRAINER_VICTORIA ===
 Name: VICTORIA
@@ -5949,11 +6209,30 @@ Pic: Youngster
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Poochyena
-Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Rattata
+Level: 7
+Ability: Guts
+- Quick Attack
+- Tail Whip
+- Focus Energy
+
+Nymble
+Level: 6
+Ability: Swarm
+- Tackle
+- Leer
+- Struggle Bug
+- Astonish
+
+Shinx
+Level: 8
+Ability: Intimidate
+- Tackle
+- Leer
+- Thunder Shock
+- Charge
 
 === TRAINER_BILLY ===
 Name: BILLY
@@ -6126,11 +6405,30 @@ Pic: Youngster
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Mightyena
-Level: 27
-IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
+Rattata
+Level: 7
+Ability: Guts
+- Quick Attack
+- Tail Whip
+- Focus Energy
+
+Nymble
+Level: 6
+Ability: Swarm
+- Tackle
+- Leer
+- Struggle Bug
+- Astonish
+
+Shinx
+Level: 8
+Ability: Intimidate
+- Tackle
+- Leer
+- Thunder Shock
+- Charge
 
 === TRAINER_JOEY_3 ===
 Name: Joey
@@ -6139,15 +6437,30 @@ Pic: Youngster
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Swellow
-Level: 28
-IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
+Rattata
+Level: 7
+Ability: Guts
+- Quick Attack
+- Tail Whip
+- Focus Energy
 
-Mightyena
-Level: 30
-IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
+Nymble
+Level: 6
+Ability: Swarm
+- Tackle
+- Leer
+- Struggle Bug
+- Astonish
+
+Shinx
+Level: 8
+Ability: Intimidate
+- Tackle
+- Leer
+- Thunder Shock
+- Charge
 
 === TRAINER_JOEY_4 ===
 Name: Joey
@@ -6156,19 +6469,30 @@ Pic: Youngster
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Swellow
-Level: 31
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+Rattata
+Level: 7
+Ability: Guts
+- Quick Attack
+- Tail Whip
+- Focus Energy
 
-Linoone
-Level: 29
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+Nymble
+Level: 6
+Ability: Swarm
+- Tackle
+- Leer
+- Struggle Bug
+- Astonish
 
-Mightyena
-Level: 33
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
+Shinx
+Level: 8
+Ability: Intimidate
+- Tackle
+- Leer
+- Thunder Shock
+- Charge
 
 === TRAINER_JOEY_5 ===
 Name: Joey
@@ -6177,19 +6501,30 @@ Pic: Youngster
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Swellow
-Level: 34
-IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+Rattata
+Level: 7
+Ability: Guts
+- Quick Attack
+- Tail Whip
+- Focus Energy
 
-Linoone
-Level: 32
-IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+Nymble
+Level: 6
+Ability: Swarm
+- Tackle
+- Leer
+- Struggle Bug
+- Astonish
 
-Mightyena
-Level: 36
-IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+Shinx
+Level: 8
+Ability: Intimidate
+- Tackle
+- Leer
+- Thunder Shock
+- Charge
 
 === TRAINER_EDDIE ===
 Name: EDDIE
@@ -6209,21 +6544,34 @@ Level: 16
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_ALLEN ===
-Name: ALLEN
+Name: Allen
 Class: Youngster
 Pic: Youngster
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Zigzagoon
-Level: 4
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Rattata-Alola
+Level: 7
+Ability: Hustle
+- Quick Attack
+- Tail Whip
+- Focus Energy
 
-Taillow
-Level: 3
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Yungoos
+Level: 7
+Ability: Stakeout
+- Tackle
+- Leer
+- Payback
+
+Rattata-Alola @ Oran Berry
+Level: 7
+Ability: Gluttony
+- Quick Attack
+- Tail Whip
+- Focus Energy
 
 === TRAINER_TIMMY ===
 Name: TIMMY
@@ -6302,25 +6650,32 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Toxic
 
 === TRAINER_ANDREW ===
-Name: ANDREW
+Name: Andrew
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
 Music: Hiker
 Double Battle: No
-AI: Check Bad Move
-
-Magikarp
-Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Tentacool
-Level: 10
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+AI: Basic Trainer
 
 Magikarp
 Level: 15
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ability: Swift Swim
+- Tackle
+
+Tadbulb
+Level: 21
+Ability: Static
+- Spark
+- Charge
+- Water Gun
+- Thunder Shock
+
+Magikarp
+Level: 25
+Ability: Swift Swim
+- Tackle
+- Flail
 
 === TRAINER_IVAN ===
 Name: IVAN
@@ -8766,38 +9121,86 @@ Level: 40
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
 === TRAINER_AMY_AND_LIV_1 ===
-Name: AMY & LIV
+Name: Amy & Liv
 Class: Twins
 Pic: Twins
 Gender: Male
 Music: Twins
 Double Battle: Yes
-AI: Check Bad Move
+AI: Basic Trainer
 
-Plusle
-Level: 15
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ponyta
+Level: 20
+Ability: Flash Fire
+- Agility
+- Flame Charge
+- Ember
+- Tail Whip
 
-Minun
-Level: 15
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ponyta-Galar
+Level: 20
+Ability: Pastel Veil
+- Agility
+- Fairy Wind
+- Confusion
+- Tail Whip
+
+Yamask
+Level: 18
+Ability: Mummy
+- Will O Wisp
+- Astonish
+- Night Shade
+- Haze
+
+Yamask-Galar
+Level: 18
+Ability: Wandering Spirit
+- Brutal Swing
+- Disable
+- Night Shade
+- Protect
 
 === TRAINER_AMY_AND_LIV_2 ===
-Name: AMY & LIV
+Name: Amy & Liv
 Class: Twins
 Pic: Twins
 Gender: Male
 Music: Twins
 Double Battle: Yes
-AI: Check Bad Move
+AI: Basic Trainer
 
-Plusle
-Level: 27
-IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
+Ponyta
+Level: 20
+Ability: Flash Fire
+- Agility
+- Flame Charge
+- Ember
+- Tail Whip
 
-Minun
-Level: 27
-IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
+Ponyta-Galar
+Level: 20
+Ability: Pastel Veil
+- Agility
+- Fairy Wind
+- Confusion
+- Tail Whip
+
+Yamask
+Level: 18
+Ability: Mummy
+- Will O Wisp
+- Astonish
+- Night Shade
+- Haze
+
+Yamask-Galar
+Level: 18
+Ability: Wandering Spirit
+- Brutal Swing
+- Disable
+- Night Shade
+- Protect
 
 === TRAINER_GINA_AND_MIA_1 ===
 Name: GINA & MIA
@@ -8834,21 +9237,45 @@ Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_AMY_AND_LIV_3 ===
-Name: AMY & LIV
+Name: Amy & Liv
 Class: Twins
 Pic: Twins
 Gender: Male
 Music: Twins
 Double Battle: Yes
-AI: Check Bad Move
+AI: Basic Trainer
 
-Plusle
-Level: 9
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ponyta
+Level: 20
+Ability: Flash Fire
+- Agility
+- Flame Charge
+- Ember
+- Tail Whip
 
-Minun
-Level: 9
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ponyta-Galar
+Level: 20
+Ability: Pastel Veil
+- Agility
+- Fairy Wind
+- Confusion
+- Tail Whip
+
+Yamask
+Level: 18
+Ability: Mummy
+- Will O Wisp
+- Astonish
+- Night Shade
+- Haze
+
+Yamask-Galar
+Level: 18
+Ability: Wandering Spirit
+- Brutal Swing
+- Disable
+- Night Shade
+- Protect
 
 === TRAINER_GINA_AND_MIA_2 ===
 Name: GINA & MIA
@@ -8872,71 +9299,127 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Leech Seed
 
 === TRAINER_AMY_AND_LIV_4 ===
-Name: AMY & LIV
+Name: Amy & Liv
 Class: Twins
 Pic: Twins
 Gender: Male
 Music: Twins
 Double Battle: Yes
-AI: Check Bad Move
+AI: Basic Trainer
 
-Plusle
-Level: 30
-IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
+Ponyta
+Level: 20
+Ability: Flash Fire
+- Agility
+- Flame Charge
+- Ember
+- Tail Whip
 
-Minun
-Level: 30
-IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
+Ponyta-Galar
+Level: 20
+Ability: Pastel Veil
+- Agility
+- Fairy Wind
+- Confusion
+- Tail Whip
+
+Yamask
+Level: 18
+Ability: Mummy
+- Will O Wisp
+- Astonish
+- Night Shade
+- Haze
+
+Yamask-Galar
+Level: 18
+Ability: Wandering Spirit
+- Brutal Swing
+- Disable
+- Night Shade
+- Protect
 
 === TRAINER_AMY_AND_LIV_5 ===
-Name: AMY & LIV
+Name: Amy & Liv
 Class: Twins
 Pic: Twins
 Gender: Male
 Music: Twins
 Double Battle: Yes
-AI: Check Bad Move
+AI: Basic Trainer
 
-Plusle
-Level: 33
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
-- Spark
-- Charge
-- Fake Tears
-- Helping Hand
+Ponyta
+Level: 20
+Ability: Flash Fire
+- Agility
+- Flame Charge
+- Ember
+- Tail Whip
 
-Minun
-Level: 33
-IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
-- Spark
-- Charge
-- Charm
-- Helping Hand
+Ponyta-Galar
+Level: 20
+Ability: Pastel Veil
+- Agility
+- Fairy Wind
+- Confusion
+- Tail Whip
+
+Yamask
+Level: 18
+Ability: Mummy
+- Will O Wisp
+- Astonish
+- Night Shade
+- Haze
+
+Yamask-Galar
+Level: 18
+Ability: Wandering Spirit
+- Brutal Swing
+- Disable
+- Night Shade
+- Protect
 
 === TRAINER_AMY_AND_LIV_6 ===
-Name: AMY & LIV
+Name: Amy & Liv
 Class: Twins
 Pic: Twins
 Gender: Male
 Music: Twins
 Double Battle: Yes
-AI: Check Bad Move
+AI: Basic Trainer
 
-Plusle
-Level: 36
-IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
-- Thunder
-- Charge
-- Fake Tears
-- Helping Hand
+Ponyta
+Level: 20
+Ability: Flash Fire
+- Agility
+- Flame Charge
+- Ember
+- Tail Whip
 
-Minun
-Level: 36
-IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
-- Thunder
-- Charge
-- Charm
-- Helping Hand
+Ponyta-Galar
+Level: 20
+Ability: Pastel Veil
+- Agility
+- Fairy Wind
+- Confusion
+- Tail Whip
+
+Yamask
+Level: 18
+Ability: Mummy
+- Will O Wisp
+- Astonish
+- Night Shade
+- Haze
+
+Yamask-Galar
+Level: 18
+Ability: Wandering Spirit
+- Brutal Swing
+- Disable
+- Night Shade
+- Protect
 
 === TRAINER_HUEY ===
 Name: HUEY
@@ -9511,11 +9994,21 @@ Pic: Brendan
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Basic Trainer
+AI: Basic Trainer / Force Setup First Turn
 
-Treecko
+Bella (Yamper) (F)
+Level: 4
+Ability: Ball Fetch
+- Tackle
+- Tail Whip
+- Nuzzle
+
+Chespin (M)
 Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ability: Overgrow
+- Tackle
+- Growl
+- Vine Whip
 
 === TRAINER_BEN_ROUTE_110_PIPLUP ===
 Name: Ben
@@ -9566,11 +10059,21 @@ Pic: Brendan
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Check Bad Move / Try To Faint / Force Setup First Turn
+AI: Basic Trainer / Force Setup First Turn
 
-Torchic
+Bella (Yamper) (F)
+Level: 4
+Ability: Ball Fetch
+- Tackle
+- Tail Whip
+- Nuzzle
+
+Charmander (M)
 Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ability: Blaze
+- Scratch
+- Growl
+- Ember
 
 === TRAINER_BEN_ROUTE_110_BULBASAUR ===
 Name: Ben
@@ -9621,11 +10124,21 @@ Pic: Brendan
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Basic Trainer
+AI: Basic Trainer / Force Setup First Turn
 
-Mudkip
+Bella (Yamper) (F)
+Level: 4
+Ability: Ball Fetch
+- Tackle
+- Tail Whip
+- Nuzzle
+
+Froakie (M)
 Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ability: Torrent
+- Pound
+- Growl
+- Water Gun
 
 === TRAINER_BEN_ROUTE_110_FENNEKIN ===
 Name: Ben
@@ -11048,21 +11561,35 @@ Level: 25
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 === TRAINER_TIANA ===
-Name: TIANA
+Name: Tiana
 Class: Lass
 Pic: Lass
 Gender: Female
 Music: Female
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Zigzagoon
-Level: 4
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Pikipek
+Level: 7
+Ability: Keen Eye
+- Peck
+- Growl
+- Echoed Voice
 
-Shroomish
-Level: 4
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Deerling
+Level: 7
+Ability: Sap Sipper
+- Tackle
+- Growl
+- Sand Attack
+
+Minccino
+Level: 8
+Ability: Cute Charm
+- Pound
+- Baby Doll Eyes
+- Helping Hand
+- Echoed Voice
 
 === TRAINER_HALEY_1 ===
 Name: HALEY
@@ -11252,21 +11779,32 @@ Level: 39
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_RICK ===
-Name: RICK
+Name: Rick
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
 Music: Male
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
+
+Caterpie
+Level: 7
+Ability: Shield Dust
+- Tackle
+- String Shot
+
+Weedle
+Level: 7
+Ability: Shield Dust
+- Poison Sting
+- String Shot
 
 Wurmple
-Level: 4
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Wurmple
-Level: 4
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Level: 7
+Ability: Shield Dust
+- Tackle
+- Poison Sting
+- String Shot
 
 === TRAINER_LYLE ===
 Name: LYLE
@@ -13118,30 +13656,62 @@ Level: 15
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MARCOS ===
-Name: MARCOS
+Name: Marcos
 Class: Guitarist
 Pic: Guitarist
 Gender: Male
 Music: Intense
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Voltorb
-Level: 15
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+Loudred @ Metronome
+Level: 20
+Ability: Soundproof
+- Bite
+- Howl
+- Echoed Voice
+- Astonish
+
+Kricketune @ Metronome
+Level: 22
+Ability: Swarm
+- Fury Cutter
+- Focus Energy
+- Sing
+- Absorb
 
 === TRAINER_RHETT ===
-Name: RHETT
+Name: Rhett
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
 Music: Intense
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
 Makuhita
-Level: 15
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+Level: 20
+Ability: Thick Fat
+- Knock Off
+- Whirlwind
+- Force Palm
+- Fake Out
+
+Machop
+Level: 20
+Ability: Guts
+- Scary Face
+- Knock Off
+- Low Sweep
+- Revenge
+
+Timburr
+Level: 20
+Ability: Sheer Force
+- Rock Slide
+- Bulk Up
+- Focus Energy
+- Low Kick
 
 === TRAINER_TYRON ===
 Name: TYRON
@@ -13609,30 +14179,70 @@ Level: 44
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 === TRAINER_PETE ===
-Name: PETE
+Name: Pete
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
 Music: Swimmer
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Tentacool
-Level: 15
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Clauncher
+Level: 35
+Ability: Mega Launcher
+- Aqua Jet
+- Smack Down
+- Swords Dance
+- Water Pulse
+
+Clauncher
+Level: 36
+Ability: Mega Launcher
+- Aqua Jet
+- Smack Down
+- Swords Dance
+- Water Pulse
+
+Clawitzer
+Level: 37
+Ability: Mega Launcher
+- Dark Pulse
+- Dragon Pulse
+- Heal Pulse
+- Water Pulse
 
 === TRAINER_ISABELLE ===
-Name: ISABELLE
+Name: Isabelle
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
 Music: Swimmer
 Double Battle: No
-AI: Check Bad Move
+AI: Basic Trainer
 
-Marill
-Level: 15
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Palafin
+Level: 38
+Ability: Zero to Hero
+- Flip Turn
+- Jet Punch
+- Acrobatics
+- Focus Energy
+
+Finizen
+Level: 35
+Ability: Water Veil
+- Encore
+- Acrobatics
+- Charm
+- Dive
+
+Finizen
+Level: 35
+Ability: Water Veil
+- Focus Energy
+- Double Hit
+- Supersonic
+- Aqua Jet
 
 === TRAINER_ANDRES_1 ===
 Name: ANDRES

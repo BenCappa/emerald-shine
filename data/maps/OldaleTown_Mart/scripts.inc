@@ -64,8 +64,14 @@ OldaleTown_Mart_Text_PokeBallsAreSoldOut:
 	.string "I can't buy any Poké Balls.$"
 
 OldaleTown_Mart_Text_ImGoingToBuyPokeBalls:
-	.string "I'm going to buy a bunch of Poké Balls\n"
-	.string "and catch a bunch of Pokémon!$"
+	.string "I only but Poké Balls ten at a time,\n"
+	.string "you know why?\p"
+	.string "If I buy fifteen now and five later,\n"
+	.string "I'd only get the one Premier Ball.\l"
+	.string "But if I save up to buy twenty at once?\p"
+	.string "That's right, two Premier Balls!\p"
+	.string "I'm gonna buy a bunch of Poké Balls and\n"
+	.string "only catch Pokémon in Premier Balls!$"
 
 OldaleTown_Mart_Text_RestoreHPWithPotion:
 	.string "If a Pokémon gets hurt and loses its HP\n"

@@ -32,6 +32,7 @@ Route103_EventScript_RivalMay::
 	end
 
 Route103_EventScript_RivalBen::
+	setspeaker SP_NAME_BEN
 	msgbox Route103_Text_BenRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
@@ -41,6 +42,7 @@ Route103_EventScript_RivalBen::
 	waitmovement 0
 	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_Delay48
 	waitmovement 0
+	setspeaker SP_NAME_BEN
 	msgbox Route103_Text_BenLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_StartBenBattleBulbasaur
@@ -85,6 +87,7 @@ Route103_EventScript_AfterMayBattle::
 
 Route103_EventScript_AfterBenBattle::
 	bufferleadmonspeciesname 0
+	setspeaker SP_NAME_BEN
 	msgbox Route103_Text_BenTimeToHeadBack, MSGBOX_DEFAULT
 	goto Route103_EventScript_RivalExit
 	end
@@ -329,7 +332,7 @@ Route103_Text_MayTimeToHeadBack:
 	.string "the LAB.$"
 
 Route103_Text_BenRoute103Pokemon:
-	.string "Ben: Okay, if I could just find her a…$"
+	.string "Okay, if I could just find her a…$"
 
 Route103_Text_BenLetsBattle:
 	.string "Hey, it's {PLAYER}!\p"
@@ -348,7 +351,7 @@ Route103_Text_BenDefeated:
 	.string "Woah, {PLAYER}, you're pretty good!$"
 
 Route103_Text_BenTimeToHeadBack:
-	.string "Ben: I think I get it.\n"
+	.string "I think I get it.\n"
 	.string "I think I know why my dad has his eye\l"
 	.string "out for you now.\p"
 	.string "Look, your {STR_VAR_1} already likes you,\n"
